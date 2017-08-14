@@ -123,10 +123,8 @@
     ]
   }
 ]
-# Repository
-'repository':
-# Small blocks:
-  'tags':
+'repository': # Repository
+  'tags': # Small blocks:
     'comment': 'Tags'
     'match': 'tags'
     'name': 'keyword.control.import.tplpre'
@@ -134,8 +132,7 @@
     'comment': 'Tags TKU'
     'match': '(TKU_\\d+_\\d+_\\d+)'
     'name': 'constant.other.tplpre'
-# Highlight metadata sections
-  'metadata':
+  'metadata': # Highlight metadata sections
     'begin': '^\\s{4}(metadata)\\s+?$'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
@@ -231,9 +228,6 @@
         { 'include': "#all_controls" }
         { 'include': "#if_addm" }
     ]
-
-
-
 # Lines and comments and quotes:
   # // THIS LINE
   'comment_line':
@@ -281,16 +275,17 @@
         1: 'name': 'constant.numeric.tplpre'
   # All lines
   'lines': [
-    { 'include': "percent_line" }
-    { 'include': "comment_TODO_line" }
-    { 'include': "comment_line" }
-    { 'include': "qouted_line" }
-    { 'include': "double_qouted_line" }
-    { 'include': "regexes" }
-    { 'include': "square_brackets_line_word" }
-    { 'include': "square_brackets_line_int" }
-    { 'include': "all_keys" }
-    { 'include': "brackets" }
+    'patterns': [
+      { 'include': '#percent_line' }
+      { 'include': '#comment_TODO_line' }
+      { 'include': '#comment_line' }
+      { 'include': '#qouted_line' }
+      { 'include': '#double_qouted_line' }
+      { 'include': '#regexes' }
+      { 'include': '#square_brackets_line_word' }
+      { 'include': '#square_brackets_line_int' }
+      { 'include': '#all_keys' }
+      { 'include': '#brackets' }
     ]
 # Keys
   # plus +
@@ -343,35 +338,106 @@
     'name': 'punctuation.accessor.tplpre'
     'captures':
       1: 'name': 'keyword.operator.tplpre'
-  'all_keys': [
-    { 'include': '#var_assign' }
-    { 'include': '#equal' }
-    { 'include': '#less' }
-    { 'include': '#more' }
-    { 'include': '#more_equal' }
-    { 'include': '#less_equal' }
-    { 'include': '#plus' }
-    { 'include': '#decimal' }
-    { 'include': '#minus_decimal' }
-    { 'include': '#just_do' }
+  'all_keys':
+    'patterns': [
+      { 'include': '#var_assign' }
+      { 'include': '#equal' }
+      { 'include': '#less' }
+      { 'include': '#more' }
+      { 'include': '#more_equal' }
+      { 'include': '#less_equal' }
+      { 'include': '#plus' }
+      { 'include': '#decimal' }
+      { 'include': '#minus_decimal' }
+      { 'include': '#just_do' }
     ]
-
-
-
-
+# Regex functions:
+  'regex':
+    'match': '\\b(regex)\\s+'
+    'name': 'regex.tplpre'
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+  'regex_2_lines':
+    'match': '(regex)'
+    'name': 'regex.tplpre'
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+  'regex_raw':
+    'match': "\\b(raw)\\s+('|\")(\\\\\\d+)('|\")"
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+  'content_raw':
+    'match': "\\s\\b(raw)\\s+"
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+  'regexes':
+    'patterns': [
+      {'include': '#regex_raw'}
+      {'include': '#regex'}
+      {'include': '#content_raw'}
+    ]
+# keyword.control.conditional
+  # if, else, end if, for, end for
+  'if_statement':
+    'match': '(?:[^(end)])(if)(?:[^;\\w])'
+    'name': 'keyword.control.conditional.tplpre'
+  'then_statement':
+    'match': "\\bthen\\s+?"
+    'name': 'keyword.control.conditional.tplpre'
+  'elif_statement':
+    'match': "\\belif\\s+?"
+    'name': 'keyword.control.conditional.tplpre'
+  'else_statement':
+    'match': "\\belse\\s+?"
+    'name': 'keyword.control.conditional.tplpre'
+  'end_if_statement':
+    'match': "\\bend\\sif;\\s+?"
+    'name': 'keyword.control.conditional.tplpre'
+  'for_statement':
+    'match': "\\bend\\sfor;\\s+?"
+    'name': 'keyword.control.tplpre'
+  'end_for_statement':
+    'match': "\\bend\\sfor;\\s+?"
+    'name': 'keyword.control.tplpre'
+  'keywords_all':
+    'match': "\\b(aged|and|as|at|break|by|configuration|continue|created|default|desc|deleted|do|enumeration|exists|expand|explode|false|flags|from|has|in|is|locale|matches|modified|nodes|nodecount|none|not|on|or|order|out|overrides|processwith|relationship|removal|requires|search|show|step|stop|substring|subword|summary|tags|taxonomy|traverse|true|unconfirmed|where|with|void)\\b"
+    'name': 'support.type.tplpre'
+  'keywords_cmd':
+    'match': "\\b(unix_cmd|windows_cmd)"
+    'captures':
+        1: 'name': 'keyword.operator.tplpre'
+  'keywords_cmd_indentify_trigger':
+    'match': "\\b(unix_cmd|windows_cmd|cmd|args)"
+    'captures':
+        1: 'name': 'keyword.operator.tplpre'
   'if_ADDM_statement':
-    'name': "keyword.control.conditional.tplpre"
-    'match': "#IFADDM"
+    'match': '#IFADDM'
+    'name': 'keyword.control.conditional.tplpre'
   'else_ADDM_statement':
-    'name': "keyword.control.conditional.tplpre"
-    'match': "#ELSE\\s+?"
+    'match': '#ELSE\\s+?'
+    'name': 'keyword.control.conditional.tplpre'
   'end_if_ADDM_statement':
-    'name': "keyword.control.conditional.tplpre"
-    'match': "#ENDIFADDM\\s+?"
+    'match': '#ENDIFADDM\\s+?'
+    'name': 'keyword.control.conditional.tplpre'
 # Grouping:
   'if_addm':
     'patterns': [
-      { 'include': "#if_ADDM_statement" }
-      { 'include': "#else_ADDM_statement" }
-      { 'include': "#end_if_ADDM_statement" }
+      { 'include': '#if_ADDM_statement' }
+      { 'include': '#else_ADDM_statement' }
+      { 'include': '#end_if_ADDM_statement' }
     ]
+  # 'all_controls':
+  #   'patterns': [
+  #     {'include': '#if_statement'}
+  #     {'include': '#elif_statement'}
+  #     {'include': '#then_statement'}
+  #     {'include': '#else_statement'}
+  #     {'include': '#end_if_statement'}
+  #     {'include': '#for_statement'}
+  #     {'include': '#end_for_statement'}
+  #     {'include': '#if_addm'}
+  #     {'include': '#keywords_all'}
+  #     {'include': '#keywords_cmd'}
+  #     {'include': '#all_keys'}
+  #   ]
