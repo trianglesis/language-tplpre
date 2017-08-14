@@ -9,11 +9,11 @@
   "homepage": "https://atom.github.io/language-python",
   "repository": {
     "type": "git",
-    "url": "https://github.com/atom/tpl-syntax"
+    "url": "https://github.com/triaglesis/language-tplpre"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/atom/language-python/issues"
+    "url": "https://github.com/triaglesis/language-tplpre/issues"
   },
   "devDependencies": {
     "coffeelint": "^1.10.1"
