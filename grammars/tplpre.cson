@@ -274,7 +274,7 @@
     'captures':
         1: 'name': 'constant.numeric.tplpre'
   # All lines
-  'lines': [
+  'lines':
     'patterns': [
       { 'include': '#percent_line' }
       { 'include': '#comment_TODO_line' }
@@ -427,17 +427,17 @@
       { 'include': '#else_ADDM_statement' }
       { 'include': '#end_if_ADDM_statement' }
     ]
-  # 'all_controls':
-  #   'patterns': [
-  #     {'include': '#if_statement'}
-  #     {'include': '#elif_statement'}
-  #     {'include': '#then_statement'}
-  #     {'include': '#else_statement'}
-  #     {'include': '#end_if_statement'}
-  #     {'include': '#for_statement'}
-  #     {'include': '#end_for_statement'}
-  #     {'include': '#if_addm'}
-  #     {'include': '#keywords_all'}
-  #     {'include': '#keywords_cmd'}
-  #     {'include': '#all_keys'}
-  #   ]
+  'all_controls':
+    'patterns': [
+      {'include': '#if_statement'}
+      {'include': '#elif_statement'}
+      {'include': '#then_statement'}
+      {'include': '#else_statement'}
+      {'include': '#end_if_statement'}
+      {'include': '#for_statement'}
+      {'include': '#end_for_statement'}
+      {'include': '#if_addm'}
+      {'include': '#keywords_all'}
+      {'include': '#keywords_cmd'}
+      {'include': '#all_keys'}
+    ]
