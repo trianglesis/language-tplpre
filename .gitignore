@@ -1,0 +1,6 @@
+
+*.sublime-project
+grammars/atom_tplpre.sublime-workspace
+grammars/draft.cson
+grammars/SOURCE_tplpre.cson
+DEV/tplpre_READY.sublime-syntax
