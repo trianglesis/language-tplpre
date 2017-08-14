@@ -1,0 +1,199 @@
+'scopeName': 'source.tplpre'
+'name': 'Tplpre'
+'fileTypes': [
+  'tplpre'
+  'tpl'
+]
+'firstLineMatch': '.*'
+'patterns': [
+# Dev TEST
+#  {
+#    'match': '^(configuration)\\s(\\S+)\\s(\\d+\\.\\d+)'
+#    'captures':
+#        1: 'name': 'constant.other.tplpre'
+#        2: 'name': 'variable.parameter.tplpre'
+#        3: 'name': 'variable.parameter.tplpre'
+#  }
+  # Includes
+  # Initial
+  {
+    'include': '#percent_line'
+  }
+  {
+    'include': '#doc_strings'
+  }
+  {
+    'include': '#comment_TODO_line'
+  }
+  {
+    'include': '#comment_line'
+  }
+  {
+    'include': '#metadata_2'
+  }
+  {
+    'include': '#overwiev'
+  }
+  {
+    'include': '#simple_identifiers'
+  }
+  {
+    'include': '#if_addm'
+  }
+  # tpl $$TPLVERSION$$ module NAME;
+  {
+    'match': 'tpl\\s+(\\$\\$TPLVERSION\\$\\$|\\d+\\.\\d+)\\s+module\\s(.*);'
+    'captures':
+        1: 'name': 'constant.character.tplpre'
+        2: 'name': 'constant.character.tplpre'
+  }
+  # pattern import section
+  {
+    'match': 'from\\s(\\w+)(?:\.(\\w+))?(?:\.(\\w+))?\\simport\\s(\\S+)\\s(\\d+(?:\.\\d+)+);'
+    'captures':
+        1: 'name': 'entity.name.function.tplpre'
+        2: 'name': 'storage.type.tplpre'
+        3: 'name': 'variable.parameter.tplpre'
+        4: 'name': 'entity.name.function.tplpre'
+        5: 'name': 'constant.numeric.tplpre'
+  }
+  # Highlight configuration sections
+  {
+    'begin': '^(configuration)\\s(\\S+)\\s(\\d+\\.\\d+)'
+    'beginCaptures':
+        1: 'name': 'keyword.control.tplpre'
+        2: 'name': 'entity.name.function.tplpre'
+        3: 'name': 'constant.numeric.tplpre'
+    'end': '^(end\\sconfiguration;)'
+    'endCaptures':
+        1: 'name': 'keyword.control.tplpre'
+    # 'name': 'meta.class.old-style.python'
+    'patterns': [
+      {
+        'include': '#comment_line'
+      }
+      {
+        'include': '#doc_strings'
+      }
+      {
+        'include': '#lines'
+      }
+      {
+        'include': '#if_addm'
+      }
+    ]
+  }
+  # Highlight table sections
+  {
+    'begin': '^(table)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)'
+    'beginCaptures':
+        1: 'name': 'keyword.control.tplpre'
+        2: 'name': 'entity.name.function'
+        3: 'name': 'constant.numeric.tplpre'
+        4: 'name': 'comment.block.documentation.tplpre'
+    # 'contentName': 'comment.block.documentation.tplpre'
+    'end': '^(end\\stable;)'
+    'endCaptures':
+        1: 'name': 'keyword.control.tplpre'
+    # 'name': 'meta.class.old-style.python'
+    'patterns': [
+      {
+        'include': '#comment_line'
+      }
+      {
+        'include': '#main'
+      }
+    ]
+  }
+  # Highlight definitions sections
+  {
+    'begin': '^(definitions)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)'
+    'beginCaptures':
+        1: 'name': 'keyword.control.tplpre'
+        2: 'name': 'entity.name.function'
+        3: 'name': 'constant.numeric.tplpre'
+    # 'contentName': 'comment.block.documentation.tplpre'
+    'end': '^(end\\sdefinitions;)'
+    'endCaptures':
+        1: 'name': 'keyword.control.tplpre'
+    # 'name': 'meta.class.old-style.python'
+    'patterns': [
+      {
+        'include': '#comment_line'
+      }
+      {
+        'include': '#doc_strings'
+      }
+      {
+        'include': '#define'
+      }
+      {
+        'include': '#alt_define'
+      }
+      {
+        'include': '#lines'
+      }
+      {
+        'include': '#if_addm'
+      }
+    ]
+  }
+]
+
+# Repository
+'repository':
+
+# Small blocks:
+  'tags':
+    'comment': 'Tags'
+    'match': 'tags'
+    'name': 'keyword.control.import.tplpre'
+  'tags_TKU':
+    'comment': 'Tags TKU'
+    'match': '(TKU_\\d+_\\d+_\\d+)'
+    'name': 'constant.other.tplpre'
+
+# Highlight metadata sections
+
+
+
+
+
+# Lines and comments and quotes:
+  # // THIS LINE
+  'comment_line':
+    'name': 'comment.line.tplpre'
+    'match': '//.*'
+  # %THIS LINE%
+  'percent_line':
+    'comment': "There is one experimental regex now used. Old one is commented."
+    'match': "(\\%((?:[^\\%]|\\\\\\\\|\\\\%)*)\\%)"
+    'name': "keyword.control.tplpre"
+    'captures':
+      1: 'name': "keyword.control.tplpre"
+      2: 'name': "string.quoted.single.tplpre"
+
+
+  'if_ADDM_statement':
+    'name': "keyword.control.conditional.tplpre"
+    'match': "#IFADDM"
+  'else_ADDM_statement':
+    'name': "keyword.control.conditional.tplpre"
+    'match': "#ELSE\\s+?"
+  'end_if_ADDM_statement':
+    'name': "keyword.control.conditional.tplpre"
+    'match': "#ENDIFADDM\\s+?"
+
+# Grouping:
+  'if_addm':
+    'patterns': [
+      {
+        'include': "#if_ADDM_statement"
+      }
+      {
+        'include': "#else_ADDM_statement"
+      }
+      {
+        'include': "#end_if_ADDM_statement"
+      }
+    ]

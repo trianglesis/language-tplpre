@@ -1,0 +1,21 @@
+{
+  "name": "language-tplpre",
+  "version": "0.0.1",
+  "engines": {
+    "atom": "*",
+    "node": "*"
+  },
+  "description": "BMC tplpre language support in Atom",
+  "homepage": "https://atom.github.io/language-python",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom/tpl-syntax"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atom/language-python/issues"
+  },
+  "devDependencies": {
+    "coffeelint": "^1.10.1"
+  }
+}
