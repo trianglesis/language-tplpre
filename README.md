@@ -1,6 +1,6 @@
 # BMC tpl\\tplpre language support in Atom
 
-Adds syntax highlighting and snippets for tpl in Atom.
+Adds syntax highlighting and snippets for [tpl](https://docs.bmc.com/docs/display/DISCO111/The+Pattern+Language+TPL) in Atom.
 
 Originally re-made from the [Sublmime text 3 bundle](https://github.com/triaglesis/BMC_TPL_IDE).
 
