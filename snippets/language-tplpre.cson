@@ -1,582 +1,1159 @@
-# Generated with Atomizr – https://atom.io/packages/atomizr
+# Alexander Danylchenko
+# BMC tpl\tplre language completions snippet.
+# 2017-08-14 - Latest version.
 ".source.tplpre":
-  " BMC Copyright":
-    prefix: "_Copyright "
-    body: "// (c) Copyright 2016 BMC Software, Inc. All rights reserved.$0"
-  _tpl:
-    prefix: "_tpl"
-    body: "tpl \\$\\$TPLVERSION\\$\\$ module ${1:Module}.${2:Name};$0"
-  _pattern:
-    prefix: "_pattern"
-    body: '''
+	"comment - PATTERN BLOCK COMPLETIONS:":
+		prefix: "comment_-_PATTERN_BLOCK_COMPLETIONS:_"
+		body: "Comment ITEM: PATTERN$0"
+	"_Copyright BMC Copyright":
+		prefix: "_Copyright_BMC_Copyright_"
+		body: "// (c) Copyright 2016 BMC Software, Inc. All rights reserved.$0"
+	_tpl:
+		prefix: "_tpl_"
+		body: "tpl \\$\\$TPLVERSION\\$\\$ module ${1:Module}.${2:Name};$0"
+	_pattern:
+		prefix: "_pattern_"
+		body: '''
 
 
-      pattern ${1:PatternName} 1.0
+			pattern ${1:PatternName} 1.0
 
-        """
-        Pattern trigger on ...
-        Pattern also tries to ...
+				"""
+				Pattern trigger on ...
+				Pattern also tries to ...
 
-        Supported platforms:
+				Supported platforms:
 
-        UNIX
-        Windows
+				UNIX
+				Windows
 
-        """
+				"""
 
-        metadata
-          products := '';
-          urls := '';
-          publishers  := '';
-          categories := '';
-          known_versions := '', '', '';
-        end metadata;
+				metadata
+					products := '';
+					urls := '';
+					publishers  := '';
+					categories := '';
+					known_versions := '', '', '';
+				end metadata;
 
-        overview
-          tags TKU, TKU_YYYY_MM_DD, Name, Product;
-        end overview;
+				overview
+					tags TKU, TKU_YYYY_MM_DD, Name, Product;
+				end overview;
 
-        constants
-          si_type := 'Product Name';
-        end constants;
+				constants
+					si_type := 'Product Name';
+				end constants;
 
-        triggers
-          on process := DiscoveredProcess where cmd matches unix_cmd "CMD" and args matches regex "ARGS";
-        end triggers;
+				triggers
+					on process := DiscoveredProcess where cmd matches unix_cmd "CMD" and args matches regex "ARGS";
+				end triggers;
 
-        body
-          host := model.host(process);
+				body
+					host := model.host(process);
 
 
-        end body;
-      end pattern;
+				end body;
+			end pattern;
 
-      $0
-    '''
-  SearchFunctions:
-    prefix: "relatedSisSearchOnMultipleHosts "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
-  RDBMSFunctions:
-    prefix: "parseJDBC "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:RDBMSFunctions\\.)/}parseJDBC(url); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
-  DiscoveryFunctions:
-    prefix: "checkCommandList "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:DiscoveryFunctions\\.)/}checkCommandList(${1:host}, ${2:command_list});$0"
-  ConversionFunctions:
-    prefix: "convertToBytes "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:ModuleName\\.)/}${1:value}, ${2:gib});$0"
-  " pattern":
-    prefix: "_metadata "
-    body: '''
-          metadata
-              products := "";
-              urls := "";
-              publishers  := "";
-              categories := "";
-              known_versions := "", "", "", "", "";
-          end metadata;
-      $0
-    '''
-  " module":
-    prefix: "_metadata "
-    body: '''
-      metadata
-        origin := "TKU";
-        tkn_name := "${1:name}";
-        tree_path := '${2:category}', '${3:category}', '${4:category}';
-      end metadata;
-      $0
-    '''
-  " unix_cmd":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on process := DiscoveredProcess where cmd matches unix_cmd "${1:name}";
-      end triggers;
-      $0
-    '''
-  " windows_cmd":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on process := DiscoveredProcess where cmd matches windows_cmd "${1:name}";
-      end triggers;
-      $0
-    '''
-  " host":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on Host created, confirmed where ${1:name};
-      end triggers;
-      $0
-    '''
-  " hardware_detail":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on detail := HardwareDetail created, confirmed
-              where ${1:name};
-      end triggers;
-      $0
-    '''
-  " management_controller":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on mc := ManagementController created, confirmed
-              where ${1:name};
-      end triggers;
-      $0
-    '''
-  " network_device":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on device := NetworkDevice created, confirmed
-              where ${1:vendor};
-      end triggers;
-      $0
-    '''
-  " software_instance":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on SoftwareInstance created, confirmed
-                        where type = ${1:name};
-      end triggers;
-      $0
-    '''
-  " software_component":
-    prefix: "_triggers "
-    body: '''
-      triggers
-          on SoftwareComponent created, confirmed
-                         where instance = ${1:name};
-      end triggers;
-      $0
-    '''
-  "Simple Identifiers":
-    prefix: "_unix_cmd "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:unix_cmd )/}\"${1:unix_cmd}\" -> \"${2:product_name}\";$0"
-  " Two cols":
-    prefix: "_table "
-    body: '''
-      table ${1:table_name} 1.0
-        "one" -> "val_name1", "val_name2";
-        "two"    -> "val_name3", "val_name4";
-        default  -> "val_name5", "val_name6";
-      end table;
-      $0
-    '''
-  " One col":
-    prefix: "_table "
-    body: '''
-      table ${1:table_name} 1.0
-        "one"       -> val_1;
-        "two"       -> val_2;
-        default     -> val_100;
-      end table;
-      $0
-    '''
-  Small:
-    prefix: "_definitions "
-    body: '''
-      definitions ${1:def_name} 1.0
-        \'''${2:Describe definitions}\'''$0
+			$0
+		'''
+	"from SearchFunctions":
+		prefix: "from_SearchFunctions_"
+		body: "from SearchFunctions import SearchFunctions ${1:1}.${2:0}; // TODO: Check the current version$0"
+	"from RDBMSFunctions":
+		prefix: "from_RDBMSFunctions_"
+		body: "from RDBMSFunctions import RDBMSFunctions ${1:1}.${2:0}; // TODO: Check the current version$0"
+	"from DiscoveryFunctions":
+		prefix: "from_DiscoveryFunctions_"
+		body: "from DiscoveryFunctions import DiscoveryFunctions ${1:1}.${2:0}; // TODO: Check the current version$0"
+	"from ConversionFunctions":
+		prefix: "from_ConversionFunctions_"
+		body: "from ConversionFunctions import ConversionFunctions ${1:1}.${2:0}; // TODO: Check the current version$0"
+	"comment - METADATA":
+		prefix: "comment_-_METADATA_"
+		body: "Comment ITEM: METADATA$0"
+	"_metadata pattern":
+		prefix: "_metadata_pattern_"
+		body: '''
+			    metadata
+			        products := "";
+			        urls := "";
+			        publishers  := "";
+			        categories := "";
+			        known_versions := "", "", "", "", "";
+			    end metadata;
+			$0
+		'''
+	"_metadata module":
+		prefix: "_metadata_module_"
+		body: '''
+			metadata
+				origin := "TKU";
+				tkn_name := "${1:name}";
+				tree_path := '${2:category}', '${3:category}', '${4:category}';
+			end metadata;
+			$0
+		'''
+	"comment - TRIGGER":
+		prefix: "comment_-_TRIGGER_"
+		body: "Comment ITEM: TRIGGER$0"
+	"_triggers unix_cmd":
+		prefix: "_triggers_unix_cmd_"
+		body: '''
+			triggers
+			    on process := DiscoveredProcess where cmd matches unix_cmd "${1:name}";
+			end triggers;
+			$0
+		'''
+	"_triggers windows_cmd":
+		prefix: "_triggers_windows_cmd_"
+		body: '''
+			triggers
+			    on process := DiscoveredProcess where cmd matches windows_cmd "${1:name}";
+			end triggers;
+			$0
+		'''
+	"_triggers host":
+		prefix: "_triggers_host_"
+		body: '''
+			triggers
+			    on Host created, confirmed where ${1:name};
+			end triggers;
+			$0
+		'''
+	"_triggers hardware_detail":
+		prefix: "_triggers_hardware_detail_"
+		body: '''
+			triggers
+			    on detail := HardwareDetail created, confirmed
+			        where ${1:name};
+			end triggers;
+			$0
+		'''
+	"_triggers management_controller":
+		prefix: "_triggers_management_controller_"
+		body: '''
+			triggers
+			    on mc := ManagementController created, confirmed
+			        where ${1:name};
+			end triggers;
+			$0
+		'''
+	"_triggers network_device":
+		prefix: "_triggers_network_device_"
+		body: '''
+			triggers
+			    on device := NetworkDevice created, confirmed
+			        where ${1:vendor};
+			end triggers;
+			$0
+		'''
+	"_triggers software_instance":
+		prefix: "_triggers_software_instance_"
+		body: '''
+			triggers
+			    on SoftwareInstance created, confirmed
+			                  where type = ${1:name};
+			end triggers;
+			$0
+		'''
+	"_triggers software_component":
+		prefix: "_triggers_software_component_"
+		body: '''
+			triggers
+			    on SoftwareComponent created, confirmed
+			                   where instance = ${1:name};
+			end triggers;
+			$0
+		'''
+	"comment - IDENTIFIERS":
+		prefix: "comment_-_IDENTIFIERS_"
+		body: "Comment ITEM: IDENTIFIERS$0"
+	"_identify Simple Identifiers":
+		prefix: "_identify_Simple_Identifiers_"
+		body: '''
+			identify ${1:SOME} 1.0
+				tags simple_identity, ${2:tag1};
+				DiscoveredProcess cmd -> simple_identity;
+			end identify;
+			$0
+		'''
+	"comment - TABLES":
+		prefix: "comment_-_TABLES_"
+		body: "Comment ITEM: TABLES$0"
+	"_table Two cols":
+		prefix: "_table_Two_cols_"
+		body: '''
+			table ${1:table_name} 1.0
+				"one" -> "val_name1", "val_name2";
+				"two"    -> "val_name3", "val_name4";
+				default  -> "val_name5", "val_name6";
+			end table;
+			$0
+		'''
+	"_table One col":
+		prefix: "_table_One_col_"
+		body: '''
+			table ${1:table_name} 1.0
+				"one"       -> val_1;
+				"two"       -> val_2;
+				default     -> val_100;
+			end table;
+			$0
+		'''
+	"comment - DEFINITIONS":
+		prefix: "comment_-_DEFINITIONS_"
+		body: "Comment ITEM: DEFINITIONS$0"
+	"_definitions Small":
+		prefix: "_definitions_Small_"
+		body: '''
+			definitions ${1:def_name} 1.0
+				\'''${2:Describe definitions}\'''$0
 
-      end definitions;
-      $0
-    '''
-  Big:
-    prefix: "_definitions "
-    body: '''
-      definitions ${1:def_name} 1.0
-        \'''${2:Describe definitions}
-           Change History:
+			end definitions;
+			$0
+		'''
+	"_definitions Big":
+		prefix: "_definitions_Big_"
+		body: '''
+			definitions ${1:def_name} 1.0
+				\'''${2:Describe definitions}
+				   Change History:
 
-        \'''
-        $0
+				\'''
+				$0
 
-      end definitions;
-      $0
-    '''
-  " Function":
-    prefix: "_define "
-    body: '''
-      define ${1:function_name}(${2:argument}) -> ${3:return}
-        \'''
-        ${4:Describe function}
-        \'''
+			end definitions;
+			$0
+		'''
+	"_define Function":
+		prefix: "_define_Function_"
+		body: '''
+			define ${1:function_name}(${2:argument}) -> ${3:return}
+				\'''
+				${4:Describe function}
+				\'''
 
-        $0
+				$0
 
-        return ${5:dummy};
+				return ${5:dummy};
 
-      end define;
-      $0
-    '''
-  "(\\d*\\.\\d*)":
-    prefix: "_full_version "
-    body: '''
-      // Assign product version
-      if full_version then
-        product_version := regex.extract(full_version, regex '(\\d*\\.\\d*)', raw '\\1');
-        if not product_version then
-          product_version := full_version;
-        end if;
-      end if;
+			end define;
+			$0
+		'''
+	"comment - FULL VERSION":
+		prefix: "comment_-_FULL_VERSION_"
+		body: "Comment ITEM: FULL$0"
+	"_full_version (\\d*\\.\\d*)":
+		prefix: "_full_version_(\\d*\\.\\d*)_"
+		body: '''
+			// Assign product version
+			if full_version then
+				product_version := regex.extract(full_version, regex '(\\d*\\.\\d*)', raw '\\1');
+				if not product_version then
+					product_version := full_version;
+				end if;
+			end if;
 
-      $0
-    '''
-  "Find packages":
-    prefix: "_packages "
-    body: '''
-      packages := model.findPackages( host, [regex "${1:PACKAGE_NAME}"] );
-      for package in packages do
-        if package.version then
-          full_version := package.version;
-          break;
-        end if;
-      end for;$0
-    '''
-  "OLD _functions":
-    prefix: "checkCommandList "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:functions\\.)/}checkCommandList(${1:host}, ${2:command_list});$0"
-  discovery:
-    prefix: "vSphereGetPropertyTable "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:discovery\\.)/}vSphereGetPropertyTable(host, \"HostSystem\", host_id, \"config.storageDevice.scsiLun\", [\"serialNumber\", \"deviceName\"]);$0"
-  Matrix:
-    prefix: "command_info Windows "
-    body: '''
-      $0// *command_info_start
-      $0// command_windows := "${1:command_windows}"
-      $0// reason := "${3:Obtain something}"
-      $0// when := "${4:Only if installation path is obtained}"
-      $0// *command_info_end$0
-    '''
-  json:
-    prefix: "decode "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:json\\.)/}decode(${1:value});$0"
-  "OLD _rdbms_functions":
-    prefix: "find_db_server "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:rdbms_functions\\.)/}find_db_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, ${5:db_details});$0"
-  SearchNodesFull:
-    prefix: "getSoftwareNodes "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
-                       node_address           := ${1:none},
-                       software_type          := ${2:none},
-                       balancer_port          := ${3:none},
-                       port                   := ${4:none},
-                       instance               := ${5:none},
-                       listen_tcp_socket      := ${6:none},
-                       server_name            := ${7:none},
-                       installed_product      := ${8:none},
-                       db_name                := ${9:none},
-                       net_service_name       := ${10:none},
-                       ora_service_name       := ${11:none},
-                       db2_copy_name          := ${12:none},
-                       dsn_name               := ${13:none},
-                       jdbc_url               := ${14:none},
-                       tnsnames_file_location := ${15:none},
-                       get_remote_nodes_only  := ${16:none}
-                      ); // -> software_nodes
-      $0
-    '''
-  _jdbc_url:
-    prefix: "getSoftwareNodes "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
-      $0
-    '''
-  _jdbc_search:
-    prefix: "getSoftwareNodes "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
-      $0
-    '''
-  SearchDatabase:
-    prefix: "getSoftwareNodes "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
-                       node_address  := ${1:db_host},
-                       software_type := "${2:db_type}",
-                       db_name       := ${3:db_name}
-                      );
-      $0
-    '''
-  "SearchDB+port":
-    prefix: "getSoftwareNodes "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
-                       node_address  := ${1:db_host},
-                       software_type := ${2:db_type},
-                       port          := ${3:port},
-                       instance      := ${4:instance},
-                       db_name       := ${5:db_name}
-                      );$0
-    '''
-  SearchNodeonLB:
-    prefix: "getSoftwareNodes "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
-                       node_address  := ${1:db_host},
-                       balancer_port := ${2:none}
-                      );
-      $0
-    '''
-  "full ver (\\d+(?:\\.\\d+)*)":
-    prefix: "_regex "
-    body: "(\\d+(?:\\.\\d+)*)$0"
-  "full ver ^(\\d+(?:\\.\\d+)?)":
-    prefix: "_regex "
-    body: "^(\\d+(?:\\.\\d+)?)$0"
-  "product ver (\\d+(?:\\.\\d+)?)":
-    prefix: "_regex "
-    body: "(\\d+(?:\\.\\d+)?)$0"
-  "bjavaw (?i)\\bjavaw?(?:\\.exe)\\$":
-    prefix: "_regex "
-    body: "(?i)\\bjavaw?(?:\\.exe)\\$$0"
-  "bjava (?i)\\bjava(?:\\.exe)?\\$":
-    prefix: "_regex "
-    body: "(?i)\\bjava(?:\\.exe)?\\$$0"
-  "java (?i)^(\\w:.*\\)Java\\":
-    prefix: "_regex "
-    body: "(?i)^(\\w:.*\\)Java\\$0"
-  "java (/\\.+/)java/":
-    prefix: "_regex "
-    body: "^(/\\.+/)java/$0"
-  "ipv4 (\\d+(?:\\.\\d+){3})":
-    prefix: "_regex "
-    body: "(\\d+(?:\\.\\d+){3})$0"
-  "ver ^(\\d+)":
-    prefix: "_regex "
-    body: "^(\\d+)$0"
-  "ver ^\\d+\\$":
-    prefix: "_regex "
-    body: "^\\d+\\$$0"
-  Win_path:
-    prefix: "_regex "
-    body: "(?i)\\\"([^\"]+)PATH_TO_FILE_LIB\\\"$0"
-  Win_path_alt:
-    prefix: "_regex "
-    body: "([^\"]+)PATH_TO_FILE_CONF$0"
-  inference:
-    prefix: "destruction "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:inference\\.)/}destruction(${1:destroyed_node}, ${2:source};)$0"
-  "model.host":
-    prefix: "model.host "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}host(${1:process});$0"
-  "model.hosts":
-    prefix: "model.hosts "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}hosts(${1:model_sis});$0"
-  "model.destroy":
-    prefix: "model.destroy "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}destroy(${1:dummy});$0"
-  "model.kind":
-    prefix: "model.kind "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}kind(${1:hosting_node});$0"
-  "model.findPackages":
-    prefix: "model.findPackages "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}findPackages(host, [regex \"${1:}\"]);$0"
-  "model.withdraw":
-    prefix: "model.withdraw "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}withdraw(si_node, \"${1:detail}\");$0"
-  "model.addContainment":
-    prefix: "addContainment "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}addContainment(${1:si_node}, ${2:software_components});$0"
-  "model.addDisplayAttribute":
-    prefix: "addDisplayAttribute "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}addDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
-  "model.removeDisplayAttribute":
-    prefix: "removeDisplayAttribute "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}removeDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
-  "model.setContainment":
-    prefix: "setContainment "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}setContainment(${1:cluster_si_node}, ${2:related_sis});$0"
-  "model.setRemovalGroup":
-    prefix: "setRemovalGroup "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}setRemovalGroup(${1:cluster_si}, \"${2:Dummy_Server_Cluster}\");$0"
-  "model.anchorRemovalGroup":
-    prefix: "anchorRemovalGroup "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}anchorRemovalGroup(${1:si}, \"${2:license_dts}\");$0"
-  "model.suppressRemovalGroup":
-    prefix: "suppressRemovalGroup "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}suppressRemovalGroup(\"%${1:detail_type}%\");$0"
-  rel:
-    prefix: "StorageUse "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}rel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
-  uniquerel:
-    prefix: "StorageUse "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}uniquerel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
-  Short:
-    prefix: "SoftwareInstance "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key := key,
-        $0name := name,
-        $0short_name := short_name
-        );$0
-    '''
-  Key:
-    prefix: "SoftwareInstance "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
-      $0             name            := name,
-      $0             short_name      := short_name,
-      $0             version         := full_version,
-      $0             product_version := product_version,
-      $0             port            := port,
-      $0             listening_ports := listening_ports,
-      $0             type            := si_type
-      $0             );
-      $0
-    '''
-  Key_group:
-    prefix: "SoftwareInstance "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
-      $0             name            := name,
-      $0             short_name      := short_name,
-      $0             version         := full_version,
-      $0             product_version := product_version,
-      $0             port            := port,
-      $0             listening_ports := listening_ports,
-      $0             type            := si_type
-      $0             );
-      $0
-    '''
-  Detailed:
-    prefix: "SoftwareInstance "
-    body: '''
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key              := "%product_version%/%si_type%/%host.key%",
-      $0               name             := name,
-      $0               short_name       := short_name,
-      $0               version          := full_version,
-      $0               product_version  := product_version,
-      $0               publisher        := publisher,
-      $0               product          := product,
-      $0               type             := si_type
-      $0              );
-      $0
-    '''
-  "model.uniquerel.":
-    prefix: "Communication type "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node}, type := \"${3:%type%}\");$0"
-  number:
-    prefix: "range "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:number\\.)/}range(${1:number});$0"
-  text:
-    prefix: "ordinal "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}ordinal(${1:string});$0"
-  " , to .":
-    prefix: "replace "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}replace(${1:string}, \",\", \".\");$0"
-  " - to .":
-    prefix: "replace "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}replace(${1:string}, \"-\", \".\");$0"
-  " \\\\ to \\\\\\\\":
-    prefix: "replace "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}replace(${1:string}, \"\\\\\\\", \"\\\\\\\\\\\\\\\");$0"
-  list:
-    prefix: "append "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:list\\.)/}append(${1:the_list}, ${2:string});$0"
-  " rel_proc_parent":
-    prefix: "_trav"
-    body: '''
-      rel_services := search(in ${1:da_node} traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList
-                   $0traverse List:List:Member:DiscoveredProcess where pid = %pproc_pid%);$0
-    '''
-  " ContainedSoftware::SoftwareInstance":
-    prefix: "_trav"
-    body: '''
-      obsolete_links := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:SoftwareInstance
-                   where type = %${2:si_type}% and key <> %key%
-                   step in SoftwareContainer:SoftwareContainment
-                   where #:ContainedSoftware:SoftwareInstance.key = %${3:related_si}.key%);$0
-    '''
-  " InferredElement::DiscoveredProcess":
-    prefix: "_trav"
-    body: "procs := search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess);$0"
-  " Host:HostedSoftware::SoftwareInstance":
-    prefix: "_trav"
-    body: '''
-      some_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance
-                where ${1:type} = "${2:type_here}");$0
-    '''
-  " Client::SoftwareInstance":
-    prefix: "_trav"
-    body: "srv_si_list := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance where type = \"${2:type_here}\");$0"
-  " Server::SoftwareInstance":
-    prefix: "_trav"
-    body: "client_si_list := search(in ${1:related_si} traverse Server:Communication:Client:SoftwareInstance where type = \"${2:type_here}\");$0"
-  " ContainedSoftware::BusinessApplicationInstance":
-    prefix: "_trav"
-    body: "bai_candidates := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:BusinessApplicationInstance where type = \"%${2:si_type}%\");$0"
-  " Host::SoftwareInstance":
-    prefix: "_trav"
-    body: "db2_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type = \"${1:type_here}\" traverse ElementWithDetail:Detail:Detail:DatabaseDetail where instance has subword '%${2:subword}%');$0"
-  " ElementWithDetail::Detail":
-    prefix: "_trav"
-    body: "existing_dts := search(in si traverse ElementWithDetail:Detail:Detail:Detail where ${1:type} = \"${2:type_here}\");$0"
-  " Dependant::SoftwareInstance":
-    prefix: "_trav"
-    body: "mains_si := search(in ${1:related_si} traverse Dependant:Dependency:DependedUpon:SoftwareInstance);$0"
-  " Client::Server:SoftwareInstance":
-    prefix: "_trav"
-    body: "main_db_sis := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance);$0"
-  log:
-    prefix: "critical "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}critical(\"${1:message}\");$0"
-  line:
-    prefix: "_debug "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:line)/}:$TM_LINE_NUMBER$0"
-  simple:
-    prefix: "_debug "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} on line:$TM_LINE_NUMBER\");$0"
-  "%variable%":
-    prefix: "_debug "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} %${2:variable}% - ${4:message} on line:$TM_LINE_NUMBER\");$0"
-  "%node.attrs%":
-    prefix: "_debug "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line:$TM_LINE_NUMBER\");$0"
-  "%node.attrs% Exec":
-    prefix: "_debug "
-    body: '''
-      delta_time_tics := time.toTicks(time.current()) - time.toTicks(start_time);
-      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug("DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line:$TM_LINE_NUMBER Execution time:" + number.toText(delta_time_tics/10000) + "ms");$0
-    '''
-  "log SI":
-    prefix: "_info "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}info(\"%host.name%: SI created for %${1:si_type}%);$0"
-  "extract Var":
-    prefix: "regex "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:regex\\.)/}extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\1');$0"
-  "extract node.attrs":
-    prefix: "regex "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:regex\\.)/}extract(${1:node}.${2:attrs}, regex \"${3:regex_raw}\", raw '\\1');$0"
-  "extract raw 1,2":
-    prefix: "regex "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:regex\\.)/}extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\\\${3:1}', raw '\\\\${4:2}');$0"
-  evaluate:
-    prefix: "xpath "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:xpath\\.)/}evaluate(${1:some_file_path}, \"${2:xpath_string}\");$0"
-  openDocument:
-    prefix: "xpath "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:xpath\\.)/}openDocument(${1:some_file_path});$0"
-  closeDocument:
-    prefix: "xpath "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:xpath\\.)/}closeDocument(${1:some_file_path});$0"
-  _related:
-    prefix: "_related_host  "
-    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:related\\.)/}host(${1:node});$0"
-  "host.os_class":
-    prefix: "_os_class "
-    body: '''
-      if host.os_class = "Windows" then
-        sep := '\\\\\\';
-      else
-        sep := '/';
-      end if;
-      $0
-    '''
+			$0
+		'''
+	"_packages Find packages":
+		prefix: "_packages_Find_packages_"
+		body: '''
+			packages := model.findPackages( host, [regex "${1:PACKAGE_NAME}"] );
+			for package in packages do
+				if package.version then
+					full_version := package.version;
+					break;
+				end if;
+			end for;$0
+		'''
+	"comment - TPLPRE":
+		prefix: "comment_-_TPLPRE_"
+		body: "Comment ITEM: TPLPRE$0"
+	"comment - COMMON FUNCTIONS:":
+		prefix: "comment_-_COMMON_FUNCTIONS:_"
+		body: "Comment ITEM: COMMON$0"
+	"validate_host_address_format OLD _functions":
+		prefix: "validate_host_address_format_OLD__functions_"
+		body: "functions.validate_host_address_format(${1:rel_host_address});$0"
+	"domain_lookup OLD _functions":
+		prefix: "domain_lookup_OLD__functions_"
+		body: "functions.domain_lookup(${1:host}, ${2:rel_host_address_domain});$0"
+	"identify_host_perform_search OLD _functions":
+		prefix: "identify_host_perform_search_OLD__functions_"
+		body: "functions.identify_host_perform_search(${1:host}, ${2:rel_host_address});$0"
+	"identify_host_perform_search_in_scope OLD _functions":
+		prefix: "identify_host_perform_search_in_scope_OLD__functions_"
+		body: "functions.identify_host_perform_search_in_scope(${1:host}, ${2:rel_host_address}, ${3:hosts_scope});$0"
+	"identify_host OLD _functions":
+		prefix: "identify_host_OLD__functions_"
+		body: "functions.identify_host(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
+	"identify_host_extended OLD _functions":
+		prefix: "identify_host_extended_OLD__functions_"
+		body: "functions.identify_host_extended(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
+	"related_sis_search OLD _functions":
+		prefix: "related_sis_search_OLD__functions_"
+		body: "functions.related_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type});$0"
+	"related_sis_search_on_multiple_hosts OLD _functions":
+		prefix: "related_sis_search_on_multiple_hosts_OLD__functions_"
+		body: "functions.related_sis_search_on_multiple_hosts(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
+	"related_sis_search_on_multiple_hosts_extended OLD _functions":
+		prefix: "related_sis_search_on_multiple_hosts_extended_OLD__functions_"
+		body: "functions.related_sis_search_on_multiple_hosts_extended(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
+	"related_sis_search_extended OLD _functions":
+		prefix: "related_sis_search_extended_OLD__functions_"
+		body: "functions.related_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:extended}),$0"
+	"related_si_types_search OLD _functions":
+		prefix: "related_si_types_search_OLD__functions_"
+		body: "functions.related_si_types_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_types});$0"
+	"path_normalization OLD _functions":
+		prefix: "path_normalization_OLD__functions_"
+		body: "functions.path_normalization(${1:host}, ${2:install_root});$0"
+	"links_management OLD _functions":
+		prefix: "links_management_OLD__functions_"
+		body: "functions.links_management(${1:si_node}, ${2:recently_found_sis}, ${3:related_si_type});$0"
+	"get_cleanedup_path OLD _functions":
+		prefix: "get_cleanedup_path_OLD__functions_"
+		body: "functions.get_cleanedup_path(${1:path}, ${2:os});$0"
+	"get_max_version OLD _functions":
+		prefix: "get_max_version_OLD__functions_"
+		body: "functions.get_max_version(${1:ver1}, ${2:ver2});$0"
+	"get_exe_cwd_path OLD _functions":
+		prefix: "get_exe_cwd_path_OLD__functions_"
+		body: "functions.get_exe_cwd_path(${1:process}, ${2:expected_binary_name});$0"
+	"sort_list OLD _functions":
+		prefix: "sort_list_OLD__functions_"
+		body: "functions.sort_list(${1:list});$0"
+	"run_priv_cmd OLD _functions":
+		prefix: "run_priv_cmd_OLD__functions_"
+		body: "functions.run_priv_cmd(${1:host}, ${2:command}, priv_cmd := 'PRIV_RUNCMD');$0"
+	"has_process OLD _functions":
+		prefix: "has_process_OLD__functions_"
+		body: "functions.has_process(${1:host}, ${2:command});$0"
+	"isValidSerialNumber OLD _functions":
+		prefix: "isValidSerialNumber_OLD__functions_"
+		body: "functions.isValidSerialNumber(${1:serial});$0"
+	"convertToCharString OLD _functions":
+		prefix: "convertToCharString_OLD__functions_"
+		body: "functions.convertToCharString(${1:ascii_codes});$0"
+	"wmiFollowAssociations OLD _functions":
+		prefix: "wmiFollowAssociations_OLD__functions_"
+		body: "functions.wmiFollowAssociations(${1:host}, ${2:namespace}, ${3:initial_paths}, ${4:associations});$0"
+	"checkForDecimal OLD _functions":
+		prefix: "checkForDecimal_OLD__functions_"
+		body: "functions.checkForDecimal(${1:value}, ${2:bValue});$0"
+	"convertToBytes OLD _functions":
+		prefix: "convertToBytes_OLD__functions_"
+		body: "functions.convertToBytes(${1:value}, ${2:gib});$0"
+	"identify_host_with_uuid OLD _functions":
+		prefix: "identify_host_with_uuid_OLD__functions_"
+		body: "functions.identify_host_with_uuid(${1:uuid});$0"
+	"locateCommands OLD _functions":
+		prefix: "locateCommands_OLD__functions_"
+		body: "functions.locateCommands(${1:host}, ${2:command_list});$0"
+	"find_server OLD _functions":
+		prefix: "find_server_OLD__functions_"
+		body: "functions.find_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, alt_types := ${5:none}, all := ${6:false});$0"
+	"checkCommandList OLD _functions":
+		prefix: "checkCommandList_OLD__functions_"
+		body: "functions.checkCommandList(${1:host}, ${2:command_list});$0"
+	"comment -   CONVERSION FUNCTIONS:":
+		prefix: "comment_-_CONVERSION_FUNCTIONS:_"
+		body: "Comment ITEM:   CONVERSION$0"
+	"isValidSerialNumber ConversionFunctions":
+		prefix: "isValidSerialNumber_ConversionFunctions_"
+		body: "ConversionFunctions.isValidSerialNumber(${1:serial});$0"
+	"convertToCharString ConversionFunctions":
+		prefix: "convertToCharString_ConversionFunctions_"
+		body: "ConversionFunctions.convertToCharString(${1:ascii_codes});$0"
+	"convertToBytes ConversionFunctions":
+		prefix: "convertToBytes_ConversionFunctions_"
+		body: "ModuleName.${1:value}, ${2:gib});$0"
+	"comment -   DISCOVERY BUILT IN FUNCTIONS:":
+		prefix: "comment_-_DISCOVERY_BUILT_IN_FUNCTIONS:_"
+		body: "Comment ITEM:   DISCOVERY$0"
+	"process discovery":
+		prefix: "process_discovery_"
+		body: "discovery.process(${1:process});$0"
+	"children discovery":
+		prefix: "children_discovery_"
+		body: "discovery.children(${1:process});$0"
+	"descendents discovery":
+		prefix: "descendents_discovery_"
+		body: "discovery.descendents(${1:process});$0"
+	"parent discovery":
+		prefix: "parent_discovery_"
+		body: "discovery.parent(${1:process});$0"
+	"allProcesses discovery":
+		prefix: "allProcesses_discovery_"
+		body: "discovery.allProcesses(${1:process});$0"
+	"access discovery":
+		prefix: "access_discovery_"
+		body: "discovery.access(${1:process});$0"
+	"comment - GET AND QUERY":
+		prefix: "comment_-_GET_AND_QUERY_"
+		body: "Comment ITEM: GET$0"
+	"fileGet discovery":
+		prefix: "fileGet_discovery_"
+		body: "discovery.fileGet(host, ${1:config_filepath});$0"
+	"fileInfo discovery":
+		prefix: "fileInfo_discovery_"
+		body: "discovery.fileInfo(host, \"${1:file_path}\");$0"
+	"getNames discovery":
+		prefix: "getNames_discovery_"
+		body: "discovery.getNames(${1:target}, ${2:ip_address});$0"
+	"listDirectory discovery":
+		prefix: "listDirectory_discovery_"
+		body: "discovery.listDirectory(host, ${1:directory});$0"
+	"listRegistry discovery":
+		prefix: "listRegistry_discovery_"
+		body: "discovery.listRegistry(host, ${1:registry_root});$0"
+	"registryKey discovery":
+		prefix: "registryKey_discovery_"
+		body: "discovery.registryKey(host, ${1:reg_key_inst_dir});$0"
+	"wmiQuery discovery":
+		prefix: "wmiQuery_discovery_"
+		body: "discovery.wmiQuery(host, ${1:wmiQuery}, ${2:wmiNS});$0"
+	"wmiQuery raw discovery":
+		prefix: "wmiQuery_raw_discovery_"
+		body: "discovery.wmiQuery(host, ${1:wmiQuery}, raw \"${2:path_to}\");$0"
+	"wbemQuery discovery":
+		prefix: "wbemQuery_discovery_"
+		body: "discovery.wbemQuery(${1:target}, ${2:class_name}, [${3:properties}], ${4:namespace});$0"
+	"wbemEnumInstances discovery":
+		prefix: "wbemEnumInstances_discovery_"
+		body: "discovery.wbemEnumInstances(${1:target}, ${2:class_name}, ${3:properties}, ${4:namespace}, ${5:filter_locally});$0"
+	"runCommand discovery":
+		prefix: "runCommand_discovery_"
+		body: "discovery.runCommand(host, \"${1:command_to_run}\");$0"
+	"snmpGet discovery":
+		prefix: "snmpGet_discovery_"
+		body: "discovery.snmpGet(${1:target}, ${2:oid_table}, [${3:binary_oid_list}]);$0"
+	"snmpGetTable discovery":
+		prefix: "snmpGetTable_discovery_"
+		body: "discovery.snmpGetTable(${1:target}, ${2:table_oid}, ${3:column_table}, [${4:binary_oid_list}]);$0"
+	"comment - MATRIX":
+		prefix: "comment_-_MATRIX_"
+		body: "Comment ITEM: MATRIX$0"
+	"filepath_info Matrix":
+		prefix: "filepath_info_Matrix_"
+		body: '''
+			$0// *filepath_info_start
+			$0// filepath_windows := "${1:filepath_windows}"
+			$0// filepath_unix := "${2:filepath_unix}"
+			$0// reason := "${3:Obtain something}"
+			$0// when := "${4:Only if installation is path obtained}"
+			$0// *filepath_info_end$0
+		'''
+	"command_info Matrix":
+		prefix: "command_info_Matrix_"
+		body: '''
+			$0// *command_info_start
+			$0// command_windows := "${1:command_windows}"
+			$0// command_unix := "${2:command_unix}"
+			$0// reason := "${3:Obtain something}"
+			$0// when := "${4:Only if installation path is obtained}"
+			$0// *command_info_end$0
+		'''
+	"filepath_info Unix Matrix":
+		prefix: "filepath_info_Unix_Matrix_"
+		body: '''
+			$0// *filepath_info_start
+			$0// filepath_unix := "${2:filepath_unix}"
+			$0// reason := "${3:Obtain something}"
+			$0// when := "${4:Only if installation is path obtained}"
+			$0// *filepath_info_end$0
+		'''
+	"command_info Windows Matrix":
+		prefix: "command_info_Windows_Matrix_"
+		body: '''
+			$0// *command_info_start
+			$0// command_windows := "${1:command_windows}"
+			$0// reason := "${3:Obtain something}"
+			$0// when := "${4:Only if installation path is obtained}"
+			$0// *command_info_end$0
+		'''
+	"comment - REST":
+		prefix: "comment_-_REST_"
+		body: "Comment ITEM: REST$0"
+	"restfulGet discovery":
+		prefix: "restfulGet_discovery_"
+		body: "discovery.restfulGet(${1:target}, ${2:protocol}, ${3:path}[, ${4:header}]);$0"
+	"restfulPost discovery":
+		prefix: "restfulPost_discovery_"
+		body: "discovery.restfulPost(${1:target}, ${2:protocol}, ${3:path}, ${4:body}[, ${5:header}]);$0"
+	"comment - JSON":
+		prefix: "comment_-_JSON_"
+		body: "Comment ITEM: JSON$0"
+	"encode json":
+		prefix: "encode_json_"
+		body: "json.encode(${1:value});$0"
+	"decode json":
+		prefix: "decode_json_"
+		body: "json.decode(${1:value});$0"
+	"comment - vSphere":
+		prefix: "comment_-_vSphere_"
+		body: "Comment ITEM: vSphere$0"
+	"vSphereFindObjects discovery":
+		prefix: "vSphereFindObjects_discovery_"
+		body: "discovery.vSphereFindObjects(vc_host, \"HostSystem\", [\"name\", \"hardware.systemInfo.uuid\"]);$0"
+	"vSphereTraverseToObjects discovery":
+		prefix: "vSphereTraverseToObjects_discovery_"
+		body: "discovery.vSphereTraverseToObjects(host, \"HostSystem\", storage_info.storage_id, \"datastore\", \"Datastore\", [\"name\"]);$0"
+	"vSphereGetProperties discovery":
+		prefix: "vSphereGetProperties_discovery_"
+		body: "discovery.vSphereGetProperties(host, \"HostSystem\", host_id, [\"config.storageDevice.scsiLun[\\\"%disk_info.key%\\\"].deviceName\", \"config.storageDevice.scsiLun[\\\"%disk_info.key%\\\"].capabilities.updateDisplayNameSupported\"]);$0"
+	"vSphereGetPropertyTable discovery":
+		prefix: "vSphereGetPropertyTable_discovery_"
+		body: "discovery.vSphereGetPropertyTable(host, \"HostSystem\", host_id, \"config.storageDevice.scsiLun\", [\"serialNumber\", \"deviceName\"]);$0"
+	"comment -   DISCOVERY FUNCTIONS":
+		prefix: "comment_-_DISCOVERY_FUNCTIONS_"
+		body: "Comment ITEM:   DISCOVERY$0"
+	"pathNormalization DiscoveryFunctions":
+		prefix: "pathNormalization_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.pathNormalization(${1:host}, ${2:install_root});$0"
+	"getCleanedupPath DiscoveryFunctions":
+		prefix: "getCleanedupPath_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.getCleanedupPath(${1:path}, ${2:os});$0"
+	"getMaxVersion DiscoveryFunctions":
+		prefix: "getMaxVersion_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.getMaxVersion(${1:ver1}, ${2:ver2});$0"
+	"getExeCwdPath DiscoveryFunctions":
+		prefix: "getExeCwdPath_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.getExeCwdPath(${1:process}, ${2:expected_binary_name});$0"
+	"sortList DiscoveryFunctions":
+		prefix: "sortList_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.sortList(${1:list});$0"
+	"runActiveCommand DiscoveryFunctions":
+		prefix: "runActiveCommand_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.runActiveCommand(${1:host}, ${2:command_line}, expected_content_regex := ${3:none}, priv_cmd := ${4:none});$0"
+	"locateCommands DiscoveryFunctions":
+		prefix: "locateCommands_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.locateCommands(${1:host}, ${2:command_list});$0"
+	"checkCommandList DiscoveryFunctions":
+		prefix: "checkCommandList_DiscoveryFunctions_"
+		body: "DiscoveryFunctions.checkCommandList(${1:host}, ${2:command_list});$0"
+	"comment -   RDBMS OLD:":
+		prefix: "comment_-_RDBMS_OLD:_"
+		body: "Comment ITEM:   RDBMS$0"
+	"oracle_ora_file_parser OLD _rdbms_functions":
+		prefix: "oracle_ora_file_parser_OLD__rdbms_functions_"
+		body: "rdbms_functions.oracle_ora_file_parser(${1:section_name}, ${2:oracle_ora_file_content});$0"
+	"perform_rdbms_sis_search OLD _rdbms_functions":
+		prefix: "perform_rdbms_sis_search_OLD__rdbms_functions_"
+		body: "rdbms_functions.perform_rdbms_sis_search(${1:related_sis_raw}, ${2:rel_si_type}, ${3:instance}, ${4:port}, ${5:db_name}, ${6:extended});$0"
+	"related_rdbms_sis_search OLD _rdbms_functions":
+		prefix: "related_rdbms_sis_search_OLD__rdbms_functions_"
+		body: "rdbms_functions.related_rdbms_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"
+	"related_rdbms_sis_search_extended OLD _rdbms_functions":
+		prefix: "related_rdbms_sis_search_extended_OLD__rdbms_functions_"
+		body: "rdbms_functions.related_rdbms_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"
+	"oracle_net_service_name_search OLD _rdbms_functions":
+		prefix: "oracle_net_service_name_search_OLD__rdbms_functions_"
+		body: "rdbms_functions.oracle_net_service_name_search(${1:host}, ${2:net_service_name}, ${3:tnsnames_file_full_location});$0"
+	"dsn_rdbms_servers OLD _rdbms_functions":
+		prefix: "dsn_rdbms_servers_OLD__rdbms_functions_"
+		body: "rdbms_functions.dsn_rdbms_servers(${1:host}, ${2:dsn_name});$0"
+	"parseJDBC OLD _rdbms_functions":
+		prefix: "parseJDBC_OLD__rdbms_functions_"
+		body: "rdbms_functions.parseJDBC(${1:url});$0"
+	"jdbc_search OLD _rdbms_functions":
+		prefix: "jdbc_search_OLD__rdbms_functions_"
+		body: "rdbms_functions.jdbc_search(${1:host}, ${2:jdbc_url});$0"
+	"find_db_server OLD _rdbms_functions":
+		prefix: "find_db_server_OLD__rdbms_functions_"
+		body: "rdbms_functions.find_db_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, ${5:db_details});$0"
+	"comment -   RDBMS NEW:":
+		prefix: "comment_-_RDBMS_NEW:_"
+		body: "Comment ITEM:   RDBMS$0"
+	"oracleOraFileParser RDBMSFunctions":
+		prefix: "oracleOraFileParser_RDBMSFunctions_"
+		body: "RDBMSFunctions.oracleOraFileParser(${1:section_name}, ${2:oracle_ora_file_content}); // -> section$0"
+	"performRdbmsSisSearch RDBMSFunctions":
+		prefix: "performRdbmsSisSearch_RDBMSFunctions_"
+		body: '''
+			RDBMSFunctions.performRdbmsSisSearch(related_sis_raw = ${1:related_sis_raw},
+													 rel_si_type = ${2:rel_si_type},
+													 port = ${3:port},
+													 instance = ${4:instance},
+													 db_name = ${5:db_name},
+													 ora_service_name = ${6:ora_service_name},
+													 db2_copy_name = ${7:db2_copy_name}); // ->  -> related_rdbms_nodes$0
+		'''
+	"oracleNetServiceNameSearch RDBMSFunctions":
+		prefix: "oracleNetServiceNameSearch_RDBMSFunctions_"
+		body: '''
+			RDBMSFunctions.oracleNetServiceNameSearch(host = ${1:host},
+													  net_service_name = ${2:net_service_name},
+													  tnsnames_file_full_location = ${3:tnsnames_file_full_location}); // -> ora_host, ora_sid, ora_service_name$0
+		'''
+	"dsnRdbmsServers RDBMSFunctions":
+		prefix: "dsnRdbmsServers_RDBMSFunctions_"
+		body: "RDBMSFunctions.dsnRdbmsServers(host, dsn_name); // -> db_host, db_type, db_instance, ora_service_name, db_port, db_name$0"
+	"parseJDBC RDBMSFunctions":
+		prefix: "parseJDBC_RDBMSFunctions_"
+		body: "RDBMSFunctions.parseJDBC(url); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
+	"comment -   SEARCH FUNCTIONS:":
+		prefix: "comment_-_SEARCH_FUNCTIONS:_"
+		body: "Comment ITEM:   SEARCH$0"
+	"getNodeIp SearchFunctions":
+		prefix: "getNodeIp_SearchFunctions_"
+		body: "SearchFunctions.getNodeIp(host, ${1:rel_host_address_domain}); // -> node_ip$0"
+	"getHostingNodes SearchFunctions":
+		prefix: "getHostingNodes_SearchFunctions_"
+		body: "SearchFunctions.getHostingNodes(host, ${1:node_address}, balancer_port := ${2:none}); // -> hosting_nodes, nodes_type$0"
+	"getSI SearchFunctions":
+		prefix: "getSI_SearchFunctions_"
+		body: "SearchFunctions.getSI(${1:related_node}, ${2:si_types_raw}); // -> related_si$0"
+	"identifyHostWithUuid SearchFunctions":
+		prefix: "identifyHostWithUuid_SearchFunctions_"
+		body: "SearchFunctions.identifyHostWithUuid(${1:uuid}); // -> searched_host$0"
+	"relatedSisSearchOnMultipleHosts SearchFunctions":
+		prefix: "relatedSisSearchOnMultipleHosts_SearchFunctions_"
+		body: "SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
+	"comment - GET SOFTWARE NODES":
+		prefix: "comment_-_GET_SOFTWARE_NODES_"
+		body: "Comment ITEM: GET$0"
+	"getSoftwareNodes SearchNodesFull":
+		prefix: "getSoftwareNodes_SearchNodesFull_"
+		body: '''
+			SearchFunctions.getSoftwareNodes(host,
+											 node_address           := ${1:none},
+											 software_type          := ${2:none},
+											 balancer_port          := ${3:none},
+											 port                   := ${4:none},
+											 instance               := ${5:none},
+											 listen_tcp_socket      := ${6:none},
+											 server_name            := ${7:none},
+											 installed_product      := ${8:none},
+											 db_name                := ${9:none},
+											 net_service_name       := ${10:none},
+											 ora_service_name       := ${11:none},
+											 db2_copy_name          := ${12:none},
+											 dsn_name               := ${13:none},
+											 jdbc_url               := ${14:none},
+											 tnsnames_file_location := ${15:none},
+											 get_remote_nodes_only  := ${16:none}
+											); // -> software_nodes
+			$0
+		'''
+	"comment - GET SOFTWARE NODES JDBC":
+		prefix: "comment_-_GET_SOFTWARE_NODES_JDBC_"
+		body: "Comment ITEM: GET$0"
+	"getSoftwareNodes _jdbc_url":
+		prefix: "getSoftwareNodes__jdbc_url_"
+		body: '''
+			SearchFunctions.getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
+			$0
+		'''
+	"getSoftwareNodes _jdbc_search":
+		prefix: "getSoftwareNodes__jdbc_search_"
+		body: '''
+			SearchFunctions.getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
+			$0
+		'''
+	"comment - GET SOFTWARE NODES CUSTOM":
+		prefix: "comment_-_GET_SOFTWARE_NODES_CUSTOM_"
+		body: "Comment ITEM: GET$0"
+	"getSoftwareNodes SearchDatabase":
+		prefix: "getSoftwareNodes_SearchDatabase_"
+		body: '''
+			SearchFunctions.getSoftwareNodes(host,
+											 node_address  := ${1:db_host},
+											 software_type := "${2:db_type}",
+											 db_name       := ${3:db_name}
+											);
+			$0
+		'''
+	"getSoftwareNodes SearchDB+port":
+		prefix: "getSoftwareNodes_SearchDB+port_"
+		body: '''
+			SearchFunctions.getSoftwareNodes(host,
+											 node_address  := ${1:db_host},
+											 software_type := ${2:db_type},
+											 port          := ${3:port},
+											 instance      := ${4:instance},
+											 db_name       := ${5:db_name}
+											);$0
+		'''
+	"getSoftwareNodes SearchNodeonLB":
+		prefix: "getSoftwareNodes_SearchNodeonLB_"
+		body: '''
+			SearchFunctions.getSoftwareNodes(host,
+											 node_address  := ${1:db_host},
+											 balancer_port := ${2:none}
+											);
+			$0
+		'''
+	"comment -   REGEX USUAL USAGE:":
+		prefix: "comment_-_REGEX_USUAL_USAGE:_"
+		body: "Comment ITEM:   REGEX$0"
+	"_regex full ver (\\d+(?:\\.\\d+)*)":
+		prefix: "_regex_full_ver_(\\d+(?:\\.\\d+)*)_"
+		body: "(\\d+(?:\\.\\d+)*)$0"
+	"_regex full ver ^(\\d+(?:\\.\\d+)?)":
+		prefix: "_regex_full_ver_^(\\d+(?:\\.\\d+)?)_"
+		body: "^(\\d+(?:\\.\\d+)?)$0"
+	"_regex product ver (\\d+(?:\\.\\d+)?)":
+		prefix: "_regex_product_ver_(\\d+(?:\\.\\d+)?)_"
+		body: "(\\d+(?:\\.\\d+)?)$0"
+	"_regex bjavaw (?i)\\bjavaw?(?:\\.exe)\\$":
+		prefix: "_regex_bjavaw_(?i)\\bjavaw?(?:\\.exe)\\$_"
+		body: "(?i)\\bjavaw?(?:\\.exe)\\$$0"
+	"_regex bjava (?i)\\bjava(?:\\.exe)?\\$":
+		prefix: "_regex_bjava_(?i)\\bjava(?:\\.exe)?\\$_"
+		body: "(?i)\\bjava(?:\\.exe)?\\$$0"
+	"_regex java (?i)^(\\w:.*\\)Java\\":
+		prefix: "_regex_java_(?i)^(\\w:.*\\)Java\\_"
+		body: "(?i)^(\\w:.*\\)Java\\$0"
+	"_regex java (/\\.+/)java/":
+		prefix: "_regex_java_(/\\.+/)java/_"
+		body: "^(/\\.+/)java/$0"
+	"_regex ipv4 (\\d+(?:\\.\\d+){3})":
+		prefix: "_regex_ipv4_(\\d+(?:\\.\\d+){3})_"
+		body: "(\\d+(?:\\.\\d+){3})$0"
+	"_regex ver ^(\\d+)":
+		prefix: "_regex_ver_^(\\d+)_"
+		body: "^(\\d+)$0"
+	"_regex ver ^\\d+\\$":
+		prefix: "_regex_ver_^\\d+\\$_"
+		body: "^\\d+\\$$0"
+	"_regex Win_path":
+		prefix: "_regex_Win_path_"
+		body: "(?i)\\\"([^\"]+)PATH_TO_FILE_LIB\\\"$0"
+	"_regex Win_path_alt":
+		prefix: "_regex_Win_path_alt_"
+		body: "([^\"]+)PATH_TO_FILE_CONF$0"
+	"comment -   INFERRENCE":
+		prefix: "comment_-_INFERRENCE_"
+		body: "Comment ITEM:   INFERRENCE$0"
+	"associate inference":
+		prefix: "associate_inference_"
+		body: "inference.associate(${1:inferred_node}, ${2:associate});$0"
+	"contributor inference":
+		prefix: "contributor_inference_"
+		body: "inference.contributor(${1:inferred_node}, ${2:contributor}, ${3:contributes});$0"
+	"primary inference":
+		prefix: "primary_inference_"
+		body: "inference.primary(${1:inferred_node}, ${2:primary});$0"
+	"relation inference":
+		prefix: "relation_inference_"
+		body: "inference.relation(${1:inferred_relationship}, ${2:source});$0"
+	"withdrawal inference":
+		prefix: "withdrawal_inference_"
+		body: "inference.withdrawal(${1:inferred_node}, ${2:evidence}, ${3:withdrawn});$0"
+	"destruction inference":
+		prefix: "destruction_inference_"
+		body: "inference.destruction(${1:destroyed_node}, ${2:source};)$0"
+	"comment -   MODEL FUNCTIONS:":
+		prefix: "comment_-_MODEL_FUNCTIONS:_"
+		body: "Comment ITEM:   MODEL$0"
+	"model.host model.host":
+		prefix: "model.host_model.host_"
+		body: "model.host(${1:process});$0"
+	"model.hosts model.hosts":
+		prefix: "model.hosts_model.hosts_"
+		body: "model.hosts(${1:model_sis});$0"
+	"model.destroy model.destroy":
+		prefix: "model.destroy_model.destroy_"
+		body: "model.destroy(${1:dummy});$0"
+	"model.kind model.kind":
+		prefix: "model.kind_model.kind_"
+		body: "model.kind(${1:hosting_node});$0"
+	"model.findPackages model.findPackages":
+		prefix: "model.findPackages_model.findPackages_"
+		body: "model.findPackages(host, [regex \"${1:}\"]);$0"
+	"model.withdraw model.withdraw":
+		prefix: "model.withdraw_model.withdraw_"
+		body: "model.withdraw(si_node, \"${1:detail}\");$0"
+	"comment - ADD":
+		prefix: "comment_-_ADD_"
+		body: "Comment ITEM: ADD$0"
+	"addContainment model.addContainment":
+		prefix: "addContainment_model.addContainment_"
+		body: "model.addContainment(${1:si_node}, ${2:software_components});$0"
+	"addDisplayAttribute model.addDisplayAttribute":
+		prefix: "addDisplayAttribute_model.addDisplayAttribute_"
+		body: "model.addDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+	"removeDisplayAttribute model.removeDisplayAttribute":
+		prefix: "removeDisplayAttribute_model.removeDisplayAttribute_"
+		body: "model.removeDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+	"setContainment model.setContainment":
+		prefix: "setContainment_model.setContainment_"
+		body: "model.setContainment(${1:cluster_si_node}, ${2:related_sis});$0"
+	"setRemovalGroup model.setRemovalGroup":
+		prefix: "setRemovalGroup_model.setRemovalGroup_"
+		body: "model.setRemovalGroup(${1:cluster_si}, \"${2:Dummy_Server_Cluster}\");$0"
+	"anchorRemovalGroup model.anchorRemovalGroup":
+		prefix: "anchorRemovalGroup_model.anchorRemovalGroup_"
+		body: "model.anchorRemovalGroup(${1:si}, \"${2:license_dts}\");$0"
+	"suppressRemovalGroup model.suppressRemovalGroup":
+		prefix: "suppressRemovalGroup_model.suppressRemovalGroup_"
+		body: "model.suppressRemovalGroup(\"%${1:detail_type}%\");$0"
+	"comment - REL":
+		prefix: "comment_-_REL_"
+		body: "Comment ITEM: REL$0"
+	"Communication rel":
+		prefix: "Communication_rel_"
+		body: "model.rel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
+	"Containment rel":
+		prefix: "Containment_rel_"
+		body: "model.rel.Containment(Contained := ${1:cluster_member_node}, Container := ${2:cluster});$0"
+	"Dependency rel":
+		prefix: "Dependency_rel_"
+		body: "model.rel.Dependency(Dependant := ${1:si_node}, DependedUpon := ${2:dep_si});$0"
+	"Detail rel":
+		prefix: "Detail_rel_"
+		body: "model.rel.Detail(ElementWithDetail := ${1:si_node}, Detail := ${2:details});$0"
+	"HostContainment rel":
+		prefix: "HostContainment_rel_"
+		body: "model.rel.HostContainment(HostContainer := ${1:si_node}, ContainedHost := ${2:host});$0"
+	"HostedFile rel":
+		prefix: "HostedFile_rel_"
+		body: "model.rel.HostedFile(HostedFile := ${1:file}, Host := ${2:host});$0"
+	"HostedSoftware rel":
+		prefix: "HostedSoftware_rel_"
+		body: "model.rel.HostedSoftware(Host := ${1:host}, RunningSoftware := ${2:si_node});$0"
+	"Management rel":
+		prefix: "Management_rel_"
+		body: "model.rel.Management(Manager := ${1:manager_si}, ManagedElement := ${2:si_node});$0"
+	"RelatedFile rel":
+		prefix: "RelatedFile_rel_"
+		body: "model.rel.RelatedFile(ElementUsingFile := ${1:si_node}, File := ${2:file});$0"
+	"SoftwareService rel":
+		prefix: "SoftwareService_rel_"
+		body: "model.rel.SoftwareService(ServiceProvider := ${1:si_node}, Service := ${2:cluster});$0"
+	"SoftwareContainment rel":
+		prefix: "SoftwareContainment_rel_"
+		body: "model.rel.SoftwareContainment(SoftwareContainer := ${1:si_node}, ContainedSoftware := ${2:sc_lst});$0"
+	"StorageUse rel":
+		prefix: "StorageUse_rel_"
+		body: "model.rel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
+	"comment - UNIQUE REL":
+		prefix: "comment_-_UNIQUE_REL_"
+		body: "Comment ITEM: UNIQUE$0"
+	"Communication uniquerel":
+		prefix: "Communication_uniquerel_"
+		body: "model.uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
+	"Containment uniquerel":
+		prefix: "Containment_uniquerel_"
+		body: "model.uniquerel.Containment(Contained := ${1:cluster_member_node}, Container := ${2:cluster});$0"
+	"Dependency uniquerel":
+		prefix: "Dependency_uniquerel_"
+		body: "model.uniquerel.Dependency(Dependant := ${1:si_node}, DependedUpon := ${2:dep_si});$0"
+	"Detail uniquerel":
+		prefix: "Detail_uniquerel_"
+		body: "model.uniquerel.Detail(ElementWithDetail := ${1:si_node}, Detail := ${2:details});$0"
+	"HostContainment uniquerel":
+		prefix: "HostContainment_uniquerel_"
+		body: "model.uniquerel.HostContainment(HostContainer := ${1:si_node}, ContainedHost := ${2:host});$0"
+	"HostedFile uniquerel":
+		prefix: "HostedFile_uniquerel_"
+		body: "model.uniquerel.HostedFile(HostedFile := ${1:file}, Host := ${2:host});$0"
+	"HostedSoftware uniquerel":
+		prefix: "HostedSoftware_uniquerel_"
+		body: "model.uniquerel.HostedSoftware(Host := ${1:host}, RunningSoftware := ${2:si_node});$0"
+	"HostedService uniquerel":
+		prefix: "HostedService_uniquerel_"
+		body: "model.uniquerel.HostedService(ServiceHost := ${1:cluster}, RunningService := ${2:cluster_service_node});$0"
+	"Management uniquerel":
+		prefix: "Management_uniquerel_"
+		body: "model.uniquerel.Management(Manager := ${1:manager_si}, ManagedElement := ${2:si_node});$0"
+	"RelatedFile uniquerel":
+		prefix: "RelatedFile_uniquerel_"
+		body: "model.uniquerel.RelatedFile(ElementUsingFile := ${1:si_node}, File := ${2:file});$0"
+	"SoftwareService uniquerel":
+		prefix: "SoftwareService_uniquerel_"
+		body: "model.uniquerel.SoftwareService(ServiceProvider := ${1:si_node}, Service := ${2:cluster});$0"
+	"SoftwareContainment uniquerel":
+		prefix: "SoftwareContainment_uniquerel_"
+		body: "model.uniquerel.SoftwareContainment(SoftwareContainer := ${1:si_node}, ContainedSoftware := ${2:sc_lst});$0"
+	"StorageUse uniquerel":
+		prefix: "StorageUse_uniquerel_"
+		body: "model.uniquerel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
+	"comment - Customization:":
+		prefix: "comment_-_Customization:_"
+		body: "Comment ITEM: Customization$0"
+	"SoftwareInstance Short":
+		prefix: "SoftwareInstance_Short_"
+		body: '''
+			model.SoftwareInstance(key := key,
+				$0name := name,
+				$0short_name := short_name
+				);$0
+		'''
+	"SoftwareInstance Key":
+		prefix: "SoftwareInstance_Key_"
+		body: '''
+			model.SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
+			$0					   name            := name,
+			$0					   short_name      := short_name,
+			$0					   version         := full_version,
+			$0					   product_version := product_version,
+			$0					   port            := port,
+			$0					   listening_ports := listening_ports,
+			$0					   type            := si_type
+			$0					   );
+			$0
+		'''
+	"SoftwareInstance Key_group":
+		prefix: "SoftwareInstance_Key_group_"
+		body: '''
+			model.SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
+			$0					   name            := name,
+			$0					   short_name      := short_name,
+			$0					   version         := full_version,
+			$0					   product_version := product_version,
+			$0					   port            := port,
+			$0					   listening_ports := listening_ports,
+			$0					   type            := si_type
+			$0					   );
+			$0
+		'''
+	"SoftwareInstance Detailed":
+		prefix: "SoftwareInstance_Detailed_"
+		body: '''
+			model.SoftwareInstance(key              := "%product_version%/%si_type%/%host.key%",
+			$0						   name             := name,
+			$0						   short_name       := short_name,
+			$0						   version          := full_version,
+			$0						   product_version  := product_version,
+			$0						   publisher        := publisher,
+			$0						   product          := product,
+			$0						   type             := si_type
+			$0						  );
+			$0
+		'''
+	"comment - Extra":
+		prefix: "comment_-_Extra_"
+		body: "Comment ITEM: Extra$0"
+	"Communication type model.uniquerel.":
+		prefix: "Communication_type_model.uniquerel._"
+		body: "model.uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node}, type := \"${3:%type%}\");$0"
+	"comment -   NUMBER FUNCTIONS:":
+		prefix: "comment_-_NUMBER_FUNCTIONS:_"
+		body: "Comment ITEM:   NUMBER$0"
+	"toChar number":
+		prefix: "toChar_number_"
+		body: "number.toChar(${1:number});$0"
+	"toText number":
+		prefix: "toText_number_"
+		body: "number.toText(${1:number});$0"
+	"range number":
+		prefix: "range_number_"
+		body: "number.range(${1:number});$0"
+	"comment -   TEXT FUNCTIONS:":
+		prefix: "comment_-_TEXT_FUNCTIONS:_"
+		body: "Comment ITEM:   TEXT$0"
+	"lower text":
+		prefix: "lower_text_"
+		body: "text.lower(string)$0"
+	"upper text":
+		prefix: "upper_text_"
+		body: "text.upper(string)$0"
+	"toNumber text":
+		prefix: "toNumber_text_"
+		body: "text.toNumber(port);$0"
+	"comment - REPLACE":
+		prefix: "comment_-_REPLACE_"
+		body: "Comment ITEM: REPLACE$0"
+	"replace text":
+		prefix: "replace_text_"
+		body: "text.replace(${1:where_string}, \"${2:from_char}\", \"${3:to_char}\");$0"
+	"replace , to .":
+		prefix: "replace_,_to_._"
+		body: "text.replace(${1:string}, \",\", \".\");$0"
+	"replace - to .":
+		prefix: "replace_-_to_._"
+		body: "text.replace(${1:string}, \"-\", \".\");$0"
+	"replace \\\\ to \\\\\\\\":
+		prefix: "replace_\\\\_to_\\\\\\\\_"
+		body: "text.replace(${1:string}, \"\\\\\\\", \"\\\\\\\\\\\\\\\");$0"
+	"comment - STRING OPTIONS":
+		prefix: "comment_-_STRING_OPTIONS_"
+		body: "Comment ITEM: STRING$0"
+	"join text":
+		prefix: "join_text_"
+		body: "text.join(${1:list}, \"${2:separator}\");$0"
+	"split text":
+		prefix: "split_text_"
+		body: "text.split(${1:string}, \"${2:sumbol}\");$0"
+	"strip text":
+		prefix: "strip_text_"
+		body: "text.strip(${1:string});$0"
+	"leftStrip text":
+		prefix: "leftStrip_text_"
+		body: "text.leftStrip(${1:string} [, ${2:characters} ] );$0"
+	"rightStrip text":
+		prefix: "rightStrip_text_"
+		body: "text.rightStrip(${1:string} [, ${2:characters} ] );$0"
+	"hash text":
+		prefix: "hash_text_"
+		body: "text.hash(${1:string});$0"
+	"ordinal text":
+		prefix: "ordinal_text_"
+		body: "text.ordinal(${1:string});$0"
+	"comment - LIST":
+		prefix: "comment_-_LIST_"
+		body: "Comment ITEM: LIST$0"
+	"append list":
+		prefix: "append_list_"
+		body: "list.append(${1:the_list}, ${2:string});$0"
+	"comment -   TRAVERCE":
+		prefix: "comment_-_TRAVERCE_"
+		body: "Comment ITEM:   TRAVERCE$0"
+	" _trav rel_proc_parent":
+		prefix: "_trav_rel_proc_parent_"
+		body: '''
+			rel_services := search(in ${1:da_node} traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList
+								   $0traverse List:List:Member:DiscoveredProcess where pid = %pproc_pid%);$0
+		'''
+	" _trav ContainedSoftware::SoftwareInstance":
+		prefix: "_trav_ContainedSoftware::SoftwareInstance_"
+		body: '''
+			obsolete_links := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:SoftwareInstance
+									 where type = %${2:si_type}% and key <> %key%
+									 step in SoftwareContainer:SoftwareContainment
+									 where #:ContainedSoftware:SoftwareInstance.key = %${3:related_si}.key%);$0
+		'''
+	" _trav InferredElement::DiscoveredProcess":
+		prefix: "_trav_InferredElement::DiscoveredProcess_"
+		body: "procs := search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess);$0"
+	" _trav Host:HostedSoftware::SoftwareInstance":
+		prefix: "_trav_Host:HostedSoftware::SoftwareInstance_"
+		body: '''
+			some_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance
+							  where ${1:type} = "${2:type_here}");$0
+		'''
+	" _trav Client::SoftwareInstance":
+		prefix: "_trav_Client::SoftwareInstance_"
+		body: "srv_si_list := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance where type = \"${2:type_here}\");$0"
+	" _trav Server::SoftwareInstance":
+		prefix: "_trav_Server::SoftwareInstance_"
+		body: "client_si_list := search(in ${1:related_si} traverse Server:Communication:Client:SoftwareInstance where type = \"${2:type_here}\");$0"
+	" _trav ContainedSoftware::BusinessApplicationInstance":
+		prefix: "_trav_ContainedSoftware::BusinessApplicationInstance_"
+		body: "bai_candidates := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:BusinessApplicationInstance where type = \"%${2:si_type}%\");$0"
+	" _trav Host::SoftwareInstance":
+		prefix: "_trav_Host::SoftwareInstance_"
+		body: "db2_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type = \"${1:type_here}\" traverse ElementWithDetail:Detail:Detail:DatabaseDetail where instance has subword '%${2:subword}%');$0"
+	" _trav ElementWithDetail::Detail":
+		prefix: "_trav_ElementWithDetail::Detail_"
+		body: "existing_dts := search(in si traverse ElementWithDetail:Detail:Detail:Detail where ${1:type} = \"${2:type_here}\");$0"
+	" _trav Dependant::SoftwareInstance":
+		prefix: "_trav_Dependant::SoftwareInstance_"
+		body: "mains_si := search(in ${1:related_si} traverse Dependant:Dependency:DependedUpon:SoftwareInstance);$0"
+	" _trav Client::Server:SoftwareInstance":
+		prefix: "_trav_Client::Server:SoftwareInstance_"
+		body: "main_db_sis := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance);$0"
+	"comment -   OTHER - DIFFERENT":
+		prefix: "comment_-_OTHER_-_DIFFERENT_"
+		body: "Comment ITEM:   OTHER$0"
+	"comment - LOG USUAL":
+		prefix: "comment_-_LOG_USUAL_"
+		body: "Comment ITEM: LOG$0"
+	"debug log":
+		prefix: "debug_log_"
+		body: "log.debug(\"${1:message}\");$0"
+	"info log":
+		prefix: "info_log_"
+		body: "log.info(\"${1:message}\");$0"
+	"warn log":
+		prefix: "warn_log_"
+		body: "log.warn(\"${1:message}\");$0"
+	"error log":
+		prefix: "error_log_"
+		body: "log.error(\"${1:message}\");$0"
+	"critical log":
+		prefix: "critical_log_"
+		body: "log.critical(\"${1:message}\");$0"
+	"comment - LOG CUSTOM":
+		prefix: "comment_-_LOG_CUSTOM_"
+		body: "Comment ITEM: LOG$0"
+	"_debug line":
+		prefix: "_debug_line_"
+		body: "(?1:line)/}:$0"
+	"_debug simple":
+		prefix: "_debug_simple_"
+		body: "log.debug(\"DEBUG_RUN: -----------> ${1:message} on line:\");$0"
+	"_debug %variable%":
+		prefix: "_debug_%variable%_"
+		body: "log.debug(\"DEBUG_RUN: -----------> ${1:message} %${2:variable}% - ${4:message} on line:\");$0"
+	"_debug %node.attrs%":
+		prefix: "_debug_%node.attrs%_"
+		body: "log.debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line:\");$0"
+	"_debug %node.attrs% Exec":
+		prefix: "_debug_%node.attrs%_Exec_"
+		body: '''
+			delta_time_tics := time.toTicks(time.current()) - time.toTicks(start_time);
+			(?1:log\\.)/}debug("DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line: Execution time:" + number.toText(delta_time_tics/10000) + "ms");$0
+		'''
+	"comment - LOG SI":
+		prefix: "comment_-_LOG_SI_"
+		body: "Comment ITEM: LOG$0"
+	"_info log SI":
+		prefix: "_info_log_SI_"
+		body: "log.info(\"%host.name%: SI created for %${1:si_type}%);$0"
+	"comment - EXTRACTIONS REGEX":
+		prefix: "comment_-_EXTRACTIONS_REGEX_"
+		body: "Comment ITEM: EXTRACTIONS$0"
+	"regex extract Var":
+		prefix: "regex_extract_Var_"
+		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\1');$0"
+	"regex extract node.attrs":
+		prefix: "regex_extract_node.attrs_"
+		body: "regex.extract(${1:node}.${2:attrs}, regex \"${3:regex_raw}\", raw '\\1');$0"
+	"regex extract raw 1,2":
+		prefix: "regex_extract_raw_1,2_"
+		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\\\${3:1}', raw '\\\\${4:2}');$0"
+	"comment - EXTRACTIONS Xpath":
+		prefix: "comment_-_EXTRACTIONS_Xpath_"
+		body: "Comment ITEM: EXTRACTIONS$0"
+	"xpath evaluate":
+		prefix: "xpath_evaluate_"
+		body: "xpath.evaluate(${1:some_file_path}, \"${2:xpath_string}\");$0"
+	"xpath openDocument":
+		prefix: "xpath_openDocument_"
+		body: "xpath.openDocument(${1:some_file_path});$0"
+	"xpath closeDocument":
+		prefix: "xpath_closeDocument_"
+		body: "xpath.closeDocument(${1:some_file_path});$0"
+	"comment - CONTAINERS":
+		prefix: "comment_-_CONTAINERS_"
+		body: "Comment ITEM: CONTAINERS$0"
+	"detailContainer _related":
+		prefix: "detailContainer__related_"
+		body: "related.detailContainer(${1:node});$0"
+	"hostingNode _related":
+		prefix: "hostingNode__related_"
+		body: "related.hostingNode(\"${1:Cluster}\", type := \"${2:SQL Server}\", properties := ${3:required_properties});$0"
+	"_related_host  _related":
+		prefix: "_related_host_related_"
+		body: "related.host(${1:node});$0"
+	"comment - SIMPLE IDENTIFIERS:":
+		prefix: "comment_-_SIMPLE_IDENTIFIERS:_"
+		body: "Comment ITEM: SIMPLE$0"
+	"_regex Simple Identifiers":
+		prefix: "_regex_Simple_Identifiers_"
+		body: "(?1:regex )/}\"${1:regex}\" -> \"${2:product_name}\";$0"
+	"_windows_cmd Simple Identifiers":
+		prefix: "_windows_cmd_Simple_Identifiers_"
+		body: "(?1:windows_cmd )/}\"${1:windows_cmd}\" -> \"${2:product_name}\";$0"
+	"_unix_cmd Simple Identifiers":
+		prefix: "_unix_cmd_Simple_Identifiers_"
+		body: "(?1:unix_cmd )/}\"${1:unix_cmd}\" -> \"${2:product_name}\";$0"
+	"comment - IF OS_CLASS:":
+		prefix: "comment_-_IF_OS_CLASS:_"
+		body: "Comment ITEM: IF$0"
+	"_os_class host.os_class":
+		prefix: "_os_class_host.os_class_"
+		body: '''
+			if host.os_class = "Windows" then
+				sep := '\\\\\\';
+			else
+				sep := '/';
+			end if;
+			$0
+		'''
