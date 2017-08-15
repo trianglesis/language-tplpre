@@ -1,0 +1,582 @@
+# Generated with Atomizr – https://atom.io/packages/atomizr
+".source.tplpre":
+  " BMC Copyright":
+    prefix: "_Copyright "
+    body: "// (c) Copyright 2016 BMC Software, Inc. All rights reserved.$0"
+  _tpl:
+    prefix: "_tpl"
+    body: "tpl \\$\\$TPLVERSION\\$\\$ module ${1:Module}.${2:Name};$0"
+  _pattern:
+    prefix: "_pattern"
+    body: '''
+
+
+      pattern ${1:PatternName} 1.0
+
+        """
+        Pattern trigger on ...
+        Pattern also tries to ...
+
+        Supported platforms:
+
+        UNIX
+        Windows
+
+        """
+
+        metadata
+          products := '';
+          urls := '';
+          publishers  := '';
+          categories := '';
+          known_versions := '', '', '';
+        end metadata;
+
+        overview
+          tags TKU, TKU_YYYY_MM_DD, Name, Product;
+        end overview;
+
+        constants
+          si_type := 'Product Name';
+        end constants;
+
+        triggers
+          on process := DiscoveredProcess where cmd matches unix_cmd "CMD" and args matches regex "ARGS";
+        end triggers;
+
+        body
+          host := model.host(process);
+
+
+        end body;
+      end pattern;
+
+      $0
+    '''
+  SearchFunctions:
+    prefix: "relatedSisSearchOnMultipleHosts "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
+  RDBMSFunctions:
+    prefix: "parseJDBC "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:RDBMSFunctions\\.)/}parseJDBC(url); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
+  DiscoveryFunctions:
+    prefix: "checkCommandList "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:DiscoveryFunctions\\.)/}checkCommandList(${1:host}, ${2:command_list});$0"
+  ConversionFunctions:
+    prefix: "convertToBytes "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:ModuleName\\.)/}${1:value}, ${2:gib});$0"
+  " pattern":
+    prefix: "_metadata "
+    body: '''
+          metadata
+              products := "";
+              urls := "";
+              publishers  := "";
+              categories := "";
+              known_versions := "", "", "", "", "";
+          end metadata;
+      $0
+    '''
+  " module":
+    prefix: "_metadata "
+    body: '''
+      metadata
+        origin := "TKU";
+        tkn_name := "${1:name}";
+        tree_path := '${2:category}', '${3:category}', '${4:category}';
+      end metadata;
+      $0
+    '''
+  " unix_cmd":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on process := DiscoveredProcess where cmd matches unix_cmd "${1:name}";
+      end triggers;
+      $0
+    '''
+  " windows_cmd":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on process := DiscoveredProcess where cmd matches windows_cmd "${1:name}";
+      end triggers;
+      $0
+    '''
+  " host":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on Host created, confirmed where ${1:name};
+      end triggers;
+      $0
+    '''
+  " hardware_detail":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on detail := HardwareDetail created, confirmed
+              where ${1:name};
+      end triggers;
+      $0
+    '''
+  " management_controller":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on mc := ManagementController created, confirmed
+              where ${1:name};
+      end triggers;
+      $0
+    '''
+  " network_device":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on device := NetworkDevice created, confirmed
+              where ${1:vendor};
+      end triggers;
+      $0
+    '''
+  " software_instance":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on SoftwareInstance created, confirmed
+                        where type = ${1:name};
+      end triggers;
+      $0
+    '''
+  " software_component":
+    prefix: "_triggers "
+    body: '''
+      triggers
+          on SoftwareComponent created, confirmed
+                         where instance = ${1:name};
+      end triggers;
+      $0
+    '''
+  "Simple Identifiers":
+    prefix: "_unix_cmd "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:unix_cmd )/}\"${1:unix_cmd}\" -> \"${2:product_name}\";$0"
+  " Two cols":
+    prefix: "_table "
+    body: '''
+      table ${1:table_name} 1.0
+        "one" -> "val_name1", "val_name2";
+        "two"    -> "val_name3", "val_name4";
+        default  -> "val_name5", "val_name6";
+      end table;
+      $0
+    '''
+  " One col":
+    prefix: "_table "
+    body: '''
+      table ${1:table_name} 1.0
+        "one"       -> val_1;
+        "two"       -> val_2;
+        default     -> val_100;
+      end table;
+      $0
+    '''
+  Small:
+    prefix: "_definitions "
+    body: '''
+      definitions ${1:def_name} 1.0
+        \'''${2:Describe definitions}\'''$0
+
+      end definitions;
+      $0
+    '''
+  Big:
+    prefix: "_definitions "
+    body: '''
+      definitions ${1:def_name} 1.0
+        \'''${2:Describe definitions}
+           Change History:
+
+        \'''
+        $0
+
+      end definitions;
+      $0
+    '''
+  " Function":
+    prefix: "_define "
+    body: '''
+      define ${1:function_name}(${2:argument}) -> ${3:return}
+        \'''
+        ${4:Describe function}
+        \'''
+
+        $0
+
+        return ${5:dummy};
+
+      end define;
+      $0
+    '''
+  "(\\d*\\.\\d*)":
+    prefix: "_full_version "
+    body: '''
+      // Assign product version
+      if full_version then
+        product_version := regex.extract(full_version, regex '(\\d*\\.\\d*)', raw '\\1');
+        if not product_version then
+          product_version := full_version;
+        end if;
+      end if;
+
+      $0
+    '''
+  "Find packages":
+    prefix: "_packages "
+    body: '''
+      packages := model.findPackages( host, [regex "${1:PACKAGE_NAME}"] );
+      for package in packages do
+        if package.version then
+          full_version := package.version;
+          break;
+        end if;
+      end for;$0
+    '''
+  "OLD _functions":
+    prefix: "checkCommandList "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:functions\\.)/}checkCommandList(${1:host}, ${2:command_list});$0"
+  discovery:
+    prefix: "vSphereGetPropertyTable "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:discovery\\.)/}vSphereGetPropertyTable(host, \"HostSystem\", host_id, \"config.storageDevice.scsiLun\", [\"serialNumber\", \"deviceName\"]);$0"
+  Matrix:
+    prefix: "command_info Windows "
+    body: '''
+      $0// *command_info_start
+      $0// command_windows := "${1:command_windows}"
+      $0// reason := "${3:Obtain something}"
+      $0// when := "${4:Only if installation path is obtained}"
+      $0// *command_info_end$0
+    '''
+  json:
+    prefix: "decode "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:json\\.)/}decode(${1:value});$0"
+  "OLD _rdbms_functions":
+    prefix: "find_db_server "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:rdbms_functions\\.)/}find_db_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, ${5:db_details});$0"
+  SearchNodesFull:
+    prefix: "getSoftwareNodes "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
+                       node_address           := ${1:none},
+                       software_type          := ${2:none},
+                       balancer_port          := ${3:none},
+                       port                   := ${4:none},
+                       instance               := ${5:none},
+                       listen_tcp_socket      := ${6:none},
+                       server_name            := ${7:none},
+                       installed_product      := ${8:none},
+                       db_name                := ${9:none},
+                       net_service_name       := ${10:none},
+                       ora_service_name       := ${11:none},
+                       db2_copy_name          := ${12:none},
+                       dsn_name               := ${13:none},
+                       jdbc_url               := ${14:none},
+                       tnsnames_file_location := ${15:none},
+                       get_remote_nodes_only  := ${16:none}
+                      ); // -> software_nodes
+      $0
+    '''
+  _jdbc_url:
+    prefix: "getSoftwareNodes "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
+      $0
+    '''
+  _jdbc_search:
+    prefix: "getSoftwareNodes "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
+      $0
+    '''
+  SearchDatabase:
+    prefix: "getSoftwareNodes "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
+                       node_address  := ${1:db_host},
+                       software_type := "${2:db_type}",
+                       db_name       := ${3:db_name}
+                      );
+      $0
+    '''
+  "SearchDB+port":
+    prefix: "getSoftwareNodes "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
+                       node_address  := ${1:db_host},
+                       software_type := ${2:db_type},
+                       port          := ${3:port},
+                       instance      := ${4:instance},
+                       db_name       := ${5:db_name}
+                      );$0
+    '''
+  SearchNodeonLB:
+    prefix: "getSoftwareNodes "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:SearchFunctions\\.)/}getSoftwareNodes(host,
+                       node_address  := ${1:db_host},
+                       balancer_port := ${2:none}
+                      );
+      $0
+    '''
+  "full ver (\\d+(?:\\.\\d+)*)":
+    prefix: "_regex "
+    body: "(\\d+(?:\\.\\d+)*)$0"
+  "full ver ^(\\d+(?:\\.\\d+)?)":
+    prefix: "_regex "
+    body: "^(\\d+(?:\\.\\d+)?)$0"
+  "product ver (\\d+(?:\\.\\d+)?)":
+    prefix: "_regex "
+    body: "(\\d+(?:\\.\\d+)?)$0"
+  "bjavaw (?i)\\bjavaw?(?:\\.exe)\\$":
+    prefix: "_regex "
+    body: "(?i)\\bjavaw?(?:\\.exe)\\$$0"
+  "bjava (?i)\\bjava(?:\\.exe)?\\$":
+    prefix: "_regex "
+    body: "(?i)\\bjava(?:\\.exe)?\\$$0"
+  "java (?i)^(\\w:.*\\)Java\\":
+    prefix: "_regex "
+    body: "(?i)^(\\w:.*\\)Java\\$0"
+  "java (/\\.+/)java/":
+    prefix: "_regex "
+    body: "^(/\\.+/)java/$0"
+  "ipv4 (\\d+(?:\\.\\d+){3})":
+    prefix: "_regex "
+    body: "(\\d+(?:\\.\\d+){3})$0"
+  "ver ^(\\d+)":
+    prefix: "_regex "
+    body: "^(\\d+)$0"
+  "ver ^\\d+\\$":
+    prefix: "_regex "
+    body: "^\\d+\\$$0"
+  Win_path:
+    prefix: "_regex "
+    body: "(?i)\\\"([^\"]+)PATH_TO_FILE_LIB\\\"$0"
+  Win_path_alt:
+    prefix: "_regex "
+    body: "([^\"]+)PATH_TO_FILE_CONF$0"
+  inference:
+    prefix: "destruction "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:inference\\.)/}destruction(${1:destroyed_node}, ${2:source};)$0"
+  "model.host":
+    prefix: "model.host "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}host(${1:process});$0"
+  "model.hosts":
+    prefix: "model.hosts "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}hosts(${1:model_sis});$0"
+  "model.destroy":
+    prefix: "model.destroy "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}destroy(${1:dummy});$0"
+  "model.kind":
+    prefix: "model.kind "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}kind(${1:hosting_node});$0"
+  "model.findPackages":
+    prefix: "model.findPackages "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}findPackages(host, [regex \"${1:}\"]);$0"
+  "model.withdraw":
+    prefix: "model.withdraw "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}withdraw(si_node, \"${1:detail}\");$0"
+  "model.addContainment":
+    prefix: "addContainment "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}addContainment(${1:si_node}, ${2:software_components});$0"
+  "model.addDisplayAttribute":
+    prefix: "addDisplayAttribute "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}addDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+  "model.removeDisplayAttribute":
+    prefix: "removeDisplayAttribute "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}removeDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+  "model.setContainment":
+    prefix: "setContainment "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}setContainment(${1:cluster_si_node}, ${2:related_sis});$0"
+  "model.setRemovalGroup":
+    prefix: "setRemovalGroup "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}setRemovalGroup(${1:cluster_si}, \"${2:Dummy_Server_Cluster}\");$0"
+  "model.anchorRemovalGroup":
+    prefix: "anchorRemovalGroup "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}anchorRemovalGroup(${1:si}, \"${2:license_dts}\");$0"
+  "model.suppressRemovalGroup":
+    prefix: "suppressRemovalGroup "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}suppressRemovalGroup(\"%${1:detail_type}%\");$0"
+  rel:
+    prefix: "StorageUse "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}rel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
+  uniquerel:
+    prefix: "StorageUse "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}uniquerel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
+  Short:
+    prefix: "SoftwareInstance "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key := key,
+        $0name := name,
+        $0short_name := short_name
+        );$0
+    '''
+  Key:
+    prefix: "SoftwareInstance "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
+      $0             name            := name,
+      $0             short_name      := short_name,
+      $0             version         := full_version,
+      $0             product_version := product_version,
+      $0             port            := port,
+      $0             listening_ports := listening_ports,
+      $0             type            := si_type
+      $0             );
+      $0
+    '''
+  Key_group:
+    prefix: "SoftwareInstance "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
+      $0             name            := name,
+      $0             short_name      := short_name,
+      $0             version         := full_version,
+      $0             product_version := product_version,
+      $0             port            := port,
+      $0             listening_ports := listening_ports,
+      $0             type            := si_type
+      $0             );
+      $0
+    '''
+  Detailed:
+    prefix: "SoftwareInstance "
+    body: '''
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}SoftwareInstance(key              := "%product_version%/%si_type%/%host.key%",
+      $0               name             := name,
+      $0               short_name       := short_name,
+      $0               version          := full_version,
+      $0               product_version  := product_version,
+      $0               publisher        := publisher,
+      $0               product          := product,
+      $0               type             := si_type
+      $0              );
+      $0
+    '''
+  "model.uniquerel.":
+    prefix: "Communication type "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:model\\.)/}uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node}, type := \"${3:%type%}\");$0"
+  number:
+    prefix: "range "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:number\\.)/}range(${1:number});$0"
+  text:
+    prefix: "ordinal "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}ordinal(${1:string});$0"
+  " , to .":
+    prefix: "replace "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}replace(${1:string}, \",\", \".\");$0"
+  " - to .":
+    prefix: "replace "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}replace(${1:string}, \"-\", \".\");$0"
+  " \\\\ to \\\\\\\\":
+    prefix: "replace "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:text\\.)/}replace(${1:string}, \"\\\\\\\", \"\\\\\\\\\\\\\\\");$0"
+  list:
+    prefix: "append "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:list\\.)/}append(${1:the_list}, ${2:string});$0"
+  " rel_proc_parent":
+    prefix: "_trav"
+    body: '''
+      rel_services := search(in ${1:da_node} traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList
+                   $0traverse List:List:Member:DiscoveredProcess where pid = %pproc_pid%);$0
+    '''
+  " ContainedSoftware::SoftwareInstance":
+    prefix: "_trav"
+    body: '''
+      obsolete_links := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:SoftwareInstance
+                   where type = %${2:si_type}% and key <> %key%
+                   step in SoftwareContainer:SoftwareContainment
+                   where #:ContainedSoftware:SoftwareInstance.key = %${3:related_si}.key%);$0
+    '''
+  " InferredElement::DiscoveredProcess":
+    prefix: "_trav"
+    body: "procs := search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess);$0"
+  " Host:HostedSoftware::SoftwareInstance":
+    prefix: "_trav"
+    body: '''
+      some_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance
+                where ${1:type} = "${2:type_here}");$0
+    '''
+  " Client::SoftwareInstance":
+    prefix: "_trav"
+    body: "srv_si_list := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance where type = \"${2:type_here}\");$0"
+  " Server::SoftwareInstance":
+    prefix: "_trav"
+    body: "client_si_list := search(in ${1:related_si} traverse Server:Communication:Client:SoftwareInstance where type = \"${2:type_here}\");$0"
+  " ContainedSoftware::BusinessApplicationInstance":
+    prefix: "_trav"
+    body: "bai_candidates := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:BusinessApplicationInstance where type = \"%${2:si_type}%\");$0"
+  " Host::SoftwareInstance":
+    prefix: "_trav"
+    body: "db2_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type = \"${1:type_here}\" traverse ElementWithDetail:Detail:Detail:DatabaseDetail where instance has subword '%${2:subword}%');$0"
+  " ElementWithDetail::Detail":
+    prefix: "_trav"
+    body: "existing_dts := search(in si traverse ElementWithDetail:Detail:Detail:Detail where ${1:type} = \"${2:type_here}\");$0"
+  " Dependant::SoftwareInstance":
+    prefix: "_trav"
+    body: "mains_si := search(in ${1:related_si} traverse Dependant:Dependency:DependedUpon:SoftwareInstance);$0"
+  " Client::Server:SoftwareInstance":
+    prefix: "_trav"
+    body: "main_db_sis := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance);$0"
+  log:
+    prefix: "critical "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}critical(\"${1:message}\");$0"
+  line:
+    prefix: "_debug "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:line)/}:$TM_LINE_NUMBER$0"
+  simple:
+    prefix: "_debug "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} on line:$TM_LINE_NUMBER\");$0"
+  "%variable%":
+    prefix: "_debug "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} %${2:variable}% - ${4:message} on line:$TM_LINE_NUMBER\");$0"
+  "%node.attrs%":
+    prefix: "_debug "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line:$TM_LINE_NUMBER\");$0"
+  "%node.attrs% Exec":
+    prefix: "_debug "
+    body: '''
+      delta_time_tics := time.toTicks(time.current()) - time.toTicks(start_time);
+      ${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}debug("DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line:$TM_LINE_NUMBER Execution time:" + number.toText(delta_time_tics/10000) + "ms");$0
+    '''
+  "log SI":
+    prefix: "_info "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:log\\.)/}info(\"%host.name%: SI created for %${1:si_type}%);$0"
+  "extract Var":
+    prefix: "regex "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:regex\\.)/}extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\1');$0"
+  "extract node.attrs":
+    prefix: "regex "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:regex\\.)/}extract(${1:node}.${2:attrs}, regex \"${3:regex_raw}\", raw '\\1');$0"
+  "extract raw 1,2":
+    prefix: "regex "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:regex\\.)/}extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\\\${3:1}', raw '\\\\${4:2}');$0"
+  evaluate:
+    prefix: "xpath "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:xpath\\.)/}evaluate(${1:some_file_path}, \"${2:xpath_string}\");$0"
+  openDocument:
+    prefix: "xpath "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:xpath\\.)/}openDocument(${1:some_file_path});$0"
+  closeDocument:
+    prefix: "xpath "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:xpath\\.)/}closeDocument(${1:some_file_path});$0"
+  _related:
+    prefix: "_related_host  "
+    body: "${TM_CURRENT_WORD/\\.\\W*|(.*)/(?1:related\\.)/}host(${1:node});$0"
+  "host.os_class":
+    prefix: "_os_class "
+    body: '''
+      if host.os_class = "Windows" then
+        sep := '\\\\\\';
+      else
+        sep := '/';
+      end if;
+      $0
+    '''
