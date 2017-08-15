@@ -121,7 +121,7 @@
         { 'include': "#body" }
         { 'include': "#if_addm" }
         { 'include': '#docstrings' }
-        # { 'include': '#doc_strings_block_doulbe_q' }
+        { 'include': '#doc_strings_block_doulbe_q' }
     ]
   }
 ]
@@ -275,6 +275,11 @@
     'match': '\\[(-?\\d+)\\]'
     'captures':
         1: 'name': 'constant.numeric.tplpre'
+  'drdc_jira':
+    'match': "\\((DRDC1-\\S+)\\)"
+    # 'name': "variable.parameter.tplpre"
+    'captures':
+        1: 'name': "variable.other.tplpre"
   # All lines
   'lines':
     'patterns': [
@@ -288,6 +293,7 @@
       { 'include': '#square_brackets_line_int' }
       { 'include': '#all_keys' }
       { 'include': '#brackets' }
+      { 'include': '#drdc_jira' }
     ]
 # Keys
   # plus +
@@ -450,788 +456,102 @@
   # THIS BLOCK
   # """
   'doc_strings_block_doulbe_q':
-    'match': '(\\\"{3})'
-    'captures':
-      "1": 'name': "comment.block.documentation.tplpre"
+    'comment': 'TRIGGER TYPE Working fine and DATE\TASK highlighted'
+    'begin': '(\\\"{3})'
+    'beginCaptures':
+      1: 'name': "comment.block.documentation.tplpre"
+    'end': "(\\\"{3})"
+    'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "comment.block.documentation.tplpre"
      'patterns': [
         {
-          'match': "(\\\"{3})"
-          'captures':
-            1: 'name': "comment.block.documentation.tplpre"
-        }
-        {
-          'match': "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})(.*)?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?"
+          'name': "variable.parameter.tplpre"
+          'match': "\\((QM\\d+)\\)"
           'captures':
             1: 'name': "variable.other.tplpre"
-            2: 'name': "comment.block.documentation.tplpre"
+        }
+        {
           'name': "variable.parameter.tplpre"
+          'match': "\\((DRDC1-\\d+)\\)"
+          'captures':
+            1: 'name': "variable.other.tplpre"
         }
         {
-          'match': "."
-          'name': "comment.block.documentation.tplpre"
+          'name': "variable.parameter.tplpre"
+          'match': "\\((TKU-\\d+)\\)"
+          'captures':
+            1: 'name': "variable.other.tplpre"
         }
         {
-          'include': "$self"
+          'name': "variable.parameter.tplpre"
+          'match': "\\((esc\\s+?\\d+)\\)"
+          'captures':
+            1: 'name': "variable.other.tplpre"
+        }
+        {
+          # 'name': "variable.parameter.tplpre"
+          'match': "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?"
+          'captures':
+            1: 'name': "variable.other.tplpre"
         }
     ]
-# COPYPASTE from language-python
-# Works but will be removed because not smart
-  'docstrings':
-    'patterns': [
-      {
-        'begin': '^\\s*(?=[uU]?[rR]?""")'
-        'end': '(?<=""")'
-        'name': 'comment.block.python'
-        'patterns': [
-          {
-            'include': '#string_quoted_double'
-          }
-        ]
-      }
-      {
-        'begin': '^\\s*(?=[uU]?[rR]?\'\'\')'
-        'end': '(?<=\'\'\')'
-        'name': 'comment.block.python'
-        'patterns': [
-          {
-            'include': '#string_quoted_single'
-          }
-        ]
-      }
+  # '''
+  # THIS BLOCK
+  # '''
+  'doc_strings_block_single_q':
+    'comment': 'TRIGGER TYPE Working fine and DATE\TASK highlighted'
+    'begin': "('{3})"
+    'beginCaptures':
+      1: 'name': "comment.block.documentation.tplpre"
+    'end': "('{3})"
+    'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "comment.block.documentation.tplpre"
+     'patterns': [
+        {
+          'name': "variable.parameter.tplpre"
+          'match': "\\((QM\\d+)\\)"
+          'captures':
+            1: 'name': "variable.other.tplpre"
+        }
+        {
+          'name': "variable.parameter.tplpre"
+          'match': "\\((DRDC1-\\d+)\\)"
+          'captures':
+            1: 'name': "variable.other.tplpre"
+        }
+        {
+          'name': "variable.parameter.tplpre"
+          'match': "\\((TKU-\\d+)\\)"
+          'captures':
+            1: 'name': "variable.other.tplpre"
+        }
+        {
+          'name': "variable.parameter.tplpre"
+          'match': "\\((esc\\s+?\\d+)\\)"
+          'captures':
+            1: 'name': "variable.other.tplpre"
+        }
+        {
+          # 'name': "variable.parameter.tplpre"
+          'match': "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?"
+          'captures':
+            1: 'name': "variable.other.tplpre"
+        }
     ]
-  'string_quoted_double':
+  # ''' THIS STRING '''
+  'doc_strings_single_simple':
+      'name': "comment.block.documentation.tplpre"
+      'match': "('{3}([^']+?)'{3})"
+      'captures':
+        1: 'name': "string.quoted.triple.tplpre"
+        2: 'name': "string.quoted.triple.tplpre"
+        3: 'name': "string.quoted.triple.tplpre"
+# Grouping DOC STRINGS:
+  'doc_strings':
     'patterns': [
-      {
-        'begin': '([uU]r)(""")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted unicode-raw string'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-        'name': 'string.quoted.double.block.unicode-raw-regex.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': '#regular_expressions'
-          }
-        ]
-      }
-      {
-        'begin': '([uU]R)(""")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted unicode-raw string without regular expression highlighting'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-        'name': 'string.quoted.double.block.unicode-raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(r)(""")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted raw string'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-        'name': 'string.quoted.double.block.raw-regex.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': '#regular_expressions'
-          }
-        ]
-      }
-      {
-        'begin': '(R)(""")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted raw string'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-        'name': 'string.quoted.double.block.raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '([uU])(""")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted unicode string'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-        'name': 'string.quoted.double.block.unicode.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'captures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-          '3':
-            'patterns': [
-              {'include': '#constant_placeholder'}
-              {'include': '#escaped_unicode_char'}
-              {'include': '#escaped_char'}
-              {'include': '#regular_expressions'}
-            ]
-          '4':
-            'name': 'punctuation.definition.string.end.python'
-        'comment': 'double-quoted raw string'
-        'match': '([uU]r)(")((?:[^"\\\\]|\\\\.)*)(")'
-        'name': 'string.quoted.double.single-line.unicode-raw-regex.python'
-      }
-      {
-        'begin': '([uU]R)(")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double-quoted raw string'
-        'end': '((?<=")(")|")|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-          '3':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.double.single-line.unicode-raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'captures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-          '3':
-            'patterns': [
-              {'include': '#constant_placeholder'}
-              {'include': '#escaped_char'}
-              {'include': '#regular_expressions'}
-            ]
-          '4':
-            'name': 'punctuation.definition.string.end.python'
-        'comment': 'double-quoted raw string'
-        'match': '(r)(")((?:[^"\\\\]|\\\\.)*)(")'
-        'name': 'string.quoted.double.single-line.raw-regex.python'
-      }
-      {
-        'begin': '(R)(")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double-quoted raw string'
-        'end': '((?<=")(")|")|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-          '3':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.double.single-line.raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '([uU])(")'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted unicode string'
-        'end': '((?<=")(")|")|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-          '3':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.double.single-line.unicode.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(""")'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted string'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-        'name': 'string.quoted.double.block.sql.python'
-        'patterns': [
-          {
-             'begin': '(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|WITH))'
-             'end': '(?=\\s*""")'
-             'patterns': [
-                {
-                  'include': 'source.sql'
-                }
-             ]
-          }
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|WITH))'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted string'
-        'end': '((?<=")(")|")|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-          '3':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.double.single-line.sql.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': 'source.sql'
-          }
-        ]
-      }
-      {
-        'begin': '(""")'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted string'
-        'end': '((?<=""")(")""|""")'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-        'name': 'string.quoted.double.block.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(")'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'double quoted string'
-        'end': '((?<=")(")|")|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.double.python'
-          '3':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.double.single-line.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-    ]
-  'string_quoted_single':
-    'patterns': [
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-          '2':
-            'name': 'punctuation.definition.string.end.python'
-          '3':
-            'name': 'meta.empty-string.single.python'
-        'match': '(?<!\')(\')((\'))(?!\')'
-        'name': 'string.quoted.single.single-line.python'
-      }
-      {
-        'begin': '([uU]r)(\'\'\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted unicode-raw string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.single.python'
-        'name': 'string.quoted.single.block.unicode-raw-regex.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': '#regular_expressions'
-          }
-        ]
-      }
-      {
-        'begin': '([uU]R)(\'\'\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted unicode-raw string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.single.python'
-        'name': 'string.quoted.single.block.unicode-raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(r)(\'\'\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted raw string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.single.python'
-        'name': 'string.quoted.single.block.raw-regex.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': '#regular_expressions'
-          }
-        ]
-      }
-      {
-        'begin': '(R)(\'\'\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted raw string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.single.python'
-        'name': 'string.quoted.single.block.raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '([uU])(\'\'\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted unicode string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.single.python'
-        'name': 'string.quoted.single.block.unicode.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'captures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-          '3':
-            'patterns': [
-              {'include': '#constant_placeholder'}
-              {'include': '#escaped_unicode_char'}
-              {'include': '#escaped_char'}
-              {'include': '#regular_expressions'}
-            ]
-          '4':
-            'name': 'punctuation.definition.string.end.python'
-        'comment': 'single quoted raw string'
-        'match': '([uU]r)(\')((?:[^\'\\\\]|\\\\.)*)(\')'
-        'name': 'string.quoted.single.single-line.unicode-raw-regex.python'
-      }
-      {
-        'begin': '([uU]R)(\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted raw string'
-        'end': '(\')|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.single.single-line.unicode-raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'captures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-          '3':
-            'patterns': [
-              {'include': '#constant_placeholder'}
-              {'include': '#escaped_char'}
-              {'include': '#regular_expressions'}
-            ]
-          '4':
-            'name': 'punctuation.definition.string.end.python'
-        'comment': 'single quoted raw string'
-        'match': '(r)(\')((?:[^\'\\\\]|\\\\.)*)(\')'
-        'name': 'string.quoted.single.single-line.raw-regex.python'
-      }
-      {
-        'begin': '(R)(\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted raw string'
-        'end': '(\')|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.single.single-line.raw.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '([uU])(\')'
-        'beginCaptures':
-          '1':
-            'name': 'storage.type.string.python'
-          '2':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted unicode string'
-        'end': '(\')|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.single.single-line.unicode.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_unicode_char'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(\'\'\')'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.single.python'
-        'name': 'string.quoted.single.block.sql.python'
-        'patterns': [
-          {
-             'begin': '(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|WITH))'
-             'end': '(?=\\s*\'\'\')'
-             'patterns': [
-                {
-                  'include': 'source.sql'
-                }
-             ]
-          }
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(\')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|WITH))'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted string'
-        'end': '(\')|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.single.single-line.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-          {
-            'include': 'source.sql'
-          }
-        ]
-      }
-      {
-        'begin': '(\'\'\')'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted string'
-        'end': '((?<=\'\'\')(\')\'\'|\'\'\')'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'meta.empty-string.single.python'
-        'name': 'string.quoted.single.block.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-      {
-        'begin': '(\')'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.definition.string.begin.python'
-        'comment': 'single quoted string'
-        'end': '(\')|(\\n)'
-        'endCaptures':
-          '1':
-            'name': 'punctuation.definition.string.end.python'
-          '2':
-            'name': 'invalid.illegal.unclosed-string.python'
-        'name': 'string.quoted.single.single-line.python'
-        'patterns': [
-          {
-            'include': '#constant_placeholder'
-          }
-          {
-            'include': '#escaped_char'
-          }
-        ]
-      }
-    ]
-  'strings':
-    'patterns': [
-      {
-        'include': '#string_quoted_double'
-      }
-      {
-        'include': '#string_quoted_single'
-      }
+      { 'include': '#doc_strings_block_doulbe_q' }
+      { 'include': '#doc_strings_block_single_q' }
+      { 'include': '#doc_strings_single_simple' }
     ]
