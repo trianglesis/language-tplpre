@@ -1,3 +1,7 @@
+# Alexander Danylchenko
+# BMC tplpre\tpl syntax file highligh.
+# 2017-08-14 - Latest version.
+# Based on sublime-suntax.
 'scopeName': 'source.tplpre'
 'name': 'Tplpre'
 'fileTypes': [
@@ -6,14 +10,6 @@
 ]
 'firstLineMatch': '.*'
 'patterns': [
-# Dev TEST
-#  {
-#    'match': '^(configuration)\\s(\\S+)\\s(\\d+\\.\\d+)'
-#    'captures':
-#        1: 'name': 'constant.other.tplpre'
-#        2: 'name': 'variable.parameter.tplpre'
-#        3: 'name': 'variable.parameter.tplpre'
-#  }
   # Includes
   # Initial
   { 'include': '#percent_line' }
@@ -24,14 +20,14 @@
   { 'include': '#overwiev' }
   { 'include': '#simple_identifiers' }
   { 'include': '#if_addm' }
-  # tpl $$TPLVERSION$$ module NAME;
+# tpl $$TPLVERSION$$ module NAME;
   {
     'match': 'tpl\\s+(\\$\\$TPLVERSION\\$\\$|\\d+\\.\\d+)\\s+module\\s(.*);'
     'captures':
         1: 'name': 'constant.character.tplpre'
         2: 'name': 'constant.character.tplpre'
   }
-  # pattern import section
+# pattern import section
   {
     'match': 'from\\s(\\w+)(?:\.(\\w+))?(?:\.(\\w+))?\\simport\\s(\\S+)\\s(\\d+(?:\.\\d+)+);'
     'captures':
@@ -41,7 +37,7 @@
         4: 'name': 'entity.name.function.tplpre'
         5: 'name': 'constant.numeric.tplpre'
   }
-  # Highlight configuration sections
+# Highlight configuration sections
   {
     'begin': '^(configuration)\\s(\\S+)\\s(\\d+\\.\\d+)'
     'beginCaptures':
@@ -59,7 +55,7 @@
       { 'include': '#if_addm' }
     ]
   }
-  # Highlight table sections
+# Highlight table sections
   {
     'begin': '^(table)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)'
     'beginCaptures':
@@ -77,7 +73,7 @@
       { 'include': '#main' }
     ]
   }
-  # Highlight definitions sections
+# Highlight definitions sections
   {
     'begin': '^(definitions)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)'
     'beginCaptures':
@@ -98,7 +94,7 @@
       { 'include': '#if_addm' }
     ]
   }
-  # Highlight pattern sections
+# Highlight pattern sections
   {
     'begin': '^\\b(pattern)\\s+(\\w+)\\s(\\d+(?:\\.\\d+)+)\\s+$'
     'beginCaptures':
@@ -125,8 +121,10 @@
     ]
   }
 ]
-'repository': # Repository
-  'tags': # Small blocks:
+# Repository
+'repository':
+# Small blocks:
+  'tags':
     'comment': 'Tags'
     'match': 'tags'
     'name': 'keyword.control.import.tplpre'
@@ -385,6 +383,276 @@
       {'include': '#regex'}
       {'include': '#content_raw'}
     ]
+# BuiltIN tplre functions:
+# Later some checks can be added
+  # Discovery mark
+  'discovery_functions':
+    # name: discovery.function.tplpre
+    'comment': 'Discovery functions DEV looks working'
+    'begin': "(discovery)(\\.)(fileGet|fileInfo|getNames|listDirectory|listRegistry|registryKey|wmiQuery|wbemQuery|wbemEnumInstances|runCommand|snmpGet|snmpGetTable|restfulGet|restfulPost|vSphereFindObjects|vSphereTraverseToObjects|vSphereGetProperties|vSphereGetPropertyTable)"
+    'beginCaptures':
+      1: 'name': 'support.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'support.constant.tplpre'
+    'end': "\\;"
+    # 'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "disabled.tplpre"
+     'patterns': [
+        {
+          'include': '#lines'
+        }
+        {
+          'include': '#all_controls'
+        }
+        {
+          'include': '#regex'
+        }
+      ]
+# model functions
+  'model_functions':
+    # name: discovery.function.tplpre
+    'comment': 'Model functions DEV looks working'
+    'begin': "((model)(\\.)(addContainment|setContainment|destroy|withdraw|setRemovalGroup|anchorRemovalGroup|suppressRemovalGroup|host|hosts|findPackages|addDisplayAttribute|removeDisplayAttribute|kind))"
+    'beginCaptures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'support.function.tplpre'
+      3: 'name': 'punctuation.accessor.tplpre'
+      4: 'name': 'support.constant.tplpre'
+    'end': "\\;"
+    # 'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "disabled.tplpre"
+     'patterns': [
+        {
+          'include': '#lines'
+        }
+        {
+          'include': '#all_controls'
+        }
+        {
+          'include': '#regex'
+        }
+      ]
+# model rel functions
+  'model_rel_functions':
+    # name: discovery.function.tplpre
+    'comment': 'Model rel functions DEV looks working'
+    'begin': "((model)(\\.)(rel|uniquerel)(\\.)(Communication|Containment|Dependency|Detail|HostContainment|HostedFile|HostedSoftware|Management|RelatedFile|SoftwareService|SoftwareContainment|StorageUse))"
+    'beginCaptures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'support.function.tplpre'
+      3: 'name': 'punctuation.accessor.tplpre'
+      4: 'name': 'support.constant.tplpre'
+    'end': "\\;"
+    # 'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "disabled.tplpre"
+     'patterns': [
+        {
+          'include': '#lines'
+        }
+        {
+          'include': '#all_controls'
+        }
+        {
+          'include': '#regex'
+        }
+      ]
+# model SI functions
+  'model_SI_functions':
+    # name: discovery.function.tplpre
+    'comment': 'Model SI functions DEV looks working. TODO: upgrage to highlight inr content 2017-08-15'
+    'begin': "((model)(\\.)(SoftwareInstance))"
+    'beginCaptures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'support.function.tplpre'
+      3: 'name': 'punctuation.accessor.tplpre'
+      4: 'name': 'support.constant.tplpre'
+    'end': "\\;"
+    # 'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "disabled.tplpre"
+     'patterns': [
+        {
+          'include': '#lines'
+        }
+        {
+          'include': '#all_controls'
+        }
+        {
+          'include': '#regex'
+        }
+      ]
+# Log functions: log.debug("Blah")
+  'log_functions':
+    'match': '(log\\.(?:debug|info|warn|error|critical))'
+    'captures':
+        1: 'name': 'storage.type.tplpre'
+# Text functions: text.toNumber(text)
+  'number_functions':
+    'match': "(text)(\\.)(lower|upper|toNumber|replace|join|split|strip|leftStrip|rightStrip|hash|ordinal)"
+    'captures':
+        1: 'name': 'support.function.tplpre'
+        2: 'name': 'punctuation.accessor.tplpre'
+        3: 'name': 'support.constant.tplpre'
+# Regex functions
+  'regex_functions':
+    # name: regex.function.tplpre
+    'match': "(regex)(\\.)(extract|extractAll)"
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+# Xpath functions
+  'xpath_functions':
+    # name: xpath.function.tplpre
+    'match': "(xpath)(\\.)(evaluate|openDocument|closeDocument)"
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+# Discovery results functions:
+  'discovery_manipulation_functions':
+    # name: discovery.function.tplpre
+    'match': "(discovery)(\\.)(process|children|descendents|parent|allProcesses|access)"
+    'captures':
+      1: 'name': 'support.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'support.constant.tplpre'
+# Binary NETW convertion functions
+  'binary_functions':
+    # name: binary.function.tplpre
+    'match': "(binary)(\\.)(toHexString|toIPv4|toIPv4z|toIPv6|toIPv6z|toMACAddress|toValue|toWWN)"
+    'captures':
+      1: 'name': 'support.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'support.constant.tplpre'
+# JSON Functions
+  'json_functions':
+    # name: binary.function.tplpre
+    'match': "(json)(\\.)(encode|decode)"
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+# Related functions
+  'related_functions':
+    # name: time.function.tplpre
+    'match': "(related)(\\.)(detailContainer|host\\b|hostingNode)"
+    'captures':
+      1: 'name': 'support.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'support.constant.tplpre'
+# Mail functions (old)
+  'mail_functions':
+    # name: mail.function.tplpre
+    'match': "(mail)(\\.)(send)"
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+# Time functions
+  'time_functions':
+    # name: time.function.tplpre
+    'match': "(time)(\\.)(current|delta|parseLocal|parseUTC|formatLocal|formatUTC|toTicks|fromTicks)"
+    'captures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+# Inferrence functions
+  'inference_functions':
+    # name: inference.function.tplpre
+    'match': "(inference)(\\.)(associate|contributor|primary|relation|withdrawal|destruction)"
+    'captures':
+      1: 'name': 'support.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'support.constant.tplpre'
+# Conversion functions (SupportingFiles - > pattern):
+  'ConversionFunctions':
+    # name: ConversionFunctions.function.tplpre
+    'match': "(ConversionFunctions)(\\.)(isValidSerialNumber|convertToCharString|convertToBytes)"
+    'captures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'entity.name.function.tplpre'
+# Discovery functions (SupportingFiles - > pattern):
+  'DiscoveryFunctions':
+    # name: DiscoveryFunctions.function.tplpre
+    'match': "(DiscoveryFunctions)(\\.)(pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|locateCommands|checkCommandList)"
+    'captures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'entity.name.function.tplpre'
+# RDBMSFunctions functions (SupportingFiles - > pattern):
+  'RDBMSFunctions':
+    # name: RDBMSFunctions.function.tplpre
+    'match': "(RDBMSFunctions)(\\.)(oracleOraFileParser|performRdbmsSisSearch|oracleNetServiceNameSearch|dsnRdbmsServers|parseJDBC)"
+    'captures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'entity.name.function.tplpre'
+# rdbms_functions functions (SupportingFiles - > pattern OLD):
+  'rdbms_functions':
+    # name: rdbms_functions.function.tplpre
+    'match': "(rdbms_functions)(\\.)(oracle_ora_file_parser|perform_rdbms_sis_search|related_rdbms_sis_search|related_rdbms_sis_search_extended|oracle_net_service_name_search|dsn_rdbms_servers|parseJDBC|jdbc_search|find_db_server)"
+    'captures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'entity.name.function.tplpre'
+# SearchFunctions functions (SupportingFiles - > pattern):
+  'SearchFunctions':
+    # name: SearchFunctions.function.tplpre
+    'match': "(SearchFunctions)(\\.)(getNodeIp|getHostingNodes|getSoftwareNodes|getSI|identifyHostWithUuid|relatedSisSearchOnMultipleHosts)"
+    'captures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'entity.name.function.tplpre'
+# common_functions functions (SupportingFiles - > pattern OLD):
+  'common_functions':
+    # name: common_functions.function.tplpre
+    'match': "(functions)(\\.)(validate_host_address_format|domain_lookup|identify_host_perform_search|identify_host_perform_search_in_scope|identify_host|identify_host_extended|related_sis_search\\b|related_sis_search_on_multiple_hosts|related_sis_search_on_multiple_hosts_extended|related_sis_search_extended|related_si_types_search|path_normalization|links_management|get_cleanedup_path|get_max_version|get_exe_cwd_path|sort_list|run_priv_cmd|has_process|isValidSerialNumber|convertToCharString|wmiFollowAssociations|checkForDecimal|convertToBytes|identify_host_with_uuid|locateCommands|find_server|checkCommandList)"
+    'captures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'entity.name.function.tplpre'
+# local_functions functions (in current pattern):
+  'local_functions':
+    # name: local_functions.tplpre
+    'match': "(local_functions|localFunctions)(\\.)(\\w+)"
+    'captures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'entity.name.function.tplpre'
+# Grouping all functions:
+  'all_functions':
+    'patterns': [
+      { 'include': '#discovery_functions' }
+      { 'include': '#model_functions' }
+      { 'include': '#model_SI_functions' }
+      { 'include': '#model_rel_functions' }
+      { 'include': '#log_functions' }
+      { 'include': '#log_functions' }
+      { 'include': '#text_functions' }
+      { 'include': '#number_functions' }
+      { 'include': '#regex_functions' }
+      { 'include': '#xpath_functions' }
+      { 'include': '#discovery_manipulation_functions' }
+      { 'include': '#binary_functions' }
+      { 'include': '#json_functions' }
+      { 'include': '#related_functions' }
+      { 'include': '#mail_functions' }
+      { 'include': '#time_functions' }
+      { 'include': '#inference_functions' }
+      { 'include': '#ConversionFunctions' }
+      { 'include': '#SearchFunctions' }
+      { 'include': '#rdbms_functions' }
+      { 'include': '#RDBMSFunctions' }
+      { 'include': '#DiscoveryFunctions' }
+      { 'include': '#common_functions' }
+      { 'include': '#local_functions' }
+    ]
+
 # keyword.control.conditional
   # if, else, end if, for, end for
   'if_statement':
@@ -554,4 +822,82 @@
       { 'include': '#doc_strings_block_doulbe_q' }
       { 'include': '#doc_strings_block_single_q' }
       { 'include': '#doc_strings_single_simple' }
+    ]
+#  define section
+# Highlight define sections
+  'define':
+    'begin': '\\s+(define)\\s+(\\S+)\\((.*?)\\)(\\s\\S+\\s(.*))?'
+    'beginCaptures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'entity.name.function.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+      4: 'name': 'constant.numeric.tplpre'
+    'end': '\\s+(end\\sdefine;\\s+?$)'
+    'endCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'patterns': [
+        { 'include': "#doc_strings" }
+        { 'include': "#all_functions" }
+        { 'include': "#lines" }
+        { 'include': "#all_controls" }
+        { 'include': "#if_addm" }
+        { 'include': "#dev_keys" }
+      ]
+# Altermate define
+  'alt_define':
+    'begin': '\\s+(define)\\s+(\\S+)(\\s\\S+\\s(.*))?'
+    'beginCaptures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'entity.name.function.tplpre'
+      3: 'name': 'variable.parameter.tplpre'
+    'end': '\\s+(end\\sdefine;)'
+    'endCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'patterns': [
+        { 'include': "#doc_strings" }
+        { 'include': "#all_functions" }
+        { 'include': "#lines" }
+        { 'include': "#all_controls" }
+        { 'include': "#if_addm" }
+        { 'include': "#dev_keys" }
+      ]
+# * Simple Identifiers *
+  'simple_identifiers':
+    'begin': '\\b(identify)\\s+(\\w+)\\s(\\d+(?:\\.\\d+)+)'
+    'beginCaptures':
+      1: 'name': "keyword.control.tplpre"
+      2: 'name': "constant.numeric.tplpre"
+    'end': '(end\\sidentify;)'
+    'endCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'patterns': [
+        { 'include': "#lines" }
+        { 'include': "#keywords_cmd" }
+        { 'include': "#keywords_all" }
+        { 'include': "#regexes" }
+        { 'include': "#keywords_cmd_indentify_trigger" }
+        { 'include': "#if_addm" }
+      ]
+# DEVELOPMENT
+# Some functions can be usefull or not. Add them here to be able to disable without errors.
+# Attributes
+  'keywords_attributes':
+    'patterns': [
+        { 'include': '#keywords_attrs' }
+    ]
+  'keywords_attrs':
+    'match': "\\b(key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b"
+    'captures':
+       1: 'name': 'variable.parameter.tplpre'
+
+  'traverse':
+    'name': 'entity.name.function.model'
+    'match': '\\#(?:(\\w+)(:|\\.))+(\\w+)'
+    'captures':
+      3: 'name': 'keyword.control.model'
+
+  'dev_keys':
+    'patterns': [
+        { 'include': "#keywords_attributes" }
+        { 'include': "#traverse" }
     ]
