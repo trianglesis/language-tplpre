@@ -75,6 +75,7 @@
   }
 # Highlight definitions sections
   {
+    'comment': 'Adding SQL support via #lines'
     'begin': '^(definitions)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)'
     'beginCaptures':
         1: 'name': 'keyword.control.tplpre'
@@ -250,19 +251,26 @@
     'captures':
       1: 'name': "keyword.control.tplpre"
       2: 'name': "string.quoted.single.tplpre"
+# 'THIS LINE'
   'qouted_line':
     'match': '(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")'
-    'comment': 'There is one experimental regex now used. Old one is commented.'
+    'comment': 'There is one experimental regex now used. Old one is commented. Add Begin trigger to include SQL support'
     'captures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'string.quoted.single.tplpre'
+    'patterns': [
+        { 'include': "#sql_query" }
+    ]
   # "THIS LINE"
   'double_qouted_line':
     'match': '(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")'
-    'comment': 'There is one experimental regex now used. Old one is commented.'
+    'comment': 'There is one experimental regex now used. Old one is commented. Add Begin trigger to include SQL support'
     'captures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'string.quoted.single.tplpre'
+    'patterns': [
+        { 'include': "#sql_query" }
+    ]
   # [THIS]
   'square_brackets_line_word':
     'match': '\\[(\\w+[^\\d+])\\]'
@@ -278,9 +286,18 @@
     # 'name': "variable.parameter.tplpre"
     'captures':
         1: 'name': "variable.other.tplpre"
+  'sql_query':
+    'begin': '(?="""(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|WITH))'
+    'end': '(?=""";)'
+    'patterns': [
+          {
+            'include': 'source.sql'
+          }
+        ]
   # All lines
   'lines':
     'patterns': [
+      { 'include': '#sql_query' }
       { 'include': '#percent_line' }
       { 'include': '#comment_TODO_line' }
       { 'include': '#comment_line' }
@@ -290,7 +307,6 @@
       { 'include': '#square_brackets_line_word' }
       { 'include': '#square_brackets_line_int' }
       { 'include': '#all_keys' }
-      { 'include': '#brackets' }
       { 'include': '#drdc_jira' }
     ]
 # Keys
@@ -399,15 +415,9 @@
     'endCaptures':
       1: 'name': "disabled.tplpre"
      'patterns': [
-        {
-          'include': '#lines'
-        }
-        {
-          'include': '#all_controls'
-        }
-        {
-          'include': '#regex'
-        }
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
       ]
 # model functions
   'model_functions':
@@ -424,15 +434,9 @@
     'endCaptures':
       1: 'name': "disabled.tplpre"
      'patterns': [
-        {
-          'include': '#lines'
-        }
-        {
-          'include': '#all_controls'
-        }
-        {
-          'include': '#regex'
-        }
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
       ]
 # model rel functions
   'model_rel_functions':
@@ -449,15 +453,9 @@
     'endCaptures':
       1: 'name': "disabled.tplpre"
      'patterns': [
-        {
-          'include': '#lines'
-        }
-        {
-          'include': '#all_controls'
-        }
-        {
-          'include': '#regex'
-        }
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
       ]
 # model SI functions
   'model_SI_functions':
@@ -474,15 +472,9 @@
     'endCaptures':
       1: 'name': "disabled.tplpre"
      'patterns': [
-        {
-          'include': '#lines'
-        }
-        {
-          'include': '#all_controls'
-        }
-        {
-          'include': '#regex'
-        }
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
       ]
 # Log functions: log.debug("Blah")
   'log_functions':
@@ -656,13 +648,32 @@
 # keyword.control.conditional
   # if, else, end if, for, end for
   'if_statement':
-    'comment': 'Its better to add here beginCaptures statement and endCaptures to then'
-    'match': '(?:[^(end)])(if)(?:[^;\\w])'
-    'name': 'keyword.control.conditional.tplpre'
-  'then_statement':
-    'comment': 'Its better to add here endCaptures as finish of if beginCaptures'
-    'match': "\\bthen\\s+?"
-    'name': 'keyword.control.conditional.tplpre'
+    'comment': 'New beginCaptures include here usual types of expressions'
+    # 'begin': '(?!end if;|then)(if)(?:.+?)(?:then)'
+    'begin': '(?!end if;|then)(\\bif)'
+    'beginCaptures':
+        1: 'name': 'keyword.control.conditional.tplpre'
+    # 'contentName': 'meta.function.parameters.python'
+    'end': '(then)'
+    'endCaptures':
+        1: 'name': 'keyword.control.conditional.tplpre'
+    'patterns': [
+        {
+          'match': '(\\w+)\\s+(and)\\s+(\\w+)\\.(content)'
+          'captures':
+              1: 'name': 'variable.parameter.function.tplpre'
+              2: 'name': 'keyword.control.conditional.tplpre'
+              3: 'name': 'variable.parameter.function.tplpre'
+              4: 'name': 'storage.type.class.tplpre'
+        }
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
+    ]
+  # 'then_statement':
+  #   'comment': 'Its better to add here endCaptures as finish of if beginCaptures'
+  #   'match': "\\bthen\\s+?"
+  #   'name': 'keyword.control.conditional.tplpre'
   'elif_statement':
     'match': "\\belif\\s+?"
     'name': 'keyword.control.conditional.tplpre'
@@ -672,14 +683,31 @@
   'end_if_statement':
     'match': "\\bend\\sif;\\s+?"
     'name': 'keyword.control.conditional.tplpre'
+
   'for_statement':
-    'match': "\\bend\\sfor;\\s+?"
-    'name': 'keyword.control.tplpre'
+    'comment': 'Not a good idea to add beginCaptures for if and for because it will fing just first occurence and then stop.'
+    # 'begin': '(?!end if;|then)(if)(?:.+?)(?:then)'
+    'begin': '(?!end for;|do)(\\bfor)'
+    'beginCaptures':
+        1: 'name': 'keyword.control.tplpre'
+    # 'contentName': 'meta.function.parameters.python'
+    'end': '(do)'
+    'endCaptures':
+        1: 'name': 'keyword.control.tplpre'
+    'patterns': [
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
+    ]
+  # 'for_statement':
+  #   'match': "\\bend\\sfor;\\s+?"
+  #   'name': 'keyword.control.tplpre'
   'end_for_statement':
     'match': "\\bend\\sfor;\\s+?"
     'name': 'keyword.control.tplpre'
+
   'keywords_all':
-    'match': "\\b(aged|and|as|at|break|by|configuration|continue|created|default|desc|deleted|do|enumeration|exists|expand|explode|false|flags|from|has|in|is|locale|matches|modified|nodes|nodecount|none|not|on|or|order|out|overrides|processwith|relationship|removal|requires|search|show|step|stop|substring|subword|summary|tags|taxonomy|traverse|true|unconfirmed|where|with|void)\\b"
+    'match': "\\b(size|in|aged|and|as|at|break|by|configuration|continue|created|default|desc|deleted|do|enumeration|exists|expand|explode|false|flags|from|has|in|is|locale|matches|modified|nodes|nodecount|none|not|on|or|order|out|overrides|processwith|relationship|removal|requires|search|show|step|stop|substring|subword|summary|tags|taxonomy|traverse|true|unconfirmed|where|with|void|has|substring)\\b"
     'name': 'support.type.tplpre'
   'keywords_cmd':
     'match': "\\b(unix_cmd|windows_cmd)"
@@ -709,7 +737,7 @@
     'patterns': [
       {'include': '#if_statement'}
       {'include': '#elif_statement'}
-      {'include': '#then_statement'}
+      # {'include': '#then_statement'}
       {'include': '#else_statement'}
       {'include': '#end_if_statement'}
       {'include': '#for_statement'}
@@ -724,7 +752,7 @@
   # THIS BLOCK
   # """
   'doc_strings_block_doulbe_q':
-    'comment': 'TRIGGER TYPE Working fine and DATE\TASK highlighted'
+    'comment': 'TRIGGER TYPE Working fine and DATE & TASK highlighted Adding SQL support via #lines'
     'begin': '(\\\"{3})'
     'beginCaptures':
       1: 'name': "comment.block.documentation.tplpre"
@@ -733,6 +761,7 @@
     'endCaptures':
       1: 'name': "comment.block.documentation.tplpre"
      'patterns': [
+        { 'include': "#sql_query" }
         {
           'name': "variable.parameter.tplpre"
           'match': "\\((QM\\d+)\\)"
@@ -810,6 +839,7 @@
     ]
   # ''' THIS STRING '''
   'doc_strings_single_simple':
+      'comment': 'Adding SQL support via #lines'
       'name': "comment.block.documentation.tplpre"
       'match': "('{3}([^']+?)'{3})"
       'captures':
@@ -826,6 +856,7 @@
 #  define section
 # Highlight define sections
   'define':
+    'comment': 'Adding SQL support via #lines'
     'begin': '\\s+(define)\\s+(\\S+)\\((.*?)\\)(\\s\\S+\\s(.*))?'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
@@ -839,12 +870,14 @@
         { 'include': "#doc_strings" }
         { 'include': "#all_functions" }
         { 'include': "#lines" }
+        { 'include': '#sql_query' }
         { 'include': "#all_controls" }
         { 'include': "#if_addm" }
         { 'include': "#dev_keys" }
       ]
 # Altermate define
   'alt_define':
+    'comment': 'Adding SQL support via #lines'
     'begin': '\\s+(define)\\s+(\\S+)(\\s\\S+\\s(.*))?'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
@@ -857,6 +890,7 @@
         { 'include': "#doc_strings" }
         { 'include': "#all_functions" }
         { 'include': "#lines" }
+        { 'include': '#sql_query' }
         { 'include': "#all_controls" }
         { 'include': "#if_addm" }
         { 'include': "#dev_keys" }
