@@ -336,7 +336,9 @@
 
 	"OLD functions.identify_host_perform_search_in_scope(host, rel_host_address, hosts_scope)":
 		prefix: "functions.identify_host_perform_search_in_scope"
-		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host in some narrowed scope of hosts, but not on all available hosts like identify_host_perform_search()'
+		description: """OLD Common_functions module.
+										Function searches for one rel_host_address Host in some narrowed scope of hosts,
+										but not on all available hosts like identify_host_perform_search()"""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_perform_search_in_scope(${1:host}, ${2:rel_host_address}, ${3:hosts_scope});$0"
 
@@ -408,7 +410,8 @@
 
 	"OLD functions.get_exe_cwd_path(process, expected_binary_name)":
 		prefix: "functions.get_exe_cwd_path"
-		description: 'OLD Common_functions module. Function tries to obtain: - full process command path (exe_path) and/or - current working directory (cwd_path) - directory the process was started from. '
+		description: """OLD Common_functions module. Function tries to obtain: - full process command path (exe_path)
+										and/or - current working directory (cwd_path) - directory the process was started from. """
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.get_exe_cwd_path(${1:process}, ${2:expected_binary_name});$0"
 
@@ -420,7 +423,9 @@
 
 	"OLD functions.run_priv_cmd(host, command, priv_cmd := 'PRIV_RUNCMD')":
 		prefix: "functions.run_priv_cmd"
-		description: 'OLD Common_functions module. Run the given command, using privilege elevation on UNIX, if required. The command is first run as given. If this fails, produces no output and the platform is UNIX then the command is executed again using the given priv_cmd. '
+		description: """OLD Common_functions module. Run the given command, using privilege elevation on UNIX, if required.
+										The command is first run as given. If this fails, produces no output and the platform
+										is UNIX then the command is executed again using the given priv_cmd. """
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.run_priv_cmd(${1:host}, ${2:command}, priv_cmd := 'PRIV_RUNCMD');$0"
 
@@ -444,7 +449,8 @@
 
 	"OLD functions.wmiFollowAssociations(host, namespace, initial_paths, associations)":
 		prefix: "functions.wmiFollowAssociations"
-		description: 'OLD Common_functions module. Starting from initial_paths, a list of WMI source instance paths, follows multiple WMI associations to reach a set of target instances. '
+		description: """OLD Common_functions module. Starting from initial_paths, a list of WMI
+										source instance paths, follows multiple WMI associations to reach a set of target instances. """
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.wmiFollowAssociations(${1:host}, ${2:namespace}, ${3:initial_paths}, ${4:associations});$0"
 
@@ -468,7 +474,8 @@
 
 	"OLD functions.locateCommands(host, command_list)":
 		prefix: "functions.locateCommands"
-		description: 'OLD Common_functions module. Attempts to locate the required commands. Returns a table of each command location. The location is none if the command could not be found. This call returns none if the location process fails '
+		description: """OLD Common_functions module. Attempts to locate the required commands. Returns a table of each command location.
+										The location is none if the command could not be found. This call returns none if the location process fails."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.locateCommands(${1:host}, ${2:command_list});$0"
 
@@ -510,7 +517,11 @@
 	#  cluster_support_functions
 	"cluster_support_functions.getHostingNode(host, fallback_kind := Host, instance := inst, clustered_data_path := path)":
 		prefix: "cluster_support_functions.getHostingNode"
-		description: 'SI can be identified as clustered (running on cluster): - if SI has specific processes/commands that indicates clustered installation - if SI is managed/monitored by ClusterService. Usually SI\'s instance or paths can be found in ClusterService information. - if SI binary or data directory resides on file system managed by Cluster - if SI is listening on IP address which is managed by Cluster'
+		description: """SI can be identified as clustered (running on cluster):
+										- if SI has specific processes/commands that indicates clustered installation
+										- if SI is managed/monitored by ClusterService. Usually SI\'s instance or paths can be found in ClusterService information.
+										- if SI binary or data directory resides on file system managed by Cluster
+										- if SI is listening on IP address which is managed by Cluster"""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "cluster_support_functions.getHostingNode(host, fallback_kind := \"${1:t_host}\", instance := \"${2:inst}\", clustered_data_path := \"${3:path}\");$0"
 
@@ -534,7 +545,10 @@
 
 	"cluster_support_functions.get_si_host(si, ip_addr)":
 		prefix: "cluster_support_functions.get_si_host"
-		description: 'Obtain the host related to the provided SoftwareInstance node. If the SoftwareInstance is related to multiple hosts due to the software running on a cluster, then it selects the host based on the host currently supporting the provided IP address or the host known to be actively running the clustered software.'
+		description: """Obtain the host related to the provided SoftwareInstance node.
+										If the SoftwareInstance is related to multiple hosts due to the software running on a cluster,
+										then it selects the host based on the host currently supporting the provided IP address
+										or the host known to be actively running the clustered software."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "cluster_support_functions.get_si_host(${1:si}, ${2:ip_addr});$0"
 
@@ -943,7 +957,7 @@
 		body: "SearchFunctions.getHostingNodes(host, ${1:node_address}, balancer_port := ${2:none}); // -> hosting_nodes, nodes_type$0"
 
 	# comment - GET SOFTWARE NODES:
-	"SearchFunctions.getSoftwareNodes(host, node_address := none, software_type := none, balancer_port := none, port := none, instance := none, listen_tcp_socket := none, server_name := none, installed_product := none, db_name := none, net_service_name := none, tnsnames_file_location := none, ora_service_name := none, db2_copy_name := none, dsn_name := none, jdbc_url := none, get_remote_nodes_only := false) -> software_nodes":
+	"SearchFunctions.getSoftwareNodes(evrything) -> software_nodes":
 		prefix: "SearchFunctions.getSoftwareNodes"
 		description: 'searches for software(SoftwareInstance, DatabaseDetail, SoftwareComponent or LoadBalancerService)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
@@ -1140,7 +1154,8 @@
 		body: "model.addContainment(${1:si_node}, ${2:software_components});$0"
 	"model.setContainment(container, containees)":
 		prefix: "model.setContainment"
-		description: 'Equivalent to addContainment, except that at the end of the pattern body, any relationships to contained nodes that have not been confirmed by setContainment or addContainment calls are removed.'
+		description: """Equivalent to addContainment, except that at the end of the pattern body,
+										any relationships to contained nodes that have not been confirmed by setContainment or addContainment calls are removed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.setContainment'
 		body: "model.setContainment(${1:cluster_si_node}, ${2:related_sis});$0"
 	"model.destroy(node)":
@@ -1170,17 +1185,24 @@
 		body: "model.suppressRemovalGroup(\"%${1:detail_type}%\");$0"
 	"model.host(node)":
 		prefix: "model.host"
-		description: 'Returns the Host node corresponding to the given node. The given node can be any directly discovered data node, or a Software Instance or Business Application Instance. If more than one Host is related to the given node (for example a Business Application Instance spread across multiple Hosts), an arbitrary one of the Hosts is returned.'
+		description: """Returns the Host node corresponding to the given node.
+										The given node can be any directly discovered data node, or a Software Instance or Business Application Instance.
+										If more than one Host is related to the given node
+										(for example a Business Application Instance spread across multiple Hosts),
+										an arbitrary one of the Hosts is returned."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.host'
 		body: "model.host(${1:process});$0"
 	"model.hosts(node)":
 		prefix: "model.hosts"
-		description: 'Returns a list of all the Host nodes corresponding to the given node. As with model.host, the given node can be any directly discovered data node or a Software Instance or Business Application Instance.'
+		description: """Returns a list of all the Host nodes corresponding to the given node.
+										As with model.host, the given node can be any directly discovered data node
+										or a Software Instance or Business Application Instance."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.hosts'
 		body: "model.hosts(${1:model_sis});$0"
 	"model.findPackages(node, regexes)":
 		prefix: "model.findPackages"
-		description: 'Traverses from the node, which must be a Host or a directly discovered data node, and returns a set of all Package nodes that have names matching the provided list of regular expressions.'
+		description: """Traverses from the node, which must be a Host or a directly discovered data node,
+										and returns a set of all Package nodes that have names matching the provided list of regular expressions."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.findPackages'
 		body: "model.findPackages(host, [regex \"${1:}\"]);$0"
 	"model.addDisplayAttribute(node, value)":
@@ -1203,62 +1225,86 @@
 
 	"model.rel.Communication(Server, Client)":
 		prefix: "rel_Communication"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
 	"model.rel.Containment(Contained, Container)":
 		prefix: "rel_Containment"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: 		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.Containment(Contained := ${1:cluster_member_node}, Container := ${2:cluster});$0"
 	"model.rel.Dependency(Dependant, DependedUpon)":
 		prefix: "rel_Dependency"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.Dependency(Dependant := ${1:si_node}, DependedUpon := ${2:dep_si});$0"
 	"model.rel.Detail(ElementWithDetail, Detail)":
 		prefix: "rel_Detail"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.Detail(ElementWithDetail := ${1:si_node}, Detail := ${2:details});$0"
 	"model.rel.HostContainment(HostContainer, ContainedHost)":
 		prefix: "rel_HostContainment"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.HostContainment(HostContainer := ${1:si_node}, ContainedHost := ${2:host});$0"
 	"model.rel.HostedFile(HostedFile, Host)":
 		prefix: "rel_HostedFile"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.HostedFile(HostedFile := ${1:file}, Host := ${2:host});$0"
 	"model.rel.HostedSoftware(Host, RunningSoftware)":
 		prefix: "rel_HostedSoftware"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.HostedSoftware(Host := ${1:host}, RunningSoftware := ${2:si_node});$0"
 	"model.rel.Management(Manager, ManagedElement)":
 		prefix: "rel_Management"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.Management(Manager := ${1:manager_si}, ManagedElement := ${2:si_node});$0"
 	"model.rel.RelatedFile(ElementUsingFile, File)":
 		prefix: "rel_RelatedFile"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.RelatedFile(ElementUsingFile := ${1:si_node}, File := ${2:file});$0"
 	"model.rel.SoftwareService(ServiceProvider, Service)":
 		prefix: "rel_SoftwareService"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.SoftwareService(ServiceProvider := ${1:si_node}, Service := ${2:cluster});$0"
 	"model.rel.SoftwareContainment(SoftwareContainer, ContainedSoftware)":
 		prefix: "rel_SoftwareContainment"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.SoftwareContainment(SoftwareContainer := ${1:si_node}, ContainedSoftware := ${2:sc_lst});$0"
 	"model.rel.StorageUse(Consumer, Provider)":
 		prefix: "rel_StorageUse"
-		description: 'Where additional relationships are required, they can be created explicitly. For each relationship defined in the taxonomy, a corresponding function is also defined in the model.rel scope.'
+		description: """Where additional relationships are required, they can be created explicitly.
+										For each relationship defined in the taxonomy,
+										a corresponding function is also defined in the model.rel scope."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
 
@@ -1471,7 +1517,10 @@
 		body: "text.upper(string)$0"
 	"text.toNumber(string [, base ] )":
 		prefix: "text.toNumber"
-		description: 'Converts its string argument into a number. By default, the number is treated as a base 10 value; if the optional base is provided, the number is treated as being in the specified base. Bases from 2 to 36 are supported. Bases larger than 10 use the letters a through z to represent digits.'
+		description: """Converts its string argument into a number.
+										By default, the number is treated as a base 10 value; if the optional base is provided,
+										the number is treated as being in the specified base. Bases from 2 to 36 are supported.
+										Bases larger than 10 use the letters a through z to represent digits."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.toNumber'
 		body: "text.toNumber(port);$0"
 	# comment - REPLACE:
@@ -1533,58 +1582,88 @@
 		body: "text.ordinal(${1:string});$0"
 
 	# comment - LIST:
-
 	"append list":
 		prefix: "append_list_"
 		body: "list.append(${1:the_list}, ${2:string});$0"
 
 	# comment -   TRAVERCE:
-
-	" _trav rel_proc_parent":
-		prefix: "_trav_rel_proc_parent_"
-		description: ''
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+	"search(in da ::DiscoveryResult:ProcessList \#DiscoveredProcess where pid":
+		prefix: "_trav_rel_proc_parent"
+		description: 'search(in da traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList traverse List:List:Member:DiscoveredProcess where pid'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: """
 			rel_services := search(in ${1:da_node} traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList
 								   $0traverse List:List:Member:DiscoveredProcess where pid = %pproc_pid%);$0
 		"""
-	" _trav ContainedSoftware::SoftwareInstance":
-		prefix: "_trav_ContainedSoftware::SoftwareInstance_"
+
+	"search(in si ::SoftwareContainer:SoftwareInstance":
+		prefix: "_trav_ContainedSoftware::SoftwareInstance"
+		description: 'search(in si traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:SoftwareInstance where type and key <> %key% step in SoftwareContainer:SoftwareContainment where \#:ContainedSoftware:SoftwareInstance.key = si.key)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: """
 			obsolete_links := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:SoftwareInstance
 									 where type = %${2:si_type}% and key <> %key%
 									 step in SoftwareContainer:SoftwareContainment
 									 where #:ContainedSoftware:SoftwareInstance.key = %${3:related_si}.key%);$0
 		"""
-	" _trav InferredElement::DiscoveredProcess":
-		prefix: "_trav_InferredElement::DiscoveredProcess_"
+
+	"search(in si ::DiscoveredProcess)":
+		prefix: "_trav_InferredElement::DiscoveredProcess"
+		description: 'search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "procs := search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess);$0"
-	" _trav Host:HostedSoftware::SoftwareInstance":
-		prefix: "_trav_Host:HostedSoftware::SoftwareInstance_"
+
+	"search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type)":
+		prefix: "_trav_Host:HostedSoftware::SoftwareInstance"
+		description: 'search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: """
-			some_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance
-							  where ${1:type} = "${2:type_here}");$0
+						some_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance
+										  where ${1:type} = \"${2:type_here}\");$0
 		"""
-	" _trav Client::SoftwareInstance":
-		prefix: "_trav_Client::SoftwareInstance_"
+
+	"search(in si ::Communication:Server:SoftwareInstance where type":
+		prefix: "_trav_Client::SoftwareInstance"
+		description: 'search(in si traverse Client:Communication:Server:SoftwareInstance where type = smth)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "srv_si_list := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance where type = \"${2:type_here}\");$0"
-	" _trav Server::SoftwareInstance":
-		prefix: "_trav_Server::SoftwareInstance_"
+
+	"search(in si ::Client:SoftwareInstance where type":
+		prefix: "_trav_Server::SoftwareInstance"
+		description: 'search(in si traverse Server:Communication:Client:SoftwareInstance where type = smth)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "client_si_list := search(in ${1:related_si} traverse Server:Communication:Client:SoftwareInstance where type = \"${2:type_here}\");$0"
-	" _trav ContainedSoftware::BusinessApplicationInstance":
-		prefix: "_trav_ContainedSoftware::BusinessApplicationInstance_"
+
+	"search(in si ::SoftwareContainer:BusinessApplicationInstance where type":
+		prefix: "_trav_ContainedSoftware::BusinessApplicationInstance"
+		description: 'search(in si traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:BusinessApplicationInstance where type = si_type)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "bai_candidates := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:BusinessApplicationInstance where type = \"%${2:si_type}%\");$0"
-	" _trav Host::SoftwareInstance":
-		prefix: "_trav_Host::SoftwareInstance_"
+
+	"search(in host ::SoftwareInstance where type ::Detail:DatabaseDetail":
+		prefix: "_trav_Host::SoftwareInstance"
+		description: "search(in host
+									traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type = smth
+									traverse ElementWithDetail:Detail:Detail:DatabaseDetail where instance has subword subword)"
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "db2_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type = \"${1:type_here}\" traverse ElementWithDetail:Detail:Detail:DatabaseDetail where instance has subword '%${2:subword}%');$0"
-	" _trav ElementWithDetail::Detail":
-		prefix: "_trav_ElementWithDetail::Detail_"
+
+	"search(in si ::Detail:Detail:Detail where type":
+		prefix: "_trav_ElementWithDetail::Detail"
+		description: 'search(in si traverse ElementWithDetail:Detail:Detail:Detail where type = smth)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "existing_dts := search(in si traverse ElementWithDetail:Detail:Detail:Detail where ${1:type} = \"${2:type_here}\");$0"
-	" _trav Dependant::SoftwareInstance":
-		prefix: "_trav_Dependant::SoftwareInstance_"
+
+	"search(in si ::DependedUpon:SoftwareInstance":
+		prefix: "_trav_Dependant::SoftwareInstance"
+		description: 'search(in si traverse Dependant:Dependency:DependedUpon:SoftwareInstance)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "mains_si := search(in ${1:related_si} traverse Dependant:Dependency:DependedUpon:SoftwareInstance);$0"
-	" _trav Client::Server:SoftwareInstance":
-		prefix: "_trav_Client::Server:SoftwareInstance_"
+
+	"search(in si ::Communication:Server:SoftwareInstance":
+		prefix: "_trav_Client::Server:SoftwareInstance"
+		description: 'search(in si traverse Client:Communication:Server:SoftwareInstance)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "main_db_sis := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance);$0"
 
 	# comment -   OTHER - DIFFERENT:
