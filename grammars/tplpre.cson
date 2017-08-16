@@ -727,19 +727,21 @@
         #       2: 'name': 'variable.parameter.function.tplpre'
         #       3: 'name': 'storage.type.class.tplpre'
         # }
+        { 'include': '#all_functions' }
         { 'include': '#all_controls' }
         { 'include': '#lines' }
         { 'include': '#regex' }
     ]
 
+  # TODO catch this: elif versions_new[counter] and (text.toNumber(versions_new[counter]) < text.toNumber(version) ) then
   # 'then_statement':
   #   'comment': 'When if_statement is logically separated to begin\\end - this can be removed.'
   #   'match': "\\bthen\\s+?"
   #   'name': 'keyword.control.conditional.tplpre'
-
   'elif_statement':
     'match': "\\belif\\s+?"
     'name': 'keyword.control.conditional.tplpre'
+
   'else_statement':
     'match': "\\belse\\b"
     'name': 'keyword.control.conditional.tplpre'
