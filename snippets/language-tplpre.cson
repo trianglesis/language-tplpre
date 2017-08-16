@@ -2,17 +2,23 @@
 # BMC tpl\tplre language completions snippet.
 # 2017-08-14 - Latest version.
 ".source.tplpre":
-	"comment - PATTERN BLOCK COMPLETIONS:":
-		prefix: "comment_-_PATTERN_BLOCK_COMPLETIONS:_"
-		body: "Comment ITEM: PATTERN$0"
+
+	# comment - PATTERN BLOCK COMPLETIONS::
+
 	"_Copyright BMC Copyright":
 		prefix: "_Copyright_BMC_Copyright_"
-		body: "// (c) Copyright 2016 BMC Software, Inc. All rights reserved.$0"
+		body: "// (c) Copyright 2017 BMC Software, Inc. All rights reserved.$0"
+		description: 'Copyright info'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/The+Pattern+Language+TPL'
+
 	_tpl:
 		prefix: "_tpl_"
 		body: "tpl \\$\\$TPLVERSION\\$\\$ module ${1:Module}.${2:Name};$0"
+		description: 'Dev option. Header for TPLPreprocessor'
 	_pattern:
 		prefix: "_pattern_"
+		description: 'Pattern block template'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Pattern+Overview'
 		body: '''
 
 
@@ -70,11 +76,13 @@
 	"from ConversionFunctions":
 		prefix: "from_ConversionFunctions_"
 		body: "from ConversionFunctions import ConversionFunctions ${1:1}.${2:0}; // TODO: Check the current version$0"
-	"comment - METADATA":
-		prefix: "comment_-_METADATA_"
-		body: "Comment ITEM: METADATA$0"
+
+	# comment - METADATA:
+
 	"_metadata pattern":
 		prefix: "_metadata_pattern_"
+		description: 'Metadata in pattern body block template'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Pattern+Overview'
 		body: '''
 			    metadata
 			        products := "";
@@ -87,6 +95,8 @@
 		'''
 	"_metadata module":
 		prefix: "_metadata_module_"
+		description: 'Metadata in module block template'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Pattern+Overview'
 		body: '''
 			metadata
 				origin := "TKU";
@@ -95,11 +105,13 @@
 			end metadata;
 			$0
 		'''
-	"comment - TRIGGER":
-		prefix: "comment_-_TRIGGER_"
-		body: "Comment ITEM: TRIGGER$0"
+
+	# comment - TRIGGER:
+
 	"_triggers unix_cmd":
 		prefix: "_triggers_unix_cmd_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on process := DiscoveredProcess where cmd matches unix_cmd "${1:name}";
@@ -108,6 +120,8 @@
 		'''
 	"_triggers windows_cmd":
 		prefix: "_triggers_windows_cmd_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on process := DiscoveredProcess where cmd matches windows_cmd "${1:name}";
@@ -116,6 +130,8 @@
 		'''
 	"_triggers host":
 		prefix: "_triggers_host_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on Host created, confirmed where ${1:name};
@@ -124,6 +140,8 @@
 		'''
 	"_triggers hardware_detail":
 		prefix: "_triggers_hardware_detail_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on detail := HardwareDetail created, confirmed
@@ -133,6 +151,8 @@
 		'''
 	"_triggers management_controller":
 		prefix: "_triggers_management_controller_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on mc := ManagementController created, confirmed
@@ -142,6 +162,8 @@
 		'''
 	"_triggers network_device":
 		prefix: "_triggers_network_device_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on device := NetworkDevice created, confirmed
@@ -151,6 +173,8 @@
 		'''
 	"_triggers software_instance":
 		prefix: "_triggers_software_instance_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on SoftwareInstance created, confirmed
@@ -160,6 +184,8 @@
 		'''
 	"_triggers software_component":
 		prefix: "_triggers_software_component_"
+		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
 		body: '''
 			triggers
 			    on SoftwareComponent created, confirmed
@@ -167,11 +193,13 @@
 			end triggers;
 			$0
 		'''
-	"comment - IDENTIFIERS":
-		prefix: "comment_-_IDENTIFIERS_"
-		body: "Comment ITEM: IDENTIFIERS$0"
+
+	# comment - IDENTIFIERS:
+
 	"_identify Simple Identifiers":
 		prefix: "_identify_Simple_Identifiers_"
+		description: 'Identify tables are active tables used to annotate matching nodes with particular values.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Identify'
 		body: '''
 			identify ${1:SOME} 1.0
 				tags simple_identity, ${2:tag1};
@@ -179,11 +207,13 @@
 			end identify;
 			$0
 		'''
-	"comment - TABLES":
-		prefix: "comment_-_TABLES_"
-		body: "Comment ITEM: TABLES$0"
+
+	# comment - TABLES:
+
 	"_table Two cols":
 		prefix: "_table_Two_cols_"
+		description: 'Tables provide simple look-up tables that can be used by functions in pattern bodies.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Static+Tables'
 		body: '''
 			table ${1:table_name} 1.0
 				"one" -> "val_name1", "val_name2";
@@ -194,6 +224,8 @@
 		'''
 	"_table One col":
 		prefix: "_table_One_col_"
+		description: 'Tables provide simple look-up tables that can be used by functions in pattern bodies.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Static+Tables'
 		body: '''
 			table ${1:table_name} 1.0
 				"one"       -> val_1;
@@ -202,11 +234,13 @@
 			end table;
 			$0
 		'''
-	"comment - DEFINITIONS":
-		prefix: "comment_-_DEFINITIONS_"
-		body: "Comment ITEM: DEFINITIONS$0"
+
+	# comment - DEFINITIONS:
+
 	"_definitions Small":
 		prefix: "_definitions_Small_"
+		description: 'Additional functions to call in patterns are described in definitions blocks. In TPL 1.5, definitions blocks are used for User defined functions and for data integration with SQL databases.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Definitions'
 		body: '''
 			definitions ${1:def_name} 1.0
 				\'''${2:Describe definitions}\'''$0
@@ -216,6 +250,8 @@
 		'''
 	"_definitions Big":
 		prefix: "_definitions_Big_"
+		description: 'Additional functions to call in patterns are described in definitions blocks. In TPL 1.5, definitions blocks are used for User defined functions and for data integration with SQL databases.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Definitions'
 		body: '''
 			definitions ${1:def_name} 1.0
 				\'''${2:Describe definitions}
@@ -229,6 +265,8 @@
 		'''
 	"_define Function":
 		prefix: "_define_Function_"
+		description: 'User defined functions are specified in definitions blocks. In order to specify a function the type parameter within the definitions block must be set to the value function or omitted.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: '''
 			define ${1:function_name}(${2:argument}) -> ${3:return}
 				\'''
@@ -242,11 +280,13 @@
 			end define;
 			$0
 		'''
-	"comment - FULL VERSION":
-		prefix: "comment_-_FULL_VERSION_"
-		body: "Comment ITEM: FULL$0"
+
+	# comment - FULL VERSION:
+
 	"_full_version (\\d*\\.\\d*)":
 		prefix: "_full_version_(\\d*\\.\\d*)_"
+		description: 'Template for product version extract when full version is obtained.'
+		# descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: '''
 			// Assign product version
 			if full_version then
@@ -260,6 +300,8 @@
 		'''
 	"_packages Find packages":
 		prefix: "_packages_Find_packages_"
+		description: 'Template for find packages and get full version.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.findPackages'
 		body: '''
 			packages := model.findPackages( host, [regex "${1:PACKAGE_NAME}"] );
 			for package in packages do
@@ -269,12 +311,12 @@
 				end if;
 			end for;$0
 		'''
-	"comment - TPLPRE":
-		prefix: "comment_-_TPLPRE_"
-		body: "Comment ITEM: TPLPRE$0"
-	"comment - COMMON FUNCTIONS:":
-		prefix: "comment_-_COMMON_FUNCTIONS:_"
-		body: "Comment ITEM: COMMON$0"
+
+	# comment - TPLPRE:
+
+
+	# comment - COMMON FUNCTIONS::
+
 	"validate_host_address_format OLD _functions":
 		prefix: "validate_host_address_format_OLD__functions_"
 		body: "functions.validate_host_address_format(${1:rel_host_address});$0"
@@ -359,9 +401,9 @@
 	"checkCommandList OLD _functions":
 		prefix: "checkCommandList_OLD__functions_"
 		body: "functions.checkCommandList(${1:host}, ${2:command_list});$0"
-	"comment -   CONVERSION FUNCTIONS:":
-		prefix: "comment_-_CONVERSION_FUNCTIONS:_"
-		body: "Comment ITEM:   CONVERSION$0"
+
+	# comment -   CONVERSION FUNCTIONS::
+
 	"isValidSerialNumber ConversionFunctions":
 		prefix: "isValidSerialNumber_ConversionFunctions_"
 		body: "ConversionFunctions.isValidSerialNumber(${1:serial});$0"
@@ -371,72 +413,110 @@
 	"convertToBytes ConversionFunctions":
 		prefix: "convertToBytes_ConversionFunctions_"
 		body: "ModuleName.${1:value}, ${2:gib});$0"
-	"comment -   DISCOVERY BUILT IN FUNCTIONS:":
-		prefix: "comment_-_DISCOVERY_BUILT_IN_FUNCTIONS:_"
-		body: "Comment ITEM:   DISCOVERY$0"
+
+	# comment -   DISCOVERY BUILT IN FUNCTIONS::
+
 	"process discovery":
-		prefix: "process_discovery_"
+		prefix: "discovery_process"
+		description: 'Returns the process node corresponding to the source node, which must be a ListeningPort or NetworkConnection node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.process'
 		body: "discovery.process(${1:process});$0"
 	"children discovery":
-		prefix: "children_discovery_"
+		prefix: "discovery_children"
+		description: 'Returns a list of the child processes for the given DiscoveredProcess node. Returns an empty list if there no children or the parameter is not a DiscoveredProcess node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.children'
 		body: "discovery.children(${1:process});$0"
 	"descendents discovery":
-		prefix: "descendents_discovery_"
+		prefix: "discovery_descendents"
+		description: "Returns a list consisting of the children of the given DiscoveredProcess node, and recursively all of the children's children."
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.descendents'
 		body: "discovery.descendents(${1:process});$0"
 	"parent discovery":
-		prefix: "parent_discovery_"
+		prefix: "discovery_parent"
+		description: 'Returns the parent process for the given DiscoveredProcess node. Returns none if the process has no parent.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.parent'
 		body: "discovery.parent(${1:process});$0"
 	"allProcesses discovery":
-		prefix: "allProcesses_discovery_"
+		prefix: "discovery_allProcesses"
+		description: 'Returns a list of all processes corresponding to the directly discovered data source node. Returns an empty list if the source node is not a valid directly discovered data node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.allProcesses'
 		body: "discovery.allProcesses(${1:process});$0"
 	"access discovery":
-		prefix: "access_discovery_"
+		prefix: "discovery_access"
+		description: 'Returns the Discovery Access node for the source DDD node, if given. If no node is given, it returns the DiscoveryAccess currently in use.Returns none if the source is not valid.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.access'
 		body: "discovery.access(${1:process});$0"
-	"comment - GET AND QUERY":
-		prefix: "comment_-_GET_AND_QUERY_"
-		body: "Comment ITEM: GET$0"
+
+	# comment - GET AND QUERY:
+
 	"fileGet discovery":
 		prefix: "fileGet_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.fileGet(host, ${1:config_filepath});$0"
 	"fileInfo discovery":
 		prefix: "fileInfo_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.fileInfo(host, \"${1:file_path}\");$0"
 	"getNames discovery":
 		prefix: "getNames_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.getNames(${1:target}, ${2:ip_address});$0"
 	"listDirectory discovery":
 		prefix: "listDirectory_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.listDirectory(host, ${1:directory});$0"
 	"listRegistry discovery":
 		prefix: "listRegistry_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.listRegistry(host, ${1:registry_root});$0"
 	"registryKey discovery":
 		prefix: "registryKey_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.registryKey(host, ${1:reg_key_inst_dir});$0"
 	"wmiQuery discovery":
 		prefix: "wmiQuery_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.wmiQuery(host, ${1:wmiQuery}, ${2:wmiNS});$0"
 	"wmiQuery raw discovery":
 		prefix: "wmiQuery_raw_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.wmiQuery(host, ${1:wmiQuery}, raw \"${2:path_to}\");$0"
 	"wbemQuery discovery":
 		prefix: "wbemQuery_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.wbemQuery(${1:target}, ${2:class_name}, [${3:properties}], ${4:namespace});$0"
 	"wbemEnumInstances discovery":
 		prefix: "wbemEnumInstances_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.wbemEnumInstances(${1:target}, ${2:class_name}, ${3:properties}, ${4:namespace}, ${5:filter_locally});$0"
 	"runCommand discovery":
 		prefix: "runCommand_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
 		body: "discovery.runCommand(host, \"${1:command_to_run}\");$0"
 	"snmpGet discovery":
 		prefix: "snmpGet_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.snmpGet'
 		body: "discovery.snmpGet(${1:target}, ${2:oid_table}, [${3:binary_oid_list}]);$0"
 	"snmpGetTable discovery":
 		prefix: "snmpGetTable_discovery_"
+		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.snmpGetTable'
 		body: "discovery.snmpGetTable(${1:target}, ${2:table_oid}, ${3:column_table}, [${4:binary_oid_list}]);$0"
-	"comment - MATRIX":
-		prefix: "comment_-_MATRIX_"
-		body: "Comment ITEM: MATRIX$0"
+
+	# comment - MATRIX:
+
 	"filepath_info Matrix":
 		prefix: "filepath_info_Matrix_"
 		body: '''
@@ -475,27 +555,27 @@
 			$0// when := "${4:Only if installation path is obtained}"
 			$0// *command_info_end$0
 		'''
-	"comment - REST":
-		prefix: "comment_-_REST_"
-		body: "Comment ITEM: REST$0"
+
+	# comment - REST:
+
 	"restfulGet discovery":
 		prefix: "restfulGet_discovery_"
 		body: "discovery.restfulGet(${1:target}, ${2:protocol}, ${3:path}[, ${4:header}]);$0"
 	"restfulPost discovery":
 		prefix: "restfulPost_discovery_"
 		body: "discovery.restfulPost(${1:target}, ${2:protocol}, ${3:path}, ${4:body}[, ${5:header}]);$0"
-	"comment - JSON":
-		prefix: "comment_-_JSON_"
-		body: "Comment ITEM: JSON$0"
+
+	# comment - JSON:
+
 	"encode json":
 		prefix: "encode_json_"
 		body: "json.encode(${1:value});$0"
 	"decode json":
 		prefix: "decode_json_"
 		body: "json.decode(${1:value});$0"
-	"comment - vSphere":
-		prefix: "comment_-_vSphere_"
-		body: "Comment ITEM: vSphere$0"
+
+	# comment - vSphere:
+
 	"vSphereFindObjects discovery":
 		prefix: "vSphereFindObjects_discovery_"
 		body: "discovery.vSphereFindObjects(vc_host, \"HostSystem\", [\"name\", \"hardware.systemInfo.uuid\"]);$0"
@@ -508,9 +588,9 @@
 	"vSphereGetPropertyTable discovery":
 		prefix: "vSphereGetPropertyTable_discovery_"
 		body: "discovery.vSphereGetPropertyTable(host, \"HostSystem\", host_id, \"config.storageDevice.scsiLun\", [\"serialNumber\", \"deviceName\"]);$0"
-	"comment -   DISCOVERY FUNCTIONS":
-		prefix: "comment_-_DISCOVERY_FUNCTIONS_"
-		body: "Comment ITEM:   DISCOVERY$0"
+
+	# comment -   DISCOVERY FUNCTIONS:
+
 	"pathNormalization DiscoveryFunctions":
 		prefix: "pathNormalization_DiscoveryFunctions_"
 		body: "DiscoveryFunctions.pathNormalization(${1:host}, ${2:install_root});$0"
@@ -535,9 +615,9 @@
 	"checkCommandList DiscoveryFunctions":
 		prefix: "checkCommandList_DiscoveryFunctions_"
 		body: "DiscoveryFunctions.checkCommandList(${1:host}, ${2:command_list});$0"
-	"comment -   RDBMS OLD:":
-		prefix: "comment_-_RDBMS_OLD:_"
-		body: "Comment ITEM:   RDBMS$0"
+
+	# comment -   RDBMS OLD::
+
 	"oracle_ora_file_parser OLD _rdbms_functions":
 		prefix: "oracle_ora_file_parser_OLD__rdbms_functions_"
 		body: "rdbms_functions.oracle_ora_file_parser(${1:section_name}, ${2:oracle_ora_file_content});$0"
@@ -565,9 +645,9 @@
 	"find_db_server OLD _rdbms_functions":
 		prefix: "find_db_server_OLD__rdbms_functions_"
 		body: "rdbms_functions.find_db_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, ${5:db_details});$0"
-	"comment -   RDBMS NEW:":
-		prefix: "comment_-_RDBMS_NEW:_"
-		body: "Comment ITEM:   RDBMS$0"
+
+	# comment -   RDBMS NEW::
+
 	"oracleOraFileParser RDBMSFunctions":
 		prefix: "oracleOraFileParser_RDBMSFunctions_"
 		body: "RDBMSFunctions.oracleOraFileParser(${1:section_name}, ${2:oracle_ora_file_content}); // -> section$0"
@@ -595,9 +675,9 @@
 	"parseJDBC RDBMSFunctions":
 		prefix: "parseJDBC_RDBMSFunctions_"
 		body: "RDBMSFunctions.parseJDBC(url); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
-	"comment -   SEARCH FUNCTIONS:":
-		prefix: "comment_-_SEARCH_FUNCTIONS:_"
-		body: "Comment ITEM:   SEARCH$0"
+
+	# comment -   SEARCH FUNCTIONS::
+
 	"getNodeIp SearchFunctions":
 		prefix: "getNodeIp_SearchFunctions_"
 		body: "SearchFunctions.getNodeIp(host, ${1:rel_host_address_domain}); // -> node_ip$0"
@@ -613,9 +693,9 @@
 	"relatedSisSearchOnMultipleHosts SearchFunctions":
 		prefix: "relatedSisSearchOnMultipleHosts_SearchFunctions_"
 		body: "SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
-	"comment - GET SOFTWARE NODES":
-		prefix: "comment_-_GET_SOFTWARE_NODES_"
-		body: "Comment ITEM: GET$0"
+
+	# comment - GET SOFTWARE NODES:
+
 	"getSoftwareNodes SearchNodesFull":
 		prefix: "getSoftwareNodes_SearchNodesFull_"
 		body: '''
@@ -639,9 +719,9 @@
 											); // -> software_nodes
 			$0
 		'''
-	"comment - GET SOFTWARE NODES JDBC":
-		prefix: "comment_-_GET_SOFTWARE_NODES_JDBC_"
-		body: "Comment ITEM: GET$0"
+
+	# comment - GET SOFTWARE NODES JDBC:
+
 	"getSoftwareNodes _jdbc_url":
 		prefix: "getSoftwareNodes__jdbc_url_"
 		body: '''
@@ -654,9 +734,9 @@
 			SearchFunctions.getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
 			$0
 		'''
-	"comment - GET SOFTWARE NODES CUSTOM":
-		prefix: "comment_-_GET_SOFTWARE_NODES_CUSTOM_"
-		body: "Comment ITEM: GET$0"
+
+	# comment - GET SOFTWARE NODES CUSTOM:
+
 	"getSoftwareNodes SearchDatabase":
 		prefix: "getSoftwareNodes_SearchDatabase_"
 		body: '''
@@ -687,9 +767,9 @@
 											);
 			$0
 		'''
-	"comment -   REGEX USUAL USAGE:":
-		prefix: "comment_-_REGEX_USUAL_USAGE:_"
-		body: "Comment ITEM:   REGEX$0"
+
+	# comment -   REGEX USUAL USAGE::
+
 	"_regex full ver (\\d+(?:\\.\\d+)*)":
 		prefix: "_regex_full_ver_(\\d+(?:\\.\\d+)*)_"
 		body: "(\\d+(?:\\.\\d+)*)$0"
@@ -726,9 +806,9 @@
 	"_regex Win_path_alt":
 		prefix: "_regex_Win_path_alt_"
 		body: "([^\"]+)PATH_TO_FILE_CONF$0"
-	"comment -   INFERRENCE":
-		prefix: "comment_-_INFERRENCE_"
-		body: "Comment ITEM:   INFERRENCE$0"
+
+	# comment -   INFERRENCE:
+
 	"associate inference":
 		prefix: "associate_inference_"
 		body: "inference.associate(${1:inferred_node}, ${2:associate});$0"
@@ -747,9 +827,9 @@
 	"destruction inference":
 		prefix: "destruction_inference_"
 		body: "inference.destruction(${1:destroyed_node}, ${2:source};)$0"
-	"comment -   MODEL FUNCTIONS:":
-		prefix: "comment_-_MODEL_FUNCTIONS:_"
-		body: "Comment ITEM:   MODEL$0"
+
+	# comment -   MODEL FUNCTIONS::
+
 	"model.host model.host":
 		prefix: "model.host_model.host_"
 		body: "model.host(${1:process});$0"
@@ -768,9 +848,9 @@
 	"model.withdraw model.withdraw":
 		prefix: "model.withdraw_model.withdraw_"
 		body: "model.withdraw(si_node, \"${1:detail}\");$0"
-	"comment - ADD":
-		prefix: "comment_-_ADD_"
-		body: "Comment ITEM: ADD$0"
+
+	# comment - ADD:
+
 	"addContainment model.addContainment":
 		prefix: "addContainment_model.addContainment_"
 		body: "model.addContainment(${1:si_node}, ${2:software_components});$0"
@@ -792,9 +872,9 @@
 	"suppressRemovalGroup model.suppressRemovalGroup":
 		prefix: "suppressRemovalGroup_model.suppressRemovalGroup_"
 		body: "model.suppressRemovalGroup(\"%${1:detail_type}%\");$0"
-	"comment - REL":
-		prefix: "comment_-_REL_"
-		body: "Comment ITEM: REL$0"
+
+	# comment - REL:
+
 	"Communication rel":
 		prefix: "Communication_rel_"
 		body: "model.rel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
@@ -831,9 +911,9 @@
 	"StorageUse rel":
 		prefix: "StorageUse_rel_"
 		body: "model.rel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
-	"comment - UNIQUE REL":
-		prefix: "comment_-_UNIQUE_REL_"
-		body: "Comment ITEM: UNIQUE$0"
+
+	# comment - UNIQUE REL:
+
 	"Communication uniquerel":
 		prefix: "Communication_uniquerel_"
 		body: "model.uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
@@ -873,9 +953,9 @@
 	"StorageUse uniquerel":
 		prefix: "StorageUse_uniquerel_"
 		body: "model.uniquerel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
-	"comment - Customization:":
-		prefix: "comment_-_Customization:_"
-		body: "Comment ITEM: Customization$0"
+
+	# comment - Customization::
+
 	"SoftwareInstance Short":
 		prefix: "SoftwareInstance_Short_"
 		body: '''
@@ -926,15 +1006,15 @@
 			$0						  );
 			$0
 		'''
-	"comment - Extra":
-		prefix: "comment_-_Extra_"
-		body: "Comment ITEM: Extra$0"
+
+	# comment - Extra:
+
 	"Communication type model.uniquerel.":
 		prefix: "Communication_type_model.uniquerel._"
 		body: "model.uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node}, type := \"${3:%type%}\");$0"
-	"comment -   NUMBER FUNCTIONS:":
-		prefix: "comment_-_NUMBER_FUNCTIONS:_"
-		body: "Comment ITEM:   NUMBER$0"
+
+	# comment -   NUMBER FUNCTIONS::
+
 	"toChar number":
 		prefix: "toChar_number_"
 		body: "number.toChar(${1:number});$0"
@@ -944,9 +1024,9 @@
 	"range number":
 		prefix: "range_number_"
 		body: "number.range(${1:number});$0"
-	"comment -   TEXT FUNCTIONS:":
-		prefix: "comment_-_TEXT_FUNCTIONS:_"
-		body: "Comment ITEM:   TEXT$0"
+
+	# comment -   TEXT FUNCTIONS::
+
 	"lower text":
 		prefix: "lower_text_"
 		body: "text.lower(string)$0"
@@ -956,9 +1036,9 @@
 	"toNumber text":
 		prefix: "toNumber_text_"
 		body: "text.toNumber(port);$0"
-	"comment - REPLACE":
-		prefix: "comment_-_REPLACE_"
-		body: "Comment ITEM: REPLACE$0"
+
+	# comment - REPLACE:
+
 	"replace text":
 		prefix: "replace_text_"
 		body: "text.replace(${1:where_string}, \"${2:from_char}\", \"${3:to_char}\");$0"
@@ -971,9 +1051,9 @@
 	"replace \\\\ to \\\\\\\\":
 		prefix: "replace_\\\\_to_\\\\\\\\_"
 		body: "text.replace(${1:string}, \"\\\\\\\", \"\\\\\\\\\\\\\\\");$0"
-	"comment - STRING OPTIONS":
-		prefix: "comment_-_STRING_OPTIONS_"
-		body: "Comment ITEM: STRING$0"
+
+	# comment - STRING OPTIONS:
+
 	"join text":
 		prefix: "join_text_"
 		body: "text.join(${1:list}, \"${2:separator}\");$0"
@@ -995,15 +1075,15 @@
 	"ordinal text":
 		prefix: "ordinal_text_"
 		body: "text.ordinal(${1:string});$0"
-	"comment - LIST":
-		prefix: "comment_-_LIST_"
-		body: "Comment ITEM: LIST$0"
+
+	# comment - LIST:
+
 	"append list":
 		prefix: "append_list_"
 		body: "list.append(${1:the_list}, ${2:string});$0"
-	"comment -   TRAVERCE":
-		prefix: "comment_-_TRAVERCE_"
-		body: "Comment ITEM:   TRAVERCE$0"
+
+	# comment -   TRAVERCE:
+
 	" _trav rel_proc_parent":
 		prefix: "_trav_rel_proc_parent_"
 		body: '''
@@ -1048,12 +1128,12 @@
 	" _trav Client::Server:SoftwareInstance":
 		prefix: "_trav_Client::Server:SoftwareInstance_"
 		body: "main_db_sis := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance);$0"
-	"comment -   OTHER - DIFFERENT":
-		prefix: "comment_-_OTHER_-_DIFFERENT_"
-		body: "Comment ITEM:   OTHER$0"
-	"comment - LOG USUAL":
-		prefix: "comment_-_LOG_USUAL_"
-		body: "Comment ITEM: LOG$0"
+
+	# comment -   OTHER - DIFFERENT:
+
+
+	# comment - LOG USUAL:
+
 	"debug log":
 		prefix: "debug_log_"
 		body: "log.debug(\"${1:message}\");$0"
@@ -1069,9 +1149,9 @@
 	"critical log":
 		prefix: "critical_log_"
 		body: "log.critical(\"${1:message}\");$0"
-	"comment - LOG CUSTOM":
-		prefix: "comment_-_LOG_CUSTOM_"
-		body: "Comment ITEM: LOG$0"
+
+	# comment - LOG CUSTOM:
+
 	"_debug line":
 		prefix: "_debug_line_"
 		body: "(?1:line)/}:$0"
@@ -1090,15 +1170,15 @@
 			delta_time_tics := time.toTicks(time.current()) - time.toTicks(start_time);
 			(?1:log\\.)/}debug("DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line: Execution time:" + number.toText(delta_time_tics/10000) + "ms");$0
 		'''
-	"comment - LOG SI":
-		prefix: "comment_-_LOG_SI_"
-		body: "Comment ITEM: LOG$0"
+
+	# comment - LOG SI:
+
 	"_info log SI":
 		prefix: "_info_log_SI_"
 		body: "log.info(\"%host.name%: SI created for %${1:si_type}%);$0"
-	"comment - EXTRACTIONS REGEX":
-		prefix: "comment_-_EXTRACTIONS_REGEX_"
-		body: "Comment ITEM: EXTRACTIONS$0"
+
+	# comment - EXTRACTIONS REGEX:
+
 	"regex extract Var":
 		prefix: "regex_extract_Var_"
 		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\1');$0"
@@ -1108,9 +1188,9 @@
 	"regex extract raw 1,2":
 		prefix: "regex_extract_raw_1,2_"
 		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\\\${3:1}', raw '\\\\${4:2}');$0"
-	"comment - EXTRACTIONS Xpath":
-		prefix: "comment_-_EXTRACTIONS_Xpath_"
-		body: "Comment ITEM: EXTRACTIONS$0"
+
+	# comment - EXTRACTIONS Xpath:
+
 	"xpath evaluate":
 		prefix: "xpath_evaluate_"
 		body: "xpath.evaluate(${1:some_file_path}, \"${2:xpath_string}\");$0"
@@ -1120,9 +1200,9 @@
 	"xpath closeDocument":
 		prefix: "xpath_closeDocument_"
 		body: "xpath.closeDocument(${1:some_file_path});$0"
-	"comment - CONTAINERS":
-		prefix: "comment_-_CONTAINERS_"
-		body: "Comment ITEM: CONTAINERS$0"
+
+	# comment - CONTAINERS:
+
 	"detailContainer _related":
 		prefix: "detailContainer__related_"
 		body: "related.detailContainer(${1:node});$0"
@@ -1132,9 +1212,9 @@
 	"_related_host  _related":
 		prefix: "_related_host_related_"
 		body: "related.host(${1:node});$0"
-	"comment - SIMPLE IDENTIFIERS:":
-		prefix: "comment_-_SIMPLE_IDENTIFIERS:_"
-		body: "Comment ITEM: SIMPLE$0"
+
+	# comment - SIMPLE IDENTIFIERS::
+
 	"_regex Simple Identifiers":
 		prefix: "_regex_Simple_Identifiers_"
 		body: "(?1:regex )/}\"${1:regex}\" -> \"${2:product_name}\";$0"
@@ -1144,9 +1224,9 @@
 	"_unix_cmd Simple Identifiers":
 		prefix: "_unix_cmd_Simple_Identifiers_"
 		body: "(?1:unix_cmd )/}\"${1:unix_cmd}\" -> \"${2:product_name}\";$0"
-	"comment - IF OS_CLASS:":
-		prefix: "comment_-_IF_OS_CLASS:_"
-		body: "Comment ITEM: IF$0"
+
+	# comment - IF OS_CLASS::
+
 	"_os_class host.os_class":
 		prefix: "_os_class_host.os_class_"
 		body: '''

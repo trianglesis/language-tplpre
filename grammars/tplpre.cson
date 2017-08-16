@@ -12,7 +12,6 @@
 'patterns': [
   # Includes
   # Initial
-  { 'include': '#percent_line' }
   { 'include': '#doc_strings' }
   { 'include': '#comment_TODO_line' }
   { 'include': '#comment_line' }
@@ -101,6 +100,7 @@
     'beginCaptures':
         1: 'name': 'keyword.control.tplpre'
         2: 'name': 'constant.numeric.tplpre'
+        3: 'name': 'constant.numeric.tplpre'
     # 'contentName': 'comment.block.documentation.tplpre'
     'end': '\\b(end\\spattern;)'
     'endCaptures':
@@ -133,6 +133,7 @@
     'comment': 'Tags TKU'
     'match': '(TKU_\\d+_\\d+_\\d+)'
     'name': 'constant.other.tplpre'
+
   'metadata': # Highlight metadata sections
     'begin': '^\\s{4}(metadata)\\s+?$'
     'beginCaptures':
@@ -153,8 +154,8 @@
     'endCaptures':
       1: 'name': 'keyword.control.tplpre'
     'patterns': [
-        { 'include': "#comment_line" }
         { 'include': "#lines" }
+        { 'include': "#comment_line" }
         { 'include': "#if_addm" }
     ]
 # Highlight overview sections
@@ -234,6 +235,7 @@
   'comment_line':
     'name': 'comment.line.tplpre'
     'match': '//.*'
+# TODO: or TO DO:
   'comment_TODO_line':
     'comment': "variable.parameter.tplpre"
     'begin': "(//)\\s?(TO(\\s+|)DO\\:)"
@@ -243,34 +245,32 @@
     'end': '(.*)'
     'endCaptures':
       1: 'name': "variable.parameter.function.tplpre"
+
   # %THIS LINE%
   'percent_line':
-    'comment': "There is one experimental regex now used. Old one is commented."
+    'comment': "I got a problem here. two %% in one string - break coloring. This should use some more logic."
     'match': "(\\%((?:[^\\%]|\\\\\\\\|\\\\%)*)\\%)"
     'name': "keyword.control.tplpre"
     'captures':
       1: 'name': "keyword.control.tplpre"
       2: 'name': "string.quoted.single.tplpre"
+
 # 'THIS LINE'
   'qouted_line':
     'match': '(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")'
-    'comment': 'There is one experimental regex now used. Old one is commented. Add Begin trigger to include SQL support'
+    'comment': 'Still cannot match string like with empty or double quotes'
     'captures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'string.quoted.single.tplpre'
-    'patterns': [
-        { 'include': "#sql_query" }
-    ]
+
   # "THIS LINE"
   'double_qouted_line':
     'match': '(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")'
-    'comment': 'There is one experimental regex now used. Old one is commented. Add Begin trigger to include SQL support'
+    'comment': 'Still cannot match string like with empty or single quotes'
     'captures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'string.quoted.single.tplpre'
-    'patterns': [
-        { 'include': "#sql_query" }
-    ]
+
   # [THIS]
   'square_brackets_line_word':
     'match': '\\[(\\w+[^\\d+])\\]'
@@ -281,11 +281,13 @@
     'match': '\\[(-?\\d+)\\]'
     'captures':
         1: 'name': 'constant.numeric.tplpre'
+
   'drdc_jira':
     'match': "\\((DRDC1-\\S+)\\)"
     # 'name': "variable.parameter.tplpre"
     'captures':
         1: 'name': "variable.other.tplpre"
+
   'sql_query':
     'begin': '(?="""(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|WITH))'
     'end': '(?=""";)'
@@ -297,12 +299,12 @@
   # All lines
   'lines':
     'patterns': [
-      { 'include': '#sql_query' }
-      { 'include': '#percent_line' }
-      { 'include': '#comment_TODO_line' }
-      { 'include': '#comment_line' }
       { 'include': '#qouted_line' }
       { 'include': '#double_qouted_line' }
+      { 'include': '#sql_query' }
+      # { 'include': '#percent_line' }
+      { 'include': '#comment_TODO_line' }
+      { 'include': '#comment_line' }
       { 'include': '#regexes' }
       { 'include': '#square_brackets_line_word' }
       { 'include': '#square_brackets_line_int' }
@@ -373,6 +375,7 @@
       { 'include': '#minus_decimal' }
       { 'include': '#just_do' }
     ]
+
 # Regex functions:
   'regex':
     'match': '\\b(regex)\\s+'
@@ -388,16 +391,44 @@
     'match': "\\b(raw)\\s+('|\")(\\\\\\d+)('|\")"
     'captures':
       1: 'name': 'keyword.control.tplpre'
-      3: 'name': 'variable.parameter.tplpre'
+      2: 'name': 'keyword.control.tplpre'
+      3: 'name': 'keyword.control.tplpre'
   'content_raw':
     'match': "\\s\\b(raw)\\s+"
     'captures':
       1: 'name': 'keyword.control.tplpre'
+
+# Trying to highlight regex string.
+  'regex_token_s_quote':
+    'comment': 'Catch regex in single quotes'
+    'begin': '(regex)\\s+?(?=\')(.+?)'
+    'beginCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'end': '(?=\')'
+    'endCaptures':
+      1: 'name': "support.function.tplpre"
+     'patterns': [
+        { 'include': '#regular_expressions' }
+      ]
+  'regex_token_d_quote':
+    'comment': 'Catch regex in double qoutes'
+    'begin': '(regex)\\s+?(?=\")(.+?)'
+    'beginCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'end': '(?=\")'
+    'endCaptures':
+      1: 'name': "support.function.tplpre"
+     'patterns': [
+        { 'include': '#regular_expressions' }
+      ]
+
   'regexes':
     'patterns': [
-      {'include': '#regex_raw'}
-      {'include': '#regex'}
-      {'include': '#content_raw'}
+      # {'include': '#regex_raw'}
+      # {'include': '#regex'}
+      {'include': '#regex_token_s_quote'}
+      {'include': '#regex_token_d_quote'}
+      # {'include': '#content_raw'}
     ]
 # BuiltIN tplre functions:
 # Later some checks can be added
@@ -407,7 +438,7 @@
     'comment': 'Discovery functions DEV looks working'
     'begin': "(discovery)(\\.)(fileGet|fileInfo|getNames|listDirectory|listRegistry|registryKey|wmiQuery|wbemQuery|wbemEnumInstances|runCommand|snmpGet|snmpGetTable|restfulGet|restfulPost|vSphereFindObjects|vSphereTraverseToObjects|vSphereGetProperties|vSphereGetPropertyTable)"
     'beginCaptures':
-      1: 'name': 'support.function.tplpre'
+      1: 'name': 'storage.type.tplpre'
       2: 'name': 'punctuation.accessor.tplpre'
       3: 'name': 'support.constant.tplpre'
     'end': "\\;"
@@ -653,70 +684,77 @@
     'begin': '(?!end if;|then)(\\bif)'
     'beginCaptures':
         1: 'name': 'keyword.control.conditional.tplpre'
-    # 'contentName': 'meta.function.parameters.python'
-    'end': '(then)'
+    'end': '(\\bthen)'
     'endCaptures':
         1: 'name': 'keyword.control.conditional.tplpre'
     'patterns': [
-        {
-          'match': '(\\w+)\\s+(and)\\s+(\\w+)\\.(content)'
-          'captures':
-              1: 'name': 'variable.parameter.function.tplpre'
-              2: 'name': 'keyword.control.conditional.tplpre'
-              3: 'name': 'variable.parameter.function.tplpre'
-              4: 'name': 'storage.type.class.tplpre'
-        }
-        { 'include': '#lines' }
+        # # experimental - to showup some attributes. Disable untill upgrade
+        # {
+        #   'match': '(\\w+)\\s+(?:and)\\s+(\\w+)\\.(\\w+)'
+        #   'comment': 'EXAMPLE: if f and f.content then'
+        #   'captures':
+        #       1: 'name': 'variable.parameter.function.tplpre'
+        #       2: 'name': 'variable.parameter.function.tplpre'
+        #       3: 'name': 'storage.type.class.tplpre'
+        # }
         { 'include': '#all_controls' }
+        { 'include': '#lines' }
         { 'include': '#regex' }
     ]
+
   # 'then_statement':
-  #   'comment': 'Its better to add here endCaptures as finish of if beginCaptures'
+  #   'comment': 'When if_statement is logically separated to begin\\end - this can be removed.'
   #   'match': "\\bthen\\s+?"
   #   'name': 'keyword.control.conditional.tplpre'
+
   'elif_statement':
     'match': "\\belif\\s+?"
     'name': 'keyword.control.conditional.tplpre'
   'else_statement':
-    'match': "\\belse\\s+?"
+    'match': "\\belse\\b"
     'name': 'keyword.control.conditional.tplpre'
   'end_if_statement':
-    'match': "\\bend\\sif;\\s+?"
+    'match': "(?!;|if|else\\w)\\bend\\b\\s\\bif\\b;"
     'name': 'keyword.control.conditional.tplpre'
 
   'for_statement':
-    'comment': 'Not a good idea to add beginCaptures for if and for because it will fing just first occurence and then stop.'
-    # 'begin': '(?!end if;|then)(if)(?:.+?)(?:then)'
-    'begin': '(?!end for;|do)(\\bfor)'
+    'comment': 'Improve this with some logic.'
+    # 'begin': '(?!end for;|do)(\\bfor)'
+    'begin': '\\s{4}(for\\b)(?!;)'
     'beginCaptures':
         1: 'name': 'keyword.control.tplpre'
     # 'contentName': 'meta.function.parameters.python'
-    'end': '(do)'
+    'end': '(\\bdo\\b)'
     'endCaptures':
         1: 'name': 'keyword.control.tplpre'
     'patterns': [
+        { 'include': '#regex' }
         { 'include': '#lines' }
         { 'include': '#all_controls' }
-        { 'include': '#regex' }
     ]
   # 'for_statement':
+  #   'comment': 'When for_statement is logically separated to begin\\end - this can be removed.'
   #   'match': "\\bend\\sfor;\\s+?"
   #   'name': 'keyword.control.tplpre'
+
   'end_for_statement':
     'match': "\\bend\\sfor;\\s+?"
     'name': 'keyword.control.tplpre'
 
   'keywords_all':
     'match': "\\b(size|in|aged|and|as|at|break|by|configuration|continue|created|default|desc|deleted|do|enumeration|exists|expand|explode|false|flags|from|has|in|is|locale|matches|modified|nodes|nodecount|none|not|on|or|order|out|overrides|processwith|relationship|removal|requires|search|show|step|stop|substring|subword|summary|tags|taxonomy|traverse|true|unconfirmed|where|with|void|has|substring)\\b"
-    'name': 'support.type.tplpre'
+    'name': 'storage.type.class.tplpre'
+
   'keywords_cmd':
     'match': "\\b(unix_cmd|windows_cmd)"
     'captures':
         1: 'name': 'keyword.operator.tplpre'
+
   'keywords_cmd_indentify_trigger':
     'match': "\\b(unix_cmd|windows_cmd|cmd|args)"
     'captures':
         1: 'name': 'keyword.operator.tplpre'
+
   'if_ADDM_statement':
     'match': '#IFADDM'
     'name': 'keyword.control.conditional.tplpre'
@@ -726,6 +764,7 @@
   'end_if_ADDM_statement':
     'match': '#ENDIFADDM\\s+?'
     'name': 'keyword.control.conditional.tplpre'
+
 # Grouping:
   'if_addm':
     'patterns': [
@@ -867,10 +906,9 @@
     'endCaptures':
       1: 'name': 'keyword.control.tplpre'
     'patterns': [
+        { 'include': "#lines" }
         { 'include': "#doc_strings" }
         { 'include': "#all_functions" }
-        { 'include': "#lines" }
-        { 'include': '#sql_query' }
         { 'include': "#all_controls" }
         { 'include': "#if_addm" }
         { 'include': "#dev_keys" }
@@ -888,9 +926,8 @@
       1: 'name': 'keyword.control.tplpre'
     'patterns': [
         { 'include': "#doc_strings" }
-        { 'include': "#all_functions" }
         { 'include': "#lines" }
-        { 'include': '#sql_query' }
+        { 'include': "#all_functions" }
         { 'include': "#all_controls" }
         { 'include': "#if_addm" }
         { 'include': "#dev_keys" }
@@ -920,9 +957,11 @@
         { 'include': '#keywords_attrs' }
     ]
   'keywords_attrs':
-    'match': "\\b(key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b"
+    'comment': 'Changed disabled to 1 to turn off DEV highlighting.'
+    'disabled': 1
+    'match': "\\b(key_group|key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b"
     'captures':
-       1: 'name': 'variable.parameter.tplpre'
+       1: 'name': 'storage.type.tplpre'
 
   'traverse':
     'name': 'entity.name.function.model'
@@ -930,6 +969,16 @@
     'captures':
       3: 'name': 'keyword.control.model'
 
+# FROM: "https://github.com/atom/language-python.git
+  'regular_expressions':
+    'comment': 'Changed disabled to 1 to turn off syntax highlighting in “r” strings.'
+    'disabled': 0
+    'patterns': [
+      {
+        'include': 'source.regexp.python'
+      }
+    ]
+# Collect all dev
   'dev_keys':
     'patterns': [
         { 'include': "#keywords_attributes" }
