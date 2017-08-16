@@ -316,169 +316,169 @@
 
 	# comment - TPLPRE:
 	# comment - COMMON FUNCTIONS::
-	"functions.validate_host_address_format(rel_host_address)":
+	"OLD functions.validate_host_address_format(rel_host_address)":
 		prefix: "functions.validate_host_address_format"
 		description: 'OLD Common_functions module. If <rel_host_address> does not meet requirements(regex \'^[\da-z\:][\w\:\.\-]*$\') then functions returns empty string'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.validate_host_address_format(${1:rel_host_address});$0"
 
-	"functions.domain_lookup(host, rel_host_address_domain)":
+	"OLD functions.domain_lookup(host, rel_host_address_domain)":
 		prefix: "functions.domain_lookup"
 		description: 'OLD Common_functions module. Function resolves domain to IP address using "nslookup" command'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.domain_lookup(${1:host}, ${2:rel_host_address_domain});$0"
 
-	"functions.identify_host_perform_search(host, rel_host_address)":
+	"OLD functions.identify_host_perform_search(host, rel_host_address)":
 		prefix: "functions.identify_host_perform_search"
 		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_perform_search(${1:host}, ${2:rel_host_address});$0"
 
-	"functions.identify_host_perform_search_in_scope(host, rel_host_address, hosts_scope)":
+	"OLD functions.identify_host_perform_search_in_scope(host, rel_host_address, hosts_scope)":
 		prefix: "functions.identify_host_perform_search_in_scope"
 		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host in some narrowed scope of hosts, but not on all available hosts like identify_host_perform_search()'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_perform_search_in_scope(${1:host}, ${2:rel_host_address}, ${3:hosts_scope});$0"
 
-	"functions.identify_host(host, rel_host_address, extended)":
+	"OLD functions.identify_host(host, rel_host_address, extended)":
 		prefix: "functions.identify_host"
 		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
 
-	"functions.identify_host_extended(host, rel_host_address, extended)":
+	"OLD functions.identify_host_extended(host, rel_host_address, extended)":
 		prefix: "functions.identify_host_extended"
 		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_extended(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
 
-	"functions.related_sis_search(host, rel_host_address, rel_si_type)":
+	"OLD functions.related_sis_search(host, rel_host_address, rel_si_type)":
 		prefix: "functions.related_sis_search"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on "rel_host_address" host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type});$0"
 
-	"functions.related_sis_search_on_multiple_hosts(host, rel_host_addresses, rel_si_type)":
+	"OLD functions.related_sis_search_on_multiple_hosts(host, rel_host_addresses, rel_si_type)":
 		prefix: "functions.related_sis_search_on_multiple_hosts"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on multiple "rel_host_addresses" hosts.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search_on_multiple_hosts(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
 
-	"functions.related_sis_search_on_multiple_hosts_extended(host, rel_host_addresses, rel_si_type)":
+	"OLD functions.related_sis_search_on_multiple_hosts_extended(host, rel_host_addresses, rel_si_type)":
 		prefix: "functions.related_sis_search_on_multiple_hosts_extended"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on multiple "rel_host_addresses" hosts.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search_on_multiple_hosts_extended(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
 
-	"functions.related_sis_search_extended(host, rel_host_address, rel_si_type, extended)":
+	"OLD functions.related_sis_search_extended(host, rel_host_address, rel_si_type, extended)":
 		prefix: "functions.related_sis_search_extended"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on "rel_host_address" host.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:extended}),$0"
 
-	"functions.related_si_types_search(host, rel_host_address, rel_si_types)":
+	"OLD functions.related_si_types_search(host, rel_host_address, rel_si_types)":
 		prefix: "functions.related_si_types_search"
 		description: 'OLD Common_functions module. Function searches for all SIs with different TYPEs in "rel_si_types" LIST on "rel_host_address" host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_si_types_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_types});$0"
 
-	"functions.path_normalization(host, install_root)":
+	"OLD functions.path_normalization(host, install_root)":
 		prefix: "functions.path_normalization"
 		description: 'OLD Common_functions module. Current function determines "~" in the path, normalizes it and returns back full path'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.path_normalization(${1:host}, ${2:install_root});$0"
 
-	"functions.links_management(si_node, recently_found_sis, related_si_type)":
+	"OLD functions.links_management(si_node, recently_found_sis, related_si_type)":
 		prefix: "functions.links_management"
 		description: 'OLD Common_functions module. Function that manages Communication and Dependency links between the current SI and related SIs'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.links_management(${1:si_node}, ${2:recently_found_sis}, ${3:related_si_type});$0"
 
-	"functions.get_cleanedup_path(path, os)":
+	"OLD functions.get_cleanedup_path(path, os)":
 		prefix: "functions.get_cleanedup_path"
 		description: 'OLD Common_functions module. Function which normalizes directory path by removing "\.\", "\..\", etc.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.get_cleanedup_path(${1:path}, ${2:os});$0"
 
-	"functions.get_max_version(ver1, ver2)":
+	"OLD functions.get_max_version(ver1, ver2)":
 		prefix: "functions.get_max_version"
 		description: 'OLD Common_functions module. Compares to version strings like "10.08.10" and "7.18" and returns the biggest one'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.get_max_version(${1:ver1}, ${2:ver2});$0"
 
-	"functions.get_exe_cwd_path(process, expected_binary_name)":
+	"OLD functions.get_exe_cwd_path(process, expected_binary_name)":
 		prefix: "functions.get_exe_cwd_path"
 		description: 'OLD Common_functions module. Function tries to obtain: - full process command path (exe_path) and/or - current working directory (cwd_path) - directory the process was started from. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.get_exe_cwd_path(${1:process}, ${2:expected_binary_name});$0"
 
-	"functions.sort_list(list)":
+	"OLD functions.sort_list(list)":
 		prefix: "functions.sort_list"
 		description: 'OLD Common_functions module. Function returns sorted list of strings '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.sort_list(${1:list});$0"
 
-	"functions.run_priv_cmd(host, command, priv_cmd := 'PRIV_RUNCMD')":
+	"OLD functions.run_priv_cmd(host, command, priv_cmd := 'PRIV_RUNCMD')":
 		prefix: "functions.run_priv_cmd"
 		description: 'OLD Common_functions module. Run the given command, using privilege elevation on UNIX, if required. The command is first run as given. If this fails, produces no output and the platform is UNIX then the command is executed again using the given priv_cmd. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.run_priv_cmd(${1:host}, ${2:command}, priv_cmd := 'PRIV_RUNCMD');$0"
 
-	"functions.has_process(host, command)":
+	"OLD functions.has_process(host, command)":
 		prefix: "functions.has_process"
 		description: 'OLD Common_functions module. Returns true if the given process is running on the given host. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.has_process(${1:host}, ${2:command});$0"
 
-	"functions.isValidSerialNumber(serial)":
+	"OLD functions.isValidSerialNumber(serial)":
 		prefix: "functions.isValidSerialNumber"
 		description: 'OLD Common_functions module. Returns true if the given serial number is valid '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.isValidSerialNumber(${1:serial});$0"
 
-	"functions.convertToCharString(ascii_codes)":
+	"OLD functions.convertToCharString(ascii_codes)":
 		prefix: "functions.convertToCharString"
 		description: 'OLD Common_functions module. Converts list of ASCII code integers into a string of characters. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.convertToCharString(${1:ascii_codes});$0"
 
-	"functions.wmiFollowAssociations(host, namespace, initial_paths, associations)":
+	"OLD functions.wmiFollowAssociations(host, namespace, initial_paths, associations)":
 		prefix: "functions.wmiFollowAssociations"
 		description: 'OLD Common_functions module. Starting from initial_paths, a list of WMI source instance paths, follows multiple WMI associations to reach a set of target instances. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.wmiFollowAssociations(${1:host}, ${2:namespace}, ${3:initial_paths}, ${4:associations});$0"
 
-	"functions.checkForDecimal(value, bValue)":
+	"OLD functions.checkForDecimal(value, bValue)":
 		prefix: "functions.checkForDecimal"
 		description: 'OLD Common_functions module. Check for decimal and convert the value into Bytes '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.checkForDecimal(${1:value}, ${2:bValue});$0"
 
-	"functions.convertToBytes(value, gib)":
+	"OLD functions.convertToBytes(value, gib)":
 		prefix: "functions.convertToBytes"
 		description: 'OLD Common_functions module. Convert the value into Bytes '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.convertToBytes(${1:value}, ${2:gib});$0"
 
-	"functions.identify_host_with_uuid(uuid)":
+	"OLD functions.identify_host_with_uuid(uuid)":
 		prefix: "functions.identify_host_with_uuid"
 		description: 'OLD Common_functions module. Function returns host with searched UUID '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_with_uuid(${1:uuid});$0"
 
-	"functions.locateCommands(host, command_list)":
+	"OLD functions.locateCommands(host, command_list)":
 		prefix: "functions.locateCommands"
 		description: 'OLD Common_functions module. Attempts to locate the required commands. Returns a table of each command location. The location is none if the command could not be found. This call returns none if the location process fails '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.locateCommands(${1:host}, ${2:command_list});$0"
 
-	"functions.find_server(host, server_address, port, si_type, alt_types := none, all := false)":
+	"OLD functions.find_server(host, server_address, port, si_type, alt_types := none, all := false)":
 		prefix: "functions.find_server"
 		description: 'OLD Common_functions module. Function that searches for the appropriate server node based on the provided server details. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.find_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, alt_types := ${5:none}, all := ${6:false});$0"
 
-	"functions.checkCommandList(host, command_list)":
+	"OLD functions.checkCommandList(host, command_list)":
 		prefix: "functions.checkCommandList"
 		description: 'OLD Common_functions module. Checks whether the commands exist. Returns true if all the commands exist. Even one command we are looking for is not present we return false. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
@@ -486,15 +486,57 @@
 
 	# comment -   CONVERSION FUNCTIONS::
 
-	"isValidSerialNumber ConversionFunctions":
-		prefix: "isValidSerialNumber_ConversionFunctions_"
+	"ConversionFunctions.isValidSerialNumber(serial) -> valid":
+		prefix: "ConversionFunctions.isValidSerialNumber"
+		description: 'SupportingFiles ConversionFunctions module -> isValidSerialNumber() - checks if the provided serial number is valid;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "ConversionFunctions.isValidSerialNumber(${1:serial});$0"
-	"convertToCharString ConversionFunctions":
-		prefix: "convertToCharString_ConversionFunctions_"
+	"ConversionFunctions.convertToCharString(ascii_codes) -> ascii_string":
+		prefix: "ConversionFunctions.convertToCharString"
+		description: 'SupportingFiles ConversionFunctions module -> convertToCharString() - converts list of ASCII code integers into a string of characters;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "ConversionFunctions.convertToCharString(${1:ascii_codes});$0"
-	"convertToBytes ConversionFunctions":
-		prefix: "convertToBytes_ConversionFunctions_"
-		body: "ModuleName.${1:value}, ${2:gib});$0"
+	"ConversionFunctions.convertToBytes(value, gib) -> result":
+		prefix: "ConversionFunctions.convertToBytes"
+		description: 'SupportingFiles ConversionFunctions module -> convertToBytes() - converts the value into Bytes;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "ConversionFunctions.convertToBytes(${1:value}, gib);$0"
+	"ConversionFunctions.convertStringToHex(string, sep := \"\") -> result":
+		prefix: "ConversionFunctions.convertStringToHex"
+		description: 'SupportingFiles ConversionFunctions module -> convertStringToHex() - converts String To HexaDecimal string;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "ConversionFunctions.convertStringToHex(${1:string}, sep := \"\");$0"
+
+	#  cluster_support_functions
+	"cluster_support_functions.getHostingNode(host, fallback_kind := Host, instance := inst, clustered_data_path := path)":
+		prefix: "cluster_support_functions.getHostingNode"
+		description: 'SI can be identified as clustered (running on cluster): - if SI has specific processes/commands that indicates clustered installation - if SI is managed/monitored by ClusterService. Usually SI\'s instance or paths can be found in ClusterService information. - if SI binary or data directory resides on file system managed by Cluster - if SI is listening on IP address which is managed by Cluster'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "cluster_support_functions.getHostingNode(host, fallback_kind := \"${1:t_host}\", instance := \"${2:inst}\", clustered_data_path := \"${3:path}\");$0"
+
+	"cluster_support_functions.add_resource_attrs(resource, resource_type, resource_properties, resource_mapping)":
+		prefix: "cluster_support_functions.add_resource_attrs"
+		description: 'Add resource attributes of interest to the cluster resource node along with a standardised resource type attribute.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "cluster_support_functions.add_resource_attrs(${1:resource}, ${2:resource_type}, ${3:resource_properties}, ${4:resource_mapping});$0"
+
+	"cluster_support_functions.get_cluster_dns_names(cluster, ipv4_addrs, ipv6_addrs, host:=none)":
+		prefix: "cluster_support_functions.get_cluster_dns_names"
+		description: 'Get DNS names associated with the hosts of a cluster.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "cluster_support_functions.get_cluster_dns_names(${1:cluster}, ${2:ipv4_addrs}, ${3:ipv6_addrs}, host := \"${4:none}\");$0"
+
+	"cluster_support_functions.get_cluster_service_vip(si)":
+		prefix: "cluster_support_functions.get_cluster_service_vip"
+		description: 'Obtain the virtual ip address of the provided SoftwareInstance node if it is related to a ClusterService node. Also return the port if reported.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "cluster_support_functions.get_cluster_service_vip(${1:si});$0"
+
+	"cluster_support_functions.get_si_host(si, ip_addr)":
+		prefix: "cluster_support_functions.get_si_host"
+		description: 'Obtain the host related to the provided SoftwareInstance node. If the SoftwareInstance is related to multiple hosts due to the software running on a cluster, then it selects the host based on the host currently supporting the provided IP address or the host known to be actively running the clustered software.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "cluster_support_functions.get_si_host(${1:si}, ${2:ip_addr});$0"
 
 	# comment -   DISCOVERY BUILT IN FUNCTIONS::
 
@@ -738,69 +780,121 @@
 		body: "json.decode(${1:value});$0"
 
 	# comment -   DISCOVERY FUNCTIONS:
-
-	"pathNormalization DiscoveryFunctions":
-		prefix: "pathNormalization_DiscoveryFunctions_"
+	"DiscoveryFunctions.pathNormalization(host, install_root) -> install_root":
+		prefix: "DiscoveryFunctions.pathNormalization"
+		description: 'DiscoveryFunctions.pathNormalization() -> determines "~" in the path, normalizes it and returns back full path.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.pathNormalization(${1:host}, ${2:install_root});$0"
-	"getCleanedupPath DiscoveryFunctions":
-		prefix: "getCleanedupPath_DiscoveryFunctions_"
+
+	"DiscoveryFunctions.getCleanedupPath(path, os) -> path_normalized":
+		prefix: "DiscoveryFunctions.getCleanedupPath"
+		description: 'DiscoveryFunctions.getCleanedupPath() -> normalizes directory path by removing relative path symbols, like: "\.\", "\..\".'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.getCleanedupPath(${1:path}, ${2:os});$0"
-	"getMaxVersion DiscoveryFunctions":
-		prefix: "getMaxVersion_DiscoveryFunctions_"
+
+	"DiscoveryFunctions.getMaxVersion(ver1, ver2) -> maxversion":
+		prefix: "DiscoveryFunctions.getMaxVersion"
+		description: 'DiscoveryFunctions.getMaxVersion() -> compares two versions and returns the highest one.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.getMaxVersion(${1:ver1}, ${2:ver2});$0"
-	"getExeCwdPath DiscoveryFunctions":
-		prefix: "getExeCwdPath_DiscoveryFunctions_"
+
+	"DiscoveryFunctions.getExeCwdPath(process, expected_binary_name) -> exe_path, cwd_path":
+		prefix: "DiscoveryFunctions.getExeCwdPath"
+		description: 'DiscoveryFunctions.getExeCwdPath() -> returns full path of the binary file location and the full path from where it\'s been execute.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.getExeCwdPath(${1:process}, ${2:expected_binary_name});$0"
-	"sortList DiscoveryFunctions":
-		prefix: "sortList_DiscoveryFunctions_"
+
+	"DiscoveryFunctions.sortList(list) -> sorted_list":
+		prefix: "DiscoveryFunctions.sortList"
+		description: 'DiscoveryFunctions.sortList() -> sorts the list and returns its sorted copy.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.sortList(${1:list});$0"
-	"runActiveCommand DiscoveryFunctions":
-		prefix: "runActiveCommand_DiscoveryFunctions_"
+
+	"DiscoveryFunctions.runActiveCommand(host, command_line, expected_content_regex := none, priv_cmd := none) -> result":
+		prefix: "DiscoveryFunctions.runActiveCommand"
+		description: 'DiscoveryFunctions.runActiveCommand() -> runs the command and then re-runs it with privileged permissions if needed.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.runActiveCommand(${1:host}, ${2:command_line}, expected_content_regex := ${3:none}, priv_cmd := ${4:none});$0"
-	"locateCommands DiscoveryFunctions":
-		prefix: "locateCommands_DiscoveryFunctions_"
+
+	"DiscoveryFunctions.locateCommands(host, command_list) -> result":
+		prefix: "DiscoveryFunctions.locateCommands"
+		description: 'DiscoveryFunctions.locateCommands() -> searches for the location of the provided command list.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.locateCommands(${1:host}, ${2:command_list});$0"
-	"checkCommandList DiscoveryFunctions":
-		prefix: "checkCommandList_DiscoveryFunctions_"
+
+	"DiscoveryFunctions.checkCommandList(host, command_list) -> result":
+		prefix: "DiscoveryFunctions.checkCommandList"
+		description: 'DiscoveryFunctions.checkCommandList() -> checks that the list of commands exist on the given Host.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.checkCommandList(${1:host}, ${2:command_list});$0"
 
 	# comment -   RDBMS OLD::
-
-	"oracle_ora_file_parser OLD _rdbms_functions":
-		prefix: "oracle_ora_file_parser_OLD__rdbms_functions_"
+	"OLD rdbms_functions.oracle_ora_file_parser(section_name, oracle_ora_file_content) -> section":
+		prefix: "rdbms_functions.oracle_ora_file_parser"
+		description: 'OLD rdbms_functions.oracle_ora_file_parser -> function tries to obtain full section from Oracle listener.ora or tnsnames.ora file. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.oracle_ora_file_parser(${1:section_name}, ${2:oracle_ora_file_content});$0"
-	"perform_rdbms_sis_search OLD _rdbms_functions":
-		prefix: "perform_rdbms_sis_search_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.perform_rdbms_sis_search(related_sis_raw, rel_si_type, instance, port, db_name, extended) -> related_rdbms_sis":
+		prefix: "rdbms_functions.perform_rdbms_sis_search"
+		description: 'OLD rdbms_functions.perform_rdbms_sis_search -> This internal function is used by related_rdbms_sis_search() and related_rdbms_sis_search_extended() and searches for specific RDBMS SI \"rel_si_type\" TYPE on \"rel_host_address\" host, which can be uniquely identified by attribute (depends on RDBMS Type) '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.perform_rdbms_sis_search(${1:related_sis_raw}, ${2:rel_si_type}, ${3:instance}, ${4:port}, ${5:db_name}, ${6:extended});$0"
-	"related_rdbms_sis_search OLD _rdbms_functions":
-		prefix: "related_rdbms_sis_search_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.related_rdbms_sis_search(host, rel_host_address, rel_si_type, instance, port, db_name, extended) -> related_rdbms_sis":
+		prefix: "rdbms_functions.related_rdbms_sis_search"
+		description: 'OLD rdbms_functions.related_rdbms_sis_search ->  Function searches for specific RDBMS SI \"rel_si_type\" TYPE on \"rel_host_address\" host. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.related_rdbms_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"
-	"related_rdbms_sis_search_extended OLD _rdbms_functions":
-		prefix: "related_rdbms_sis_search_extended_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.related_rdbms_sis_search_extended(host, rel_host_address, rel_si_type, instance, port, db_name, extended) -> related_rdbms_sis":
+		prefix: "rdbms_functions.related_rdbms_sis_search_extended"
+		description: 'OLD rdbms_functions.related_rdbms_sis_search_extended -> Function searches for specific RDBMS SI \"rel_si_type\" TYPE on \"rel_host_address\" host. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.related_rdbms_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"
-	"oracle_net_service_name_search OLD _rdbms_functions":
-		prefix: "oracle_net_service_name_search_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.oracle_net_service_name_search(host, net_service_name, tnsnames_file_full_location) -> related_oracle_si":
+		prefix: "rdbms_functions.oracle_net_service_name_search"
+		description: 'OLD rdbms_functions.oracle_net_service_name_search -> Function returns Oracle Database SI which is end point for local \<net_service_name\>. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.oracle_net_service_name_search(${1:host}, ${2:net_service_name}, ${3:tnsnames_file_full_location});$0"
-	"dsn_rdbms_servers OLD _rdbms_functions":
-		prefix: "dsn_rdbms_servers_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.dsn_rdbms_servers(host,dsn_name) -> db_srvs":
+		prefix: "rdbms_functions.dsn_rdbms_servers"
+		description: 'OLD rdbms_functions.dsn_rdbms_servers -> Function returns related RDBMS SI by its DSN (Data Source Name) value. For WINDOWS ONLY! '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.dsn_rdbms_servers(${1:host}, ${2:dsn_name});$0"
-	"parseJDBC OLD _rdbms_functions":
-		prefix: "parseJDBC_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.parseJDBC(url) -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name":
+		prefix: "rdbms_functions.parseJDBC"
+		description: 'OLD rdbms_functions.parseJDBC -> Parse a JDBC URL and extract the details '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.parseJDBC(${1:url});$0"
-	"jdbc_search OLD _rdbms_functions":
-		prefix: "jdbc_search_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.jdbc_search(host,jdbc_url) -> db_srvs":
+		prefix: "rdbms_functions.jdbc_search"
+		description: 'OLD rdbms_functions.jdbc_search -> Function returns related RDBMS SI by JDBC URL value. First it parses the JDBC URL(the function from j2eeinferredmodel module was taken as a basis), then it uses related_rdbms_sis_search or oracle_net_service_name_search function to find the related RDBMS SIs. Supported RDBMS: MSSQL, Oracle, DB2, MySQL, PostgreSQL, Ingres DB, Sybase ASE, Informix. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.jdbc_search(${1:host}, ${2:jdbc_url});$0"
-	"find_db_server OLD _rdbms_functions":
-		prefix: "find_db_server_OLD__rdbms_functions_"
+
+	"OLD rdbms_functions.find_db_server(host, server_address, port, si_type, db_details) -> server_nodes":
+		prefix: "rdbms_functions.find_db_server"
+		description: 'OLD rdbms_functions.find_db_server -> Function that searches for the appropriate database server node based on the provided server details. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "rdbms_functions.find_db_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, ${5:db_details});$0"
 
-	# comment -   RDBMS NEW::
 
-	"oracleOraFileParser RDBMSFunctions":
-		prefix: "oracleOraFileParser_RDBMSFunctions_"
+	# comment -   RDBMS NEW::
+	"RDBMSFunctions.oracleOraFileParser(section_name, oracle_ora_file_content) -> section":
+		prefix: "RDBMSFunctions.oracleOraFileParser"
+		description: 'obtains full section from Oracle listener.ora or tnsnames.ora files'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "RDBMSFunctions.oracleOraFileParser(${1:section_name}, ${2:oracle_ora_file_content}); // -> section$0"
-	"performRdbmsSisSearch RDBMSFunctions":
-		prefix: "performRdbmsSisSearch_RDBMSFunctions_"
+
+	"RDBMSFunctions.performRdbmsSisSearch(related_sis_raw, rel_si_type, port, instance, db_name, ora_service_name, db2_copy_name) -> related_rdbms_nodes":
+		prefix: "RDBMSFunctions.performRdbmsSisSearch"
+		description: 'searches for the RDBMS Software by provided parameters'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
 			RDBMSFunctions.performRdbmsSisSearch(related_sis_raw = ${1:related_sis_raw},
 													 rel_si_type = ${2:rel_si_type},
@@ -810,42 +904,49 @@
 													 ora_service_name = ${6:ora_service_name},
 													 db2_copy_name = ${7:db2_copy_name}); // ->  -> related_rdbms_nodes$0
 		"""
-	"oracleNetServiceNameSearch RDBMSFunctions":
-		prefix: "oracleNetServiceNameSearch_RDBMSFunctions_"
+
+	"RDBMSFunctions.oracleNetServiceNameSearch(host, net_service_name, tnsnames_file_full_location) -> ora_host, ora_sid, ora_service_name":
+		prefix: "RDBMSFunctions.oracleNetServiceNameSearch"
+		description: 'returns Oracle Database SI parameters by the provided Net Service Name'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
 			RDBMSFunctions.oracleNetServiceNameSearch(host = ${1:host},
 													  net_service_name = ${2:net_service_name},
 													  tnsnames_file_full_location = ${3:tnsnames_file_full_location}); // -> ora_host, ora_sid, ora_service_name$0
 		"""
-	"dsnRdbmsServers RDBMSFunctions":
-		prefix: "dsnRdbmsServers_RDBMSFunctions_"
-		body: "RDBMSFunctions.dsnRdbmsServers(host, dsn_name); // -> db_host, db_type, db_instance, ora_service_name, db_port, db_name$0"
-	"parseJDBC RDBMSFunctions":
-		prefix: "parseJDBC_RDBMSFunctions_"
-		body: "RDBMSFunctions.parseJDBC(url); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
+
+	"RDBMSFunctions.dsnRdbmsServers(host,dsn_name) -> db_host, db_type, db_instance, ora_service_name, db_port, db_name":
+		prefix: "RDBMSFunctions.dsnRdbmsServers"
+		description: 'determines RDBMS Server details by the provided DSN'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "RDBMSFunctions.dsnRdbmsServers(host, ${1:dsn_name}); // -> db_host, db_type, db_instance, ora_service_name, db_port, db_name$0"
+
+	"RDBMSFunctions.parseJDBC(url) -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name":
+		prefix: "RDBMSFunctions.parseJDBC"
+		description: 'extracts RDBMS details by the provided JDBC URL'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "RDBMSFunctions.parseJDBC(${1:url}); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
 
 	# comment -   SEARCH FUNCTIONS::
 
-	"getNodeIp SearchFunctions":
-		prefix: "getNodeIp_SearchFunctions_"
+
+	"SearchFunctions.getNodeIp(host, rel_host_address_domain) -> node_ip":
+		prefix: "SearchFunctions.getNodeIp"
+		description: 'converts alphanumeric Host address into IP address'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "SearchFunctions.getNodeIp(host, ${1:rel_host_address_domain}); // -> node_ip$0"
-	"getHostingNodes SearchFunctions":
-		prefix: "getHostingNodes_SearchFunctions_"
+
+	"SearchFunctions.getHostingNodes(host, node_address, balancer_port := none) -> hosting_nodes, nodes_type":
+		prefix: "SearchFunctions.getHostingNodes"
+		description: 'searches for Hosting Nodes'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "SearchFunctions.getHostingNodes(host, ${1:node_address}, balancer_port := ${2:none}); // -> hosting_nodes, nodes_type$0"
-	"getSI SearchFunctions":
-		prefix: "getSI_SearchFunctions_"
-		body: "SearchFunctions.getSI(${1:related_node}, ${2:si_types_raw}); // -> related_si$0"
-	"identifyHostWithUuid SearchFunctions":
-		prefix: "identifyHostWithUuid_SearchFunctions_"
-		body: "SearchFunctions.identifyHostWithUuid(${1:uuid}); // -> searched_host$0"
-	"relatedSisSearchOnMultipleHosts SearchFunctions":
-		prefix: "relatedSisSearchOnMultipleHosts_SearchFunctions_"
-		body: "SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
 
 	# comment - GET SOFTWARE NODES:
-
-	"getSoftwareNodes SearchNodesFull":
-		prefix: "getSoftwareNodes_SearchNodesFull_"
+	"SearchFunctions.getSoftwareNodes(host, node_address := none, software_type := none, balancer_port := none, port := none, instance := none, listen_tcp_socket := none, server_name := none, installed_product := none, db_name := none, net_service_name := none, tnsnames_file_location := none, ora_service_name := none, db2_copy_name := none, dsn_name := none, jdbc_url := none, get_remote_nodes_only := false) -> software_nodes":
+		prefix: "SearchFunctions.getSoftwareNodes"
+		description: 'searches for software(SoftwareInstance, DatabaseDetail, SoftwareComponent or LoadBalancerService)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
 			SearchFunctions.getSoftwareNodes(host,
 											 node_address           := ${1:none},
@@ -868,35 +969,51 @@
 			$0
 		"""
 
+	"SearchFunctions.getSI(related_node, si_types_raw) -> related_si":
+		prefix: "SearchFunctions.getSI"
+		description: 'returns the SI Node which is running behind LoadBalancer or hosts DatabaseDetail Node'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.getSI(${1:related_node}, ${2:si_types_raw}); // -> related_si$0"
+
+	"SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses, rel_si_type) -> related_sis":
+		prefix: "SearchFunctions.relatedSisSearchOnMultipleHosts"
+		description: 'searches for software on multiple Hosts'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.identifyHostWithUuid(${1:uuid}); // -> searched_host$0"
+
+	"SearchFunctions.identifyHostWithUuid(uuid) -> searched_host":
+		prefix: "SearchFunctions.identifyHostWithUuid"
+		description: 'searches for the Host with the specific UUID'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
+
+	# Templates:
 	# comment - GET SOFTWARE NODES JDBC:
-
-	"getSoftwareNodes _jdbc_url":
-		prefix: "getSoftwareNodes__jdbc_url_"
+	"SearchFunctions.getSoftwareNodes(host, jdbc_url)":
+		prefix: "_jdbc_url_SearchFunctions.getSoftwareNodes"
+		description: 'Template of common SearchFunctions.getSoftwareNodes to find database via jdbc url.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
-			SearchFunctions.getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
+			SearchFunctions.getSoftwareNodes(host, jdbc_url := ${2:jdbc_url});
 			$0
 		"""
-	"getSoftwareNodes _jdbc_search":
-		prefix: "getSoftwareNodes__jdbc_search_"
-		body: """
-			SearchFunctions.getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
-			$0
-		"""
-
 	# comment - GET SOFTWARE NODES CUSTOM:
-
-	"getSoftwareNodes SearchDatabase":
-		prefix: "getSoftwareNodes_SearchDatabase_"
+	"SearchFunctions.getSoftwareNodes(host, node_address, software_type, db_name)":
+		prefix: "_db_host_type_SearchFunctions.getSoftwareNodes"
+		description: 'Template of common SearchFunctions.getSoftwareNodes to find related database.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
 			SearchFunctions.getSoftwareNodes(host,
 											 node_address  := ${1:db_host},
-											 software_type := "${2:db_type}",
+											 software_type := ${2:db_type},
 											 db_name       := ${3:db_name}
 											);
 			$0
 		"""
-	"getSoftwareNodes SearchDB+port":
-		prefix: "getSoftwareNodes_SearchDB+port_"
+	"SearchFunctions.getSoftwareNodes(host, node_address, software_type, port, instance, db_name)":
+	  prefix: "_db_host_port_SearchFunctions.getSoftwareNodes"
+		description: 'Template of common SearchFunctions.getSoftwareNodes to find related database by node_address, software_type, port, instance, db_name.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
 			SearchFunctions.getSoftwareNodes(host,
 											 node_address  := ${1:db_host},
@@ -904,18 +1021,9 @@
 											 port          := ${3:port},
 											 instance      := ${4:instance},
 											 db_name       := ${5:db_name}
-											);$0
-		"""
-	"getSoftwareNodes SearchNodeonLB":
-		prefix: "getSoftwareNodes_SearchNodeonLB_"
-		body: """
-			SearchFunctions.getSoftwareNodes(host,
-											 node_address  := ${1:db_host},
-											 balancer_port := ${2:none}
 											);
 			$0
 		"""
-
 	# comment -   REGEX USUAL USAGE::
 
 	"full ver (\\d+(?:\\.\\d+)*)":
