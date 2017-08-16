@@ -12,19 +12,19 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/The+Pattern+Language+TPL'
 
 	_tpl:
-		prefix: "_tpl_"
+		prefix: "_tpl"
 		body: "tpl \\$\\$TPLVERSION\\$\\$ module ${1:Module}.${2:Name};$0"
 		description: 'Dev option. Header for TPLPreprocessor'
 	_pattern:
-		prefix: "_pattern_"
+		prefix: "_pattern"
 		description: 'Pattern block template'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Pattern+Overview'
-		body: '''
+		body: """
 
 
 			pattern ${1:PatternName} 1.0
 
-				"""
+				\"\"\"
 				Pattern trigger on ...
 				Pattern also tries to ...
 
@@ -33,7 +33,7 @@
 				UNIX
 				Windows
 
-				"""
+				\"\"\"
 
 				metadata
 					products := '';
@@ -52,7 +52,7 @@
 				end constants;
 
 				triggers
-					on process := DiscoveredProcess where cmd matches unix_cmd "CMD" and args matches regex "ARGS";
+					on process := DiscoveredProcess where cmd matches unix_cmd \"CMD\" and args matches regex \"ARGS\";
 				end triggers;
 
 				body
@@ -63,7 +63,9 @@
 			end pattern;
 
 			$0
-		'''
+		"""
+
+
 	"from SearchFunctions":
 		prefix: "from_SearchFunctions_"
 		body: "from SearchFunctions import SearchFunctions ${1:1}.${2:0}; // TODO: Check the current version$0"
@@ -79,32 +81,32 @@
 
 	# comment - METADATA:
 
-	"_metadata pattern":
-		prefix: "_metadata_pattern_"
+	"metadata pattern":
+		prefix: "_metadata_pattern"
 		description: 'Metadata in pattern body block template'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Pattern+Overview'
-		body: '''
+		body: """
 			    metadata
-			        products := "";
-			        urls := "";
-			        publishers  := "";
-			        categories := "";
-			        known_versions := "", "", "", "", "";
+			        products := \"\";
+			        urls := \"\";
+			        publishers  := \"\";
+			        categories := \"\";
+			        known_versions := \"\", \"\", \"\", \"\", \"\";
 			    end metadata;
 			$0
-		'''
-	"_metadata module":
-		prefix: "_metadata_module_"
+		"""
+	"metadata module":
+		prefix: "_metadata_module"
 		description: 'Metadata in module block template'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Pattern+Overview'
-		body: '''
+		body: """
 			metadata
-				origin := "TKU";
-				tkn_name := "${1:name}";
+				origin := \"TKU\";
+				tkn_name := \"${1:name}\";
 				tree_path := '${2:category}', '${3:category}', '${4:category}';
 			end metadata;
 			$0
-		'''
+		"""
 
 	# comment - TRIGGER:
 
@@ -112,87 +114,87 @@
 		prefix: "_triggers_unix_cmd_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
-			    on process := DiscoveredProcess where cmd matches unix_cmd "${1:name}";
+			    on process := DiscoveredProcess where cmd matches unix_cmd \"${1:name}\";
 			end triggers;
 			$0
-		'''
+		"""
 	"_triggers windows_cmd":
 		prefix: "_triggers_windows_cmd_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
-			    on process := DiscoveredProcess where cmd matches windows_cmd "${1:name}";
+			    on process := DiscoveredProcess where cmd matches windows_cmd \"${1:name}\";
 			end triggers;
 			$0
-		'''
+		"""
 	"_triggers host":
 		prefix: "_triggers_host_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
 			    on Host created, confirmed where ${1:name};
 			end triggers;
 			$0
-		'''
+		"""
 	"_triggers hardware_detail":
 		prefix: "_triggers_hardware_detail_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
 			    on detail := HardwareDetail created, confirmed
 			        where ${1:name};
 			end triggers;
 			$0
-		'''
+		"""
 	"_triggers management_controller":
 		prefix: "_triggers_management_controller_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
 			    on mc := ManagementController created, confirmed
 			        where ${1:name};
 			end triggers;
 			$0
-		'''
+		"""
 	"_triggers network_device":
 		prefix: "_triggers_network_device_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
 			    on device := NetworkDevice created, confirmed
 			        where ${1:vendor};
 			end triggers;
 			$0
-		'''
+		"""
 	"_triggers software_instance":
 		prefix: "_triggers_software_instance_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
 			    on SoftwareInstance created, confirmed
 			                  where type = ${1:name};
 			end triggers;
 			$0
-		'''
+		"""
 	"_triggers software_component":
 		prefix: "_triggers_software_component_"
 		description: 'Triggers define the conditions in which the body of the pattern are evaluated.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Triggers'
-		body: '''
+		body: """
 			triggers
 			    on SoftwareComponent created, confirmed
 			                   where instance = ${1:name};
 			end triggers;
 			$0
-		'''
+		"""
 
 	# comment - IDENTIFIERS:
 
@@ -200,13 +202,13 @@
 		prefix: "_identify_Simple_Identifiers_"
 		description: 'Identify tables are active tables used to annotate matching nodes with particular values.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Identify'
-		body: '''
+		body: """
 			identify ${1:SOME} 1.0
 				tags simple_identity, ${2:tag1};
 				DiscoveredProcess cmd -> simple_identity;
 			end identify;
 			$0
-		'''
+		"""
 
 	# comment - TABLES:
 
@@ -214,26 +216,26 @@
 		prefix: "_table_Two_cols_"
 		description: 'Tables provide simple look-up tables that can be used by functions in pattern bodies.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Static+Tables'
-		body: '''
+		body: """
 			table ${1:table_name} 1.0
-				"one" -> "val_name1", "val_name2";
-				"two"    -> "val_name3", "val_name4";
-				default  -> "val_name5", "val_name6";
+				\"one\" -> \"val_name1\", \"val_name2\";
+				\"two\"    -> \"val_name3\", \"val_name4\";
+				default  -> \"val_name5\", \"val_name6\";
 			end table;
 			$0
-		'''
+		"""
 	"_table One col":
 		prefix: "_table_One_col_"
 		description: 'Tables provide simple look-up tables that can be used by functions in pattern bodies.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Static+Tables'
-		body: '''
+		body: """
 			table ${1:table_name} 1.0
-				"one"       -> val_1;
-				"two"       -> val_2;
+				\"one\"       -> val_1;
+				\"two\"       -> val_2;
 				default     -> val_100;
 			end table;
 			$0
-		'''
+		"""
 
 	# comment - DEFINITIONS:
 
@@ -241,18 +243,18 @@
 		prefix: "_definitions_Small_"
 		description: 'Additional functions to call in patterns are described in definitions blocks. In TPL 1.5, definitions blocks are used for User defined functions and for data integration with SQL databases.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Definitions'
-		body: '''
+		body: """
 			definitions ${1:def_name} 1.0
 				\'''${2:Describe definitions}\'''$0
 
 			end definitions;
 			$0
-		'''
+		"""
 	"_definitions Big":
 		prefix: "_definitions_Big_"
 		description: 'Additional functions to call in patterns are described in definitions blocks. In TPL 1.5, definitions blocks are used for User defined functions and for data integration with SQL databases.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Definitions'
-		body: '''
+		body: """
 			definitions ${1:def_name} 1.0
 				\'''${2:Describe definitions}
 				   Change History:
@@ -262,12 +264,12 @@
 
 			end definitions;
 			$0
-		'''
+		"""
 	"_define Function":
 		prefix: "_define_Function_"
 		description: 'User defined functions are specified in definitions blocks. In order to specify a function the type parameter within the definitions block must be set to the value function or omitted.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: '''
+		body: """
 			define ${1:function_name}(${2:argument}) -> ${3:return}
 				\'''
 				${4:Describe function}
@@ -279,7 +281,7 @@
 
 			end define;
 			$0
-		'''
+		"""
 
 	# comment - FULL VERSION:
 
@@ -287,7 +289,7 @@
 		prefix: "_full_version_(\\d*\\.\\d*)_"
 		description: 'Template for product version extract when full version is obtained.'
 		# descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: '''
+		body: """
 			// Assign product version
 			if full_version then
 				product_version := regex.extract(full_version, regex '(\\d*\\.\\d*)', raw '\\1');
@@ -297,109 +299,189 @@
 			end if;
 
 			$0
-		'''
+		"""
 	"_packages Find packages":
 		prefix: "_packages_Find_packages_"
 		description: 'Template for find packages and get full version.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.findPackages'
-		body: '''
-			packages := model.findPackages( host, [regex "${1:PACKAGE_NAME}"] );
+		body: """
+			packages := model.findPackages( host, [regex \"${1:PACKAGE_NAME}\"] );
 			for package in packages do
 				if package.version then
 					full_version := package.version;
 					break;
 				end if;
 			end for;$0
-		'''
+		"""
 
 	# comment - TPLPRE:
-
-
 	# comment - COMMON FUNCTIONS::
-
-	"validate_host_address_format OLD _functions":
-		prefix: "validate_host_address_format_OLD__functions_"
+	"functions.validate_host_address_format(rel_host_address)":
+		prefix: "functions.validate_host_address_format"
+		description: 'OLD Common_functions module. If <rel_host_address> does not meet requirements(regex \'^[\da-z\:][\w\:\.\-]*$\') then functions returns empty string'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.validate_host_address_format(${1:rel_host_address});$0"
-	"domain_lookup OLD _functions":
-		prefix: "domain_lookup_OLD__functions_"
+
+	"functions.domain_lookup(host, rel_host_address_domain)":
+		prefix: "functions.domain_lookup"
+		description: 'OLD Common_functions module. Function resolves domain to IP address using "nslookup" command'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.domain_lookup(${1:host}, ${2:rel_host_address_domain});$0"
-	"identify_host_perform_search OLD _functions":
-		prefix: "identify_host_perform_search_OLD__functions_"
+
+	"functions.identify_host_perform_search(host, rel_host_address)":
+		prefix: "functions.identify_host_perform_search"
+		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_perform_search(${1:host}, ${2:rel_host_address});$0"
-	"identify_host_perform_search_in_scope OLD _functions":
-		prefix: "identify_host_perform_search_in_scope_OLD__functions_"
+
+	"functions.identify_host_perform_search_in_scope(host, rel_host_address, hosts_scope)":
+		prefix: "functions.identify_host_perform_search_in_scope"
+		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host in some narrowed scope of hosts, but not on all available hosts like identify_host_perform_search()'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_perform_search_in_scope(${1:host}, ${2:rel_host_address}, ${3:hosts_scope});$0"
-	"identify_host OLD _functions":
-		prefix: "identify_host_OLD__functions_"
+
+	"functions.identify_host(host, rel_host_address, extended)":
+		prefix: "functions.identify_host"
+		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
-	"identify_host_extended OLD _functions":
-		prefix: "identify_host_extended_OLD__functions_"
+
+	"functions.identify_host_extended(host, rel_host_address, extended)":
+		prefix: "functions.identify_host_extended"
+		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_extended(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
-	"related_sis_search OLD _functions":
-		prefix: "related_sis_search_OLD__functions_"
+
+	"functions.related_sis_search(host, rel_host_address, rel_si_type)":
+		prefix: "functions.related_sis_search"
+		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on "rel_host_address" host'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type});$0"
-	"related_sis_search_on_multiple_hosts OLD _functions":
-		prefix: "related_sis_search_on_multiple_hosts_OLD__functions_"
+
+	"functions.related_sis_search_on_multiple_hosts(host, rel_host_addresses, rel_si_type)":
+		prefix: "functions.related_sis_search_on_multiple_hosts"
+		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on multiple "rel_host_addresses" hosts.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search_on_multiple_hosts(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
-	"related_sis_search_on_multiple_hosts_extended OLD _functions":
-		prefix: "related_sis_search_on_multiple_hosts_extended_OLD__functions_"
+
+	"functions.related_sis_search_on_multiple_hosts_extended(host, rel_host_addresses, rel_si_type)":
+		prefix: "functions.related_sis_search_on_multiple_hosts_extended"
+		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on multiple "rel_host_addresses" hosts.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search_on_multiple_hosts_extended(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
-	"related_sis_search_extended OLD _functions":
-		prefix: "related_sis_search_extended_OLD__functions_"
+
+	"functions.related_sis_search_extended(host, rel_host_address, rel_si_type, extended)":
+		prefix: "functions.related_sis_search_extended"
+		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on "rel_host_address" host.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:extended}),$0"
-	"related_si_types_search OLD _functions":
-		prefix: "related_si_types_search_OLD__functions_"
+
+	"functions.related_si_types_search(host, rel_host_address, rel_si_types)":
+		prefix: "functions.related_si_types_search"
+		description: 'OLD Common_functions module. Function searches for all SIs with different TYPEs in "rel_si_types" LIST on "rel_host_address" host'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.related_si_types_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_types});$0"
-	"path_normalization OLD _functions":
-		prefix: "path_normalization_OLD__functions_"
+
+	"functions.path_normalization(host, install_root)":
+		prefix: "functions.path_normalization"
+		description: 'OLD Common_functions module. Current function determines "~" in the path, normalizes it and returns back full path'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.path_normalization(${1:host}, ${2:install_root});$0"
-	"links_management OLD _functions":
-		prefix: "links_management_OLD__functions_"
+
+	"functions.links_management(si_node, recently_found_sis, related_si_type)":
+		prefix: "functions.links_management"
+		description: 'OLD Common_functions module. Function that manages Communication and Dependency links between the current SI and related SIs'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.links_management(${1:si_node}, ${2:recently_found_sis}, ${3:related_si_type});$0"
-	"get_cleanedup_path OLD _functions":
-		prefix: "get_cleanedup_path_OLD__functions_"
+
+	"functions.get_cleanedup_path(path, os)":
+		prefix: "functions.get_cleanedup_path"
+		description: 'OLD Common_functions module. Function which normalizes directory path by removing "\.\", "\..\", etc.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.get_cleanedup_path(${1:path}, ${2:os});$0"
-	"get_max_version OLD _functions":
-		prefix: "get_max_version_OLD__functions_"
+
+	"functions.get_max_version(ver1, ver2)":
+		prefix: "functions.get_max_version"
+		description: 'OLD Common_functions module. Compares to version strings like "10.08.10" and "7.18" and returns the biggest one'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.get_max_version(${1:ver1}, ${2:ver2});$0"
-	"get_exe_cwd_path OLD _functions":
-		prefix: "get_exe_cwd_path_OLD__functions_"
+
+	"functions.get_exe_cwd_path(process, expected_binary_name)":
+		prefix: "functions.get_exe_cwd_path"
+		description: 'OLD Common_functions module. Function tries to obtain: - full process command path (exe_path) and/or - current working directory (cwd_path) - directory the process was started from. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.get_exe_cwd_path(${1:process}, ${2:expected_binary_name});$0"
-	"sort_list OLD _functions":
-		prefix: "sort_list_OLD__functions_"
+
+	"functions.sort_list(list)":
+		prefix: "functions.sort_list"
+		description: 'OLD Common_functions module. Function returns sorted list of strings '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.sort_list(${1:list});$0"
-	"run_priv_cmd OLD _functions":
-		prefix: "run_priv_cmd_OLD__functions_"
+
+	"functions.run_priv_cmd(host, command, priv_cmd := 'PRIV_RUNCMD')":
+		prefix: "functions.run_priv_cmd"
+		description: 'OLD Common_functions module. Run the given command, using privilege elevation on UNIX, if required. The command is first run as given. If this fails, produces no output and the platform is UNIX then the command is executed again using the given priv_cmd. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.run_priv_cmd(${1:host}, ${2:command}, priv_cmd := 'PRIV_RUNCMD');$0"
-	"has_process OLD _functions":
-		prefix: "has_process_OLD__functions_"
+
+	"functions.has_process(host, command)":
+		prefix: "functions.has_process"
+		description: 'OLD Common_functions module. Returns true if the given process is running on the given host. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.has_process(${1:host}, ${2:command});$0"
-	"isValidSerialNumber OLD _functions":
-		prefix: "isValidSerialNumber_OLD__functions_"
+
+	"functions.isValidSerialNumber(serial)":
+		prefix: "functions.isValidSerialNumber"
+		description: 'OLD Common_functions module. Returns true if the given serial number is valid '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.isValidSerialNumber(${1:serial});$0"
-	"convertToCharString OLD _functions":
-		prefix: "convertToCharString_OLD__functions_"
+
+	"functions.convertToCharString(ascii_codes)":
+		prefix: "functions.convertToCharString"
+		description: 'OLD Common_functions module. Converts list of ASCII code integers into a string of characters. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.convertToCharString(${1:ascii_codes});$0"
-	"wmiFollowAssociations OLD _functions":
-		prefix: "wmiFollowAssociations_OLD__functions_"
+
+	"functions.wmiFollowAssociations(host, namespace, initial_paths, associations)":
+		prefix: "functions.wmiFollowAssociations"
+		description: 'OLD Common_functions module. Starting from initial_paths, a list of WMI source instance paths, follows multiple WMI associations to reach a set of target instances. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.wmiFollowAssociations(${1:host}, ${2:namespace}, ${3:initial_paths}, ${4:associations});$0"
-	"checkForDecimal OLD _functions":
-		prefix: "checkForDecimal_OLD__functions_"
+
+	"functions.checkForDecimal(value, bValue)":
+		prefix: "functions.checkForDecimal"
+		description: 'OLD Common_functions module. Check for decimal and convert the value into Bytes '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.checkForDecimal(${1:value}, ${2:bValue});$0"
-	"convertToBytes OLD _functions":
-		prefix: "convertToBytes_OLD__functions_"
+
+	"functions.convertToBytes(value, gib)":
+		prefix: "functions.convertToBytes"
+		description: 'OLD Common_functions module. Convert the value into Bytes '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.convertToBytes(${1:value}, ${2:gib});$0"
-	"identify_host_with_uuid OLD _functions":
-		prefix: "identify_host_with_uuid_OLD__functions_"
+
+	"functions.identify_host_with_uuid(uuid)":
+		prefix: "functions.identify_host_with_uuid"
+		description: 'OLD Common_functions module. Function returns host with searched UUID '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.identify_host_with_uuid(${1:uuid});$0"
-	"locateCommands OLD _functions":
-		prefix: "locateCommands_OLD__functions_"
+
+	"functions.locateCommands(host, command_list)":
+		prefix: "functions.locateCommands"
+		description: 'OLD Common_functions module. Attempts to locate the required commands. Returns a table of each command location. The location is none if the command could not be found. This call returns none if the location process fails '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.locateCommands(${1:host}, ${2:command_list});$0"
-	"find_server OLD _functions":
-		prefix: "find_server_OLD__functions_"
+
+	"functions.find_server(host, server_address, port, si_type, alt_types := none, all := false)":
+		prefix: "functions.find_server"
+		description: 'OLD Common_functions module. Function that searches for the appropriate server node based on the provided server details. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.find_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, alt_types := ${5:none}, all := ${6:false});$0"
-	"checkCommandList OLD _functions":
-		prefix: "checkCommandList_OLD__functions_"
+
+	"functions.checkCommandList(host, command_list)":
+		prefix: "functions.checkCommandList"
+		description: 'OLD Common_functions module. Checks whether the commands exist. Returns true if all the commands exist. Even one command we are looking for is not present we return false. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "functions.checkCommandList(${1:host}, ${2:command_list});$0"
 
 	# comment -   CONVERSION FUNCTIONS::
@@ -416,178 +498,244 @@
 
 	# comment -   DISCOVERY BUILT IN FUNCTIONS::
 
-	"process discovery":
-		prefix: "discovery_process"
+	"discovery.process(node)":
+		prefix: "discovery.process"
 		description: 'Returns the process node corresponding to the source node, which must be a ListeningPort or NetworkConnection node.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.process'
 		body: "discovery.process(${1:process});$0"
-	"children discovery":
-		prefix: "discovery_children"
+	"discovery.children(node)":
+		prefix: "discovery.children"
 		description: 'Returns a list of the child processes for the given DiscoveredProcess node. Returns an empty list if there no children or the parameter is not a DiscoveredProcess node.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.children'
 		body: "discovery.children(${1:process});$0"
-	"descendents discovery":
-		prefix: "discovery_descendents"
+	"discovery.descendents(node)":
+		prefix: "discovery.descendents"
 		description: "Returns a list consisting of the children of the given DiscoveredProcess node, and recursively all of the children's children."
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.descendents'
 		body: "discovery.descendents(${1:process});$0"
-	"parent discovery":
-		prefix: "discovery_parent"
+	"discovery.parent(node)":
+		prefix: "discovery.parent"
 		description: 'Returns the parent process for the given DiscoveredProcess node. Returns none if the process has no parent.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.parent'
 		body: "discovery.parent(${1:process});$0"
-	"allProcesses discovery":
-		prefix: "discovery_allProcesses"
+	"discovery.allProcesses(node)":
+		prefix: "discovery.allProcesses"
 		description: 'Returns a list of all processes corresponding to the directly discovered data source node. Returns an empty list if the source node is not a valid directly discovered data node.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.allProcesses'
 		body: "discovery.allProcesses(${1:process});$0"
-	"access discovery":
-		prefix: "discovery_access"
+	"discovery.access(node)":
+		prefix: "discovery.access"
 		description: 'Returns the Discovery Access node for the source DDD node, if given. If no node is given, it returns the DiscoveryAccess currently in use.Returns none if the source is not valid.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.access'
 		body: "discovery.access(${1:process});$0"
 
 	# comment - GET AND QUERY:
 
-	"fileGet discovery":
-		prefix: "fileGet_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.fileGet(host, config_filepath)":
+		prefix: "discovery.fileGet"
+		description: 'Retrieves the specified file. target is a node used to identify the discovery target, either a directly discovered data node, or a Host node. Requires PRIV_CAT to be defined to retrieve files not readable by the current user.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.fileGet'
 		body: "discovery.fileGet(host, ${1:config_filepath});$0"
-	"fileInfo discovery":
-		prefix: "fileInfo_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.fileInfo(host, \"file_path\")":
+		prefix: "discovery.fileInfo"
+		description: "Retrieves information about the specified file, but not the file content. This is useful if the file is a binary file or particularly large."
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.fileInfo'
 		body: "discovery.fileInfo(host, \"${1:file_path}\");$0"
-	"getNames discovery":
-		prefix: "getNames_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.getNames(target, ip_address)":
+		prefix: "discovery.getNames"
+		description: 'Performs a DNS lookup on the IP address and returns a list of FQDN strings.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.getNames'
 		body: "discovery.getNames(${1:target}, ${2:ip_address});$0"
-	"listDirectory discovery":
-		prefix: "listDirectory_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.listDirectory(host, directory)":
+		prefix: "discovery.listDirectory"
+		description: 'Retrieves the directory listing of the directory specified by the path on the specified target. You cannot use wildcards in the path.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.listDirectory'
 		body: "discovery.listDirectory(host, ${1:directory});$0"
-	"listRegistry discovery":
-		prefix: "listRegistry_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.listRegistry(host, registry_root)":
+		prefix: "discovery.listRegistry"
+		description: 'Returns a list of the registry entries of the registry key specified by the key_path.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.listRegistry'
 		body: "discovery.listRegistry(host, ${1:registry_root});$0"
-	"registryKey discovery":
-		prefix: "registryKey_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.registryKey(host, reg_key_inst_dir)":
+		prefix: "discovery.registryKey"
+		description: 'Retrieves a registry key from a Windows computer.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.registryKey'
 		body: "discovery.registryKey(host, ${1:reg_key_inst_dir});$0"
-	"wmiQuery discovery":
-		prefix: "wmiQuery_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.wmiQuery(host, wmiQuery, wmiNS)":
+		prefix: "discovery.wmiQuery_wmiNS"
+		description: 'Performs a WMI query on a Windows computer. Returns a list of DiscoveredWMI nodes.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.wmiQuery'
 		body: "discovery.wmiQuery(host, ${1:wmiQuery}, ${2:wmiNS});$0"
-	"wmiQuery raw discovery":
-		prefix: "wmiQuery_raw_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.wmiQuery(host, wmiQuery, raw \"path_to\")":
+		prefix: "discovery.wmiQuery_path_to"
+		description: 'Performs a WMI query on a Windows computer. Returns a list of DiscoveredWMI nodes.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.wmiQuery'
 		body: "discovery.wmiQuery(host, ${1:wmiQuery}, raw \"${2:path_to}\");$0"
-	"wbemQuery discovery":
-		prefix: "wbemQuery_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.wbemQuery(target, class_name, [properties], namespace)":
+		prefix: "discovery.wbemQuery"
+		description: 'Performs a WBEM query on the target and returns a list of DiscoveredWBEM DDD nodes.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.wbemQuery'
 		body: "discovery.wbemQuery(${1:target}, ${2:class_name}, [${3:properties}], ${4:namespace});$0"
-	"wbemEnumInstances discovery":
-		prefix: "wbemEnumInstances_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.wbemEnumInstances(target, class_name, properties, namespace, filter_locally)":
+		prefix: "discovery.wbemEnumInstances"
+		description: 'Performs a WBEM query on the target and returns a list of DiscoveredWBEMInstance DDD nodes.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.wbemEnumInstances'
 		body: "discovery.wbemEnumInstances(${1:target}, ${2:class_name}, ${3:properties}, ${4:namespace}, ${5:filter_locally});$0"
-	"runCommand discovery":
-		prefix: "runCommand_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Discovery+data+manipulation+functions'
+	"discovery.runCommand(host, \"command_to_run\")":
+		prefix: "discovery.runCommand"
+		description: 'Returns a DiscoveredCommandResult node containing the result of running the specified command.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.runCommand'
 		body: "discovery.runCommand(host, \"${1:command_to_run}\");$0"
-	"snmpGet discovery":
-		prefix: "snmpGet_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+	"discovery.snmpGet(target, oid_table, [binary_oid_list])":
+		prefix: "discovery.snmpGet"
+		description: 'Performs an SNMP query on the target and returns a DiscoveredSNMP node.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.snmpGet'
 		body: "discovery.snmpGet(${1:target}, ${2:oid_table}, [${3:binary_oid_list}]);$0"
-	"snmpGetTable discovery":
-		prefix: "snmpGetTable_discovery_"
-		description: 'The following functions in the discovery module navigate across the stored directly discovered data. They do not perform any discovery actions. They take positional arguments.'
+	"discovery.snmpGetTable(target, table_oid, column_table, [binary_oid_list])":
+		prefix: "discovery.snmpGetTable"
+		description: 'Performs an SNMP query that returns a table on the target.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.snmpGetTable'
 		body: "discovery.snmpGetTable(${1:target}, ${2:table_oid}, ${3:column_table}, [${4:binary_oid_list}]);$0"
+
+	# New functions for REST API:
+	"discovery.restfulGet(target, protocol, path[, header])":
+		prefix: "discovery.restfulGet"
+		description: 'Performs a GET request on the target using the RESTful protocol specified and returns a node containing information on the discovered system.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.restfulGet'
+		body: "discovery.restfulGet(${1:target}, ${2:protocol}, ${3:path}[, ${4:header}]);$0"
+	"discovery.restfulPost(target, protocol, path, body[, header])":
+		prefix: "discovery.restfulPost"
+		description: 'Performs a POST request on the target using the RESTful system and returns a node containing information on the discovered system.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.restfulPost'
+		body: "discovery.restfulPost(${1:target}, ${2:protocol}, ${3:path}, ${4:body}[, ${5:header}]);$0"
+
+	# New functions for vSphere:
+	"discovery.vSphereFindObjects":
+		prefix: "discovery.vSphereFindObjects"
+		description: 'Queries to search from the root folder the instances of an object type and returns the requested properties for each object found.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.vSphereFindObjects'
+		body: "discovery.vSphereFindObjects(${1:vc_host}, \"${2:HostSystem}\", [\"name\", \"hardware.systemInfo.uuid\"]);$0"
+	"discovery.vSphereTraverseToObjects":
+		prefix: "discovery.vSphereTraverseToObjects"
+		description: 'Queries to traverse from the initial object to instances of an object type and get properties on those objects.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.vSphereTraverseToObjects'
+		body: "discovery.vSphereTraverseToObjects(${1:host}, \"${2:HostSystem}\", storage_info.storage_id, \"datastore\", \"Datastore\", [\"name\"]);$0"
+	"discovery.vSphereGetProperties":
+		prefix: "discovery.vSphereGetProperties"
+		description: 'Queries to retrieve properties from a given MOR and returns the requested properties for each object found.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.vSphereGetProperties'
+		body: "discovery.vSphereGetProperties(${1:host}, \"${2:HostSystem}\", host_id, [\"config.storageDevice.scsiLun[\"%disk_info.key%\"].deviceName\", \"config.storageDevice.scsiLun[\"%disk_info.key%\"].capabilities.updateDisplayNameSupported\"]);$0"
+	"discovery.vSphereGetPropertyTable":
+		prefix: "discovery.vSphereGetPropertyTable"
+		description: 'Queries to retrieve a table of values from a given MOR and is intended to be used to retrieve nested properties from lists and arrays.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.vSphereGetPropertyTable'
+		body: "discovery.vSphereGetPropertyTable(${1:host}, \"${2:HostSystem}\", host_id, \"config.storageDevice.scsiLun\", [\"serialNumber\", \"deviceName\"]);$0"
+
+# https://docs.bmc.com/docs/display/DISCO111/Binary+functions
+
+	"binary.toHexString(value)":
+		prefix: "binary.toHexString"
+		description: 'Returns the given binary value as a hex string, that is, two hex digits per byte.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toHexString'
+		body: "binary.toHexString(${1:value});$0"
+	"binary.toIPv4(value)":
+		prefix: "binary.toIPv4"
+		description: 'Returns the given binary value as the text representation of an IPv4 address.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toIPv4'
+		body: "binary.toIPv4(${1:value});$0"
+	"binary.toIPv4z(value)":
+		prefix: "binary.toIPv4z"
+		description: 'Returns the given binary value as the text representation of an IPv4 address with a zone index.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toIPv4z'
+		body: "binary.toIPv4z(${1:value});$0"
+	"binary.toIPv6(value)":
+		prefix: "binary.toIPv6"
+		description: 'Returns the given binary value as the text representation of a canonical IPv6 address.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toIPv6'
+		body: "binary.toIPv6(${1:value});$0"
+	"binary.toIPv6z(value)":
+		prefix: "binary.toIPv6z"
+		description: 'Returns the given binary value as the text representation of a canonical IPv6 address with zone index.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toIPv6z'
+		body: "binary.toIPv6z(${1:value});$0"
+	"binary.toMACAddress(value)":
+		prefix: "binary.toMACAddress"
+		description: 'Returns the given binary value as the text representation of a MAC address.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toMACAddress'
+		body: "binary.toMACAddress(${1:value});$0"
+	"binary.toValue(data, format)":
+		prefix: "binary.toValue"
+		description: 'Converts the given binary value into the specified format.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toValue'
+		body: "binary.toValue(${1:data}, ${2:format});$0"
+	"binary.toWWN(value)":
+		prefix: "binary.toWWN"
+		description: 'Returns the given binary value as the text representation of a WWN value.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/binary.toWWN'
+		body: "binary.toWWN(${1:value});$0"
+
 
 	# comment - MATRIX:
 
 	"filepath_info Matrix":
-		prefix: "filepath_info_Matrix_"
-		body: '''
+		prefix: "filepath_info_Matrix"
+		description: 'Development function. Allows us to gather all file get and command run from patterns to show it in docs.'
+		# descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+		body: """
 			$0// *filepath_info_start
-			$0// filepath_windows := "${1:filepath_windows}"
-			$0// filepath_unix := "${2:filepath_unix}"
-			$0// reason := "${3:Obtain something}"
-			$0// when := "${4:Only if installation is path obtained}"
+			$0// filepath_windows := \"${1:filepath_windows}\"
+			$0// filepath_unix := \"${2:filepath_unix}\"
+			$0// reason := \"${3:Obtain something}\"
+			$0// when := \"${4:Only if installation is path obtained}\"
 			$0// *filepath_info_end$0
-		'''
+		"""
 	"command_info Matrix":
-		prefix: "command_info_Matrix_"
-		body: '''
+		prefix: "command_info_Matrix"
+		description: 'Development function. Allows us to gather all file get and command run from patterns to show it in docs.'
+		# descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+		body: """
 			$0// *command_info_start
-			$0// command_windows := "${1:command_windows}"
-			$0// command_unix := "${2:command_unix}"
-			$0// reason := "${3:Obtain something}"
-			$0// when := "${4:Only if installation path is obtained}"
+			$0// command_windows := \"${1:command_windows}\"
+			$0// command_unix := \"${2:command_unix}\"
+			$0// reason := \"${3:Obtain something}\"
+			$0// when := \"${4:Only if installation path is obtained}\"
 			$0// *command_info_end$0
-		'''
+		"""
 	"filepath_info Unix Matrix":
-		prefix: "filepath_info_Unix_Matrix_"
-		body: '''
+		prefix: "filepath_info_Unix_Matrix"
+		description: 'Development function. Allows us to gather all file get and command run from patterns to show it in docs.'
+		# descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+		body: """
 			$0// *filepath_info_start
-			$0// filepath_unix := "${2:filepath_unix}"
-			$0// reason := "${3:Obtain something}"
-			$0// when := "${4:Only if installation is path obtained}"
+			$0// filepath_unix := \"${2:filepath_unix}\"
+			$0// reason := \"${3:Obtain something}\"
+			$0// when := \"${4:Only if installation is path obtained}\"
 			$0// *filepath_info_end$0
-		'''
+		"""
 	"command_info Windows Matrix":
-		prefix: "command_info_Windows_Matrix_"
-		body: '''
+		prefix: "command_info_Windows_Matrix"
+		description: 'Development function. Allows us to gather all file get and command run from patterns to show it in docs.'
+		# descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+		body: """
 			$0// *command_info_start
-			$0// command_windows := "${1:command_windows}"
-			$0// reason := "${3:Obtain something}"
-			$0// when := "${4:Only if installation path is obtained}"
+			$0// command_windows := \"${1:command_windows}\"
+			$0// reason := \"${3:Obtain something}\"
+			$0// when := \"${4:Only if installation path is obtained}\"
 			$0// *command_info_end$0
-		'''
-
-	# comment - REST:
-
-	"restfulGet discovery":
-		prefix: "restfulGet_discovery_"
-		body: "discovery.restfulGet(${1:target}, ${2:protocol}, ${3:path}[, ${4:header}]);$0"
-	"restfulPost discovery":
-		prefix: "restfulPost_discovery_"
-		body: "discovery.restfulPost(${1:target}, ${2:protocol}, ${3:path}, ${4:body}[, ${5:header}]);$0"
+		"""
 
 	# comment - JSON:
 
-	"encode json":
-		prefix: "encode_json_"
+	"json.encode(\"value\")":
+		prefix: "json.encode"
+		description: 'Converts value to a JSON encoded string.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/json.encode'
 		body: "json.encode(${1:value});$0"
-	"decode json":
-		prefix: "decode_json_"
+	"json.decode(\"value\")":
+		prefix: "json.decode"
+		description: 'Decodes a JSON encoded string and returns a structure containing a string, table or list including nested structures.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/json.decode'
 		body: "json.decode(${1:value});$0"
-
-	# comment - vSphere:
-
-	"vSphereFindObjects discovery":
-		prefix: "vSphereFindObjects_discovery_"
-		body: "discovery.vSphereFindObjects(vc_host, \"HostSystem\", [\"name\", \"hardware.systemInfo.uuid\"]);$0"
-	"vSphereTraverseToObjects discovery":
-		prefix: "vSphereTraverseToObjects_discovery_"
-		body: "discovery.vSphereTraverseToObjects(host, \"HostSystem\", storage_info.storage_id, \"datastore\", \"Datastore\", [\"name\"]);$0"
-	"vSphereGetProperties discovery":
-		prefix: "vSphereGetProperties_discovery_"
-		body: "discovery.vSphereGetProperties(host, \"HostSystem\", host_id, [\"config.storageDevice.scsiLun[\\\"%disk_info.key%\\\"].deviceName\", \"config.storageDevice.scsiLun[\\\"%disk_info.key%\\\"].capabilities.updateDisplayNameSupported\"]);$0"
-	"vSphereGetPropertyTable discovery":
-		prefix: "vSphereGetPropertyTable_discovery_"
-		body: "discovery.vSphereGetPropertyTable(host, \"HostSystem\", host_id, \"config.storageDevice.scsiLun\", [\"serialNumber\", \"deviceName\"]);$0"
 
 	# comment -   DISCOVERY FUNCTIONS:
 
@@ -653,7 +801,7 @@
 		body: "RDBMSFunctions.oracleOraFileParser(${1:section_name}, ${2:oracle_ora_file_content}); // -> section$0"
 	"performRdbmsSisSearch RDBMSFunctions":
 		prefix: "performRdbmsSisSearch_RDBMSFunctions_"
-		body: '''
+		body: """
 			RDBMSFunctions.performRdbmsSisSearch(related_sis_raw = ${1:related_sis_raw},
 													 rel_si_type = ${2:rel_si_type},
 													 port = ${3:port},
@@ -661,14 +809,14 @@
 													 db_name = ${5:db_name},
 													 ora_service_name = ${6:ora_service_name},
 													 db2_copy_name = ${7:db2_copy_name}); // ->  -> related_rdbms_nodes$0
-		'''
+		"""
 	"oracleNetServiceNameSearch RDBMSFunctions":
 		prefix: "oracleNetServiceNameSearch_RDBMSFunctions_"
-		body: '''
+		body: """
 			RDBMSFunctions.oracleNetServiceNameSearch(host = ${1:host},
 													  net_service_name = ${2:net_service_name},
 													  tnsnames_file_full_location = ${3:tnsnames_file_full_location}); // -> ora_host, ora_sid, ora_service_name$0
-		'''
+		"""
 	"dsnRdbmsServers RDBMSFunctions":
 		prefix: "dsnRdbmsServers_RDBMSFunctions_"
 		body: "RDBMSFunctions.dsnRdbmsServers(host, dsn_name); // -> db_host, db_type, db_instance, ora_service_name, db_port, db_name$0"
@@ -698,7 +846,7 @@
 
 	"getSoftwareNodes SearchNodesFull":
 		prefix: "getSoftwareNodes_SearchNodesFull_"
-		body: '''
+		body: """
 			SearchFunctions.getSoftwareNodes(host,
 											 node_address           := ${1:none},
 											 software_type          := ${2:none},
@@ -718,38 +866,38 @@
 											 get_remote_nodes_only  := ${16:none}
 											); // -> software_nodes
 			$0
-		'''
+		"""
 
 	# comment - GET SOFTWARE NODES JDBC:
 
 	"getSoftwareNodes _jdbc_url":
 		prefix: "getSoftwareNodes__jdbc_url_"
-		body: '''
+		body: """
 			SearchFunctions.getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
 			$0
-		'''
+		"""
 	"getSoftwareNodes _jdbc_search":
 		prefix: "getSoftwareNodes__jdbc_search_"
-		body: '''
+		body: """
 			SearchFunctions.getSoftwareNodes(host, jdbc_url=${2:jdbc_url});
 			$0
-		'''
+		"""
 
 	# comment - GET SOFTWARE NODES CUSTOM:
 
 	"getSoftwareNodes SearchDatabase":
 		prefix: "getSoftwareNodes_SearchDatabase_"
-		body: '''
+		body: """
 			SearchFunctions.getSoftwareNodes(host,
 											 node_address  := ${1:db_host},
 											 software_type := "${2:db_type}",
 											 db_name       := ${3:db_name}
 											);
 			$0
-		'''
+		"""
 	"getSoftwareNodes SearchDB+port":
 		prefix: "getSoftwareNodes_SearchDB+port_"
-		body: '''
+		body: """
 			SearchFunctions.getSoftwareNodes(host,
 											 node_address  := ${1:db_host},
 											 software_type := ${2:db_type},
@@ -757,126 +905,198 @@
 											 instance      := ${4:instance},
 											 db_name       := ${5:db_name}
 											);$0
-		'''
+		"""
 	"getSoftwareNodes SearchNodeonLB":
 		prefix: "getSoftwareNodes_SearchNodeonLB_"
-		body: '''
+		body: """
 			SearchFunctions.getSoftwareNodes(host,
 											 node_address  := ${1:db_host},
 											 balancer_port := ${2:none}
 											);
 			$0
-		'''
+		"""
 
 	# comment -   REGEX USUAL USAGE::
 
-	"_regex full ver (\\d+(?:\\.\\d+)*)":
-		prefix: "_regex_full_ver_(\\d+(?:\\.\\d+)*)_"
+	"full ver (\\d+(?:\\.\\d+)*)":
+		prefix: "_regex_full_ver_(\\d+(?:\\.\\d+)*)"
+		description: 'Template regex expression to catch full version.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(\\d+(?:\\.\\d+)*)$0"
-	"_regex full ver ^(\\d+(?:\\.\\d+)?)":
-		prefix: "_regex_full_ver_^(\\d+(?:\\.\\d+)?)_"
+	"full ver ^(\\d+(?:\\.\\d+)?)":
+		prefix: "_regex_full_ver_s^(\\d+(?:\\.\\d+)?)"
+		description: 'Template regex expression to catch full version from start if string.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^(\\d+(?:\\.\\d+)?)$0"
-	"_regex product ver (\\d+(?:\\.\\d+)?)":
-		prefix: "_regex_product_ver_(\\d+(?:\\.\\d+)?)_"
+	"product ver (\\d+(?:\\.\\d+)?)":
+		prefix: "_regex_product_ver_(\\d+(?:\\.\\d+)?)"
+		description: 'Template regex expression to catch product version.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(\\d+(?:\\.\\d+)?)$0"
-	"_regex bjavaw (?i)\\bjavaw?(?:\\.exe)\\$":
-		prefix: "_regex_bjavaw_(?i)\\bjavaw?(?:\\.exe)\\$_"
+	"bjavaw (?i)\\bjavaw?(?:\\.exe)\\$":
+		prefix: "_regex_bjavaw_(?i)\\bjavaw?(?:\\.exe)\\$"
+		description: 'Template regex expression to catch bjavaw cmd.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)\\bjavaw?(?:\\.exe)\\$$0"
-	"_regex bjava (?i)\\bjava(?:\\.exe)?\\$":
-		prefix: "_regex_bjava_(?i)\\bjava(?:\\.exe)?\\$_"
+	"bjava (?i)\\bjava(?:\\.exe)?\\$":
+		prefix: "_regex_bjava_(?i)\\bjava(?:\\.exe)?\\$"
+		description: 'Template regex expression to catch bjava cmd.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)\\bjava(?:\\.exe)?\\$$0"
-	"_regex java (?i)^(\\w:.*\\)Java\\":
-		prefix: "_regex_java_(?i)^(\\w:.*\\)Java\\_"
+	"java (?i)^(\\w:.*\\)Java\\":
+		prefix: "_regex_java_(?i)^(\\w:.*\\)Java\\"
+		description: 'Template regex expression to catch java cmd.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)^(\\w:.*\\)Java\\$0"
-	"_regex java (/\\.+/)java/":
-		prefix: "_regex_java_(/\\.+/)java/_"
+	"java (/\\.+/)java/":
+		prefix: "_regex_java_(/\\.+/)java/"
+		description: 'Template regex expression to catch java cmd.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^(/\\.+/)java/$0"
-	"_regex ipv4 (\\d+(?:\\.\\d+){3})":
-		prefix: "_regex_ipv4_(\\d+(?:\\.\\d+){3})_"
+	"ipv4 (\\d+(?:\\.\\d+){3})":
+		prefix: "_regex_ipv4_(\\d+(?:\\.\\d+){3})"
+		description: 'Template regex expression to catch ipv4.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(\\d+(?:\\.\\d+){3})$0"
-	"_regex ver ^(\\d+)":
-		prefix: "_regex_ver_^(\\d+)_"
+	"ver ^(\\d+)":
+		prefix: "_regex_ver_^(\\d+)"
+		description: 'Template regex expression to catch simple decimals.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^(\\d+)$0"
-	"_regex ver ^\\d+\\$":
-		prefix: "_regex_ver_^\\d+\\$_"
+	"ver ^\\d+\\$":
+		prefix: "_regex_ver_^\\d+\\$"
+		description: 'Template regex expression to catch simple decimals.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^\\d+\\$$0"
-	"_regex Win_path":
-		prefix: "_regex_Win_path_"
+	"Win_path":
+		prefix: "_regex_Win_path"
+		description: 'Template regex expression to catch path with spaces in windows.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)\\\"([^\"]+)PATH_TO_FILE_LIB\\\"$0"
-	"_regex Win_path_alt":
-		prefix: "_regex_Win_path_alt_"
+	"Win_path_alt":
+		prefix: "_regex_Win_path_alt"
+		description: 'Template regex expression to catch path with spaces in windows, alternative.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "([^\"]+)PATH_TO_FILE_CONF$0"
 
-	# comment -   INFERRENCE:
+	# comment -   INFERRENCE: https://docs.bmc.com/docs/display/DISCO111/Inference+functions
 
-	"associate inference":
-		prefix: "associate_inference_"
+	"inference.associate(inferred_node, associate)":
+		prefix: "inference.associate"
+		description: 'Create associate inference relationship(s) from the specified node(s) to the inferred node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/inference.associate'
 		body: "inference.associate(${1:inferred_node}, ${2:associate});$0"
-	"contributor inference":
-		prefix: "contributor_inference_"
+	"inference.contributor(inferred_node, contributor, contributes)":
+		prefix: "inference.contributor"
+		description: 'Create contributor inference relationship(s) from the specified node(s) to the inferred node, for attribute names specified in the contributes list.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/inference.contributor'
 		body: "inference.contributor(${1:inferred_node}, ${2:contributor}, ${3:contributes});$0"
-	"primary inference":
-		prefix: "primary_inference_"
+	"inference.primary(inferred_node, primary)":
+		prefix: "inference.primary"
+		description: 'Create primary inference relationship(s) from the specified node(s) to the inferred node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/inference.primary'
 		body: "inference.primary(${1:inferred_node}, ${2:primary});$0"
-	"relation inference":
-		prefix: "relation_inference_"
+	"inference.relation(inferred_relationship, source)":
+		prefix: "inference.relation"
+		description: 'Create relation inference relationship(s) from the specified node(s) to the inferred relationship.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/inference.relation'
 		body: "inference.relation(${1:inferred_relationship}, ${2:source});$0"
-	"withdrawal inference":
-		prefix: "withdrawal_inference_"
+	"inference.withdrawal(inferred_node, evidence, withdrawn)":
+		prefix: "inference.withdrawal"
+		description: 'Create withdrawal inference relationship(s) from the specified node(s) to the inferred node, indicating the withdrawal of the withdrawn attribute name.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/inference.withdrawal'
 		body: "inference.withdrawal(${1:inferred_node}, ${2:evidence}, ${3:withdrawn});$0"
-	"destruction inference":
-		prefix: "destruction_inference_"
-		body: "inference.destruction(${1:destroyed_node}, ${2:source};)$0"
+	"inference.destruction(destroyed_node, source)":
+		prefix: "inference.destruction"
+		description: 'When destroying a node, indicate that the source node was responsible for its destruction.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/inference.destruction'
+		body: "inference.destruction(${1:destroyed_node}, ${2:source});$0"
+
+	# https://docs.bmc.com/docs/display/DISCO111/System+functions
+	"system.getOption(option_name)":
+		prefix: "system.getOption"
+		description: 'Takes the name of a BMC Discovery system option and returns the value.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+		body: "system.getOption(${1:option_name});$0"
+	"system.cmdbSync(nodes)":
+		prefix: "system.cmdbSync"
+		description: 'Addssystem.cmdbSync the given root node or list of root nodes to the CMDB synchronization queue for all sync connections where continuous synchronization is enabled.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+		body: "system.cmdbSync(${1:nodes});$0"
 
 	# comment -   MODEL FUNCTIONS::
-
-	"model.host model.host":
-		prefix: "model.host_model.host_"
-		body: "model.host(${1:process});$0"
-	"model.hosts model.hosts":
-		prefix: "model.hosts_model.hosts_"
-		body: "model.hosts(${1:model_sis});$0"
-	"model.destroy model.destroy":
-		prefix: "model.destroy_model.destroy_"
-		body: "model.destroy(${1:dummy});$0"
-	"model.kind model.kind":
-		prefix: "model.kind_model.kind_"
-		body: "model.kind(${1:hosting_node});$0"
-	"model.findPackages model.findPackages":
-		prefix: "model.findPackages_model.findPackages_"
-		body: "model.findPackages(host, [regex \"${1:}\"]);$0"
-	"model.withdraw model.withdraw":
-		prefix: "model.withdraw_model.withdraw_"
-		body: "model.withdraw(si_node, \"${1:detail}\");$0"
-
-	# comment - ADD:
-
-	"addContainment model.addContainment":
-		prefix: "addContainment_model.addContainment_"
+	"model.addContainment(container, containees)":
+		prefix: "model.addContainment"
+		description: 'Adds the containees to the container by creating suitable relationships between the nodes. containees can be a single node, or a list of nodes, for example: [node1, node2].'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.addContainment'
 		body: "model.addContainment(${1:si_node}, ${2:software_components});$0"
-	"addDisplayAttribute model.addDisplayAttribute":
-		prefix: "addDisplayAttribute_model.addDisplayAttribute_"
-		body: "model.addDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
-	"removeDisplayAttribute model.removeDisplayAttribute":
-		prefix: "removeDisplayAttribute_model.removeDisplayAttribute_"
-		body: "model.removeDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
-	"setContainment model.setContainment":
-		prefix: "setContainment_model.setContainment_"
+	"model.setContainment(container, containees)":
+		prefix: "model.setContainment"
+		description: 'Equivalent to addContainment, except that at the end of the pattern body, any relationships to contained nodes that have not been confirmed by setContainment or addContainment calls are removed.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.setContainment'
 		body: "model.setContainment(${1:cluster_si_node}, ${2:related_sis});$0"
-	"setRemovalGroup model.setRemovalGroup":
-		prefix: "setRemovalGroup_model.setRemovalGroup_"
+	"model.destroy(node)":
+		prefix: "model.destroy"
+		description: 'Destroy the specified node or relationship in the model. (Not usually used in pattern bodies, but in removal sections.)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.destroy'
+		body: "model.destroy(${1:dummy});$0"
+	"model.withdraw(node, attribute)":
+		prefix: "model.withdraw"
+		description: 'Removes the named attribute from the node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.withdraw'
+		body: "model.withdraw(si_node, \"${1:detail}\");$0"
+	"model.setRemovalGroup(node, [name])":
+		prefix: "model.setRemovalGroup"
+		description: 'Add the specified node or nodes to a named removal group. The purpose of this function is to identify a group of nodes.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.setRemovalGroup'
 		body: "model.setRemovalGroup(${1:cluster_si}, \"${2:Dummy_Server_Cluster}\");$0"
-	"anchorRemovalGroup model.anchorRemovalGroup":
-		prefix: "anchorRemovalGroup_model.anchorRemovalGroup_"
+	"model.anchorRemovalGroup(node, [name])":
+		prefix: "model.anchorRemovalGroup"
+		description: 'Specify an anchor node for a named removal group. If a group name is not specified the default name group is used.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.anchorRemovalGroup'
 		body: "model.anchorRemovalGroup(${1:si}, \"${2:license_dts}\");$0"
-	"suppressRemovalGroup model.suppressRemovalGroup":
-		prefix: "suppressRemovalGroup_model.suppressRemovalGroup_"
+	"model.suppressRemovalGroup([name])":
+		prefix: "model.suppressRemovalGroup"
+		description: 'Suppress removal of the named removal group. If a group name is not specified the default name group is used. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.suppressRemovalGroup'
 		body: "model.suppressRemovalGroup(\"%${1:detail_type}%\");$0"
+	"model.host(node)":
+		prefix: "model.host"
+		description: 'Returns the Host node corresponding to the given node. The given node can be any directly discovered data node, or a Software Instance or Business Application Instance. If more than one Host is related to the given node (for example a Business Application Instance spread across multiple Hosts), an arbitrary one of the Hosts is returned.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.host'
+		body: "model.host(${1:process});$0"
+	"model.hosts(node)":
+		prefix: "model.hosts"
+		description: 'Returns a list of all the Host nodes corresponding to the given node. As with model.host, the given node can be any directly discovered data node or a Software Instance or Business Application Instance.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.hosts'
+		body: "model.hosts(${1:model_sis});$0"
+	"model.findPackages(node, regexes)":
+		prefix: "model.findPackages"
+		description: 'Traverses from the node, which must be a Host or a directly discovered data node, and returns a set of all Package nodes that have names matching the provided list of regular expressions.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.findPackages'
+		body: "model.findPackages(host, [regex \"${1:}\"]);$0"
+	"model.addDisplayAttribute(node, value)":
+		prefix: "model.addDisplayAttribute"
+		description: 'Adds a named attribute, or a list of named attributes to the additional attributes displayed in a node view. Added attributes can be removed using model.removeDisplayAttribute.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.addDisplayAttribute'
+		body: "model.addDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+	"model.removeDisplayAttribute(node, value)":
+		prefix: "model.removeDisplayAttribute"
+		description: 'Removes a named attribute, or a list of named attributes from the additional attributes displayed in a node view. Additional attributes are added using the model.addDisplayAttribute function.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.removeDisplayAttribute'
+		body: "model.removeDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+	"model.kind(node)":
+		prefix: "model.kind"
+		description: 'Returns the node kind corresponding to the given node.The given node can be any node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.kind'
+		body: "model.kind(${1:hosting_node});$0"
 
 	# comment - REL:
 
 	"Communication rel":
 		prefix: "Communication_rel_"
+		description: ''
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
 		body: "model.rel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
 	"Containment rel":
 		prefix: "Containment_rel_"
@@ -916,6 +1136,8 @@
 
 	"Communication uniquerel":
 		prefix: "Communication_uniquerel_"
+		description: ''
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
 		body: "model.uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
 	"Containment uniquerel":
 		prefix: "Containment_uniquerel_"
@@ -958,16 +1180,16 @@
 
 	"SoftwareInstance Short":
 		prefix: "SoftwareInstance_Short_"
-		body: '''
+		body: """
 			model.SoftwareInstance(key := key,
 				$0name := name,
 				$0short_name := short_name
 				);$0
-		'''
+		"""
 	"SoftwareInstance Key":
 		prefix: "SoftwareInstance_Key_"
-		body: '''
-			model.SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
+		body: """
+			model.SoftwareInstance(key             := \"%port%/%key_si_type%/%host.key%\",
 			$0					   name            := name,
 			$0					   short_name      := short_name,
 			$0					   version         := full_version,
@@ -977,11 +1199,11 @@
 			$0					   type            := si_type
 			$0					   );
 			$0
-		'''
+		"""
 	"SoftwareInstance Key_group":
 		prefix: "SoftwareInstance_Key_group_"
-		body: '''
-			model.SoftwareInstance(key             := "%port%/%key_si_type%/%host.key%",
+		body: """
+			model.SoftwareInstance(key             := \"%port%/%key_si_type%/%host.key%\",
 			$0					   name            := name,
 			$0					   short_name      := short_name,
 			$0					   version         := full_version,
@@ -991,11 +1213,11 @@
 			$0					   type            := si_type
 			$0					   );
 			$0
-		'''
+		"""
 	"SoftwareInstance Detailed":
 		prefix: "SoftwareInstance_Detailed_"
-		body: '''
-			model.SoftwareInstance(key              := "%product_version%/%si_type%/%host.key%",
+		body: """
+			model.SoftwareInstance(key              := \"%product_version%/%si_type%/%host.key%\",
 			$0						   name             := name,
 			$0						   short_name       := short_name,
 			$0						   version          := full_version,
@@ -1005,7 +1227,7 @@
 			$0						   type             := si_type
 			$0						  );
 			$0
-		'''
+		"""
 
 	# comment - Extra:
 
@@ -1015,65 +1237,94 @@
 
 	# comment -   NUMBER FUNCTIONS::
 
-	"toChar number":
-		prefix: "toChar_number_"
+	"number.toChar(number)":
+		prefix: "number.toChar"
+		description: 'Converts the integer number in the ASCII range to a character.If the value is outside the ASCII range, it returns none.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/number.toChar'
 		body: "number.toChar(${1:number});$0"
-	"toText number":
-		prefix: "toText_number_"
+	"number.toText(number)":
+		prefix: "number.toText"
+		description: 'Converts the integer number to a text form'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/number.toText'
 		body: "number.toText(${1:number});$0"
-	"range number":
-		prefix: "range_number_"
+	"number.range(number)":
+		prefix: "number.range"
+		description: 'Generate a list containing 0 to number - 1. If number is less than 1 the list will be empty.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/number.range'
 		body: "number.range(${1:number});$0"
 
 	# comment -   TEXT FUNCTIONS::
-
-	"lower text":
-		prefix: "lower_text_"
+	"text.lower(string)":
+		prefix: "text.lower"
+		description: 'Returns the lower-cased version of the string argument.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.lower'
 		body: "text.lower(string)$0"
-	"upper text":
-		prefix: "upper_text_"
+	"text.upper(string)":
+		prefix: "text.upper"
+		description: 'Returns the upper-cased version of the string argument.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.upper'
 		body: "text.upper(string)$0"
-	"toNumber text":
-		prefix: "toNumber_text_"
+	"text.toNumber(string [, base ] )":
+		prefix: "text.toNumber"
+		description: 'Converts its string argument into a number. By default, the number is treated as a base 10 value; if the optional base is provided, the number is treated as being in the specified base. Bases from 2 to 36 are supported. Bases larger than 10 use the letters a through z to represent digits.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.toNumber'
 		body: "text.toNumber(port);$0"
-
 	# comment - REPLACE:
-
-	"replace text":
-		prefix: "replace_text_"
+	"text.replace(string, old, new)":
+		prefix: "text.replace"
+		description: 'Returns a modified version of the string formed by replacing all occurrences of the string old with new.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.replace'
 		body: "text.replace(${1:where_string}, \"${2:from_char}\", \"${3:to_char}\");$0"
-	"replace , to .":
-		prefix: "replace_,_to_._"
+	"text.replace() -> replace , to .":
+		prefix: "_text.replace_col"
+		description: 'Template to replace common characters.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.replace'
 		body: "text.replace(${1:string}, \",\", \".\");$0"
-	"replace - to .":
-		prefix: "replace_-_to_._"
+	"text.replace() -> replace - to .":
+		prefix: "_text.replace_min"
+		description: 'Template to replace common characters.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.replace'
 		body: "text.replace(${1:string}, \"-\", \".\");$0"
-	"replace \\\\ to \\\\\\\\":
-		prefix: "replace_\\\\_to_\\\\\\\\_"
+	"text.replace() -> replace \\\\ to \\\\\\\\":
+		prefix: "_text.replace_sla"
+		description: 'Template to replace common characters.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.replace'
 		body: "text.replace(${1:string}, \"\\\\\\\", \"\\\\\\\\\\\\\\\");$0"
-
 	# comment - STRING OPTIONS:
-
-	"join text":
-		prefix: "join_text_"
+	"text.join(list, \"separator\")":
+		prefix: "text.join"
+		description: 'Returns a string containing all items in a list of strings joined with the specified separator.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.join'
 		body: "text.join(${1:list}, \"${2:separator}\");$0"
-	"split text":
-		prefix: "split_text_"
-		body: "text.split(${1:string}, \"${2:sumbol}\");$0"
-	"strip text":
-		prefix: "strip_text_"
+	"text.split(string, [separator])":
+		prefix: "text.split"
+		description: 'Returns a list consisting of portions of the string split according to the separator string, where specified.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.split'
+		body: "text.split(${1:string}, \"${2:separator}\");$0"
+	"text.strip(string [, characters ] )":
+		prefix: "text.strip"
+		description: 'Strips unwanted characters from the start and end of the given string.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.strip'
 		body: "text.strip(${1:string});$0"
-	"leftStrip text":
-		prefix: "leftStrip_text_"
+	"text.leftStrip(string [, characters ] )":
+		prefix: "text.leftStrip"
+		description: 'Equivalent to text.strip, but only strips from the left side of the string.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.leftStrip'
 		body: "text.leftStrip(${1:string} [, ${2:characters} ] );$0"
-	"rightStrip text":
-		prefix: "rightStrip_text_"
+	"text.rightStrip(string [, characters ] )":
+		prefix: "text.rightStrip"
+		description: 'Equivalent to text.strip, but only strips from the right side of the string.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.rightStrip'
 		body: "text.rightStrip(${1:string} [, ${2:characters} ] );$0"
-	"hash text":
-		prefix: "hash_text_"
+	"text.hash(string)":
+		prefix: "text.hash"
+		description: 'Returns a hashed form of the string, generated with the MD5 hash algorithm.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.hash'
 		body: "text.hash(${1:string});$0"
-	"ordinal text":
-		prefix: "ordinal_text_"
+	"text.ordinal(string)":
+		prefix: "text.ordinal"
+		description: 'Returns the ordinal value of the string argument. The string must be one character in length.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.ordinal'
 		body: "text.ordinal(${1:string});$0"
 
 	# comment - LIST:
@@ -1086,27 +1337,29 @@
 
 	" _trav rel_proc_parent":
 		prefix: "_trav_rel_proc_parent_"
-		body: '''
+		description: ''
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
+		body: """
 			rel_services := search(in ${1:da_node} traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList
 								   $0traverse List:List:Member:DiscoveredProcess where pid = %pproc_pid%);$0
-		'''
+		"""
 	" _trav ContainedSoftware::SoftwareInstance":
 		prefix: "_trav_ContainedSoftware::SoftwareInstance_"
-		body: '''
+		body: """
 			obsolete_links := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:SoftwareInstance
 									 where type = %${2:si_type}% and key <> %key%
 									 step in SoftwareContainer:SoftwareContainment
 									 where #:ContainedSoftware:SoftwareInstance.key = %${3:related_si}.key%);$0
-		'''
+		"""
 	" _trav InferredElement::DiscoveredProcess":
 		prefix: "_trav_InferredElement::DiscoveredProcess_"
 		body: "procs := search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess);$0"
 	" _trav Host:HostedSoftware::SoftwareInstance":
 		prefix: "_trav_Host:HostedSoftware::SoftwareInstance_"
-		body: '''
+		body: """
 			some_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance
 							  where ${1:type} = "${2:type_here}");$0
-		'''
+		"""
 	" _trav Client::SoftwareInstance":
 		prefix: "_trav_Client::SoftwareInstance_"
 		body: "srv_si_list := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance where type = \"${2:type_here}\");$0"
@@ -1134,26 +1387,38 @@
 
 	# comment - LOG USUAL:
 
-	"debug log":
-		prefix: "debug_log_"
+	"log.debug(\"message\")":
+		prefix: "log.debug"
+		description: 'Log the given message with a debug level message. The log messages that are output automatically include the name of the pattern performing the log action.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/log.debug'
 		body: "log.debug(\"${1:message}\");$0"
-	"info log":
-		prefix: "info_log_"
+	"log.info(\"message\")":
+		prefix: "log.info"
+		description: 'Log the given message with a debug level message. The log messages that are output automatically include the name of the pattern performing the log action.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/log.info'
 		body: "log.info(\"${1:message}\");$0"
-	"warn log":
-		prefix: "warn_log_"
+	"log.warn(\"message\")":
+		prefix: "log.warn"
+		description: 'Log the given message with a debug level message. The log messages that are output automatically include the name of the pattern performing the log action.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/log.warn'
 		body: "log.warn(\"${1:message}\");$0"
-	"error log":
-		prefix: "error_log_"
+	"log.error(\"message\")":
+		prefix: "log.error"
+		description: 'Log the given message with a debug level message. The log messages that are output automatically include the name of the pattern performing the log action.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/log.error'
 		body: "log.error(\"${1:message}\");$0"
-	"critical log":
-		prefix: "critical_log_"
+	"log.critical(\"message\")":
+		prefix: "log.critical"
+		description: 'Log the given message with a debug level message. The log messages that are output automatically include the name of the pattern performing the log action.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/log.critical'
 		body: "log.critical(\"${1:message}\");$0"
 
 	# comment - LOG CUSTOM:
 
 	"_debug line":
 		prefix: "_debug_line_"
+		description: ''
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
 		body: "(?1:line)/}:$0"
 	"_debug simple":
 		prefix: "_debug_simple_"
@@ -1166,52 +1431,146 @@
 		body: "log.debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line:\");$0"
 	"_debug %node.attrs% Exec":
 		prefix: "_debug_%node.attrs%_Exec_"
-		body: '''
+		body: """
 			delta_time_tics := time.toTicks(time.current()) - time.toTicks(start_time);
-			(?1:log\\.)/}debug("DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line: Execution time:" + number.toText(delta_time_tics/10000) + "ms");$0
-		'''
+			(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line: Execution time:\" + number.toText(delta_time_tics/10000) + \"ms\");$0
+		"""
 
 	# comment - LOG SI:
-
 	"_info log SI":
 		prefix: "_info_log_SI_"
-		body: "log.info(\"%host.name%: SI created for %${1:si_type}%);$0"
+		body: "log.info(\"%host.name%: SI created for %${1:si_type}%\");$0"
 
 	# comment - EXTRACTIONS REGEX:
-
-	"regex extract Var":
-		prefix: "regex_extract_Var_"
+	"regex.extract(string, expression [, substitution] [, no_match])":
+		prefix: "regex.extract"
+		description: 'Returns the result of extracting the regular expression from the string, optionally with a substitution expression and a specified result if no match is found. Returns an empty string, or the string specified in no_match if the expression does not match. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
+		body: "regex.extract(${1:string}, ${2:expression}, raw '\\1', no_match := '${3:NoMatch}');$0"
+	"regex.extractAll(string, pattern)":
+		prefix: "regex.extractAll"
+		description: 'Returns a list containing all the non-overlapping matches of the pattern in the string. If the pattern contains more than one group, returns a list of lists containing the groups in order.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
+		body: "regex.extractAll(${1:string}, ${2:pattern});$0"
+	"regex.extract(variable, regex regex_raw, raw '\\1')":
+		prefix: "regex.extract_Var"
+		description: 'Tamplate for regex - extracting from: variable with some content in it.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\1');$0"
-	"regex extract node.attrs":
-		prefix: "regex_extract_node.attrs_"
+	"regex.extract(node.attrs, regex regex_raw, raw '\\1')":
+		prefix: "regex.extract_node.attrs"
+		description: 'Tamplate for regex - extracting from: node with attribues.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "regex.extract(${1:node}.${2:attrs}, regex \"${3:regex_raw}\", raw '\\1');$0"
-	"regex extract raw 1,2":
-		prefix: "regex_extract_raw_1,2_"
+	"regex.extract(variable, regex regex_raw, raw '\\1', raw '\\2)":
+		prefix: "regex.extract_raw_1,2"
+		description: 'Tamplate for regex - extracting from: variable with two groups to check.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\\\${3:1}', raw '\\\\${4:2}');$0"
 
 	# comment - EXTRACTIONS Xpath:
 
-	"xpath evaluate":
-		prefix: "xpath_evaluate_"
+	"xpath.evaluate(string, expression)":
+		prefix: "xpath.evaluate"
+		description: 'Returns the result of evaluating the xpath expression against the XML string. Returns a list of strings containing the selected values. The result is always a list, even if the expression is guaranteed to always return just one result.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/xpath.evaluate'
 		body: "xpath.evaluate(${1:some_file_path}, \"${2:xpath_string}\");$0"
-	"xpath openDocument":
-		prefix: "xpath_openDocument_"
+	"xpath.openDocument(string)":
+		prefix: "xpath.openDocument"
+		description: 'Returns the DOM object resulting from parsing the XML string. The DOM object returned is suitable for passing to xpath.evaluate.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/xpath.openDocument'
 		body: "xpath.openDocument(${1:some_file_path});$0"
-	"xpath closeDocument":
-		prefix: "xpath_closeDocument_"
+	"xpath.closeDocument(DOM object)":
+		prefix: "xpath.closeDocument"
+		description: 'Closes the DOM object resulting from xpath.openDocument.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/xpath.closeDocument'
 		body: "xpath.closeDocument(${1:some_file_path});$0"
+
+	# Table functions:
+	"table( [ parameters ] )":
+		prefix: "table"
+		description: 'Creates a new table.With no parameters, creates an empty table. If parameters are given, initializes the table with items where the keys are the parameter names and the values are the parameter values.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/table'
+		body: "table();$0"
+	"table.remove(table, key)":
+		prefix: "table.remove"
+		description: 'Removes the specified key from the specified table.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/table.remove'
+		body: "table.remove(${1:table}, ${2:key});$0"
 
 	# comment - CONTAINERS:
 
-	"detailContainer _related":
-		prefix: "detailContainer__related_"
+	"related.detailContainer(node)":
+		prefix: "related.detailContainer"
+		description: 'Returns the Software Component, Software Instance, or Business Application Instance node containing the given node.The given node can be a Detail or DatabaseDetail. If no single container node can be found None is returned.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/related.detailContainer'
 		body: "related.detailContainer(${1:node});$0"
-	"hostingNode _related":
-		prefix: "hostingNode__related_"
+	"related.hostingNode( [\"fallback_kind\"], attributes...)":
+		prefix: "related.hostingNode"
+		description: 'Returns a Host or Cluster node that is associated with the node that triggered the pattern.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/related.hostingNode'
 		body: "related.hostingNode(\"${1:Cluster}\", type := \"${2:SQL Server}\", properties := ${3:required_properties});$0"
-	"_related_host  _related":
-		prefix: "_related_host_related_"
+	"related.host(node)":
+		prefix: "related.host"
+		description: 'Returns the Host node corresponding to the given node.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/related.host'
 		body: "related.host(${1:node});$0"
+
+	# https://docs.bmc.com/docs/display/DISCO111/Email+functions
+
+	"mail.send(recipients, subject, message)":
+		prefix: "mail.send"
+		description: 'Sends an email. recipients is a single string containing an email address, or a list of email address strings; subject is the subject line to use in the email; message is the message contents.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/mail.send'
+		body: "mail.send(${1:recipients}, ${2:subject}, ${3:message});$0"
+
+	# https://docs.bmc.com/docs/display/DISCO111/Time+functions
+	"time.current()":
+		prefix: "time.current"
+		description: 'Returns an internal datetime object representing the current UTC time.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.current'
+		body: "time.current();$0"
+	"time.delta(days, hours, minutes, seconds)":
+		prefix: "time.delta"
+		description: 'Creates a time delta that can be added to or subtracted from a time represented by an internal datetime object. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.delta'
+		body: "time.delta(${1:days}, ${2:hours}, ${3:minutes}, ${4:seconds});$0"
+	"time.parseLocal(string)":
+		prefix: "time.parseLocal"
+		description: 'Converts a string representing a local time into an internal UTC datetime object. If no time zone is present in the string it will use the time zone of the appliance.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.parseLocal'
+		body: "time.parseLocal(${1:string});$0"
+	"time.parseUTC(string)":
+		prefix: "time.parseUTC"
+		description: 'Take a UTC time string and converts it into an internal datetime object. It is not adjusted for timezones or daylight saving time. '
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.parseUTC'
+		body: "time.parseUTC(${1:string});$0"
+	"time.formatLocal(datetime [, format ])":
+		prefix: "time.formatLocal"
+		description: 'Formats an internal datetime object into a human-readable string.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.formatLocal'
+		body: "time.formatUTC(${1:lastRebootedDate}, raw \"%m/%d/%Y %H:%M:%S\");$0"
+	"time.formatUTC(datetime [, format ])":
+		prefix: "time.formatUTC"
+		description: 'Formats an internal datetime object into a human-readable string.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.formatUTC'
+		body: "time.formatUTC(${1:datetime} [, format ]);$0"
+	"time.toTicks(datetime)":
+		prefix: "time.toTicks"
+		description: 'Converts an internal datatime object (UTC) to ticks.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.toTicks'
+		body: "time.toTicks(${1:datetime});$0"
+	"time.fromTicks(ticks)":
+		prefix: "time.fromTicks"
+		description: 'Converts ticks to an internal datetime object (UTC).'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.fromTicks'
+		body: "time.fromTicks(${1:ticks});$0"
+	"time.deltaFromTicks(ticks)":
+		prefix: "time.deltaFromTicks"
+		description: 'Converts ticks into a time delta.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/time.deltaFromTicks'
+		body: "time.deltaFromTicks(${1:ticks});$0"
+
 
 	# comment - SIMPLE IDENTIFIERS::
 
@@ -1229,11 +1588,11 @@
 
 	"_os_class host.os_class":
 		prefix: "_os_class_host.os_class_"
-		body: '''
+		body: """
 			if host.os_class = "Windows" then
 				sep := '\\\\\\';
 			else
 				sep := '/';
 			end if;
 			$0
-		'''
+		"""
