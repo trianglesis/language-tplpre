@@ -4,7 +4,7 @@
 ]
 'foldingStartMarker': '(/\\*|\\{|\\()'
 'foldingStopMarker': '(\\*/|\\}|\\))'
-'name': 'Regular Expressions (Python)'
+'name': 'Regular Expressions (tpl) python like'
 'patterns': [
   {
     'match': '\\\\[bBAZzG]|\\^|\\$'
@@ -151,4 +151,4 @@
         ]
       }
     ]
-'scopeName': 'source.regexp.python'
+'scopeName': 'source.regexp.tplpre'

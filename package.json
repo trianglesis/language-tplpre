@@ -5,15 +5,15 @@
     "atom": "*",
     "node": "*"
   },
-  "description": "BMC tpl language support in Atom",
-  "homepage": "https://atom.github.io/language-tplpre",
+  "description": "BMC tplpre language support in Atom",
+  "homepage": "https://atom.github.io/language-python",
   "repository": {
     "type": "git",
-    "url": "http://atom.github.io/language-tplpre.git"
+    "url": "https://github.com/atom/tpl-syntax"
   },
   "license": "MIT",
   "bugs": {
-    "url": "http://atom.github.io/language-tplpre/issues"
+    "url": "https://github.com/atom/language-python/issues"
   },
   "devDependencies": {
     "coffeelint": "^1.10.1"

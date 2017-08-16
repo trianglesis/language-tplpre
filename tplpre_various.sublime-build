@@ -1,0 +1,220 @@
+{
+    "selector": "source.tplpre",
+    "cmd": ["C:\\Python27\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\TPLPreprocessor.py", "-q", "-f", "{FILE_ACTIVE}"],
+    "working_dir": "{FILE_ACTIVE_PATH}",
+    "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+    "variants": [
+
+        # Just run tpl Syntax check
+        { "name": "TPL Syntax check",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-tpl", "10.2",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-l", "debug"]
+        },
+
+        # Just run TPLPreprocessor on one file
+        { "name": "TPL Preproc",
+          "cmd": ["C:\\Python27\\python.exe",
+                  "{PROJECT_PATH}\\bmc_tplpre\\TPLPreprocessor.py", "-q", "-f", "{FILE_ACTIVE}"]
+        },
+
+        # Run TPLPreprocessor and import related patterns in result folder
+        { "name": "TPL Preproc + imports",
+          "cmd": ["C:\\Python27\\python.exe",
+                  "{PROJECT_PATH}\\bmc_tplpre\\TPLPreprocessor.py", "-q", "-f", "{FILE_ACTIVE}", "-o", "{FILE_ACTIVE_PATH}"]
+        },
+
+        # Run TPLPreprocessor after tpl Syntax check on current pattern
+        { "name": "TPL Syntax check + Preproc (pattern)",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-tpl", "10.2",
+                  "-full_path", "{FILE_ACTIVE}",
+                  "-l", "info"]
+        },
+
+        # Run TPLPreprocessor after tpl Syntax check on current pattern folder
+        { "name": "TPL Syntax check + Preproc (folder)",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-tpl", "10.2",
+                  "-l", "info"]
+        },
+
+        # Run TPLPreprocessor after tpl Syntax check and upload pattern folder to ADDM
+        { "name": "UPLOAD 11.2-5(11) -- folder",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-tpl", "10.2",
+                  "-addm", "localhost",
+                  "-u", "USER", "-p", "PASS"]
+        },
+
+        # Run TPLPreprocessor after tpl Syntax check and upload current pattern to ADDM
+        { "name": "UPLOAD 11.2-5(11) -- pattern",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-full_path", "{FILE_ACTIVE}",
+                  "-tpl", "10.2",
+                  "-addm", "localhost",
+                  "-u", "USER", "-p", "PASS"]
+        },
+
+        # # Run TPLPreprocessor after tpl Syntax check and upload pattern folder to ADDM and run Scan in playback
+        # { "name": "bob play 11.2-5(11) (folder)",
+        #   "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+        #           "-wd", "{FILE_ACTIVE_PATH}",
+        #           "-tpl", "10.2",
+        #           "-addm", "localhost",
+        #           "-u", "USER", "-p", "PASS",
+        #           "-host_list", "remotehost_ip_addr4",
+        #           "-disco_mode", "playback",
+        #           "-l", "info"]
+        # },
+
+        # # Run TPLPreprocessor after tpl Syntax check and upload current pattern to ADDM and run Scan in playback
+        # { "name": "bob play 11.2-5 (pattern)",
+        #   "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+        #           "-wd", "{FILE_ACTIVE_PATH}",
+        #           "-full_path", "{FILE_ACTIVE}",
+        #           "-tpl", "10.2",
+        #           "-addm", "localhost",
+        #           "-u", "USER", "-p", "PASS",
+        #           "-host_list", "remotehost_ip_addr4",
+        #           "-disco_mode", "playback",
+        #           "-l", "info"]
+        # },
+
+        # # Run TPLPreprocessor after tpl Syntax check and upload pattern folder to ADDM and run Scan in Record
+        # { "name": "bob rec 11.2-5 (folder)",
+        #   "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+        #           "-wd", "{FILE_ACTIVE_PATH}",
+        #           "-tpl", "10.2",
+        #           "-addm", "localhost",
+        #           "-u", "USER", "-p", "PASS",
+        #           "-host_list", "remotehost_ip_addr6",
+        #           "-disco_mode", "record",
+        #           "-l", "info"]
+        # },
+
+
+
+# CASES:
+
+        { "name": "DISCOVERY 11.2-5(11) -- folder -- (remotehost_ip_addr5) -- (MS_SQL)",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-tpl", "10.2",
+                  "-addm", "localhost",
+                  "-u", "USER", "-p", "PASS",
+                  "-host_list", "remotehost_ip_addr5",
+                  "-disco_mode", "standard",
+                  "-l", "info"]
+        },
+        { "name": "DISCOVERY 11.2-5(11) -- pattern -- (remotehost_ip_addr5) -- (MS_SQL)",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "--FULL_CURRENT_PATH", "{FILE_ACTIVE}",
+                  "-tpl", "10.2",
+                  "-addm", "localhost",
+                  "-u", "USER", "-p", "PASS",
+                  "-host_list", "remotehost_ip_addr5",
+                  "-disco_mode", "standard"
+                  ]
+        },
+        { "name": "PLAYBACK 11.2-5(11) -- folder --  (remotehost_ip_addr4) ",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-tpl", "10.2",
+                  "-addm", "localhost",
+                  "-u", "USER", "-p", "PASS",
+                  "-host_list", "remotehost_ip_addr4",
+                  "-disco_mode", "playback",
+                  "-l", "debug"]
+        },
+        { "name": "PLAYBACK 11.2-5(11) -- pattern --  (remotehost_ip_addr4) ",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}",
+                  "-full_path", "{FILE_ACTIVE}",
+                  "-tpl", "10.2",
+                  "-addm", "localhost",
+                  "-u", "USER", "-p", "PASS",
+                  "-host_list", "remotehost_ip_addr4",
+                  "-disco_mode", "playback",
+                  "-l", "debug"]
+        },
+
+#  NEW PRODUCTS DISCOVERY AND RECORD DATA:
+
+  # MULIPLE HOSTS LOCAL AND REMOTE:
+      # Remote BMC HOSTS MY
+        { "name": "RECORD 2 11.2-5(11) -- pattern (SEAS) remotehost_ip_addr, remotehost_ip_addr2",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-full_path", "{FILE_ACTIVE}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "record", "-l", "debug",
+                                "-host_list", "remotehost_ip_addr, remotehost_ip_addr2"]
+        },
+        { "name": "RECORD 2 11.2-5(11) -- pattern () remotehost_ip_addr3, remotehost_ip_addr2",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-full_path", "{FILE_ACTIVE}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "record", "-l", "debug",
+                                "-host_list", "remotehost_ip_addr3, remotehost_ip_addr2"]
+        },
+        { "name": "RECORD 2 11.2-5(11) -- pattern  tkudev-05 -- remotehost_ip_addr2",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-full_path", "{FILE_ACTIVE}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "record", "-l", "debug",
+                                "-host_list", "remotehost_ip_addr2"]
+        },
+        { "name": "RECORD 2 11.2-5(11) -- pattern  Unix -- remotehost_ip_addr",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-full_path", "{FILE_ACTIVE}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "record", "-l", "debug",
+                                "-host_list", "remotehost_ip_addr"]
+        },
+        { "name": "DISCOVERY 11.2-5(11) -- folder remotehost_ip_addr, remotehost_ip_addr2",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "standard", "-l", "debug",
+                                "-host_list", "remotehost_ip_addr, remotehost_ip_addr2"]
+        },
+        { "name": "DISCOVERY 11.2-5(11) -- folder  tkudev-05 -- remotehost_ip_addr2",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "standard", "-l", "debug",
+                                "-host_list", "remotehost_ip_addr2"]
+        },
+        { "name": "DISCOVERY 11.2-5(11) -- folder  Unix -- remotehost_ip_addr",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "standard", "-l", "debug",
+                                "-host_list", "remotehost_ip_addr"]
+        },
+      # LOCAL HOSTS MY:
+        { "name": "DISCOVERY 11.2-5(11) -- pattern -- (remotehost_ip_addr)",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-full_path", "{FILE_ACTIVE}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "standard", "-l", "debug",
+                                    "-host_list", "remotehost_ip_addr"]
+        },
+        { "name": "DISCOVERY 11.2-5(11) -- folder -- (remotehost_ip_addr)",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "standard", "-l", "debug",
+                                    "-host_list", "remotehost_ip_addr"]
+        },
+
+
+  # Local HOST IN VM ONLY ONE:
+        { "name": "DISCOVERY 11.2-5(11) -- pattern -- (remotehost_ip_addr) -- TMSPS",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-full_path", "{FILE_ACTIVE}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "standard", "-l", "debug",
+                                    "-host_list", "remotehost_ip_addr"]
+        },
+
+        { "name": "DISCOVERY 11.2-5(11) -- folder -- (remotehost_ip_addr) -- TMSPS",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "standard", "-l", "debug",
+                                    "-host_list", "remotehost_ip_addr"]
+        },
+
+        { "name": "RECORD 11.2-5(11) -- pattern -- (remotehost_ip_addr) -- TMSPS",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py",
+                  "-wd", "{FILE_ACTIVE_PATH}", "-full_path", "{FILE_ACTIVE}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "record", "-l", "debug",
+                                    "-host_list", "remotehost_ip_addr"]
+        },
+
+        { "name": "RECORD 11.2-5(11) -- folder -- (remotehost_ip_addr) -- TMSPS",
+          "cmd": ["C:\\Python34\\python.exe", "{PROJECT_PATH}\\bmc_tplpre\\check.py", "-wd", "{FILE_ACTIVE_PATH}", "-tpl", "10.2", "-addm", "localhost", "-u", "USER", "-p", "PASS", "-disco_mode", "record", "-l", "debug",
+                                  "-host_list", "remotehost_ip_addr"]
+        },
+
+
+        { "name": "Dummy",
+          "cmd": ["Dummy"]
+        }
+
+
+    ]
+}

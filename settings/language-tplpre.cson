@@ -1,9 +1,14 @@
+# Alexander Danylchenko
+# BMC tpl\tplre language settings.
+# 2017-08-14 - Latest version.
+# experimental:
 '.source.tplpre':
   'editor':
-    'autoIndentOnPaste': false
+    'autoIndentOnPaste': true
     'softTabs': true
     'tabLength': 4
     'commentStart': '// '
-    'increaseIndentPattern': '^\\s*(class|def|elif|else|except|finally|for|if|try|with|while)\\b.*:\\s*$'
-    'decreaseIndentPattern': '^\\s*(elif|else|except|finally)\\b.*:\\s*$'
-    'decreaseNextIndentPattern': '^\\s*(pass|return|yield|continue|break|raise)\\b.*$'
+    'increaseIndentPattern': '(if|elif).*(\\S+\\s+then)\\b.*$'
+    'increaseIndentPattern': '(for).*(\\S+\\s+do)\\b.*$'
+    'decreaseIndentPattern': '(end\\sif;|end\\sfor;)$'
+    'decreaseNextIndentPattern': '^\\s*(pass;|break;)\\b.*$'
