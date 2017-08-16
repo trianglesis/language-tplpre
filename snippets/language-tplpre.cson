@@ -1011,7 +1011,7 @@
 			$0
 		"""
 	"SearchFunctions.getSoftwareNodes(host, node_address, software_type, port, instance, db_name)":
-	  prefix: "_db_host_port_SearchFunctions.getSoftwareNodes"
+		prefix: "_db_host_port_SearchFunctions.getSoftwareNodes"
 		description: 'Template of common SearchFunctions.getSoftwareNodes to find related database by node_address, software_type, port, instance, db_name.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
