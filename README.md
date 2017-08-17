@@ -11,3 +11,5 @@ Contributions are greatly appreciated. Please fork this repository and open a pu
 ### Additional functionality will be added soon in both versions for Sublime Text and Atom.
 
 Fell free to contact me via it@trianglesis.org.ua
+
+Last validation: 2017-08-17
