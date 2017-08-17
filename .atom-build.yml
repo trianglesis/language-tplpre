@@ -1,0 +1,33 @@
+cmd: 'C:\Python27\python.exe'
+name: 'TPLPreprocessor solo'
+args:
+  - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
+  - '-f {FILE_ACTIVE}'
+sh: true,
+cwd: {FILE_ACTIVE_PATH}
+# env:
+#   VARIABLE1: "VALUE1"
+#   VARIABLE2: "VALUE2"
+errorMatch:
+  - '\s+Error:\s+(.*)'
+warningMatch:
+  - '\s+Warning:\s+(.*)'
+keymap: ctrl-shift-t
+atomCommandName: tplpre:TPLPreprocessor
+targets:
+  extraTargetName:
+      cmd: 'C:\Python27\python.exe'
+      name: 'TPLPreprocessor imports'
+      args:
+        - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
+        - '-f {FILE_ACTIVE}'
+        - '-d {FILE_ACTIVE_PATH}'
+        - '-o {FILE_ACTIVE_PATH}'
+      sh: true,
+      cwd: {FILE_ACTIVE_PATH}
+      keymap: ctrl-shift-i
+      atomCommandName: tplpre:TPLPreprocessor imports
+      errorMatch:
+        - '\s+Error:\s+(.*)'
+      warningMatch:
+        - '\s+Warning:\s+(.*)'
