@@ -2,7 +2,7 @@
 
 Adds syntax highlighting and snippets for [tpl](https://docs.bmc.com/docs/display/DISCO111/The+Pattern+Language+TPL) in Atom.
 
-Originally re-made from the [Sublmime text 3 bundle](https://github.com/triaglesis/BMC_TPL_IDE).
+Originally re-made from the [Sublmime text 3 bundle](https://github.com/triaglesis/bmc_tpl).
 
 Build Logic for this package is not included, you can find it in separate [repo](https://github.com/triaglesis/BMC_TPL_IDE)
 
