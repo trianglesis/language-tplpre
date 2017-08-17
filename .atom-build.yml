@@ -15,19 +15,39 @@ warningMatch:
 keymap: ctrl-shift-t
 atomCommandName: tplpre:TPLPreprocessor
 targets:
-  extraTargetName:
-      cmd: 'C:\Python27\python.exe'
-      name: 'TPLPreprocessor imports'
-      args:
-        - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
-        - '-f {FILE_ACTIVE}'
-        - '-d {FILE_ACTIVE_PATH}'
-        - '-o {FILE_ACTIVE_PATH}'
-      sh: true,
-      cwd: {FILE_ACTIVE_PATH}
-      keymap: ctrl-shift-i
-      atomCommandName: tplpre:TPLPreprocessor imports
-      errorMatch:
-        - '\s+Error:\s+(.*)'
-      warningMatch:
-        - '\s+Warning:\s+(.*)'
+  extraTargetName: [
+            {
+              name: 'TPLPreprocessor imports'
+               cmd: 'C:\Python27\python.exe'
+               args:
+                 - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
+                 - '-f {FILE_ACTIVE}'
+                 - '-d {FILE_ACTIVE_PATH}'
+                 - '-o {FILE_ACTIVE_PATH}'
+               sh: true,
+               cwd: {FILE_ACTIVE_PATH}
+               keymap: ctrl-shift-i
+               atomCommandName: tplpre:TPLPreprocessor imports
+               errorMatch:
+                 - '\s+Error:\s+(.*)'
+               warningMatch:
+                 - '\s+Warning:\s+(.*)'
+            },
+            {
+              name: 'TPLPreprocessor imports'
+              cmd: 'C:\Python27\python.exe'
+              args:
+                - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
+                - '-f {FILE_ACTIVE}'
+                - '-d {FILE_ACTIVE_PATH}'
+                - '-o {FILE_ACTIVE_PATH}'
+              sh: true,
+              cwd: {FILE_ACTIVE_PATH}
+              keymap: ctrl-shift-i
+              atomCommandName: tplpre:TPLPreprocessor imports
+              errorMatch:
+                - '\s+Error:\s+(.*)'
+              warningMatch:
+                - '\s+Warning:\s+(.*)'
+            }
+]
