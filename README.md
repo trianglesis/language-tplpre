@@ -22,7 +22,7 @@ Build Logic for this package is not included, you can find it in separate [repo]
 
 ####  Automation, syntax check, upload pattern, etc:
 
-With module: [BMC_TPL_IDE](https://github.com/triaglesis/BMC_TPL_IDE) you can most development routines automatically.
+With module: [BMC_TPL_IDE](https://github.com/triaglesis/BMC_TPL_IDE) you can run most development routines automatically.
 For Atom command templates will be available in Command Palette (Ctrl+Shift+P) - [build system](https://atom.io/packages/build)
 
 
