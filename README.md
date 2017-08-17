@@ -13,9 +13,17 @@ Build Logic for this package is not included, you can find it in separate [repo]
 
 
 ## Use:
-- Set syntax: Ctrl+Shift+L -> type 'tplpre'
 
-- Automation, syntax check, upload pattern, etc:
+####  Set syntax: Ctrl+Shift+L -> type 'tplpre'
+
+![set syntax](https://github.com/triaglesis/language-tplpre/blob/master/Pictures/SetSyntax.png)
+
+
+####  Automation, syntax check, upload pattern, etc:
+
+![Build](https://github.com/triaglesis/language-tplpre/blob/master/Pictures/BuildSystem.png)
+
+![Buildresult](https://github.com/triaglesis/language-tplpre/blob/master/Pictures/BuildSystem_output.png)
 
 With module: [BMC_TPL_IDE](https://github.com/triaglesis/BMC_TPL_IDE) you can most development routines automatically.
 For Atom command templates will be available in Command Palette (Ctrl+Shift+P) - [build system](http://sublimetext.info/docs/en/reference/build_systems.html)
