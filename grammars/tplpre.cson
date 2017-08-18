@@ -1,7 +1,7 @@
 # Alexander Danylchenko
 # BMC tplpre\tpl syntax file highligh.
-# 2017-08-14 - Latest version.
-# Based on sublime-suntax.
+# 2017-08-18 - Latest version.
+# Based on sublime-syntax.
 'scopeName': 'source.tplpre'
 'name': 'Tplpre'
 'fileTypes': [
