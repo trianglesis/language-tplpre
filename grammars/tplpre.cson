@@ -258,11 +258,12 @@
 
 # 'THIS LINE'
   'qouted_line':
-    'match': '(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")'
+    'match': '(?<!\')(\')([^\']*)((\'))(?!\')'
     'comment': 'Still cannot match string like with empty or double quotes'
     'captures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'string.quoted.single.tplpre'
+      4: 'name': 'keyword.control.tplpre'
 
 # '<empty>'
   'qouted_line_empty':
@@ -322,7 +323,7 @@
       { 'include': '#qouted_line_empty' }
       { 'include': '#double_qouted_line' }
       { 'include': '#sql_query' }
-      # { 'include': '#percent_line' }
+      { 'include': '#percent_line' }
       { 'include': '#comment_TODO_line' }
       { 'include': '#comment_line' }
       { 'include': '#regexes' }
@@ -355,7 +356,7 @@
     'name': 'keyword.operator.assignment.tplpre'
   # var1 < var2
   'less':
-    'match': "\\<\\="
+    'match': "\\<"
     'name': 'keyword.operator.tplpre'
   # var2 > var1
   'more':
@@ -708,8 +709,9 @@
 
 # keyword.control.conditional
   # if, else, end if, for, end for
+
   'if_statement':
-    'comment': 'New beginCaptures include here usual types of expressions'
+    'comment': 'Match if ..values.. then and include usual lines. #lines can override some marks'
     # 'begin': '(?!end if;|then)(if)(?:.+?)(?:then)'
     'begin': '(?!end if;|then)(\\bif)'
     'beginCaptures':
@@ -729,28 +731,49 @@
         # }
         { 'include': '#all_functions' }
         { 'include': '#all_controls' }
-        { 'include': '#lines' }
-        { 'include': '#regex' }
+        { 'include': '#regexes' }
+        { 'include': '#all_keys' }
+        # { 'include': '#lines' }
     ]
-
-  # TODO catch this: elif versions_new[counter] and (text.toNumber(versions_new[counter]) < text.toNumber(version) ) then
-  # 'then_statement':
-  #   'comment': 'When if_statement is logically separated to begin\\end - this can be removed.'
-  #   'match': "\\bthen\\s+?"
-  #   'name': 'keyword.control.conditional.tplpre'
   'elif_statement':
-    'match': "\\belif\\s+?"
-    'name': 'keyword.control.conditional.tplpre'
+    'comment': 'Match elif ..values.. then and include usual lines. #lines can override some marks'
+    'begin': '(?!end if;|then)(\\belif)'
+    'beginCaptures':
+        1: 'name': 'keyword.control.conditional.tplpre'
+    'end': '(\\bthen)'
+    'endCaptures':
+        1: 'name': 'keyword.control.conditional.tplpre'
+    'patterns': [
+        # # experimental - to showup some attributes. Disable untill upgrade
+        # {
+        #   'match': '(\\w+)\\s+(?:and)\\s+(\\w+)\\.(\\w+)'
+        #   'comment': 'EXAMPLE: if f and f.content then'
+        #   'captures':
+        #       1: 'name': 'variable.parameter.function.tplpre'
+        #       2: 'name': 'variable.parameter.function.tplpre'
+        #       3: 'name': 'storage.type.class.tplpre'
+        # }
+        { 'include': '#all_functions' }
+        { 'include': '#all_controls' }
+        { 'include': '#regexes' }
+        { 'include': '#all_keys' }
+        # { 'include': '#lines' }
+    ]
+  # 'elif_statement':
+  # 'comment': 'Old simple match'
+  #   'match': "\\belif\\s+?"
+  #   'name': 'keyword.control.conditional.tplpre'
 
   'else_statement':
     'match': "\\belse\\b"
     'name': 'keyword.control.conditional.tplpre'
+
   'end_if_statement':
     'match': "(?!;|if|else\\w)\\bend\\b\\s\\bif\\b;"
     'name': 'keyword.control.conditional.tplpre'
 
   'for_statement':
-    'comment': 'Improve this with some logic.'
+    'comment': 'Improve this with some logic. Now only works when 4 spaces before it.'
     # 'begin': '(?!end for;|do)(\\bfor)'
     'begin': '\\s{4}(for\\b)(?!;)'
     'beginCaptures':
@@ -765,7 +788,7 @@
         { 'include': '#all_controls' }
     ]
   # 'for_statement':
-  #   'comment': 'When for_statement is logically separated to begin\\end - this can be removed.'
+  #   'comment': 'Old simple match'
   #   'match': "\\bend\\sfor;\\s+?"
   #   'name': 'keyword.control.tplpre'
 
@@ -808,7 +831,6 @@
     'patterns': [
       {'include': '#if_statement'}
       {'include': '#elif_statement'}
-      # {'include': '#then_statement'}
       {'include': '#else_statement'}
       {'include': '#end_if_statement'}
       {'include': '#for_statement'}
@@ -832,7 +854,12 @@
     'endCaptures':
       1: 'name': "comment.block.documentation.tplpre"
      'patterns': [
-        { 'include': "#sql_query" }
+       {
+         'name': "variable.parameter.tplpre"
+         'match': "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?"
+         'captures':
+           1: 'name': "variable.other.tplpre"
+         }
         {
           'name': "variable.parameter.tplpre"
           'match': "\\((QM\\d+)\\)"
@@ -857,12 +884,7 @@
           'captures':
             1: 'name': "variable.other.tplpre"
         }
-        {
-          # 'name': "variable.parameter.tplpre"
-          'match': "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?"
-          'captures':
-            1: 'name': "variable.other.tplpre"
-        }
+        # { 'include': "#sql_query" }
     ]
   # '''
   # THIS BLOCK
@@ -877,6 +899,12 @@
     'endCaptures':
       1: 'name': "comment.block.documentation.tplpre"
      'patterns': [
+       {
+         'name': "variable.parameter.tplpre"
+         'match': "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?"
+         'captures':
+           1: 'name': "variable.other.tplpre"
+         }
         {
           'name': "variable.parameter.tplpre"
           'match': "\\((QM\\d+)\\)"
@@ -898,12 +926,6 @@
         {
           'name': "variable.parameter.tplpre"
           'match': "\\((esc\\s+?\\d+)\\)"
-          'captures':
-            1: 'name': "variable.other.tplpre"
-        }
-        {
-          # 'name': "variable.parameter.tplpre"
-          'match': "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?"
           'captures':
             1: 'name': "variable.other.tplpre"
         }
@@ -990,7 +1012,7 @@
     ]
   'keywords_attrs':
     'comment': 'Changed disabled to 1 to turn off DEV highlighting.'
-    'disabled': 1
+    'disabled': 0
     'match': "\\b(key_group|key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b"
     'captures':
        1: 'name': 'storage.type.tplpre'
