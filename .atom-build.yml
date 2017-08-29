@@ -1,3 +1,12 @@
+# This is build system template.
+# Build Logic for this package is not included, you can find it in separate [repo](https://github.com/triaglesis/BMC_TPL_IDE)
+# File formatten in YML type.
+# More info: https://github.com/noseglid/atom-build#specify-a-custom-build-command
+# Additional build options listed here:
+# -disco_mode playback | record | standard
+# -host_list - list of host IP sep by comma
+# -l info | quiet | warn | debug | output | error
+# Run TPLPreprocessor on current file:
 cmd: 'C:\Python27\python.exe'
 name: 'TPLPreprocessor solo'
 args:
@@ -15,39 +24,95 @@ warningMatch:
 keymap: ctrl-shift-t
 atomCommandName: tplpre:TPLPreprocessor
 targets:
-  extraTargetName: [
-            {
-              name: 'TPLPreprocessor imports'
-               cmd: 'C:\Python27\python.exe'
-               args:
-                 - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
-                 - '-f {FILE_ACTIVE}'
-                 - '-d {FILE_ACTIVE_PATH}'
-                 - '-o {FILE_ACTIVE_PATH}'
-               sh: true,
-               cwd: {FILE_ACTIVE_PATH}
-               keymap: ctrl-shift-i
-               atomCommandName: tplpre:TPLPreprocessor imports
-               errorMatch:
-                 - '\s+Error:\s+(.*)'
-               warningMatch:
-                 - '\s+Warning:\s+(.*)'
-            },
-            {
-              name: 'TPLPreprocessor imports'
-              cmd: 'C:\Python27\python.exe'
-              args:
-                - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
-                - '-f {FILE_ACTIVE}'
-                - '-d {FILE_ACTIVE_PATH}'
-                - '-o {FILE_ACTIVE_PATH}'
-              sh: true,
-              cwd: {FILE_ACTIVE_PATH}
-              keymap: ctrl-shift-i
-              atomCommandName: tplpre:TPLPreprocessor imports
-              errorMatch:
-                - '\s+Error:\s+(.*)'
-              warningMatch:
-                - '\s+Warning:\s+(.*)'
-            }
-]
+  # Run TPLPreprocessor and import modules from active pattern:
+  - tplPreprocImports:
+    name: 'TPLPreprocessor imports'
+    cmd: 'C:\Python27\python.exe'
+    args:
+     - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
+     - '-f {FILE_ACTIVE}'
+     - '-d {FILE_ACTIVE_PATH}'
+     - '-o {FILE_ACTIVE_PATH}'
+    sh: true
+    cwd: {FILE_ACTIVE_PATH}
+    keymap: ctrl-shift-i
+    atomCommandName: tplpre:TPLPreprocessor_imports
+    errorMatch:
+     - '\s+Error:\s+(.*)'
+    warningMatch:
+     - '\s+Warning:\s+(.*)'
+# Check syntax on current pattern folder
+  - tplpreSyntaxCheckfolder:
+    name: 'Syntax check patter folder'
+    cmd: 'C:\Python34\python.exe C:\Users\o.danylchenko\.atom\packages\language-tplpre\check.py'
+    args:
+      - '-wd {FILE_ACTIVE_PATH}'
+      - '-tpl 10.2'
+      - '-l debug'
+    sh: true
+    # cwd: 'C:\Python34\python.exe'
+    keymap: ctrl-alt-s
+    atomCommandName: tplpre:Syntax_check_folder
+    errorMatch:
+      - '\s+(ERROR|Error|Errors):\s+(.*)'
+    warningMatch:
+      - '\s+Warning:\s+(.*)'
+# Check syntax on current pattern file
+  - tplpreSyntaxCheckpattern:
+    name: 'Syntax check patter file'
+    cmd: 'C:\Python34\python.exe C:\Users\o.danylchenko\.atom\packages\language-tplpre\check.py'
+    args:
+      - '-wd {FILE_ACTIVE_PATH}'
+      - '-full_path {FILE_ACTIVE}'
+      - '-tpl 10.2'
+      - '-l debug'
+    sh: true
+    # cwd: 'C:\Python34\python.exe'
+    keymap: ctrl-alt-p
+    atomCommandName: tplpre:Syntax_check_file
+    errorMatch:
+      - '\s+(ERROR|Error|Errors):\s+(.*)'
+    warningMatch:
+      - '\s+Warning:\s+(.*)'
+# Check syntax on current pattern and upload to ADDM
+  - tplpreUpload:
+    name: 'Upload pattern'
+    cmd: 'C:\Python34\python.exe C:\Users\o.danylchenko\.atom\packages\language-tplpre\check.py'
+    args:
+      - '-wd {FILE_ACTIVE_PATH}'
+      - '-full_path {FILE_ACTIVE}'
+      - '-tpl 10.2'
+      - '-l debug'
+      - '-addm ip_arrd'
+      - '-u root'
+      - '-p pasword'
+    sh: true
+    # cwd: 'C:\Python34\python.exe'
+    # keymap: ctrl-alt-p
+    atomCommandName: tplpre:Upload_folder
+    errorMatch:
+      - '\s+(ERROR|Error|Errors):\s+(.*)'
+    warningMatch:
+      - '\s+Warning:\s+(.*)'
+# Check syntax on current pattern file
+  - tplpreUploadScanStandard:
+    name: 'Upload Scan -standard-'
+    cmd: 'C:\Python34\python.exe C:\Users\o.danylchenko\.atom\packages\language-tplpre\check.py'
+    args:
+      - '-wd {FILE_ACTIVE_PATH}'
+      - '-full_path {FILE_ACTIVE}'
+      - '-tpl 10.2'
+      - '-l debug'
+      - '-addm ip_arrd'
+      - '-u root'
+      - '-p pasword'
+      - '-host_list 0.0.0.0'
+      - '-disco_mode standard'
+    sh: true
+    # cwd: 'C:\Python34\python.exe'
+    # keymap: ctrl-alt-p
+    atomCommandName: tplpre:Upload_folder_scan_standard
+    errorMatch:
+      - '\s+(ERROR|Error|Errors):\s+(.*)'
+    warningMatch:
+      - '\s+Warning:\s+(.*)'

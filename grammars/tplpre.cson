@@ -1,6 +1,5 @@
 # Alexander Danylchenko
 # BMC tplpre\tpl syntax file highligh.
-# 2017-08-18 - Latest version.
 # Based on sublime-syntax.
 'scopeName': 'source.tplpre'
 'name': 'Tplpre'
@@ -36,6 +35,19 @@
         4: 'name': 'entity.name.function.tplpre'
         5: 'name': 'constant.numeric.tplpre'
   }
+# pattern import section 2 cols
+# Make begin/end captures
+  # {
+  #   'match': 'from\\s(\\w+)(?:\.(\\w+))?(?:\.(\\w+))?\\simport\\s+(?:(\\S+)\\s+(\\d+(?:\.\\d+)),)\\s+(?:(\\S+)\\s+(\\d+(?:\.\\d+));)'
+  #   'captures':
+  #       1: 'name': 'entity.name.function.tplpre'
+  #       2: 'name': 'storage.type.tplpre'
+  #       3: 'name': 'variable.parameter.tplpre'
+  #       4: 'name': 'entity.name.function.tplpre'
+  #       5: 'name': 'constant.numeric.tplpre'
+  #       6: 'name': 'entity.name.function.tplpre'
+  #       7: 'name': 'constant.numeric.tplpre'
+  # }
 # Highlight configuration sections
   {
     'begin': '^(configuration)\\s(\\S+)\\s(\\d+\\.\\d+)'
@@ -86,10 +98,10 @@
         1: 'name': 'keyword.control.tplpre'
     # 'name': 'meta.class.old-style.python'
     'patterns': [
-      { 'include': '#comment_line' }
-      { 'include': '#doc_strings' }
       { 'include': '#define' }
       { 'include': '#alt_define' }
+      { 'include': '#comment_line' }
+      { 'include': '#doc_strings' }
       { 'include': '#lines' }
       { 'include': '#if_addm' }
     ]
@@ -948,6 +960,7 @@
     ]
 #  define section
 # Highlight define sections
+# DO NOT SWITCH INCLUDE ORDER!
   'define':
     'comment': 'Adding SQL support via #lines'
     'begin': '\\s+(define)\\s+(\\S+)\\((.*?)\\)(\\s\\S+\\s(.*))?'
@@ -960,14 +973,15 @@
     'endCaptures':
       1: 'name': 'keyword.control.tplpre'
     'patterns': [
-        { 'include': "#lines" }
         { 'include': "#doc_strings" }
         { 'include': "#all_functions" }
         { 'include': "#all_controls" }
         { 'include': "#if_addm" }
         { 'include': "#dev_keys" }
+        { 'include': "#lines" }
       ]
 # Altermate define
+# DO NOT SWITCH INCLUDE ORDER!
   'alt_define':
     'comment': 'Adding SQL support via #lines'
     'begin': '\\s+(define)\\s+(\\S+)(\\s\\S+\\s(.*))?'
@@ -980,11 +994,11 @@
       1: 'name': 'keyword.control.tplpre'
     'patterns': [
         { 'include': "#doc_strings" }
-        { 'include': "#lines" }
         { 'include': "#all_functions" }
         { 'include': "#all_controls" }
         { 'include': "#if_addm" }
         { 'include': "#dev_keys" }
+        { 'include': "#lines" }
       ]
 # * Simple Identifiers *
   'simple_identifiers':
