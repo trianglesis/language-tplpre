@@ -438,9 +438,11 @@
     'begin': '(regex)\\s+?(?=\')(.+?)'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'keyword.control.tplpre'
     'end': '(?=\')'
     'endCaptures':
       1: 'name': "support.function.tplpre"
+      2: 'name': 'keyword.control.tplpre'
      'patterns': [
         { 'include': '#regular_expressions' }
       ]
@@ -449,9 +451,11 @@
     'begin': '(regex)\\s+?(?=\")(.+?)'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'keyword.control.tplpre'
     'end': '(?=\")'
     'endCaptures':
       1: 'name': "support.function.tplpre"
+      2: 'name': 'keyword.control.tplpre'
      'patterns': [
         { 'include': '#regular_expressions' }
       ]
@@ -1005,7 +1009,8 @@
     'begin': '\\b(identify)\\s+(\\w+)\\s(\\d+(?:\\.\\d+)+)'
     'beginCaptures':
       1: 'name': "keyword.control.tplpre"
-      2: 'name': "constant.numeric.tplpre"
+      2: 'name': 'entity.name.function'
+      3: 'name': "constant.numeric.tplpre"
     'end': '(end\\sidentify;)'
     'endCaptures':
       1: 'name': 'keyword.control.tplpre'
