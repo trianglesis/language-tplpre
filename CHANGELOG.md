@@ -1,3 +1,6 @@
+## 0.1.4 2017-08-30
+- regex fix was not properly updated
+
 ## 0.1.3 2017-08-30
 - simple_identifiers fix regex
 - regex strings fix regex
