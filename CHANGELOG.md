@@ -1,4 +1,7 @@
-## 0.0.2 2017-08-29
+## 0.1.2 2017-08-30
+- build file draft for all operations
+
+## 0.1.1 2017-08-29
 - definitions functions fix
 - build yml example in module root updated
 
