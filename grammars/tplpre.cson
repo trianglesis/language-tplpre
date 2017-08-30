@@ -410,39 +410,16 @@
       { 'include': '#just_do' }
     ]
 
-# Regex functions:
-  'regex':
-    'match': '\\b(regex)\\s+'
-    'name': 'regex.tplpre'
-    'captures':
-      1: 'name': 'keyword.control.tplpre'
-  'regex_2_lines':
-    'match': '(regex)'
-    'name': 'regex.tplpre'
-    'captures':
-      1: 'name': 'keyword.control.tplpre'
-  'regex_raw':
-    'match': "\\b(raw)\\s+('|\")(\\\\\\d+)('|\")"
-    'captures':
-      1: 'name': 'keyword.control.tplpre'
-      2: 'name': 'keyword.control.tplpre'
-      3: 'name': 'keyword.control.tplpre'
-  'content_raw':
-    'match': "\\s\\b(raw)\\s+"
-    'captures':
-      1: 'name': 'keyword.control.tplpre'
-
 # Trying to highlight regex string.
   'regex_token_s_quote':
     'comment': 'Catch regex in single quotes'
     'begin': '(regex)\\s+?(?=\')(.+?)'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
-      2: 'name': 'keyword.control.tplpre'
-    'end': '(?=\')'
+      2: 'name': 'support.function.tplpre'
+    'end': '(\')'
     'endCaptures':
       1: 'name': "support.function.tplpre"
-      2: 'name': 'keyword.control.tplpre'
      'patterns': [
         { 'include': '#regular_expressions' }
       ]
@@ -451,22 +428,18 @@
     'begin': '(regex)\\s+?(?=\")(.+?)'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
-      2: 'name': 'keyword.control.tplpre'
-    'end': '(?=\")'
+      2: 'name': 'support.function.tplpre'
+    'end': '(\")'
     'endCaptures':
       1: 'name': "support.function.tplpre"
-      2: 'name': 'keyword.control.tplpre'
      'patterns': [
         { 'include': '#regular_expressions' }
       ]
-
   'regexes':
     'patterns': [
       # {'include': '#regex_raw'}
-      # {'include': '#regex'}
       {'include': '#regex_token_s_quote'}
       {'include': '#regex_token_d_quote'}
-      # {'include': '#content_raw'}
     ]
 # BuiltIN tplre functions:
 # Later some checks can be added
