@@ -1,3 +1,7 @@
+## 0.1.3 2017-08-30
+- simple_identifiers fix regex
+- regex strings fix regex
+
 ## 0.1.2 2017-08-30
 - build file draft for all operations
 
