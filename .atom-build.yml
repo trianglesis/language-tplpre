@@ -10,6 +10,8 @@
 # You can assign own variables to use them in each target, as described below:
           # FORMAT ASSIGN:| MY_ADDM_1: &MY_ADDM_1 "192.168.1.1"
           # FORMAT CALL:| *MY_ADDM_1
+# IMPORTANT!
+# Password should not contain any symbols from this list: ['"-+=|\/] and whitespaces.
 PYTHON27: &PYTHON27 C:\Python27\python.exe
 CHECK: &CHECK "C:\\Python34\\python.exe D:\\BMC_TPL_IDE\\bmc_tplpre\\check.py"
 PREPROCESSOR: &PREPROC d:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py
