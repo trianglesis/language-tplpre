@@ -1,18 +1,25 @@
 # This is build system template.
 # Build Logic for this package is not included, you can find it in separate [repo](https://github.com/triaglesis/BMC_TPL_IDE)
 # File formatten in YML type.
-# More info: https://github.com/noseglid/atom-build#specify-a-custom-build-command
+          # More info: https://github.com/noseglid/atom-build#specify-a-custom-build-command
 # Additional build options listed here:
-# -disco_mode playback | record | standard
-# -host_list - list of host IP sep by comma
-# -l info | quiet | warn | debug | output | error
+          # -disco_mode playback | record | standard
+          # -host_list - list of host IP sep by comma
+          # -l info | quiet | warn | debug | output | error
+# VARIABLES:
+# You can assign own variables to use them in each target, as described below:
+          # FORMAT ASSIGN:| MY_ADDM_1: &MY_ADDM_1 "192.168.1.1"
+          # FORMAT CALL:| *MY_ADDM_1
+PYTHON27: &PYTHON27 C:\Python27\python.exe
+CHECK: &CHECK "C:\\Python34\\python.exe D:\\BMC_TPL_IDE\\bmc_tplpre\\check.py"
+PREPROCESSOR: &PREPROC d:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py
+# BUILD OPTIONS:
 # Run TPLPreprocessor on current file:
-cmd: 'C:\Python27\python.exe'
+cmd: *PYTHON27
 name: 'TPLpre automation'
 args:
-  - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
+  - *PREPROC
   - '-f {FILE_ACTIVE}'
-# sh: true,
 cwd: '{FILE_ACTIVE_PATH}'
 # env:
 #   VARIABLE1: "VALUE1"
@@ -23,18 +30,19 @@ warningMatch:
   - '\s+Warning:\s+(.*)'
 keymap: ctrl-shift-t
 atomCommandName: tpl:TPLPreprocessor
+# Other targets:
+# NOTE: Use different instance, name, atomCommandName, keymap for each!
 targets:
 # LOCAL ACTIONS:
   # Run TPLPreprocessor and import modules from active pattern:
   - tplPreprocImports:
     name: 'TPLPreprocessor imports'
-    cmd: 'C:\Python27\python.exe'
+    cmd: *PYTHON27
     args:
-     - 'd:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py'
+     - *PREPROC
      - '-f {FILE_ACTIVE}'
      - '-d {FILE_ACTIVE_PATH}'
      - '-o {FILE_ACTIVE_PATH}'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
     keymap: ctrl-shift-i
     atomCommandName: tpl:TPLPreprocessor_imports
@@ -46,11 +54,10 @@ targets:
       # WARN: Will fail without previously run any imports!!!
   - tplpreSyntaxCheckSolo:
     name: 'Syntax pattern'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
     keymap: ctrl-alt-s
     atomCommandName: tpl:Syntax_check_solo
@@ -62,12 +69,11 @@ targets:
     # Check syntax on recursive imports
   - tplpreSyntaxCheckRecursiveImports:
     name: 'Syntax recursive'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
     keymap: ctrl-alt-r
     atomCommandName: tpl:Syntax_check_recursive
@@ -78,13 +84,12 @@ targets:
     # Check syntax on recursive imports + test
   - tplpreSyntaxCheckRecursiveImportsTests:
     name: 'Syntax recursive + test.py'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
       - '-read_test'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
     keymap: ctrl-alt-shift-t
     atomCommandName: tpl:Syntax_check_recursive_test
@@ -99,7 +104,7 @@ targets:
   # Check syntax on recursive imports and zip paterns for ADDM version:
   - tplpreSyntaxCheckRecursiveImportsZipADDM:
     name: 'Syntax recursive zip addm'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
@@ -110,9 +115,8 @@ targets:
       - '-p'
       - 'tideway_password'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-r
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_check_recursive_zip_addm
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'
@@ -122,7 +126,7 @@ targets:
   # Check syntax on recursive imports + test and zip paterns for ADDM version:
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDM:
     name: 'Syntax recursive + test.py zip addm'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
@@ -134,9 +138,8 @@ targets:
       - '-p'
       - 'tideway_password'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-shift-t
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_check_recursive_test_zip_addm
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'
@@ -148,7 +151,7 @@ targets:
   # Recursive
   - tplpreSyntaxCheckRecursiveImportsZipADDMUpload:
     name: 'Syntax recursive zip addm upload'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
@@ -161,9 +164,8 @@ targets:
       - '-disco_mode'
       - 'record'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-r
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'
@@ -173,7 +175,7 @@ targets:
   # Recursive + test
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDMUpload:
     name: 'Syntax recursive + test.py zip addm upload'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
@@ -187,9 +189,8 @@ targets:
       - '-disco_mode'
       - 'record'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-shift-t
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'
@@ -200,7 +201,7 @@ targets:
       # Check syntax on recursive imports and zip paterns for ADDM version and Upload
   - tplpreSyntaxCheckRecursiveImportsZipADDMUploadScan:
     name: 'Syntax recursive zip addm upload scan'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
@@ -219,9 +220,8 @@ targets:
       # - '-system_password'
       # - 'DUMMY'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-r
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload_scan
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'
@@ -230,7 +230,7 @@ targets:
       # Check syntax on recursive imports + test and zip paterns for ADDM version and Upload
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDMUploadScan:
     name: 'Syntax recursive + test.py zip addm upload scan'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
@@ -250,9 +250,8 @@ targets:
       # - '-system_password'
       # - 'DUMMY'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-shift-t
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload_scan
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'
@@ -262,7 +261,7 @@ targets:
     # Solo check and upload and scan
   - tplpreSoloSyntaxCheckZipADDMUpload:
     name: 'Syntax Solo zip addm upload'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-addm'
@@ -274,9 +273,8 @@ targets:
       - '-disco_mode'
       - 'record'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-shift-t
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_solo_zip_addm_upload
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'
@@ -284,7 +282,7 @@ targets:
       - '\s+Warning:\s+(.*)'
   - tplpreSoloSyntaxCheckZipADDMUploadScan:
     name: 'Syntax Solo zip addm upload scan'
-    cmd: 'C:\Python34\python.exe C:\Users\USER\.atom\packages\language-tplpre\check.py'
+    cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-addm'
@@ -302,9 +300,8 @@ targets:
       # - '-system_password'
       # - 'DUMMY'
       - '-l info'
-    # sh: true
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl-alt-shift-t
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
     atomCommandName: tpl:Syntax_solo_zip_addm_upload_scan
     errorMatch:
       - '\s+(ERROR|Error|Errors):\s+(.*)'

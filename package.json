@@ -16,9 +16,16 @@
     "url": "https://github.com/triaglesis/language-tplpre/issues"
   },
   "devDependencies": {
-    "coffeelint": "^1.10.1",
-    "build": "^0.68.0",
-    "atom-monokai": "^0.10.9",
-    "atom-alignment": "^0.13.0"
-  }
+    "coffeelint": "^1.10.1"
+  },
+  "keywords": [
+    "language-tplpre",
+    "tplpre",
+    "tpl",
+    "syntax",
+    "template",
+    "grammar",
+    "discovery",
+    "BMC"
+  ]
 }
