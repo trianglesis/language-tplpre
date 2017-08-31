@@ -800,8 +800,15 @@
         1: 'name': 'keyword.operator.tplpre'
 
   'if_ADDM_statement':
-    'match': '#IFADDM'
-    'name': 'keyword.control.conditional.tplpre'
+    'match': '(#IFADDM)\\s+(\\d+\.\\d+)'
+    'captures':
+        1: 'name': 'keyword.control.conditional.tplpre'
+        2: 'name': 'constant.numeric.tplpre'
+  'elif_ADDM_statement':
+    'match': '(#ELIFADDM)\\s+(\\d+\.\\d+)'
+    'captures':
+        1: 'name': 'keyword.control.conditional.tplpre'
+        2: 'name': 'constant.numeric.tplpre'
   'else_ADDM_statement':
     'match': '#ELSE\\s+?'
     'name': 'keyword.control.conditional.tplpre'
@@ -813,6 +820,7 @@
   'if_addm':
     'patterns': [
       { 'include': '#if_ADDM_statement' }
+      { 'include': '#elif_ADDM_statement' }
       { 'include': '#else_ADDM_statement' }
       { 'include': '#end_if_ADDM_statement' }
     ]
