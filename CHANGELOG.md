@@ -1,3 +1,7 @@
+## 0.1.4 2017-09-04
+- regex.extract snippet fix.
+- build script info and examples updated
+
 ## 0.1.4 2017-08-30
 - regex fix was not properly updated
 

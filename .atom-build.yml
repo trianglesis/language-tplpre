@@ -1,43 +1,65 @@
 # This is build system template.
+# Build module used: https://github.com/noseglid/atom-build
 # Build Logic for this package is not included, you can find it in separate [repo](https://github.com/triaglesis/BMC_TPL_IDE)
 # File formatten in YML type.
           # More info: https://github.com/noseglid/atom-build#specify-a-custom-build-command
+#
+# =============================================
+#
 # Additional build options listed here:
           # -disco_mode playback | record | standard
           # -host_list - list of host IP sep by comma
           # -l info | quiet | warn | debug | output | error
+# =============================================
 # VARIABLES:
 # You can assign own variables to use them in each target, as described below:
-          # FORMAT ASSIGN:| MY_ADDM_1: &MY_ADDM_1 "192.168.1.1"
-          # FORMAT CALL:| *MY_ADDM_1
+          # FORMAT ASSIGN:|   MY_ADDM_1: &MY_ADDM_1 "192.168.1.1"
+          # FORMAT CALL:|     *MY_ADDM_1
+#
+# =============================================
 # IMPORTANT!
-# Password should not contain any symbols from this list: ['"-+=|\/] and whitespaces.
+# CHECK: string in double qoutes with two args in: "path_to_python_3<whitespace>path_to_check.py_module.""
+# ADDM_IP_11: IP address of running BMC Discovery (ADDM) appliance.
+# user_see_note: User should not contain any symbols from this list: ['"-+=|\/] and whitespaces.
+# password_see_note: Password should not contain any symbols from this list: ['"-+=|\/] and whitespaces.
+# HOST_LIST: list of ip addresses without spaces separated by coma
+# =============================================
+#
 PYTHON27: &PYTHON27 C:\Python27\python.exe
 CHECK: &CHECK "C:\\Python34\\python.exe D:\\BMC_TPL_IDE\\bmc_tplpre\\check.py"
 PREPROCESSOR: &PREPROC d:\perforce\addm\tkn_main\buildscripts\TPLPreprocessor.py
+ADDM_IP_11: &ADDM_IP_11 192.168.1.1
+ADDM_USR_11: &ADDM_USR_11 user_see_note
+ADDM_PSW_11: &ADDM_PSW_11 password_see_note
+SYSTEM_USER: &SYSTEM_USER user_see_note
+SYSTEM_PASSWORD: &SYSTEM_PASSWORD password_see_note
+HOST_LIST: &HOST_LIST 192.168.1.1,192.168.1.2
 # BUILD OPTIONS:
 # Run TPLPreprocessor on current file:
 cmd: *PYTHON27
+keymap: ctrl-shift-t
+atomCommandName: tpl:TPLPreprocessor
 name: 'TPLpre automation'
 args:
   - *PREPROC
   - '-f {FILE_ACTIVE}'
 cwd: '{FILE_ACTIVE_PATH}'
-# env:
-#   VARIABLE1: "VALUE1"
-#   VARIABLE2: "VALUE2"
 errorMatch:
   - '\s+Error:\s+(.*)'
 warningMatch:
-  - '\s+Warning:\s+(.*)'
-keymap: ctrl-shift-t
-atomCommandName: tpl:TPLPreprocessor
+  - '(Warning:|WARNING).*'
+# =============================================
 # Other targets:
 # NOTE: Use different instance, name, atomCommandName, keymap for each!
 targets:
 # LOCAL ACTIONS:
+#
+# =============================================
+#
   # Run TPLPreprocessor and import modules from active pattern:
   - tplPreprocImports:
+    keymap: ctrl-shift-i
+    atomCommandName: tpl:TPLPreprocessor_imports
     name: 'TPLPreprocessor imports'
     cmd: *PYTHON27
     args:
@@ -46,30 +68,33 @@ targets:
      - '-d {FILE_ACTIVE_PATH}'
      - '-o {FILE_ACTIVE_PATH}'
     cwd: '{FILE_ACTIVE_PATH}'
-    keymap: ctrl-shift-i
-    atomCommandName: tpl:TPLPreprocessor_imports
     errorMatch:
      - '\s+Error:\s+(.*)'
     warningMatch:
-     - '\s+Warning:\s+(.*)'
+     - '(Warning:|WARNING).*'
+#
+# =============================================
+#
     # Check syntax on current pattern
       # WARN: Will fail without previously run any imports!!!
   - tplpreSyntaxCheckSolo:
+    keymap: ctrl-alt-s
+    atomCommandName: tpl:Syntax_check_solo
     name: 'Syntax pattern'
     cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    keymap: ctrl-alt-s
-    atomCommandName: tpl:Syntax_check_solo
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
   # IMPORT OPTIONS:
     # Check syntax on recursive imports
   - tplpreSyntaxCheckRecursiveImports:
+    keymap: ctrl-alt-r
+    atomCommandName: tpl:Syntax_check_recursive
     name: 'Syntax recursive'
     cmd: *CHECK
     args:
@@ -77,14 +102,17 @@ targets:
       - '-recursive_import'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    keymap: ctrl-alt-r
-    atomCommandName: tpl:Syntax_check_recursive
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
     # Check syntax on recursive imports + test
   - tplpreSyntaxCheckRecursiveImportsTests:
+    keymap: ctrl-alt-shift-t
+    atomCommandName: tpl:Syntax_check_recursive_test
     name: 'Syntax recursive + test.py'
     cmd: *CHECK
     args:
@@ -93,40 +121,50 @@ targets:
       - '-read_test'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    keymap: ctrl-alt-shift-t
-    atomCommandName: tpl:Syntax_check_recursive_test
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
 # REMOTE ACTIONS:
   # -===== ADDM Actions: ===== -
   # IMPORT OPTIONS:
   # Recursive
   # Check syntax on recursive imports and zip paterns for ADDM version:
   - tplpreSyntaxCheckRecursiveImportsZipADDM:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_check_recursive_zip_addm
     name: 'Syntax recursive zip addm'
     cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_check_recursive_zip_addm
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
   # Recursive + test
   # Check syntax on recursive imports + test and zip paterns for ADDM version:
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDM:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_check_recursive_test_zip_addm
     name: 'Syntax recursive + test.py zip addm'
     cmd: *CHECK
     args:
@@ -134,48 +172,62 @@ targets:
       - '-recursive_import'
       - '-read_test'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_check_recursive_test_zip_addm
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
   # -=== UPLOADING ===-
       # IMPORT OPTIONS ZIP:
       # Check syntax on recursive imports and zip paterns for ADDM version:
   # Recursive
   - tplpreSyntaxCheckRecursiveImportsZipADDMUpload:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload
     name: 'Syntax recursive zip addm upload'
     cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
     # Check syntax on recursive imports + test and zip paterns for ADDM version and upload:
   # Recursive + test
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDMUpload:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload
     name: 'Syntax recursive + test.py zip addm upload'
     cmd: *CHECK
     args:
@@ -183,54 +235,64 @@ targets:
       - '-recursive_import'
       - '-read_test'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
   # -=== SCAN ===-
       # IMPORT OPTIONS + ULOADING
       # Check syntax on recursive imports and zip paterns for ADDM version and Upload
   - tplpreSyntaxCheckRecursiveImportsZipADDMUploadScan:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload_scan
     name: 'Syntax recursive zip addm upload scan'
     cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-recursive_import'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-host_list'
-      - '192.168.1.1,192.168.1.2'
-      # - '-system_user'
-      # - 'DUMMY'
-      # - '-system_password'
-      # - 'DUMMY'
+      - *HOST_LIST
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload_scan
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
       # Check syntax on recursive imports + test and zip paterns for ADDM version and Upload
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDMUploadScan:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload_scan
     name: 'Syntax recursive + test.py zip addm upload scan'
     cmd: *CHECK
     args:
@@ -238,74 +300,85 @@ targets:
       - '-recursive_import'
       - '-read_test'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-host_list'
-      - '192.168.1.1,192.168.1.2'
-      # - '-system_user'
-      # - 'DUMMY'
-      # - '-system_password'
-      # - 'DUMMY'
+      - *HOST_LIST
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload_scan
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
   # -=== SOLO FULL STACK ===- :
     # Solo check and upload and scan
   - tplpreSoloSyntaxCheckZipADDMUpload:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_solo_zip_addm_upload
     name: 'Syntax Solo zip addm upload'
     cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_solo_zip_addm_upload
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#
   - tplpreSoloSyntaxCheckZipADDMUploadScan:
+    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    atomCommandName: tpl:Syntax_solo_zip_addm_upload_scan
     name: 'Syntax Solo zip addm upload scan'
     cmd: *CHECK
     args:
       - '-full_path {FILE_ACTIVE}'
       - '-addm'
-      - 'addm_ip_adress'
+      - *ADDM_IP_11
       - '-u'
-      - 'tideway'
+      - *ADDM_USR_11
       - '-p'
-      - 'tideway_password'
+      - *ADDM_PSW_11
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-host_list'
-      - '192.168.1.1,192.168.1.2'
-      # - '-system_user'
-      # - 'DUMMY'
-      # - '-system_password'
-      # - 'DUMMY'
+      - *HOST_LIST
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
-    atomCommandName: tpl:Syntax_solo_zip_addm_upload_scan
     errorMatch:
-      - '\s+(ERROR|Error|Errors):\s+(.*)'
+      - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '\s+Warning:\s+(.*)'
+      - '(Warning:|WARNING).*'
+#
+# =============================================
+#

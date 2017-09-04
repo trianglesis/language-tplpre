@@ -292,7 +292,7 @@
 		body: """
 			// Assign product version
 			if full_version then
-				product_version := regex.extract(full_version, regex '(\\d*\\.\\d*)', raw '\\1');
+				product_version := regex.extract(full_version, regex '(\\d*\\.\\d*)', raw '\\\\1');
 				if not product_version then
 					product_version := full_version;
 				end if;
@@ -1730,23 +1730,23 @@
 		prefix: "regex.extract"
 		description: 'Returns the result of extracting the regular expression from the string, optionally with a substitution expression and a specified result if no match is found. Returns an empty string, or the string specified in no_match if the expression does not match. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "regex.extract(${1:string}, ${2:expression}, raw '\\1', no_match := '${3:NoMatch}');$0"
+		body: "regex.extract(${1:string}, ${2:expression}, raw '\\\\1', no_match := '${3:NoMatch}');$0"
 	"regex.extractAll(string, pattern)":
 		prefix: "regex.extractAll"
 		description: 'Returns a list containing all the non-overlapping matches of the pattern in the string. If the pattern contains more than one group, returns a list of lists containing the groups in order.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "regex.extractAll(${1:string}, ${2:pattern});$0"
-	"regex.extract(variable, regex regex_raw, raw '\\1')":
+	"regex.extract(variable, regex regex_raw, raw '\\\\1')":
 		prefix: "regex.extract_Var"
 		description: 'Tamplate for regex - extracting from: variable with some content in it.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\1');$0"
-	"regex.extract(node.attrs, regex regex_raw, raw '\\1')":
+		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\\\1');$0"
+	"regex.extract(node.attrs, regex regex_raw, raw '\\\\1')":
 		prefix: "regex.extract_node.attrs"
 		description: 'Tamplate for regex - extracting from: node with attribues.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "regex.extract(${1:node}.${2:attrs}, regex \"${3:regex_raw}\", raw '\\1');$0"
-	"regex.extract(variable, regex regex_raw, raw '\\1', raw '\\2)":
+		body: "regex.extract(${1:node}.${2:attrs}, regex \"${3:regex_raw}\", raw '\\\\1');$0"
+	"regex.extract(variable, regex regex_raw, raw '\\\\1', raw '\\\\2)":
 		prefix: "regex.extract_raw_1,2"
 		description: 'Tamplate for regex - extracting from: variable with two groups to check.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
