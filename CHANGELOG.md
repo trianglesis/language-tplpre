@@ -1,3 +1,7 @@
+## 0.1.8 2017-09-04
+- NEW model files grammar
+- fixes in tpl snippet
+
 ## 0.1.7 2017-09-04
 - escape dots -  snippet fix.
 

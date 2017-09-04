@@ -1,0 +1,249 @@
+# Alexander Danylchenko
+# BMC model syntax file highligh.
+# Based on sublime-syntax.
+'scopeName': 'source.model.tplpre'
+'name': 'model'
+'fileTypes': [
+  'model'
+]
+'firstLineMatch': '.'
+'patterns': [
+
+  { 'include': '#traverse' }
+  { 'include': '#all_keys' }
+  { 'include': '#errors' }
+  { 'include': '#keywords_attributes' }
+  { 'include': '#lines' }
+
+]
+# Repository
+'repository':
+# Attributes
+  'keywords_attrs':
+    'comment': 'Changed disabled to 1 to turn off DEV highlighting.'
+    'disabled': 0
+    'match': "\\b(key_group|key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b"
+    'captures':
+        1: 'name': 'storage.type.model'
+  'keywords_attributes':
+    'patterns': [
+        { 'include': '#keywords_attrs' }
+    ]
+
+# Trying to highlight regex string.
+  'regex_token_s_quote':
+    'comment': 'Catch regex in single quotes'
+    'begin': '(regex)\\s+?(?=\')(.+?)'
+    'beginCaptures':
+      1: 'name': 'keyword.control.model'
+      2: 'name': 'support.function.model'
+    'end': '(\')'
+    'endCaptures':
+      1: 'name': "support.function.model"
+     'patterns': [
+        { 'include': '#regular_expressions' }
+      ]
+  'regex_token_d_quote':
+    'comment': 'Catch regex in double qoutes'
+    'begin': '(regex)\\s+?(?=\")(.+?)'
+    'beginCaptures':
+      1: 'name': 'keyword.control.model'
+      2: 'name': 'support.function.model'
+    'end': '(\")'
+    'endCaptures':
+      1: 'name': "support.function.model"
+     'patterns': [
+        { 'include': '#regular_expressions' }
+      ]
+  'regexes':
+    'patterns': [
+      # {'include': '#regex_raw'}
+      {'include': '#regex_token_s_quote'}
+      {'include': '#regex_token_d_quote'}
+    ]
+
+  # // THIS LINE (ignore wrong markup in Sublime editor for this regex)
+  'comment_line':
+    'name': 'comment.line.model'
+    # 'match': '//.*'
+    'match': '(?<!\\\'|"|\\\(|\\w)(//).*\\n'
+
+# TODO: or TO DO:
+  'comment_TODO_line':
+    'comment': "variable.parameter.model"
+    'begin': "(//)\\s?(TO(\\s+|)DO\\:)"
+    'beginCaptures':
+      1: 'name': "comment.line.model"
+      2: 'name': "keyword.control.model"
+    'end': '(.*)'
+    'endCaptures':
+      1: 'name': "variable.parameter.function.model"
+
+# 'THIS LINE'
+  'qouted_line':
+    'match': '(?<!\')(\')([^\']*)((\'))(?!\')'
+    'comment': 'Still cannot match string like with empty or double quotes'
+    'captures':
+        1: 'name': 'keyword.control.model'
+        2: 'name': 'string.quoted.single.model'
+        4: 'name': 'keyword.control.model'
+
+# '<empty>'
+  'qouted_line_empty':
+    'match': '(?<!\')(\')((\'))(?!\')'
+    'comment': 'Still cannot match string like with empty or double quotes'
+    'captures':
+        1: 'name': 'punctuation.definition.string.begin.model'
+        2: 'name': 'punctuation.definition.string.end.model'
+        3: 'name': 'meta.empty-string.single.model'
+
+  # "THIS LINE"
+  'double_qouted_line':
+    'match': '(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")'
+    'comment': 'Still cannot match string like with empty or single quotes'
+    'captures':
+        1: 'name': 'keyword.control.model'
+        2: 'name': 'string.quoted.single.model'
+
+  # %THIS LINE%
+  'percent_line':
+    'comment': "I got a problem here. two %% in one string - break coloring. This should use some more logic."
+    'match': "(\\%((?:[^\\%]|\\\\\\\\|\\\\%)*)\\%)"
+    'name': "keyword.control.model"
+    'captures':
+        1: 'name': "keyword.control.model"
+        2: 'name': "string.quoted.single.model"
+
+
+  # [<empty>]
+  'square_brackets_line_empty':
+    'match': '(?<!\\[)(\\[)((\\]))(?!\\])'
+    'comment': 'Still cannot match string like with empty or double quotes'
+    'captures':
+        1: 'name': 'punctuation.definition.string.begin.model'
+        2: 'name': 'punctuation.definition.string.end.model'
+        3: 'name': 'meta.empty-string.single.model'
+
+  # [9]
+  'square_brackets_line_int':
+    'match': '\\[(-?\\d+)\\]'
+    'captures':
+        1: 'name': 'constant.numeric.model'
+
+
+  # [THIS]
+  'square_brackets_line_word':
+    'match': '\\[(\\w*?[^\\d+?])\\]'
+    'captures':
+        1: 'name': 'variable.parameter.model'
+
+  # All lines
+  'lines':
+    'patterns': [
+      { 'include': '#qouted_line' }
+      { 'include': '#qouted_line_empty' }
+      { 'include': '#double_qouted_line' }
+      { 'include': '#sql_query' }
+      { 'include': '#percent_line' }
+      { 'include': '#comment_TODO_line' }
+      { 'include': '#comment_line' }
+      { 'include': '#regexes' }
+      { 'include': '#square_brackets_line_empty' }
+      { 'include': '#square_brackets_line_word' }
+      { 'include': '#square_brackets_line_int' }
+      { 'include': '#all_keys' }
+    ]
+
+
+  'none_attr':
+    'match': '\\b(None)'
+      # 'name': 'dummy.model'
+    'captures':
+        1: 'name': 'invalid.illegal.model'
+
+  'hash_attr':
+    'match': '(#)\\s+"(\\S+)":\\s+(None)'
+      # 'name': 'dummy.model'
+    'captures':
+        1: 'name': 'invalid.illegal.model'
+        2: 'name': 'keyword.control.model'
+        3: 'name': 'invalid.illegal.model'
+
+  'errors':
+    'patterns': [
+      { 'include': '#none_attr' }
+      { 'include': '#hash_attr' }
+    ]
+
+# Keys
+  # plus +
+  'plus':
+    'match': '\\+'
+    'name': 'keyword.operator.assignment.model'
+  # var :=
+  'var_assign':
+    'match': '\\:\\='
+    'name': 'keyword.operator.assignment.model'
+  # var := ""
+  'double_q':
+    'match': '(\\\"\\\"){1}'
+    'name': 'comment.model'
+  # var := ''
+  'single_q':
+    'match': "(\\'\\'){1}"
+    'name': 'comment.model'
+  # var1 = var2
+  'equal':
+    'match': "\\="
+    'name': 'keyword.operator.assignment.model'
+  # var1 < var2
+  'less':
+    'match': "\\<"
+    'name': 'keyword.operator.model'
+  # var2 > var1
+  'more':
+    'match': "\\>"
+    'name': 'keyword.operator.model'
+  # var2 >= var1
+  'more_equal':
+    'match': "\\>\\="
+    'name': 'keyword.operator.model'
+  # var1 <= var2
+  'less_equal':
+    'match': "\\<\\="
+    'name': 'keyword.operator.model'
+  # 5 - currenly can't work
+  'decimal':
+    'match': "\\s\\-\\d+\\s"
+    'name': 'constant.numeric.integer.model'
+  # -5 - currenly can't work
+  'minus_decimal':
+    'match': "\\s\\-\\d+\\s"
+    'name': 'constant.numeric.integer.model'
+  # just dot "."
+  'just_do':
+    'match': "(\\.)"
+    'name': 'punctuation.accessor.model'
+    'captures':
+        1: 'name': 'keyword.operator.model'
+  'all_keys':
+    'patterns': [
+      { 'include': '#var_assign' }
+      { 'include': '#equal' }
+      { 'include': '#less' }
+      { 'include': '#more' }
+      { 'include': '#more_equal' }
+      { 'include': '#less_equal' }
+      { 'include': '#plus' }
+      { 'include': '#decimal' }
+      { 'include': '#minus_decimal' }
+      { 'include': '#just_do' }
+    ]
+
+
+  'traverse':
+    'match': '\\\"(\\\#(?:(\\w+)(:|\\.))+(\\w+))\\\"\\\:\\s\\\['
+    'captures':
+        1: 'name': 'entity.name.function.model'
+        2: 'name': 'variable.parameter.model'
+        4: 'name': 'keyword.control.model'
