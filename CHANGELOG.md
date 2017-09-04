@@ -1,8 +1,11 @@
-## 0.1.4 2017-09-04
+## 0.1.7 2017-09-04
+- escape dots -  snippet fix.
+
+## 0.1.6 2017-09-04
 - regex.extract snippet fix.
 - build script info and examples updated
 
-## 0.1.4 2017-08-30
+## 0.1.5 2017-08-30
 - regex fix was not properly updated
 
 ## 0.1.3 2017-08-30

@@ -285,14 +285,14 @@
 
 	# comment - FULL VERSION:
 
-	"_full_version (\\d*\\.\\d*)":
-		prefix: "_full_version_(\\d*\\.\\d*)_"
+	"_full_version (\\\\d*\\\\.\\\\d*)":
+		prefix: "_full_version_(\\\\d*\\\\.\\\\d*)_"
 		description: 'Template for product version extract when full version is obtained.'
 		# descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
 			// Assign product version
 			if full_version then
-				product_version := regex.extract(full_version, regex '(\\d*\\.\\d*)', raw '\\\\1');
+				product_version := regex.extract(full_version, regex '(\\\\d*\\\\.\\\\d*)', raw '\\\\1');
 				if not product_version then
 					product_version := full_version;
 				end if;
@@ -1040,56 +1040,56 @@
 		"""
 	# comment -   REGEX USUAL USAGE::
 
-	"full ver (\\d+(?:\\.\\d+)*)":
-		prefix: "_regex_full_ver_(\\d+(?:\\.\\d+)*)"
+	"full ver (\\\\d+(?:\\\\.\\\\d+)*)":
+		prefix: "_regex_full_ver_(\\\\d+(?:\\\\.\\\\d+)*)"
 		description: 'Template regex expression to catch full version.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "(\\d+(?:\\.\\d+)*)$0"
-	"full ver ^(\\d+(?:\\.\\d+)?)":
-		prefix: "_regex_full_ver_s^(\\d+(?:\\.\\d+)?)"
+		body: "(\\\\d+(?:\\\\.\\\\d+)*)$0"
+	"full ver ^(\\\\d+(?:\\\\.\\\\d+)?)":
+		prefix: "_regex_full_ver_s^(\\\\d+(?:\\\\.\\\\d+)?)"
 		description: 'Template regex expression to catch full version from start if string.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "^(\\d+(?:\\.\\d+)?)$0"
-	"product ver (\\d+(?:\\.\\d+)?)":
-		prefix: "_regex_product_ver_(\\d+(?:\\.\\d+)?)"
+		body: "^(\\\\d+(?:\\\\.\\\\d+)?)$0"
+	"product ver (\\\\d+(?:\\\\.\\\\d+)?)":
+		prefix: "_regex_product_ver_(\\\\d+(?:\\\\.\\\\d+)?)"
 		description: 'Template regex expression to catch product version.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "(\\d+(?:\\.\\d+)?)$0"
-	"bjavaw (?i)\\bjavaw?(?:\\.exe)\\$":
-		prefix: "_regex_bjavaw_(?i)\\bjavaw?(?:\\.exe)\\$"
+		body: "(\\\\d+(?:\\\\.\\\\d+)?)$0"
+	"bjavaw (?i)\\bjavaw?(?:\\\\.exe)\\$":
+		prefix: "_regex_bjavaw_(?i)\\bjavaw?(?:\\\\.exe)\\$"
 		description: 'Template regex expression to catch bjavaw cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "(?i)\\bjavaw?(?:\\.exe)\\$$0"
-	"bjava (?i)\\bjava(?:\\.exe)?\\$":
-		prefix: "_regex_bjava_(?i)\\bjava(?:\\.exe)?\\$"
+		body: "(?i)\\bjavaw?(?:\\\\.exe)\\$$0"
+	"bjava (?i)\\bjava(?:\\\\.exe)?\\$":
+		prefix: "_regex_bjava_(?i)\\bjava(?:\\\\.exe)?\\$"
 		description: 'Template regex expression to catch bjava cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "(?i)\\bjava(?:\\.exe)?\\$$0"
+		body: "(?i)\\bjava(?:\\\\.exe)?\\$$0"
 	"java (?i)^(\\w:.*\\)Java\\":
 		prefix: "_regex_java_(?i)^(\\w:.*\\)Java\\"
 		description: 'Template regex expression to catch java cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)^(\\w:.*\\)Java\\$0"
-	"java (/\\.+/)java/":
-		prefix: "_regex_java_(/\\.+/)java/"
+	"java (/\\\\.+/)java/":
+		prefix: "_regex_java_(/\\\\.+/)java/"
 		description: 'Template regex expression to catch java cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "^(/\\.+/)java/$0"
-	"ipv4 (\\d+(?:\\.\\d+){3})":
-		prefix: "_regex_ipv4_(\\d+(?:\\.\\d+){3})"
+		body: "^(/\\\\.+/)java/$0"
+	"ipv4 (\\\\d+(?:\\\\.\\\\d+){3})":
+		prefix: "_regex_ipv4_(\\\\d+(?:\\\\.\\\\d+){3})"
 		description: 'Template regex expression to catch ipv4.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "(\\d+(?:\\.\\d+){3})$0"
-	"ver ^(\\d+)":
-		prefix: "_regex_ver_^(\\d+)"
+		body: "(\\\\d+(?:\\\\.\\\\d+){3})$0"
+	"ver ^(\\\\d+)":
+		prefix: "_regex_ver_^(\\\\d+)"
 		description: 'Template regex expression to catch simple decimals.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "^(\\d+)$0"
-	"ver ^\\d+\\$":
-		prefix: "_regex_ver_^\\d+\\$"
+		body: "^(\\\\d+)$0"
+	"ver ^\\\\d+\\$":
+		prefix: "_regex_ver_^\\\\d+\\$"
 		description: 'Template regex expression to catch simple decimals.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
-		body: "^\\d+\\$$0"
+		body: "^\\\\d+\\$$0"
 	"Win_path":
 		prefix: "_regex_Win_path"
 		description: 'Template regex expression to catch path with spaces in windows.'
@@ -1717,7 +1717,7 @@
 		prefix: "_debug_%node.attrs%_Exec_"
 		body: """
 			delta_time_tics := time.toTicks(time.current()) - time.toTicks(start_time);
-			(?1:log\\.)/}debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line: Execution time:\" + number.toText(delta_time_tics/10000) + \"ms\");$0
+			log\\\\.debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line: Execution time:\" + number.toText(delta_time_tics/10000) + \"ms\");$0
 		"""
 
 	# comment - LOG SI:
