@@ -6,14 +6,14 @@
     "node": "*"
   },
   "description": "BMC tpl and tplpre language support in Atom",
-  "homepage": "https://github.com/triaglesis/language-tplpre",
+  "homepage": "https://github.com/trianglesis/language-tplpre",
   "repository": {
     "type": "git",
-    "url": "https://github.com/triaglesis/language-tplpre.git"
+    "url": "https://github.com/trianglesis/language-tplpre.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/triaglesis/language-tplpre/issues"
+    "url": "https://github.com/trianglesis/language-tplpre/issues"
   },
   "devDependencies": {
     "coffeelint": "^1.10.1"

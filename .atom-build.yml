@@ -1,6 +1,6 @@
 # This is build system template.
 # Build module used: https://github.com/noseglid/atom-build
-# Build Logic for this package is not included, you can find it in separate [repo](https://github.com/triaglesis/BMC_TPL_IDE)
+# Build Logic for this package is not included, you can find it in separate [repo](https://github.com/trianglesis/BMC_TPL_IDE)
 # File formatten in YML type.
           # More info: https://github.com/noseglid/atom-build#specify-a-custom-build-command
 #

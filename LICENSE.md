@@ -22,7 +22,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --------------------------------------------------------------------
 
 This package was derived from a Sublime Text bundle located at
-https://github.com/triaglesis/bmc_tpl and distributed under the
+https://github.com/trianglesis/bmc_tpl and distributed under the
 following license, located in `README.mdown`:
 
 Permission to copy, use, modify, sell and distribute this
