@@ -28,13 +28,23 @@ so if some code will be written on wrong place, highlighting can be broken.
 
 Example:
 
-![blocks](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_1.png)
-![docs](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_2.png)
-![regexes](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_3.png)
-![more_regexes](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_4.png)
+Pattern from Community Edition:
+- ![blocks](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_1.png)
+
+Documentation block and tasks highlighted:
+- ![docs](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_2.png)
+
+Triggers:
+- ![regexes](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_3.png)
+
+Regex expressions:
+(uses python regex grammar from "language-python")
+- ![more_regexes](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_4.png)
+
 
 Syntax broken
-![syntax_broken](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_syntax_broken.gif)
+(highlighting will show it)
+- ![syntax_broken](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_syntax_broken.gif)
 
 
 #### Autocomplete and Doc links:
@@ -42,10 +52,17 @@ Syntax broken
 For common code blocks and usual constructions autocompletion is available.
 It also provide links to reffering documentaion for each function or block on official BMC Doc portal.
 
-![pattern_blocks](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_pattern.gif)
-![common_code](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_versions.gif)
-![docs](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_model_docs.gif)
-![dev_examples](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_debug.gif)
+Pattern draft example:
+- ![pattern_blocks](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_pattern.gif)
+
+Code constructions usually used:
+- ![common_code](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_versions.gif)
+
+Link to BMC official docs:
+- ![docs](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_model_docs.gif)
+
+Extra developers helping code:
+- ![dev_examples](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_debug.gif)
 
 
 ####  Automation, syntax check, upload pattern, etc:
