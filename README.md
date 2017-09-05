@@ -19,7 +19,7 @@ Go to settings -> Install -> Search "language-tplpre"
 
 ####  Set syntax: Ctrl+Shift+L -> type 'tplpre'
 
-![set syntax](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_set_syntax.gif)
+![set syntax](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_set_syntax.gif)
 
 #### Syntax highlighting:
 
@@ -29,22 +29,22 @@ so if some code will be written on wrong place, highlighting can be broken.
 Example:
 
 Pattern from Community Edition:
-- ![blocks](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_1.png)
+- ![blocks](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_1.png)
 
 Documentation block and tasks highlighted:
-- ![docs](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_2.png)
+- ![docs](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_2.png)
 
 Triggers:
-- ![regexes](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_3.png)
+- ![regexes](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_3.png)
 
 Regex expressions:
 (uses python regex grammar from "language-python")
-- ![more_regexes](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_4.png)
+- ![more_regexes](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Syntax_example_4.png)
 
 
 Syntax broken
 (highlighting will show it)
-- ![syntax_broken](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_syntax_broken.gif)
+- ![syntax_broken](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_syntax_broken.gif)
 
 
 #### Autocomplete and Doc links:
@@ -53,16 +53,16 @@ For common code blocks and usual constructions autocompletion is available.
 It also provide links to reffering documentaion for each function or block on official BMC Doc portal.
 
 Pattern draft example:
-- ![pattern_blocks](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_pattern.gif)
+- ![pattern_blocks](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_pattern.gif)
 
 Code constructions usually used:
-- ![common_code](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_versions.gif)
+- ![common_code](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_versions.gif)
 
 Link to BMC official docs:
-- ![docs](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_model_docs.gif)
+- ![docs](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_model_docs.gif)
 
 Extra developers helping code:
-- ![dev_examples](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_debug.gif)
+- ![dev_examples](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/tpl_autocomplete_debug.gif)
 
 
 ####  Automation, syntax check, upload pattern, etc:
@@ -82,10 +82,10 @@ File in project's root - ".atom-build.yml" is example for TPL Automation build,
 place it in your project's root folder, where tpl\tplpre files are stored.
 
 
-![Build](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Build_System_example.png)
+![Build](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/TPL_Build_System_example.png)
 
 
-![Buildresult](https://github.com/triaglesis/trianglesis.github.io/blob/master/Atom_language_tpl_pics/BuildSystem_output.png)
+![Buildresult](https://trianglesis.github.io/blob/master/Atom_language_tpl_pics/BuildSystem_output.png)
 
 
 Contributions are greatly appreciated. Please fork this repository and open a pull request to add snippets, make grammar tweaks, etc.
