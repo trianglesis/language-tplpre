@@ -1,4 +1,7 @@
 ## 0.1.10 2017-09-05
+- language-tplpre\.atom-build.yml-EXAMPLE - renamed to disallow Atom to parse it.
+
+## 0.1.10 2017-09-05
 - Fix links.
 - repo rename to "trianglesis" (old triaglesis)
 - better readme
