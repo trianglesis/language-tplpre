@@ -413,11 +413,11 @@
 # Trying to highlight regex string.
   'regex_token_s_quote':
     'comment': 'Catch regex in single quotes'
-    'begin': '(regex)\\s+?(?=\')(.+?)'
+    'begin': "(regex)\\s+?(?=')(.+?)"
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'support.function.tplpre'
-    'end': '(\')'
+    'end': "(')"
     'endCaptures':
       1: 'name': "support.function.tplpre"
      'patterns': [
@@ -425,11 +425,35 @@
       ]
   'regex_token_d_quote':
     'comment': 'Catch regex in double qoutes'
-    'begin': '(regex)\\s+?(?=\")(.+?)'
+    'begin': '(regex)\\s+?(?=")(.+?)'
     'beginCaptures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'support.function.tplpre'
-    'end': '(\")'
+    'end': '(")'
+    'endCaptures':
+      1: 'name': "support.function.tplpre"
+     'patterns': [
+        { 'include': '#regular_expressions' }
+      ]
+  'regex_token_triple_s_quote':
+    'comment': 'Catch regex in double qoutes'
+    'begin': "(regex)\\s+?('{3})(.+?)"
+    'beginCaptures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'support.function.tplpre'
+    'end': "('{3})"
+    'endCaptures':
+      1: 'name': "support.function.tplpre"
+     'patterns': [
+        { 'include': '#regular_expressions' }
+      ]
+  'regex_token_triple_d_quote':
+    'comment': 'Catch regex in double qoutes'
+    'begin': '(regex)\\s+?("{3})(.+?)'
+    'beginCaptures':
+      1: 'name': 'keyword.control.tplpre'
+      2: 'name': 'support.function.tplpre'
+    'end': '("{3})'
     'endCaptures':
       1: 'name': "support.function.tplpre"
      'patterns': [
@@ -438,6 +462,8 @@
   'regexes':
     'patterns': [
       # {'include': '#regex_raw'}
+      {'include': '#regex_token_triple_s_quote'}
+      {'include': '#regex_token_triple_d_quote'}
       {'include': '#regex_token_s_quote'}
       {'include': '#regex_token_d_quote'}
     ]

@@ -9,10 +9,10 @@
 'firstLineMatch': '.'
 'patterns': [
 
+  { 'include': '#keywords_attributes' }
   { 'include': '#traverse' }
   { 'include': '#all_keys' }
   { 'include': '#errors' }
-  { 'include': '#keywords_attributes' }
   { 'include': '#lines' }
 
 ]
@@ -22,9 +22,11 @@
   'keywords_attrs':
     'comment': 'Changed disabled to 1 to turn off DEV highlighting.'
     'disabled': 0
-    'match': "\\b(key_group|key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b"
+    'match': '(\\")(key_group|key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)(\\")'
     'captures':
-        1: 'name': 'storage.type.model'
+        1: 'name': 'keyword.control.model'
+        2: 'name': 'storage.type.model'
+        3: 'name': 'keyword.control.model'
   'keywords_attributes':
     'patterns': [
         { 'include': '#keywords_attrs' }

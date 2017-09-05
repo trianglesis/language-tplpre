@@ -1,3 +1,7 @@
+## 0.1.9 2017-09-05
+- model grammar enhancements
+- support of '''(?i)-D SERVER_CONFIG_FILE\s*=\s*[\"\'](.*?)[\"\']''' strings.
+
 ## 0.1.8 2017-09-04
 - NEW model files grammar
 - fixes in tpl snippet
