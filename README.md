@@ -2,9 +2,9 @@
 
 Adds syntax highlighting and snippets for [tpl](https://docs.bmc.com/docs/display/DISCO111/The+Pattern+Language+TPL) in Atom.
 
-Originally re-made from the [Sublmime text 3 bundle](https://github.com/triaglesis/bmc_tpl).
+Originally re-made from the [Sublmime text 3 bundle](https://github.com/trianglesis/bmc_tpl).
 
-Build Logic for this package is not included, you can find it in separate [repo](https://github.com/triaglesis/BMC_TPL_IDE)
+Build Logic for this package is not included, you can find it in separate [repo](https://github.com/trianglesis/BMC_TPL_IDE)
 
 ## Installation:
 
@@ -75,7 +75,7 @@ You can obtain build system in:
 [build system](https://atom.io/packages/build)
 
 
-TPL Automation: [BMC_TPL_IDE](https://github.com/triaglesis/BMC_TPL_IDE) you can run most development routines automatically.
+TPL Automation: [BMC_TPL_IDE](https://github.com/trianglesis/BMC_TPL_IDE) you can run most development routines automatically.
 Atom command templates you can found in Command Palette (Ctrl+Shift+P)
 
 File in project's root - ".atom-build.yml" is example for TPL Automation build,
