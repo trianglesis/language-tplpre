@@ -1,6 +1,7 @@
 ## 0.1.10 2017-09-05
 - Fix links.
 - repo rename to "trianglesis" (old triaglesis)
+- better readme
 
 ## 0.1.9 2017-09-05
 - model grammar enhancements
