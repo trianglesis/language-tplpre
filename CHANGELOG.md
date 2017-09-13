@@ -1,3 +1,6 @@
+## 0.1.11 2017-09-13
+- tplpre highlight error in "if model.kind(si) <> 'SoftwareInstance' then" now disabled and set to simple mode.
+
 ## 0.1.10 2017-09-05
 - language-tplpre\.atom-build.yml-EXAMPLE - renamed to disallow Atom to parse it.
 

@@ -724,10 +724,12 @@
 
 # keyword.control.conditional
   # if, else, end if, for, end for
+  # ERRORS: #all_functions (disabling)
+  # if model.kind(si) <> 'SoftwareInstance' then
 
   'if_statement':
     'comment': 'Match if ..values.. then and include usual lines. #lines can override some marks'
-    # 'begin': '(?!end if;|then)(if)(?:.+?)(?:then)'
+    # 'begin': '(?!end if;|then)(\bif)(?:.+?)(?:then)'
     'begin': '(?!end if;|then)(\\bif)'
     'beginCaptures':
         1: 'name': 'keyword.control.conditional.tplpre'
@@ -744,11 +746,11 @@
         #       2: 'name': 'variable.parameter.function.tplpre'
         #       3: 'name': 'storage.type.class.tplpre'
         # }
-        { 'include': '#all_functions' }
+        # { 'include': '#all_functions' }
         { 'include': '#all_controls' }
         { 'include': '#regexes' }
         { 'include': '#all_keys' }
-        # { 'include': '#lines' }
+        { 'include': '#lines' }
     ]
   'elif_statement':
     'comment': 'Match elif ..values.. then and include usual lines. #lines can override some marks'
@@ -768,11 +770,11 @@
         #       2: 'name': 'variable.parameter.function.tplpre'
         #       3: 'name': 'storage.type.class.tplpre'
         # }
-        { 'include': '#all_functions' }
+        # { 'include': '#all_functions' }
         { 'include': '#all_controls' }
         { 'include': '#regexes' }
         { 'include': '#all_keys' }
-        # { 'include': '#lines' }
+        { 'include': '#lines' }
     ]
   # 'elif_statement':
   # 'comment': 'Old simple match'
