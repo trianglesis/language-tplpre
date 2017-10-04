@@ -33,7 +33,7 @@ ADDM_USR_11: &ADDM_USR_11 user_see_note
 ADDM_PSW_11: &ADDM_PSW_11 password_see_note
 SYSTEM_USER: &SYSTEM_USER user_see_note
 SYSTEM_PASSWORD: &SYSTEM_PASSWORD password_see_note
-HOST_LIST: &HOST_LIST 192.168.1.1,192.168.1.2
+HOST_LIST: &HOST_LIST 192.168.1.2,192.168.1.3
 # BUILD OPTIONS:
 # Run TPLPreprocessor on current file:
 cmd: *PYTHON27
