@@ -37,8 +37,6 @@ HOST_LIST: &HOST_LIST 192.168.1.1,192.168.1.2
 # BUILD OPTIONS:
 # Run TPLPreprocessor on current file:
 cmd: *PYTHON27
-keymap: ctrl-shift-t
-atomCommandName: tpl:TPLPreprocessor
 name: 'TPLpre automation'
 args:
   - *PREPROC
@@ -47,15 +45,14 @@ cwd: '{FILE_ACTIVE_PATH}'
 errorMatch:
   - '\s+Error:\s+(.*)'
 warningMatch:
-  - '(Warning:|WARNING).*'
+  - '(Warning|WARNING).*'
+keymap: ctrl-shift-t
+atomCommandName: tpl:TPLPreprocessor
 # =============================================
 # Other targets:
 # NOTE: Use different instance, name, atomCommandName, keymap for each!
 targets:
 # LOCAL ACTIONS:
-#
-# =============================================
-#
   # Run TPLPreprocessor and import modules from active pattern:
   - tplPreprocImports:
     keymap: ctrl-shift-i
@@ -71,7 +68,7 @@ targets:
     errorMatch:
      - '\s+Error:\s+(.*)'
     warningMatch:
-     - '(Warning:|WARNING).*'
+     - '(Warning|WARNING).*'
 #
 # =============================================
 #
@@ -89,7 +86,10 @@ targets:
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
+#
+# =============================================
+#
   # IMPORT OPTIONS:
     # Check syntax on recursive imports
   - tplpreSyntaxCheckRecursiveImports:
@@ -105,7 +105,7 @@ targets:
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
@@ -124,7 +124,7 @@ targets:
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
@@ -134,7 +134,7 @@ targets:
   # Recursive
   # Check syntax on recursive imports and zip paterns for ADDM version:
   - tplpreSyntaxCheckRecursiveImportsZipADDM:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    keymap: ctrl-alt-shift-u
     atomCommandName: tpl:Syntax_check_recursive_zip_addm
     name: 'Syntax recursive zip addm'
     cmd: *CHECK
@@ -156,14 +156,14 @@ targets:
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
   # Recursive + test
   # Check syntax on recursive imports + test and zip paterns for ADDM version:
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDM:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    # keymap: ctrl-alt-shift-t
     atomCommandName: tpl:Syntax_check_recursive_test_zip_addm
     name: 'Syntax recursive + test.py zip addm'
     cmd: *CHECK
@@ -186,7 +186,7 @@ targets:
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
@@ -195,7 +195,7 @@ targets:
       # Check syntax on recursive imports and zip paterns for ADDM version:
   # Recursive
   - tplpreSyntaxCheckRecursiveImportsZipADDMUpload:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    # keymap: ctrl-alt-r
     atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload
     name: 'Syntax recursive zip addm upload'
     cmd: *CHECK
@@ -208,25 +208,25 @@ targets:
       - *ADDM_USR_11
       - '-p'
       - *ADDM_PSW_11
+      - '-disco_mode'
+      - 'record'
       - '-system_user'
       - *SYSTEM_USER
       - '-system_password'
       - *SYSTEM_PASSWORD
-      - '-disco_mode'
-      - 'record'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
     # Check syntax on recursive imports + test and zip paterns for ADDM version and upload:
   # Recursive + test
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDMUpload:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    # keymap: ctrl-alt-shift-t
     atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload
     name: 'Syntax recursive + test.py zip addm upload'
     cmd: *CHECK
@@ -240,18 +240,18 @@ targets:
       - *ADDM_USR_11
       - '-p'
       - *ADDM_PSW_11
+      - '-disco_mode'
+      - 'record'
       - '-system_user'
       - *SYSTEM_USER
       - '-system_password'
       - *SYSTEM_PASSWORD
-      - '-disco_mode'
-      - 'record'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
@@ -259,7 +259,7 @@ targets:
       # IMPORT OPTIONS + ULOADING
       # Check syntax on recursive imports and zip paterns for ADDM version and Upload
   - tplpreSyntaxCheckRecursiveImportsZipADDMUploadScan:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    # keymap: ctrl-alt-r
     atomCommandName: tpl:Syntax_check_recursive_zip_addm_upload_scan
     name: 'Syntax recursive zip addm upload scan'
     cmd: *CHECK
@@ -272,26 +272,26 @@ targets:
       - *ADDM_USR_11
       - '-p'
       - *ADDM_PSW_11
-      - '-system_user'
-      - *SYSTEM_USER
-      - '-system_password'
-      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-host_list'
       - *HOST_LIST
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
       # Check syntax on recursive imports + test and zip paterns for ADDM version and Upload
   - tplpreSyntaxCheckRecursiveImportsTestsZipADDMUploadScan:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    # keymap: ctrl-alt-shift-t
     atomCommandName: tpl:Syntax_check_recursive_test_zip_addm_upload_scan
     name: 'Syntax recursive + test.py zip addm upload scan'
     cmd: *CHECK
@@ -305,27 +305,27 @@ targets:
       - *ADDM_USR_11
       - '-p'
       - *ADDM_PSW_11
-      - '-system_user'
-      - *SYSTEM_USER
-      - '-system_password'
-      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-host_list'
       - *HOST_LIST
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
   # -=== SOLO FULL STACK ===- :
     # Solo check and upload and scan
   - tplpreSoloSyntaxCheckZipADDMUpload:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    # keymap: ctrl-alt-shift-t
     atomCommandName: tpl:Syntax_solo_zip_addm_upload
     name: 'Syntax Solo zip addm upload'
     cmd: *CHECK
@@ -337,23 +337,23 @@ targets:
       - *ADDM_USR_11
       - '-p'
       - *ADDM_PSW_11
+      - '-disco_mode'
+      - 'record'
       - '-system_user'
       - *SYSTEM_USER
       - '-system_password'
       - *SYSTEM_PASSWORD
-      - '-disco_mode'
-      - 'record'
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #
   - tplpreSoloSyntaxCheckZipADDMUploadScan:
-    # keymap: ctrl+shift+CHOOSE_YOUR_KEYS!!!
+    keymap: ctrl-alt-shift-s
     atomCommandName: tpl:Syntax_solo_zip_addm_upload_scan
     name: 'Syntax Solo zip addm upload scan'
     cmd: *CHECK
@@ -365,20 +365,20 @@ targets:
       - *ADDM_USR_11
       - '-p'
       - *ADDM_PSW_11
-      - '-system_user'
-      - *SYSTEM_USER
-      - '-system_password'
-      - *SYSTEM_PASSWORD
       - '-disco_mode'
       - 'record'
       - '-host_list'
       - *HOST_LIST
+      - '-system_user'
+      - *SYSTEM_USER
+      - '-system_password'
+      - *SYSTEM_PASSWORD
       - '-l info'
     cwd: '{FILE_ACTIVE_PATH}'
     errorMatch:
       - '(ERROR|Error|Errors|WARNING).*'
     warningMatch:
-      - '(Warning:|WARNING).*'
+      - '(Warning|WARNING).*'
 #
 # =============================================
 #

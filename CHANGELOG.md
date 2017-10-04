@@ -1,3 +1,6 @@
+## 0.1.12 2017-10-04
+- Update .atom-build.yml-EXAMPLE with human friengly explanations. (by Iryna_Iatsiuk_CW@bmc.com TKU Dev team)
+
 ## 0.1.11 2017-09-13
 - tplpre highlight error in "if model.kind(si) <> 'SoftwareInstance' then" now disabled and set to simple mode.
 
