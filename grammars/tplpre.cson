@@ -491,7 +491,7 @@
   'model_functions':
     # name: discovery.function.tplpre
     'comment': 'Model functions DEV looks working'
-    'begin': "((model)(\\.)(addContainment|setContainment|destroy|withdraw|setRemovalGroup|anchorRemovalGroup|suppressRemovalGroup|host|hosts|findPackages|addDisplayAttribute|removeDisplayAttribute|kind))"
+    'begin': "((model)(\\.)(addDisplayAttribute|removeDisplayAttribute|addContainment|setContainment|destroy|withdraw|setRemovalGroup|anchorRemovalGroup|suppressRemovalGroup|host|hosts|findPackages|addDisplayAttribute|removeDisplayAttribute|kind))"
     'beginCaptures':
       1: 'name': 'entity.name.function.tplpre'
       2: 'name': 'support.function.tplpre'

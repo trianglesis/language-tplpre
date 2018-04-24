@@ -1,3 +1,7 @@
+## 0.1.13 2018-04-24
+- Add model.addDisplayAttribute/model.removeDisplayAttribute to language and snippet
+- Remove unused SQL language
+
 ## 0.1.12 2017-10-04
 - Update .atom-build.yml-EXAMPLE with human friengly explanations. (by Iryna_Iatsiuk_CW@bmc.com TKU Dev team)
 
