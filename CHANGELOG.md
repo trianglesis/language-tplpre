@@ -1,4 +1,4 @@
-## 0.1.13 2018-04-24
+## 0.2.0 2018-04-24
 - Add model.addDisplayAttribute/model.removeDisplayAttribute to language and snippet
 - Remove unused SQL language
 
