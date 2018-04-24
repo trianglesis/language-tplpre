@@ -1,3 +1,6 @@
+## 0.2.1 2018-04-24
+- Wrong attr key, fixed.
+
 ## 0.2.0 2018-04-24
 - Add model.addDisplayAttribute/model.removeDisplayAttribute to language and snippet
 - Remove unused SQL language

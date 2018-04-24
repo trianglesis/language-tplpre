@@ -1152,19 +1152,6 @@
 		description: 'Adds the containees to the container by creating suitable relationships between the nodes. containees can be a single node, or a list of nodes, for example: [node1, node2].'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.addContainment'
 		body: "model.addContainment(${1:si_node}, ${2:software_components});$0"
-
-	"model.addDisplayAttribute(node, value)":
-		prefix: "model.addDisplayAttribute"
-		description: 'Adds a named attribute, or a list of named attributes to the additional attributes displayed in a node view. Added attributes can be removed using model.removeDisplayAttribute.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO113/model.addDisplayAttribute'
-		body: "model.addDisplayAttribute(${1:node}, ${2:value});$0"
-
-	"model.removeDisplayAttribute(node, value)":
-		prefix: "model.removeDisplayAttribute"
-		description: 'Removes a named attribute, or a list of named attributes from the additional attributes displayed in a node view. Additional attributes are added using the model.addDisplayAttribute function.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO113/model.removeDisplayAttribute'
-		body: "model.removeDisplayAttribute(${1:node}, ${2:value});$0"
-
 	"model.setContainment(container, containees)":
 		prefix: "model.setContainment"
 		description: """Equivalent to addContainment, except that at the end of the pattern body,
@@ -1221,13 +1208,13 @@
 	"model.addDisplayAttribute(node, value)":
 		prefix: "model.addDisplayAttribute"
 		description: 'Adds a named attribute, or a list of named attributes to the additional attributes displayed in a node view. Added attributes can be removed using model.removeDisplayAttribute.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.addDisplayAttribute'
-		body: "model.addDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO113/model.addDisplayAttribute'
+		body: "model.addDisplayAttribute(${1:node}, ${2:value});$0"
 	"model.removeDisplayAttribute(node, value)":
 		prefix: "model.removeDisplayAttribute"
 		description: 'Removes a named attribute, or a list of named attributes from the additional attributes displayed in a node view. Additional attributes are added using the model.addDisplayAttribute function.'
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.removeDisplayAttribute'
-		body: "model.removeDisplayAttribute(${1:wls_si}, ${2:tw_meta_data_attr});$0"
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO113/model.removeDisplayAttribute'
+		body: "model.removeDisplayAttribute(${1:node}, ${2:value});$0"
 	"model.kind(node)":
 		prefix: "model.kind"
 		description: 'Returns the node kind corresponding to the given node.The given node can be any node.'
