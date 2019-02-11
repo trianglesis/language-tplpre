@@ -487,6 +487,24 @@
         { 'include': '#all_controls' }
         { 'include': '#regex' }
       ]
+  # Discovery mark
+  'discovery_functions_Future':
+    # name: discovery.function.tplpre
+    'comment': 'Discovery functions Future looks working'
+    'begin': "(Future)(\\.)(runCommand)"
+    'beginCaptures':
+      1: 'name': 'storage.type.tplpre'
+      2: 'name': 'punctuation.accessor.tplpre'
+      3: 'name': 'support.constant.tplpre'
+    'end': "\\;"
+    # 'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "disabled.tplpre"
+     'patterns': [
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
+      ]
 # model functions
   'model_functions':
     # name: discovery.function.tplpre
@@ -639,7 +657,7 @@
 # Discovery functions (SupportingFiles - > pattern):
   'DiscoveryFunctions':
     # name: DiscoveryFunctions.function.tplpre
-    'match': "(DiscoveryFunctions)(\\.)(pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|locateCommands|checkCommandList)"
+    'match': "(DiscoveryFunctions)(\\.)(escapeArg|expandWindowsPath|normalizePath|escapePath|pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|locateCommands|checkCommandList|getErrorRegexes)"
     'captures':
       1: 'name': 'entity.name.function.tplpre'
       2: 'name': 'punctuation.accessor.tplpre'
@@ -696,6 +714,7 @@
   'all_functions':
     'patterns': [
       { 'include': '#discovery_functions' }
+      { 'include': '#discovery_functions_Future' }
       { 'include': '#model_functions' }
       { 'include': '#model_SI_functions' }
       { 'include': '#model_rel_functions' }

@@ -637,6 +637,13 @@
 		description: 'Performs a WBEM query on the target and returns a list of DiscoveredWBEMInstance DDD nodes.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.wbemEnumInstances'
 		body: "discovery.wbemEnumInstances(${1:target}, ${2:class_name}, ${3:properties}, ${4:namespace}, ${5:filter_locally});$0"
+	# New implementation of runCommand:
+	"Future.runCommand(host, \"command_to_run\", \"path_to_command\")":
+		prefix: "Future.runCommand"
+		description: 'FUTURE Returns a DiscoveredCommandResult node containing the result of running the specified command.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Future.runCommand'
+		body: "Future.runCommand(host, \"${1:command}\", \"${2:path_to_command}\");$0"
+	# Classical implementation of runCommand:
 	"discovery.runCommand(host, \"command_to_run\")":
 		prefix: "discovery.runCommand"
 		description: 'Returns a DiscoveredCommandResult node containing the result of running the specified command.'
@@ -781,7 +788,6 @@
 		"""
 
 	# comment - JSON:
-
 	"json.encode(\"value\")":
 		prefix: "json.encode"
 		description: 'Converts value to a JSON encoded string.'
@@ -799,6 +805,18 @@
 		description: 'DiscoveryFunctions.pathNormalization() -> determines "~" in the path, normalizes it and returns back full path.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.pathNormalization(${1:host}, ${2:install_root});$0"
+
+	"DiscoveryFunctions.escapePath(host, install_root) -> install_root":
+		prefix: "DiscoveryFunctions.escapePath"
+		description: 'DiscoveryFunctions.escapePath() -> escape extra characters and resolve /../ in path.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.escapePath(${1:host}, ${2:install_root});$0"
+
+	"escapePath(host, install_root) -> install_root":
+		prefix: "escapePath"
+		description: 'DiscoveryFunctions.escapePath() -> escape extra characters and resolve /../ in path.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.escapePath(${1:host}, ${2:install_root});$0"
 
 	"DiscoveryFunctions.getCleanedupPath(path, os) -> path_normalized":
 		prefix: "DiscoveryFunctions.getCleanedupPath"
