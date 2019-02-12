@@ -657,7 +657,7 @@
 # Discovery functions (SupportingFiles - > pattern):
   'DiscoveryFunctions':
     # name: DiscoveryFunctions.function.tplpre
-    'match': "(DiscoveryFunctions)(\\.)(escapeArg|expandWindowsPath|normalizePath|escapePath|pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|locateCommands|checkCommandList|getErrorRegexes)"
+    'match': "(DiscoveryFunctions)(\\.)(escapeArg|expandWindowsPath|normalizePath|escapePath|pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|runFutureActiveCommand|locateCommands|checkCommandList|getErrorRegexes)"
     'captures':
       1: 'name': 'entity.name.function.tplpre'
       2: 'name': 'punctuation.accessor.tplpre'
@@ -675,9 +675,9 @@
     # name: rdbms_functions.function.tplpre
     'match': "(rdbms_functions)(\\.)(oracle_ora_file_parser|perform_rdbms_sis_search|related_rdbms_sis_search|related_rdbms_sis_search_extended|oracle_net_service_name_search|dsn_rdbms_servers|parseJDBC|jdbc_search|find_db_server)"
     'captures':
-      1: 'name': 'entity.name.function.tplpre'
+      1: 'name': 'invalid.deprecated.tplpre'
       2: 'name': 'punctuation.accessor.tplpre'
-      3: 'name': 'entity.name.function.tplpre'
+      3: 'name': 'invalid.deprecated.tplpre'
 # SearchFunctions functions (SupportingFiles - > pattern):
   'SearchFunctions':
     # name: SearchFunctions.function.tplpre
@@ -691,9 +691,9 @@
     # name: common_functions.function.tplpre
     'match': "(functions)(\\.)(validate_host_address_format|domain_lookup|identify_host_perform_search|identify_host_perform_search_in_scope|identify_host|identify_host_extended|related_sis_search\\b|related_sis_search_on_multiple_hosts|related_sis_search_on_multiple_hosts_extended|related_sis_search_extended|related_si_types_search|path_normalization|links_management|get_cleanedup_path|get_max_version|get_exe_cwd_path|sort_list|run_priv_cmd|has_process|isValidSerialNumber|convertToCharString|wmiFollowAssociations|checkForDecimal|convertToBytes|identify_host_with_uuid|locateCommands|find_server|checkCommandList)"
     'captures':
-      1: 'name': 'entity.name.function.tplpre'
+      1: 'name': 'invalid.deprecated.tplpre'
       2: 'name': 'punctuation.accessor.tplpre'
-      3: 'name': 'entity.name.function.tplpre'
+      3: 'name': 'invalid.deprecated.tplpre'
 # local_functions functions (in current pattern):
   'local_functions':
     # name: local_functions.tplpre

@@ -3,7 +3,7 @@
 # 2017-08-14 - Latest version.
 ".source.tplpre":
 
-	# comment - PATTERN BLOCK COMPLETIONS::
+	# PATTERN BLOCK COMPLETIONS::
 
 	"_Copyright BMC Copyright":
 		prefix: "_Copyright_BMC_Copyright_"
@@ -79,7 +79,7 @@
 		prefix: "from_ConversionFunctions_"
 		body: "from ConversionFunctions import ConversionFunctions ${1:1}.${2:0}; // TODO: Check the current version$0"
 
-	# comment - METADATA:
+	# METADATA:
 
 	"metadata pattern":
 		prefix: "_metadata_pattern"
@@ -108,7 +108,7 @@
 			$0
 		"""
 
-	# comment - TRIGGER:
+	# TRIGGER:
 
 	"_triggers unix_cmd":
 		prefix: "_triggers_unix_cmd_"
@@ -196,7 +196,7 @@
 			$0
 		"""
 
-	# comment - IDENTIFIERS:
+	# IDENTIFIERS:
 
 	"_identify Simple Identifiers":
 		prefix: "_identify_Simple_Identifiers_"
@@ -210,7 +210,7 @@
 			$0
 		"""
 
-	# comment - TABLES:
+	# TABLES:
 
 	"_table Two cols":
 		prefix: "_table_Two_cols_"
@@ -237,7 +237,7 @@
 			$0
 		"""
 
-	# comment - DEFINITIONS:
+	# DEFINITIONS:
 
 	"_definitions Small":
 		prefix: "_definitions_Small_"
@@ -283,7 +283,7 @@
 			$0
 		"""
 
-	# comment - FULL VERSION:
+	# FULL VERSION:
 
 	"_full_version (\\\\d*\\\\.\\\\d*)":
 		prefix: "_full_version_(\\\\d*\\\\.\\\\d*)_"
@@ -314,202 +314,254 @@
 			end for;$0
 		"""
 
-	# comment - TPLPRE:
-	# comment - COMMON FUNCTIONS::
+	# TPLPRE:
+	# COMMON FUNCTIONS::
+	# // This is an old implementation, please use new (SearchFunctions.getNodeIp)
 	"OLD functions.validate_host_address_format(rel_host_address)":
-		prefix: "functions.validate_host_address_format"
+		prefix: "_functions.validate_host_address_format"
 		description: 'OLD Common_functions module. If <rel_host_address> does not meet requirements(regex \'^[\da-z\:][\w\:\.\-]*$\') then functions returns empty string'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.validate_host_address_format(${1:rel_host_address});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions.getNodeIp)
+		functions.validate_host_address_format(${1:rel_host_address});$0"""
 	"OLD functions.domain_lookup(host, rel_host_address_domain)":
-		prefix: "functions.domain_lookup"
+		prefix: "_functions.domain_lookup"
 		description: 'OLD Common_functions module. Function resolves domain to IP address using "nslookup" command'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.domain_lookup(${1:host}, ${2:rel_host_address_domain});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.domain_lookup(${1:host}, ${2:rel_host_address_domain});$0"""
 	"OLD functions.identify_host_perform_search(host, rel_host_address)":
-		prefix: "functions.identify_host_perform_search"
+		prefix: "_functions.identify_host_perform_search"
 		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.identify_host_perform_search(${1:host}, ${2:rel_host_address});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions.getHostingNodes)
+		functions.identify_host_perform_search(${1:host}, ${2:rel_host_address});$0"""
 	"OLD functions.identify_host_perform_search_in_scope(host, rel_host_address, hosts_scope)":
-		prefix: "functions.identify_host_perform_search_in_scope"
+		prefix: "_functions.identify_host_perform_search_in_scope"
 		description: """OLD Common_functions module.
 										Function searches for one rel_host_address Host in some narrowed scope of hosts,
 										but not on all available hosts like identify_host_perform_search()"""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.identify_host_perform_search_in_scope(${1:host}, ${2:rel_host_address}, ${3:hosts_scope});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.identify_host_perform_search_in_scope(${1:host}, ${2:rel_host_address}, ${3:hosts_scope});$0"""
 	"OLD functions.identify_host(host, rel_host_address, extended)":
-		prefix: "functions.identify_host"
+		prefix: "_functions.identify_host"
 		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.identify_host(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.identify_host(${1:host}, ${2:rel_host_address}, ${3:extended});$0"""
 	"OLD functions.identify_host_extended(host, rel_host_address, extended)":
-		prefix: "functions.identify_host_extended"
+		prefix: "_functions.identify_host_extended"
 		description: 'OLD Common_functions module. Function searches for one "rel_host_address" Host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.identify_host_extended(${1:host}, ${2:rel_host_address}, ${3:extended});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.identify_host_extended(${1:host}, ${2:rel_host_address}, ${3:extended});$0"""
 	"OLD functions.related_sis_search(host, rel_host_address, rel_si_type)":
-		prefix: "functions.related_sis_search"
+		prefix: "_functions.related_sis_search"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on "rel_host_address" host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.related_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.related_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type});$0"""
 	"OLD functions.related_sis_search_on_multiple_hosts(host, rel_host_addresses, rel_si_type)":
-		prefix: "functions.related_sis_search_on_multiple_hosts"
+		prefix: "_functions.related_sis_search_on_multiple_hosts"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on multiple "rel_host_addresses" hosts.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.related_sis_search_on_multiple_hosts(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.related_sis_search_on_multiple_hosts(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"""
 	"OLD functions.related_sis_search_on_multiple_hosts_extended(host, rel_host_addresses, rel_si_type)":
-		prefix: "functions.related_sis_search_on_multiple_hosts_extended"
+		prefix: "_functions.related_sis_search_on_multiple_hosts_extended"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on multiple "rel_host_addresses" hosts.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.related_sis_search_on_multiple_hosts_extended(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.related_sis_search_on_multiple_hosts_extended(${1:host}, ${2:rel_host_addresses}, ${3:rel_si_type});$0"""
 	"OLD functions.related_sis_search_extended(host, rel_host_address, rel_si_type, extended)":
-		prefix: "functions.related_sis_search_extended"
+		prefix: "_functions.related_sis_search_extended"
 		description: 'OLD Common_functions module. Function searches for all SIs with "rel_si_type" TYPE on "rel_host_address" host.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.related_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:extended}),$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.related_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:extended}),$0"""
 	"OLD functions.related_si_types_search(host, rel_host_address, rel_si_types)":
-		prefix: "functions.related_si_types_search"
+		prefix: "_functions.related_si_types_search"
 		description: 'OLD Common_functions module. Function searches for all SIs with different TYPEs in "rel_si_types" LIST on "rel_host_address" host'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.related_si_types_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_types});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.related_si_types_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_types});$0"""
 	"OLD functions.path_normalization(host, install_root)":
-		prefix: "functions.path_normalization"
+		prefix: "_functions.path_normalization"
 		description: 'OLD Common_functions module. Current function determines "~" in the path, normalizes it and returns back full path'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.path_normalization(${1:host}, ${2:install_root});$0"
-
+		body: """
+		// This is an old implementation, please use new (New.New)
+		functions.path_normalization(${1:host}, ${2:install_root});$0"""
 	"OLD functions.links_management(si_node, recently_found_sis, related_si_type)":
-		prefix: "functions.links_management"
+		prefix: "_functions.links_management"
 		description: 'OLD Common_functions module. Function that manages Communication and Dependency links between the current SI and related SIs'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.links_management(${1:si_node}, ${2:recently_found_sis}, ${3:related_si_type});$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.links_management(${1:si_node}, ${2:recently_found_sis}, ${3:related_si_type});$0"""
 	"OLD functions.get_cleanedup_path(path, os)":
-		prefix: "functions.get_cleanedup_path"
+		prefix: "_functions.get_cleanedup_path"
 		description: 'OLD Common_functions module. Function which normalizes directory path by removing "\.\", "\..\", etc.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.get_cleanedup_path(${1:path}, ${2:os});$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.get_cleanedup_path(${1:path}, ${2:os});$0"""
 	"OLD functions.get_max_version(ver1, ver2)":
-		prefix: "functions.get_max_version"
+		prefix: "_functions.get_max_version"
 		description: 'OLD Common_functions module. Compares to version strings like "10.08.10" and "7.18" and returns the biggest one'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.get_max_version(${1:ver1}, ${2:ver2});$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.get_max_version(${1:ver1}, ${2:ver2});$0"""
 	"OLD functions.get_exe_cwd_path(process, expected_binary_name)":
-		prefix: "functions.get_exe_cwd_path"
+		prefix: "_functions.get_exe_cwd_path"
 		description: """OLD Common_functions module. Function tries to obtain: - full process command path (exe_path)
 										and/or - current working directory (cwd_path) - directory the process was started from. """
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.get_exe_cwd_path(${1:process}, ${2:expected_binary_name});$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.get_exe_cwd_path(${1:process}, ${2:expected_binary_name});$0"""
 	"OLD functions.sort_list(list)":
-		prefix: "functions.sort_list"
+		prefix: "_functions.sort_list"
 		description: 'OLD Common_functions module. Function returns sorted list of strings '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.sort_list(${1:list});$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.sort_list(${1:list});$0"""
 	"OLD functions.run_priv_cmd(host, command, priv_cmd := 'PRIV_RUNCMD')":
-		prefix: "functions.run_priv_cmd"
+		prefix: "_functions.run_priv_cmd"
 		description: """OLD Common_functions module. Run the given command, using privilege elevation on UNIX, if required.
 										The command is first run as given. If this fails, produces no output and the platform
 										is UNIX then the command is executed again using the given priv_cmd. """
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.run_priv_cmd(${1:host}, ${2:command}, priv_cmd := 'PRIV_RUNCMD');$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.run_priv_cmd(${1:host}, ${2:command}, priv_cmd := 'PRIV_RUNCMD');$0"""
 	"OLD functions.has_process(host, command)":
-		prefix: "functions.has_process"
+		prefix: "_functions.has_process"
 		description: 'OLD Common_functions module. Returns true if the given process is running on the given host. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.has_process(${1:host}, ${2:command});$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.has_process(${1:host}, ${2:command});$0"""
 	"OLD functions.isValidSerialNumber(serial)":
-		prefix: "functions.isValidSerialNumber"
+		prefix: "_functions.isValidSerialNumber"
 		description: 'OLD Common_functions module. Returns true if the given serial number is valid '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.isValidSerialNumber(${1:serial});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.isValidSerialNumber(${1:serial});$0"""
 	"OLD functions.convertToCharString(ascii_codes)":
-		prefix: "functions.convertToCharString"
+		prefix: "_functions.convertToCharString"
 		description: 'OLD Common_functions module. Converts list of ASCII code integers into a string of characters. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.convertToCharString(${1:ascii_codes});$0"
-
+		body: """
+		// This is an old implementation, please use new (ConversionFunctions)
+		functions.convertToCharString(${1:ascii_codes});$0"""
 	"OLD functions.wmiFollowAssociations(host, namespace, initial_paths, associations)":
-		prefix: "functions.wmiFollowAssociations"
+		prefix: "_functions.wmiFollowAssociations"
 		description: """OLD Common_functions module. Starting from initial_paths, a list of WMI
 										source instance paths, follows multiple WMI associations to reach a set of target instances. """
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.wmiFollowAssociations(${1:host}, ${2:namespace}, ${3:initial_paths}, ${4:associations});$0"
-
+		body: """
+		// This is an old implementation, please use new (ConversionFunctions)
+		functions.wmiFollowAssociations(${1:host}, ${2:namespace}, ${3:initial_paths}, ${4:associations});$0"""
 	"OLD functions.checkForDecimal(value, bValue)":
-		prefix: "functions.checkForDecimal"
+		prefix: "_functions.checkForDecimal"
 		description: 'OLD Common_functions module. Check for decimal and convert the value into Bytes '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.checkForDecimal(${1:value}, ${2:bValue});$0"
-
+		body: """
+		// This is an old implementation, please use new (ConversionFunctions)
+		functions.checkForDecimal(${1:value}, ${2:bValue});$0"""
 	"OLD functions.convertToBytes(value, gib)":
-		prefix: "functions.convertToBytes"
+		prefix: "_functions.convertToBytes"
 		description: 'OLD Common_functions module. Convert the value into Bytes '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.convertToBytes(${1:value}, ${2:gib});$0"
-
+		body: """
+		// This is an old implementation, please use new (ConversionFunctions)
+		functions.convertToBytes(${1:value}, ${2:gib});$0"""
 	"OLD functions.identify_host_with_uuid(uuid)":
-		prefix: "functions.identify_host_with_uuid"
+		prefix: "_functions.identify_host_with_uuid"
 		description: 'OLD Common_functions module. Function returns host with searched UUID '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.identify_host_with_uuid(${1:uuid});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)
+		functions.identify_host_with_uuid(${1:uuid});$0"""
 	"OLD functions.locateCommands(host, command_list)":
-		prefix: "functions.locateCommands"
+		prefix: "_functions.locateCommands"
 		description: """OLD Common_functions module. Attempts to locate the required commands. Returns a table of each command location.
 										The location is none if the command could not be found. This call returns none if the location process fails."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.locateCommands(${1:host}, ${2:command_list});$0"
-
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.locateCommands(${1:host}, ${2:command_list});$0"""
 	"OLD functions.find_server(host, server_address, port, si_type, alt_types := none, all := false)":
-		prefix: "functions.find_server"
+		prefix: "_functions.find_server"
 		description: 'OLD Common_functions module. Function that searches for the appropriate server node based on the provided server details. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.find_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, alt_types := ${5:none}, all := ${6:false});$0"
-
+		body: """
+		// This is an old implementation, please use new (SearchFunctions)!
+		functions.find_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, alt_types := ${5:none}, all := ${6:false});$0"""
 	"OLD functions.checkCommandList(host, command_list)":
-		prefix: "functions.checkCommandList"
+		prefix: "_functions.checkCommandList"
 		description: 'OLD Common_functions module. Checks whether the commands exist. Returns true if all the commands exist. Even one command we are looking for is not present we return false. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "functions.checkCommandList(${1:host}, ${2:command_list});$0"
+		body: """
+		// This is an old implementation, please use new (DiscoveryFunctions)
+		functions.checkCommandList(${1:host}, ${2:command_list});$0"""
 
-	# comment -   CONVERSION FUNCTIONS::
-
+	#   CONVERSION FUNCTIONS::
 	"ConversionFunctions.isValidSerialNumber(serial) -> valid":
 		prefix: "ConversionFunctions.isValidSerialNumber"
 		description: 'SupportingFiles ConversionFunctions module -> isValidSerialNumber() - checks if the provided serial number is valid;'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "ConversionFunctions.isValidSerialNumber(${1:serial});$0"
+	"isValidSerialNumber(serial) -> valid":
+		prefix: "isValidSerialNumber"
+		description: 'SupportingFiles ConversionFunctions module -> isValidSerialNumber() - checks if the provided serial number is valid;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "ConversionFunctions.isValidSerialNumber(${1:serial});$0"
+
 	"ConversionFunctions.convertToCharString(ascii_codes) -> ascii_string":
 		prefix: "ConversionFunctions.convertToCharString"
 		description: 'SupportingFiles ConversionFunctions module -> convertToCharString() - converts list of ASCII code integers into a string of characters;'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "ConversionFunctions.convertToCharString(${1:ascii_codes});$0"
+	"convertToCharString(ascii_codes) -> ascii_string":
+		prefix: "convertToCharString"
+		description: 'SupportingFiles ConversionFunctions module -> convertToCharString() - converts list of ASCII code integers into a string of characters;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "ConversionFunctions.convertToCharString(${1:ascii_codes});$0"
+
 	"ConversionFunctions.convertToBytes(value, gib) -> result":
 		prefix: "ConversionFunctions.convertToBytes"
 		description: 'SupportingFiles ConversionFunctions module -> convertToBytes() - converts the value into Bytes;'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "ConversionFunctions.convertToBytes(${1:value}, gib);$0"
+	"convertToBytes(value, gib) -> result":
+		prefix: "convertToBytes"
+		description: 'SupportingFiles ConversionFunctions module -> convertToBytes() - converts the value into Bytes;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "ConversionFunctions.convertToBytes(${1:value}, gib);$0"
+
 	"ConversionFunctions.convertStringToHex(string, sep := \"\") -> result":
 		prefix: "ConversionFunctions.convertStringToHex"
+		description: 'SupportingFiles ConversionFunctions module -> convertStringToHex() - converts String To HexaDecimal string;'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "ConversionFunctions.convertStringToHex(${1:string}, sep := \"\");$0"
+	"convertStringToHex(string, sep := \"\") -> result":
+		prefix: "convertStringToHex"
 		description: 'SupportingFiles ConversionFunctions module -> convertStringToHex() - converts String To HexaDecimal string;'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "ConversionFunctions.convertStringToHex(${1:string}, sep := \"\");$0"
@@ -524,25 +576,21 @@
 										- if SI is listening on IP address which is managed by Cluster"""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "cluster_support_functions.getHostingNode(host, fallback_kind := \"${1:t_host}\", instance := \"${2:inst}\", clustered_data_path := \"${3:path}\");$0"
-
 	"cluster_support_functions.add_resource_attrs(resource, resource_type, resource_properties, resource_mapping)":
 		prefix: "cluster_support_functions.add_resource_attrs"
 		description: 'Add resource attributes of interest to the cluster resource node along with a standardised resource type attribute.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "cluster_support_functions.add_resource_attrs(${1:resource}, ${2:resource_type}, ${3:resource_properties}, ${4:resource_mapping});$0"
-
 	"cluster_support_functions.get_cluster_dns_names(cluster, ipv4_addrs, ipv6_addrs, host:=none)":
 		prefix: "cluster_support_functions.get_cluster_dns_names"
 		description: 'Get DNS names associated with the hosts of a cluster.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "cluster_support_functions.get_cluster_dns_names(${1:cluster}, ${2:ipv4_addrs}, ${3:ipv6_addrs}, host := \"${4:none}\");$0"
-
 	"cluster_support_functions.get_cluster_service_vip(si)":
 		prefix: "cluster_support_functions.get_cluster_service_vip"
 		description: 'Obtain the virtual ip address of the provided SoftwareInstance node if it is related to a ClusterService node. Also return the port if reported.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "cluster_support_functions.get_cluster_service_vip(${1:si});$0"
-
 	"cluster_support_functions.get_si_host(si, ip_addr)":
 		prefix: "cluster_support_functions.get_si_host"
 		description: """Obtain the host related to the provided SoftwareInstance node.
@@ -552,8 +600,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "cluster_support_functions.get_si_host(${1:si}, ${2:ip_addr});$0"
 
-	# comment -   DISCOVERY BUILT IN FUNCTIONS::
-
+	#   DISCOVERY BUILT IN FUNCTIONS::
 	"discovery.process(node)":
 		prefix: "discovery.process"
 		description: 'Returns the process node corresponding to the source node, which must be a ListeningPort or NetworkConnection node.'
@@ -585,7 +632,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/discovery.access'
 		body: "discovery.access(${1:process});$0"
 
-	# comment - GET AND QUERY:
+	# GET AND QUERY:
 
 	"discovery.fileGet(host, config_filepath)":
 		prefix: "discovery.fileGet"
@@ -738,8 +785,7 @@
 		body: "binary.toWWN(${1:value});$0"
 
 
-	# comment - MATRIX:
-
+	# MATRIX:
 	"filepath_info Matrix":
 		prefix: "filepath_info_Matrix"
 		description: 'Development function. Allows us to gather all file get and command run from patterns to show it in docs.'
@@ -787,7 +833,7 @@
 			$0// *command_info_end$0
 		"""
 
-	# comment - JSON:
+	# JSON:
 	"json.encode(\"value\")":
 		prefix: "json.encode"
 		description: 'Converts value to a JSON encoded string.'
@@ -799,9 +845,14 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/json.decode'
 		body: "json.decode(${1:value});$0"
 
-	# comment -   DISCOVERY FUNCTIONS:
+	#   DISCOVERY FUNCTIONS:
 	"DiscoveryFunctions.pathNormalization(host, install_root) -> install_root":
 		prefix: "DiscoveryFunctions.pathNormalization"
+		description: 'DiscoveryFunctions.pathNormalization() -> determines "~" in the path, normalizes it and returns back full path.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.pathNormalization(${1:host}, ${2:install_root});$0"
+	"pathNormalization(host, install_root) -> install_root":
+		prefix: "pathNormalization"
 		description: 'DiscoveryFunctions.pathNormalization() -> determines "~" in the path, normalizes it and returns back full path.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.pathNormalization(${1:host}, ${2:install_root});$0"
@@ -811,7 +862,6 @@
 		description: 'DiscoveryFunctions.escapePath() -> escape extra characters and resolve /../ in path.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.escapePath(${1:host}, ${2:install_root});$0"
-
 	"escapePath(host, install_root) -> install_root":
 		prefix: "escapePath"
 		description: 'DiscoveryFunctions.escapePath() -> escape extra characters and resolve /../ in path.'
@@ -823,9 +873,19 @@
 		description: 'DiscoveryFunctions.getCleanedupPath() -> normalizes directory path by removing relative path symbols, like: "\.\", "\..\".'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.getCleanedupPath(${1:path}, ${2:os});$0"
+	"getCleanedupPath(path, os) -> path_normalized":
+		prefix: "getCleanedupPath"
+		description: 'DiscoveryFunctions.getCleanedupPath() -> normalizes directory path by removing relative path symbols, like: "\.\", "\..\".'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.getCleanedupPath(${1:path}, ${2:os});$0"
 
 	"DiscoveryFunctions.getMaxVersion(ver1, ver2) -> maxversion":
 		prefix: "DiscoveryFunctions.getMaxVersion"
+		description: 'DiscoveryFunctions.getMaxVersion() -> compares two versions and returns the highest one.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.getMaxVersion(${1:ver1}, ${2:ver2});$0"
+	"getMaxVersion(ver1, ver2) -> maxversion":
+		prefix: "getMaxVersion"
 		description: 'DiscoveryFunctions.getMaxVersion() -> compares two versions and returns the highest one.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.getMaxVersion(${1:ver1}, ${2:ver2});$0"
@@ -835,9 +895,19 @@
 		description: 'DiscoveryFunctions.getExeCwdPath() -> returns full path of the binary file location and the full path from where it\'s been execute.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.getExeCwdPath(${1:process}, ${2:expected_binary_name});$0"
+	"getExeCwdPath(process, expected_binary_name) -> exe_path, cwd_path":
+		prefix: "getExeCwdPath"
+		description: 'DiscoveryFunctions.getExeCwdPath() -> returns full path of the binary file location and the full path from where it\'s been execute.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.getExeCwdPath(${1:process}, ${2:expected_binary_name});$0"
 
 	"DiscoveryFunctions.sortList(list) -> sorted_list":
 		prefix: "DiscoveryFunctions.sortList"
+		description: 'DiscoveryFunctions.sortList() -> sorts the list and returns its sorted copy.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.sortList(${1:list});$0"
+	"sortList(list) -> sorted_list":
+		prefix: "sortList"
 		description: 'DiscoveryFunctions.sortList() -> sorts the list and returns its sorted copy.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.sortList(${1:list});$0"
@@ -847,9 +917,30 @@
 		description: 'DiscoveryFunctions.runActiveCommand() -> runs the command and then re-runs it with privileged permissions if needed.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.runActiveCommand(${1:host}, ${2:command_line}, expected_content_regex := ${3:none}, priv_cmd := ${4:none});$0"
+	"runActiveCommand(host, command_line, expected_content_regex := none, priv_cmd := none) -> result":
+		prefix: "runActiveCommand"
+		description: 'DiscoveryFunctions.runActiveCommand() -> runs the command and then re-runs it with privileged permissions if needed.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.runActiveCommand(${1:host}, ${2:command_line}, expected_content_regex := ${3:none}, priv_cmd := ${4:none});$0"
+
+	"DiscoveryFunctions.runFutureActiveCommand(host, command_line, expected_content_regex := none, priv_cmd := none, full_process := full_process) -> result":
+		prefix: "DiscoveryFunctions.runFutureActiveCommand"
+		description: 'DiscoveryFunctions.runFutureActiveCommand() -> runs the command and then re-runs it with privileged permissions if needed.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.runFutureActiveCommand(${1:host}, ${2:command_line}, expected_content_regex := ${3:none}, priv_cmd := ${4:none}, full_process := ${5:full_process});$0"
+	"runFutureActiveCommand(host, command_line, expected_content_regex := none, priv_cmd := none, full_process := full_process) -> result":
+		prefix: "runFutureActiveCommand"
+		description: 'DiscoveryFunctions.runFutureActiveCommand() -> runs the command and then re-runs it with privileged permissions if needed.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.runFutureActiveCommand(${1:host}, ${2:command_line}, expected_content_regex := ${3:none}, priv_cmd := ${4:none}, full_process := ${5:full_process});$0"
 
 	"DiscoveryFunctions.locateCommands(host, command_list) -> result":
 		prefix: "DiscoveryFunctions.locateCommands"
+		description: 'DiscoveryFunctions.locateCommands() -> searches for the location of the provided command list.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.locateCommands(${1:host}, ${2:command_list});$0"
+	"locateCommands(host, command_list) -> result":
+		prefix: "locateCommands"
 		description: 'DiscoveryFunctions.locateCommands() -> searches for the location of the provided command list.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.locateCommands(${1:host}, ${2:command_list});$0"
@@ -859,72 +950,105 @@
 		description: 'DiscoveryFunctions.checkCommandList() -> checks that the list of commands exist on the given Host.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "DiscoveryFunctions.checkCommandList(${1:host}, ${2:command_list});$0"
+	"checkCommandList(host, command_list) -> result":
+		prefix: "checkCommandList"
+		description: 'DiscoveryFunctions.checkCommandList() -> checks that the list of commands exist on the given Host.'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "DiscoveryFunctions.checkCommandList(${1:host}, ${2:command_list});$0"
 
-	# comment -   RDBMS OLD::
+	# RDBMS OLD::
+	# // This is an old implementation, please use new (RDBMSFunctions)
 	"OLD rdbms_functions.oracle_ora_file_parser(section_name, oracle_ora_file_content) -> section":
 		prefix: "rdbms_functions.oracle_ora_file_parser"
 		description: 'OLD rdbms_functions.oracle_ora_file_parser -> function tries to obtain full section from Oracle listener.ora or tnsnames.ora file. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.oracle_ora_file_parser(${1:section_name}, ${2:oracle_ora_file_content});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.oracleOraFileParser)
+		rdbms_functions.oracle_ora_file_parser(${1:section_name}, ${2:oracle_ora_file_content});$0"""
 	"OLD rdbms_functions.perform_rdbms_sis_search(related_sis_raw, rel_si_type, instance, port, db_name, extended) -> related_rdbms_sis":
 		prefix: "rdbms_functions.perform_rdbms_sis_search"
 		description: 'OLD rdbms_functions.perform_rdbms_sis_search -> This internal function is used by related_rdbms_sis_search() and related_rdbms_sis_search_extended() and searches for specific RDBMS SI \"rel_si_type\" TYPE on \"rel_host_address\" host, which can be uniquely identified by attribute (depends on RDBMS Type) '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.perform_rdbms_sis_search(${1:related_sis_raw}, ${2:rel_si_type}, ${3:instance}, ${4:port}, ${5:db_name}, ${6:extended});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.performRdbmsSisSearch)
+		rdbms_functions.perform_rdbms_sis_search(${1:related_sis_raw}, ${2:rel_si_type}, ${3:instance}, ${4:port}, ${5:db_name}, ${6:extended});$0"""
 	"OLD rdbms_functions.related_rdbms_sis_search(host, rel_host_address, rel_si_type, instance, port, db_name, extended) -> related_rdbms_sis":
 		prefix: "rdbms_functions.related_rdbms_sis_search"
 		description: 'OLD rdbms_functions.related_rdbms_sis_search ->  Function searches for specific RDBMS SI \"rel_si_type\" TYPE on \"rel_host_address\" host. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.related_rdbms_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.performRdbmsSisSearch)
+		rdbms_functions.related_rdbms_sis_search(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"""
 	"OLD rdbms_functions.related_rdbms_sis_search_extended(host, rel_host_address, rel_si_type, instance, port, db_name, extended) -> related_rdbms_sis":
 		prefix: "rdbms_functions.related_rdbms_sis_search_extended"
 		description: 'OLD rdbms_functions.related_rdbms_sis_search_extended -> Function searches for specific RDBMS SI \"rel_si_type\" TYPE on \"rel_host_address\" host. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.related_rdbms_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.performRdbmsSisSearch)
+		rdbms_functions.related_rdbms_sis_search_extended(${1:host}, ${2:rel_host_address}, ${3:rel_si_type}, ${4:instance}, ${5:port}, ${6:db_name}, ${7:extended});$0"""
 	"OLD rdbms_functions.oracle_net_service_name_search(host, net_service_name, tnsnames_file_full_location) -> related_oracle_si":
 		prefix: "rdbms_functions.oracle_net_service_name_search"
 		description: 'OLD rdbms_functions.oracle_net_service_name_search -> Function returns Oracle Database SI which is end point for local \<net_service_name\>. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.oracle_net_service_name_search(${1:host}, ${2:net_service_name}, ${3:tnsnames_file_full_location});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.oracleNetServiceNameSearch)
+		rdbms_functions.oracle_net_service_name_search(${1:host}, ${2:net_service_name}, ${3:tnsnames_file_full_location});$0"""
 	"OLD rdbms_functions.dsn_rdbms_servers(host,dsn_name) -> db_srvs":
 		prefix: "rdbms_functions.dsn_rdbms_servers"
 		description: 'OLD rdbms_functions.dsn_rdbms_servers -> Function returns related RDBMS SI by its DSN (Data Source Name) value. For WINDOWS ONLY! '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.dsn_rdbms_servers(${1:host}, ${2:dsn_name});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.dsnRdbmsServers)
+		rdbms_functions.dsn_rdbms_servers(${1:host}, ${2:dsn_name});$0"""
 	"OLD rdbms_functions.parseJDBC(url) -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name":
 		prefix: "rdbms_functions.parseJDBC"
 		description: 'OLD rdbms_functions.parseJDBC -> Parse a JDBC URL and extract the details '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.parseJDBC(${1:url});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.parseJDBC)
+		rdbms_functions.parseJDBC(${1:url});$0"""
 	"OLD rdbms_functions.jdbc_search(host,jdbc_url) -> db_srvs":
 		prefix: "rdbms_functions.jdbc_search"
 		description: 'OLD rdbms_functions.jdbc_search -> Function returns related RDBMS SI by JDBC URL value. First it parses the JDBC URL(the function from j2eeinferredmodel module was taken as a basis), then it uses related_rdbms_sis_search or oracle_net_service_name_search function to find the related RDBMS SIs. Supported RDBMS: MSSQL, Oracle, DB2, MySQL, PostgreSQL, Ingres DB, Sybase ASE, Informix. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.jdbc_search(${1:host}, ${2:jdbc_url});$0"
-
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.performRdbmsSisSearch)
+		rdbms_functions.jdbc_search(${1:host}, ${2:jdbc_url});$0"""
 	"OLD rdbms_functions.find_db_server(host, server_address, port, si_type, db_details) -> server_nodes":
 		prefix: "rdbms_functions.find_db_server"
 		description: 'OLD rdbms_functions.find_db_server -> Function that searches for the appropriate database server node based on the provided server details. '
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "rdbms_functions.find_db_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, ${5:db_details});$0"
+		body: """
+		// This is an old implementation, please use new (RDBMSFunctions.performRdbmsSisSearch)
+		rdbms_functions.find_db_server(${1:host}, ${2:server_address}, ${3:port}, ${4:si_type}, ${5:db_details});$0"""
 
-
-	# comment -   RDBMS NEW::
+	# RDBMS NEW::
 	"RDBMSFunctions.oracleOraFileParser(section_name, oracle_ora_file_content) -> section":
 		prefix: "RDBMSFunctions.oracleOraFileParser"
+		description: 'obtains full section from Oracle listener.ora or tnsnames.ora files'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "RDBMSFunctions.oracleOraFileParser(${1:section_name}, ${2:oracle_ora_file_content}); // -> section$0"
+	"oracleOraFileParser(section_name, oracle_ora_file_content) -> section":
+		prefix: "oracleOraFileParser"
 		description: 'obtains full section from Oracle listener.ora or tnsnames.ora files'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "RDBMSFunctions.oracleOraFileParser(${1:section_name}, ${2:oracle_ora_file_content}); // -> section$0"
 
 	"RDBMSFunctions.performRdbmsSisSearch(related_sis_raw, rel_si_type, port, instance, db_name, ora_service_name, db2_copy_name) -> related_rdbms_nodes":
 		prefix: "RDBMSFunctions.performRdbmsSisSearch"
+		description: 'searches for the RDBMS Software by provided parameters'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: """
+			RDBMSFunctions.performRdbmsSisSearch(related_sis_raw = ${1:related_sis_raw},
+													 rel_si_type = ${2:rel_si_type},
+													 port = ${3:port},
+													 instance = ${4:instance},
+													 db_name = ${5:db_name},
+													 ora_service_name = ${6:ora_service_name},
+													 db2_copy_name = ${7:db2_copy_name}); // ->  -> related_rdbms_nodes$0
+		"""
+	"performRdbmsSisSearch(related_sis_raw, rel_si_type, port, instance, db_name, ora_service_name, db2_copy_name) -> related_rdbms_nodes":
+		prefix: "performRdbmsSisSearch"
 		description: 'searches for the RDBMS Software by provided parameters'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
@@ -946,9 +1070,23 @@
 													  net_service_name = ${2:net_service_name},
 													  tnsnames_file_full_location = ${3:tnsnames_file_full_location}); // -> ora_host, ora_sid, ora_service_name$0
 		"""
+	"oracleNetServiceNameSearch(host, net_service_name, tnsnames_file_full_location) -> ora_host, ora_sid, ora_service_name":
+		prefix: "oracleNetServiceNameSearch"
+		description: 'returns Oracle Database SI parameters by the provided Net Service Name'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: """
+			RDBMSFunctions.oracleNetServiceNameSearch(host = ${1:host},
+													  net_service_name = ${2:net_service_name},
+													  tnsnames_file_full_location = ${3:tnsnames_file_full_location}); // -> ora_host, ora_sid, ora_service_name$0
+		"""
 
 	"RDBMSFunctions.dsnRdbmsServers(host,dsn_name) -> db_host, db_type, db_instance, ora_service_name, db_port, db_name":
 		prefix: "RDBMSFunctions.dsnRdbmsServers"
+		description: 'determines RDBMS Server details by the provided DSN'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "RDBMSFunctions.dsnRdbmsServers(host, ${1:dsn_name}); // -> db_host, db_type, db_instance, ora_service_name, db_port, db_name$0"
+	"dsnRdbmsServers(host,dsn_name) -> db_host, db_type, db_instance, ora_service_name, db_port, db_name":
+		prefix: "dsnRdbmsServers"
 		description: 'determines RDBMS Server details by the provided DSN'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "RDBMSFunctions.dsnRdbmsServers(host, ${1:dsn_name}); // -> db_host, db_type, db_instance, ora_service_name, db_port, db_name$0"
@@ -958,12 +1096,20 @@
 		description: 'extracts RDBMS details by the provided JDBC URL'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "RDBMSFunctions.parseJDBC(${1:url}); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
+	"parseJDBC(url) -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name":
+		prefix: "parseJDBC"
+		description: 'extracts RDBMS details by the provided JDBC URL'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "RDBMSFunctions.parseJDBC(${1:url}); // -> db_type, db_host, db_port, db_name, oracle_tns_alias, oracle_service_name$0"
 
-	# comment -   SEARCH FUNCTIONS::
-
-
+	# SEARCH FUNCTIONS::
 	"SearchFunctions.getNodeIp(host, rel_host_address_domain) -> node_ip":
 		prefix: "SearchFunctions.getNodeIp"
+		description: 'converts alphanumeric Host address into IP address'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.getNodeIp(host, ${1:rel_host_address_domain}); // -> node_ip$0"
+	"getNodeIp(host, rel_host_address_domain) -> node_ip":
+		prefix: "getNodeIp"
 		description: 'converts alphanumeric Host address into IP address'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "SearchFunctions.getNodeIp(host, ${1:rel_host_address_domain}); // -> node_ip$0"
@@ -973,10 +1119,40 @@
 		description: 'searches for Hosting Nodes'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "SearchFunctions.getHostingNodes(host, ${1:node_address}, balancer_port := ${2:none}); // -> hosting_nodes, nodes_type$0"
+	"getHostingNodes(host, node_address, balancer_port := none) -> hosting_nodes, nodes_type":
+		prefix: "getHostingNodes"
+		description: 'searches for Hosting Nodes'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.getHostingNodes(host, ${1:node_address}, balancer_port := ${2:none}); // -> hosting_nodes, nodes_type$0"
 
-	# comment - GET SOFTWARE NODES:
+	# GET SOFTWARE NODES:
 	"SearchFunctions.getSoftwareNodes(evrything) -> software_nodes":
 		prefix: "SearchFunctions.getSoftwareNodes"
+		description: 'searches for software(SoftwareInstance, DatabaseDetail, SoftwareComponent or LoadBalancerService)'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: """
+			SearchFunctions.getSoftwareNodes(host,
+											 node_address           := ${1:none},
+											 software_type          := ${2:none},
+											 balancer_port          := ${3:none},
+											 port                   := ${4:none},
+											 instance               := ${5:none},
+											 listen_tcp_socket      := ${6:none},
+											 server_name            := ${7:none},
+											 installed_product      := ${8:none},
+											 db_name                := ${9:none},
+											 net_service_name       := ${10:none},
+											 ora_service_name       := ${11:none},
+											 db2_copy_name          := ${12:none},
+											 dsn_name               := ${13:none},
+											 jdbc_url               := ${14:none},
+											 tnsnames_file_location := ${15:none},
+											 get_remote_nodes_only  := ${16:none}
+											); // -> software_nodes
+			$0
+		"""
+	"getSoftwareNodes(evrything) -> software_nodes":
+		prefix: "getSoftwareNodes"
 		description: 'searches for software(SoftwareInstance, DatabaseDetail, SoftwareComponent or LoadBalancerService)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: """
@@ -1006,21 +1182,36 @@
 		description: 'returns the SI Node which is running behind LoadBalancer or hosts DatabaseDetail Node'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
 		body: "SearchFunctions.getSI(${1:related_node}, ${2:si_types_raw}); // -> related_si$0"
+	"getSI(related_node, si_types_raw) -> related_si":
+		prefix: "getSI"
+		description: 'returns the SI Node which is running behind LoadBalancer or hosts DatabaseDetail Node'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.getSI(${1:related_node}, ${2:si_types_raw}); // -> related_si$0"
 
 	"SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses, rel_si_type) -> related_sis":
 		prefix: "SearchFunctions.relatedSisSearchOnMultipleHosts"
 		description: 'searches for software on multiple Hosts'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "SearchFunctions.identifyHostWithUuid(${1:uuid}); // -> searched_host$0"
+		body: "SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
+	"relatedSisSearchOnMultipleHosts(host, rel_host_addresses, rel_si_type) -> related_sis":
+		prefix: "relatedSisSearchOnMultipleHosts"
+		description: 'searches for software on multiple Hosts'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
 
 	"SearchFunctions.identifyHostWithUuid(uuid) -> searched_host":
 		prefix: "SearchFunctions.identifyHostWithUuid"
 		description: 'searches for the Host with the specific UUID'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
-		body: "SearchFunctions.relatedSisSearchOnMultipleHosts(host, rel_host_addresses = ${1:rel_host_addresses}, rel_si_type = ${2:rel_si_type}); // -> related_sis$0"
+		body: "SearchFunctions.identifyHostWithUuid(${1:uuid}); // -> searched_host$0"
+	"identifyHostWithUuid(uuid) -> searched_host":
+		prefix: "identifyHostWithUuid"
+		description: 'searches for the Host with the specific UUID'
+		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/User+defined+functions'
+		body: "SearchFunctions.identifyHostWithUuid(${1:uuid}); // -> searched_host$0"
 
 	# Templates:
-	# comment - GET SOFTWARE NODES JDBC:
+	# GET SOFTWARE NODES JDBC:
 	"SearchFunctions.getSoftwareNodes(host, jdbc_url)":
 		prefix: "_jdbc_url_SearchFunctions.getSoftwareNodes"
 		description: 'Template of common SearchFunctions.getSoftwareNodes to find database via jdbc url.'
@@ -1029,7 +1220,7 @@
 			SearchFunctions.getSoftwareNodes(host, jdbc_url := ${2:jdbc_url});
 			$0
 		"""
-	# comment - GET SOFTWARE NODES CUSTOM:
+	# GET SOFTWARE NODES CUSTOM:
 	"SearchFunctions.getSoftwareNodes(host, node_address, software_type, db_name)":
 		prefix: "_db_host_type_SearchFunctions.getSoftwareNodes"
 		description: 'Template of common SearchFunctions.getSoftwareNodes to find related database.'
@@ -1056,70 +1247,70 @@
 											);
 			$0
 		"""
-	# comment -   REGEX USUAL USAGE::
 
-	"full ver (\\\\d+(?:\\\\.\\\\d+)*)":
-		prefix: "_regex_full_ver_(\\\\d+(?:\\\\.\\\\d+)*)"
+	#   REGEX USUAL USAGE::
+	"full ver (\\\\d+(?:\\\\.\\\\d+)*) greedy":
+		prefix: "_regex_full_ver"
 		description: 'Template regex expression to catch full version.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(\\\\d+(?:\\\\.\\\\d+)*)$0"
-	"full ver ^(\\\\d+(?:\\\\.\\\\d+)?)":
-		prefix: "_regex_full_ver_s^(\\\\d+(?:\\\\.\\\\d+)?)"
+	"full ver ^(\\\\d+(?:\\\\.\\\\d+)?) zero or one":
+		prefix: "_regex_full_ver_"
 		description: 'Template regex expression to catch full version from start if string.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^(\\\\d+(?:\\\\.\\\\d+)?)$0"
-	"product ver (\\\\d+(?:\\\\.\\\\d+)?)":
-		prefix: "_regex_product_ver_(\\\\d+(?:\\\\.\\\\d+)?)"
+	"product ver (\\\\d+(?:\\\\.\\\\d+)?) zero or one":
+		prefix: "_regex_product_ver"
 		description: 'Template regex expression to catch product version.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(\\\\d+(?:\\\\.\\\\d+)?)$0"
 	"bjavaw (?i)\\bjavaw?(?:\\\\.exe)\\$":
-		prefix: "_regex_bjavaw_(?i)\\bjavaw?(?:\\\\.exe)\\$"
+		prefix: "_regex_bjavaw"
 		description: 'Template regex expression to catch bjavaw cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)\\bjavaw?(?:\\\\.exe)\\$$0"
 	"bjava (?i)\\bjava(?:\\\\.exe)?\\$":
-		prefix: "_regex_bjava_(?i)\\bjava(?:\\\\.exe)?\\$"
+		prefix: "_regex_bjava"
 		description: 'Template regex expression to catch bjava cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)\\bjava(?:\\\\.exe)?\\$$0"
 	"java (?i)^(\\w:.*\\)Java\\":
-		prefix: "_regex_java_(?i)^(\\w:.*\\)Java\\"
+		prefix: "_regex_java"
 		description: 'Template regex expression to catch java cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)^(\\w:.*\\)Java\\$0"
 	"java (/\\\\.+/)java/":
-		prefix: "_regex_java_(/\\\\.+/)java/"
+		prefix: "_regex_java"
 		description: 'Template regex expression to catch java cmd.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^(/\\\\.+/)java/$0"
 	"ipv4 (\\\\d+(?:\\\\.\\\\d+){3})":
-		prefix: "_regex_ipv4_(\\\\d+(?:\\\\.\\\\d+){3})"
+		prefix: "_regex_ipv4"
 		description: 'Template regex expression to catch ipv4.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(\\\\d+(?:\\\\.\\\\d+){3})$0"
 	"ver ^(\\\\d+)":
-		prefix: "_regex_ver_^(\\\\d+)"
+		prefix: "_regex_ver"
 		description: 'Template regex expression to catch simple decimals.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^(\\\\d+)$0"
 	"ver ^\\\\d+\\$":
-		prefix: "_regex_ver_^\\\\d+\\$"
+		prefix: "_regex_ver"
 		description: 'Template regex expression to catch simple decimals.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "^\\\\d+\\$$0"
-	"Win_path":
+	"Win_path catch path with spaces":
 		prefix: "_regex_Win_path"
 		description: 'Template regex expression to catch path with spaces in windows.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "(?i)\\\"([^\"]+)PATH_TO_FILE_LIB\\\"$0"
-	"Win_path_alt":
+	"Win_path_alt catch path with spaces in windows, alternative":
 		prefix: "_regex_Win_path_alt"
 		description: 'Template regex expression to catch path with spaces in windows, alternative.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "([^\"]+)PATH_TO_FILE_CONF$0"
 
-	# comment -   INFERRENCE: https://docs.bmc.com/docs/display/DISCO111/Inference+functions
+	#   INFERRENCE: https://docs.bmc.com/docs/display/DISCO111/Inference+functions
 
 	"inference.associate(inferred_node, associate)":
 		prefix: "inference.associate"
@@ -1164,7 +1355,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
 		body: "system.cmdbSync(${1:nodes});$0"
 
-	# comment -   MODEL FUNCTIONS::
+	#   MODEL FUNCTIONS::
 	"model.addContainment(container, containees)":
 		prefix: "model.addContainment"
 		description: 'Adds the containees to the container by creating suitable relationships between the nodes. containees can be a single node, or a list of nodes, for example: [node1, node2].'
@@ -1239,7 +1430,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/model.kind'
 		body: "model.kind(${1:hosting_node});$0"
 
-	# comment - REL:
+	# REL:
 
 	"model.rel.Communication(Server, Client)":
 		prefix: "rel_Communication"
@@ -1326,8 +1517,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Modelrelationshipexistencefunctions'
 		body: "model.rel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
 
-	# comment - UNIQUE REL:
-
+	# UNIQUE REL:
 	"model.uniquerel.Communication(Server, Client)":
 		prefix: "uniquerel_Communication"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1336,7 +1526,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node});$0"
-
 	"model.uniquerel.Containment(Contained, Container)":
 		prefix: "uniquerel_Containment"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1345,7 +1534,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.Containment(Contained := ${1:cluster_member_node}, Container := ${2:cluster});$0"
-
 	"model.uniquerel.Dependency(Dependant, DependedUpon)":
 		prefix: "uniquerel_Dependency"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1354,7 +1542,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.Dependency(Dependant := ${1:si_node}, DependedUpon := ${2:dep_si});$0"
-
 	"model.uniquerel.Detail(ElementWithDetail, Detail)":
 		prefix: "uniquerel_Detail"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1363,7 +1550,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.Detail(ElementWithDetail := ${1:si_node}, Detail := ${2:details});$0"
-
 	"model.uniquerel.HostContainment(HostContainer, ContainedHost)":
 		prefix: "uniquerel_HostContainment"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1372,7 +1558,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.HostContainment(HostContainer := ${1:si_node}, ContainedHost := ${2:host});$0"
-
 	"model.uniquerel.HostedFile(HostedFile, Host)":
 		prefix: "uniquerel_HostedFile"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1381,7 +1566,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.HostedFile(HostedFile := ${1:file}, Host := ${2:host});$0"
-
 	"model.uniquerel.HostedSoftware(Host, RunningSoftware)":
 		prefix: "uniquerel_HostedSoftware"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1390,7 +1574,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.HostedSoftware(Host := ${1:host}, RunningSoftware := ${2:si_node});$0"
-
 	"model.uniquerel.HostedService(ServiceHost, RunningService)":
 		prefix: "uniquerel_HostedService"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1399,7 +1582,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.HostedService(ServiceHost := ${1:cluster}, RunningService := ${2:cluster_service_node});$0"
-
 	"model.uniquerel.Management(Manager, ManagedElement)":
 		prefix: "uniquerel_Management"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1408,7 +1590,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.Management(Manager := ${1:manager_si}, ManagedElement := ${2:si_node});$0"
-
 	"model.uniquerel.RelatedFile(ElementUsingFile, File)":
 		prefix: "uniquerel_RelatedFile"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1417,7 +1598,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.RelatedFile(ElementUsingFile := ${1:si_node}, File := ${2:file});$0"
-
 	"model.uniquerel.SoftwareService(ServiceProvider, Service)":
 		prefix: "uniquerel_SoftwareService"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1426,7 +1606,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.SoftwareService(ServiceProvider := ${1:si_node}, Service := ${2:cluster});$0"
-
 	"model.uniquerel.SoftwareContainment(SoftwareContainer, ContainedSoftware)":
 		prefix: "uniquerel_SoftwareContainment"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1435,7 +1614,6 @@
 									- All other matching relationships from the source to other destinations are destroyed."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.SoftwareContainment(SoftwareContainer := ${1:si_node}, ContainedSoftware := ${2:sc_lst});$0"
-
 	"model.uniquerel.StorageUse(Consumer, Provider)":
 		prefix: "uniquerel_StorageUse"
 		description: """It takes the same form as the equivalent model.rel function, but its behaviour is different
@@ -1445,8 +1623,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Model+functions#Modelfunctions-Uniquerelationshipfunctions'
 		body: "model.uniquerel.StorageUse(Consumer := ${1:virtual_disk}, Provider := ${2:dest_disks});$0"
 
-	# comment - Customization::
-
+	# Customization::
 	"SoftwareInstance Short":
 		prefix: "SoftwareInstance_Short_"
 		body: """
@@ -1498,14 +1675,12 @@
 			$0
 		"""
 
-	# comment - Extra:
-
+	# Extra:
 	"Communication type model.uniquerel.":
 		prefix: "Communication_type_model.uniquerel._"
 		body: "model.uniquerel.Communication(Server := ${1:related_sis}, Client := ${2:si_node}, type := \"${3:%type%}\");$0"
 
-	# comment -   NUMBER FUNCTIONS::
-
+	#   NUMBER FUNCTIONS::
 	"number.toChar(number)":
 		prefix: "number.toChar"
 		description: 'Converts the integer number in the ASCII range to a character.If the value is outside the ASCII range, it returns none.'
@@ -1522,7 +1697,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/number.range'
 		body: "number.range(${1:number});$0"
 
-	# comment -   TEXT FUNCTIONS::
+	#   TEXT FUNCTIONS::
 	"text.lower(string)":
 		prefix: "text.lower"
 		description: 'Returns the lower-cased version of the string argument.'
@@ -1541,7 +1716,7 @@
 										Bases larger than 10 use the letters a through z to represent digits."""
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.toNumber'
 		body: "text.toNumber(port);$0"
-	# comment - REPLACE:
+	# REPLACE:
 	"text.replace(string, old, new)":
 		prefix: "text.replace"
 		description: 'Returns a modified version of the string formed by replacing all occurrences of the string old with new.'
@@ -1562,7 +1737,7 @@
 		description: 'Template to replace common characters.'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.replace'
 		body: "text.replace(${1:string}, \"\\\\\\\", \"\\\\\\\\\\\\\\\");$0"
-	# comment - STRING OPTIONS:
+	# STRING OPTIONS:
 	"text.join(list, \"separator\")":
 		prefix: "text.join"
 		description: 'Returns a string containing all items in a list of strings joined with the specified separator.'
@@ -1599,12 +1774,12 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/text.ordinal'
 		body: "text.ordinal(${1:string});$0"
 
-	# comment - LIST:
+	# LIST:
 	"append list":
 		prefix: "append_list_"
 		body: "list.append(${1:the_list}, ${2:string});$0"
 
-	# comment -   TRAVERCE:
+	#   TRAVERCE:
 	"search(in da ::DiscoveryResult:ProcessList \#DiscoveredProcess where pid":
 		prefix: "_trav_rel_proc_parent"
 		description: 'search(in da traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList traverse List:List:Member:DiscoveredProcess where pid'
@@ -1613,7 +1788,6 @@
 			rel_services := search(in ${1:da_node} traverse DiscoveryAccess:DiscoveryAccessResult:DiscoveryResult:ProcessList
 								   $0traverse List:List:Member:DiscoveredProcess where pid = %pproc_pid%);$0
 		"""
-
 	"search(in si ::SoftwareContainer:SoftwareInstance":
 		prefix: "_trav_ContainedSoftware::SoftwareInstance"
 		description: 'search(in si traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:SoftwareInstance where type and key <> %key% step in SoftwareContainer:SoftwareContainment where \#:ContainedSoftware:SoftwareInstance.key = si.key)'
@@ -1624,13 +1798,11 @@
 									 step in SoftwareContainer:SoftwareContainment
 									 where #:ContainedSoftware:SoftwareInstance.key = %${3:related_si}.key%);$0
 		"""
-
 	"search(in si ::DiscoveredProcess)":
 		prefix: "_trav_InferredElement::DiscoveredProcess"
 		description: 'search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "procs := search(in si traverse InferredElement:Inference:Primary:DiscoveredProcess);$0"
-
 	"search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type)":
 		prefix: "_trav_Host:HostedSoftware::SoftwareInstance"
 		description: 'search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type)'
@@ -1639,25 +1811,21 @@
 						some_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance
 										  where ${1:type} = \"${2:type_here}\");$0
 		"""
-
 	"search(in si ::Communication:Server:SoftwareInstance where type":
 		prefix: "_trav_Client::SoftwareInstance"
 		description: 'search(in si traverse Client:Communication:Server:SoftwareInstance where type = smth)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "srv_si_list := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance where type = \"${2:type_here}\");$0"
-
 	"search(in si ::Client:SoftwareInstance where type":
 		prefix: "_trav_Server::SoftwareInstance"
 		description: 'search(in si traverse Server:Communication:Client:SoftwareInstance where type = smth)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "client_si_list := search(in ${1:related_si} traverse Server:Communication:Client:SoftwareInstance where type = \"${2:type_here}\");$0"
-
 	"search(in si ::SoftwareContainer:BusinessApplicationInstance where type":
 		prefix: "_trav_ContainedSoftware::BusinessApplicationInstance"
 		description: 'search(in si traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:BusinessApplicationInstance where type = si_type)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "bai_candidates := search(in ${1:related_si} traverse ContainedSoftware:SoftwareContainment:SoftwareContainer:BusinessApplicationInstance where type = \"%${2:si_type}%\");$0"
-
 	"search(in host ::SoftwareInstance where type ::Detail:DatabaseDetail":
 		prefix: "_trav_Host::SoftwareInstance"
 		description: "search(in host
@@ -1665,30 +1833,24 @@
 									traverse ElementWithDetail:Detail:Detail:DatabaseDetail where instance has subword subword)"
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "db2_si := search(in host traverse Host:HostedSoftware:RunningSoftware:SoftwareInstance where type = \"${1:type_here}\" traverse ElementWithDetail:Detail:Detail:DatabaseDetail where instance has subword '%${2:subword}%');$0"
-
 	"search(in si ::Detail:Detail:Detail where type":
 		prefix: "_trav_ElementWithDetail::Detail"
 		description: 'search(in si traverse ElementWithDetail:Detail:Detail:Detail where type = smth)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "existing_dts := search(in si traverse ElementWithDetail:Detail:Detail:Detail where ${1:type} = \"${2:type_here}\");$0"
-
 	"search(in si ::DependedUpon:SoftwareInstance":
 		prefix: "_trav_Dependant::SoftwareInstance"
 		description: 'search(in si traverse Dependant:Dependency:DependedUpon:SoftwareInstance)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "mains_si := search(in ${1:related_si} traverse Dependant:Dependency:DependedUpon:SoftwareInstance);$0"
-
 	"search(in si ::Communication:Server:SoftwareInstance":
 		prefix: "_trav_Client::Server:SoftwareInstance"
 		description: 'search(in si traverse Client:Communication:Server:SoftwareInstance)'
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/Traversals'
 		body: "main_db_sis := search(in ${1:related_si} traverse Client:Communication:Server:SoftwareInstance);$0"
 
-	# comment -   OTHER - DIFFERENT:
-
-
-	# comment - LOG USUAL:
-
+	#   OTHER - DIFFERENT:
+	# LOG USUAL:
 	"log.debug(\"message\")":
 		prefix: "log.debug"
 		description: 'Log the given message with a debug level message. The log messages that are output automatically include the name of the pattern performing the log action.'
@@ -1715,8 +1877,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/log.critical'
 		body: "log.critical(\"${1:message}\");$0"
 
-	# comment - LOG CUSTOM:
-
+	# LOG CUSTOM:
 	"_debug line":
 		prefix: "_debug_line_"
 		description: ''
@@ -1738,12 +1899,12 @@
 			log\\\\.debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line: Execution time:\" + number.toText(delta_time_tics/10000) + \"ms\");$0
 		"""
 
-	# comment - LOG SI:
+	# LOG SI:
 	"_info log SI":
 		prefix: "_info_log_SI_"
 		body: "log.info(\"%host.name%: SI created for %${1:si_type}%\");$0"
 
-	# comment - EXTRACTIONS REGEX:
+	# EXTRACTIONS REGEX:
 	"regex.extract(string, expression [, substitution] [, no_match])":
 		prefix: "regex.extract"
 		description: 'Returns the result of extracting the regular expression from the string, optionally with a substitution expression and a specified result if no match is found. Returns an empty string, or the string specified in no_match if the expression does not match. '
@@ -1770,8 +1931,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/regex.extract'
 		body: "regex.extract(${1:variable}, regex \"${2:regex_raw}\", raw '\\\\${3:1}', raw '\\\\${4:2}');$0"
 
-	# comment - EXTRACTIONS Xpath:
-
+	# EXTRACTIONS Xpath:
 	"xpath.evaluate(string, expression)":
 		prefix: "xpath.evaluate"
 		description: 'Returns the result of evaluating the xpath expression against the XML string. Returns a list of strings containing the selected values. The result is always a list, even if the expression is guaranteed to always return just one result.'
@@ -1800,8 +1960,7 @@
 		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/table.remove'
 		body: "table.remove(${1:table}, ${2:key});$0"
 
-	# comment - CONTAINERS:
-
+	# CONTAINERS:
 	"related.detailContainer(node)":
 		prefix: "related.detailContainer"
 		description: 'Returns the Software Component, Software Instance, or Business Application Instance node containing the given node.The given node can be a Detail or DatabaseDetail. If no single container node can be found None is returned.'
@@ -1874,7 +2033,7 @@
 		body: "time.deltaFromTicks(${1:ticks});$0"
 
 
-	# comment - SIMPLE IDENTIFIERS::
+	# SIMPLE IDENTIFIERS::
 
 	"_regex Simple Identifiers":
 		prefix: "_regex_Simple_Identifiers_"
@@ -1886,7 +2045,7 @@
 		prefix: "_unix_cmd_Simple_Identifiers_"
 		body: "(?1:unix_cmd )/}\"${1:unix_cmd}\" -> \"${2:product_name}\";$0"
 
-	# comment - IF OS_CLASS::
+	# IF OS_CLASS::
 
 	"_os_class host.os_class":
 		prefix: "_os_class_host.os_class_"

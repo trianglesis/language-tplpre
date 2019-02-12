@@ -1,3 +1,9 @@
+## 0.3.1 2019-02-12
+- Accidentally update the major version =(
+- Added new syntax highlight for old and new functions
+- Added new functions and snippets.
+- Highlight deprecated!
+
 ## 0.2.2 2019-02-11
 - Added new functions.
 
