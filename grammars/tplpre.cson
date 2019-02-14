@@ -13,6 +13,10 @@
   # Initial
   { 'include': '#doc_strings' }
   { 'include': '#comment_TODO_line' }
+  { 'include': '#comment_WARNING_line' }
+  { 'include': '#comment_ERROR_line' }
+  { 'include': '#comment_INFO_line' }
+  { 'include': '#comment_DEBUG_line' }
   { 'include': '#comment_line' }
   { 'include': '#metadata_2' }
   { 'include': '#overwiev' }
@@ -82,6 +86,12 @@
     'patterns': [
       { 'include': '#comment_line' }
       { 'include': '#main' }
+      { 'include': "#lines" }
+      { 'include': "#keywords_cmd" }
+      { 'include': "#keywords_all" }
+      { 'include': "#regexes" }
+      { 'include': "#keywords_cmd_indentify_trigger" }
+      { 'include': "#if_addm" }
     ]
   }
 # Highlight definitions sections
@@ -119,7 +129,11 @@
         1: 'name': 'keyword.control.tplpre'
     # 'name': 'meta.class.old-style.python'
     'patterns': [
-        { 'include': "#comment_TODO_line" }
+        { 'include': '#comment_TODO_line' }
+        { 'include': '#comment_WARNING_line' }
+        { 'include': '#comment_ERROR_line' }
+        { 'include': '#comment_INFO_line' }
+        { 'include': '#comment_DEBUG_line' }
         { 'include': "#comment_line" }
         { 'include': "#doc_strings" }
         { 'include': "#metadata" }
@@ -250,7 +264,6 @@
     'match': '(?<!\\\'|"|\\\(|\\w)(//).*\\n'
 # TODO: or TO DO:
   'comment_TODO_line':
-    'comment': "variable.parameter.tplpre"
     'begin': "(//)\\s?(TO(\\s+|)DO\\:)"
     'beginCaptures':
       1: 'name': "comment.line.tplpre"
@@ -258,6 +271,46 @@
     'end': '(.*)'
     'endCaptures':
       1: 'name': "variable.parameter.function.tplpre"
+# ERROR Line:
+# // ERROR:
+  'comment_ERROR_line':
+    'begin': "(//)\\s?(ERROR\\:)"
+    'beginCaptures':
+      1: 'name': "comment.line.tplpre"
+      2: 'name': "invalid.illegal.tplpre"
+    'end': '(.*)'
+    'endCaptures':
+      1: 'name': "keyword.other.tplpre"
+# WARNING Line:
+# // WARNING:
+  'comment_WARNING_line':
+    'begin': "(//)\\s?(WARNING\\:)"
+    'beginCaptures':
+      1: 'name': "comment.line.tplpre"
+      2: 'name': "invalid.deprecated.tplpre"
+    'end': '(.*)'
+    'endCaptures':
+      1: 'name': "constant.other.tplpre"
+# INFO Line:
+# // INFO:
+  'comment_INFO_line':
+    'begin': "(//)\\s?(INFO\\:)"
+    'beginCaptures':
+      1: 'name': "comment.line.tplpre"
+      2: 'name': "support.constant.tplpre"
+    'end': '(.*)'
+    'endCaptures':
+      1: 'name': "support.constant.tplpre"
+# DEBUG Line:
+# // DEBUG:
+  'comment_DEBUG_line':
+    'begin': "(//)\\s?(DEBUG\\:)"
+    'beginCaptures':
+      1: 'name': "comment.line.tplpre"
+      2: 'name': "entity.name.function"
+    'end': '(.*)'
+    'endCaptures':
+      1: 'name': "entity.name.function"
 
   # %THIS LINE%
   'percent_line':
@@ -286,7 +339,6 @@
       2: 'name': 'punctuation.definition.string.end.tplpre'
       3: 'name': 'meta.empty-string.single.tplpre'
 
-
   # "THIS LINE"
   'double_qouted_line':
     'match': '(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")'
@@ -294,7 +346,6 @@
     'captures':
       1: 'name': 'keyword.control.tplpre'
       2: 'name': 'string.quoted.single.tplpre'
-
   # [<empty>]
   'square_brackets_line_empty':
     'match': '(?<!\\[)(\\[)((\\]))(?!\\])'
@@ -337,6 +388,10 @@
       { 'include': '#sql_query' }
       { 'include': '#percent_line' }
       { 'include': '#comment_TODO_line' }
+      { 'include': '#comment_WARNING_line' }
+      { 'include': '#comment_ERROR_line' }
+      { 'include': '#comment_INFO_line' }
+      { 'include': '#comment_DEBUG_line' }
       { 'include': '#comment_line' }
       { 'include': '#regexes' }
       { 'include': '#square_brackets_line_empty' }
@@ -547,7 +602,7 @@
   'model_SI_functions':
     # name: discovery.function.tplpre
     'comment': 'Model SI functions DEV looks working. TODO: upgrage to highlight inr content 2017-08-15'
-    'begin': "((model)(\\.)(SoftwareInstance))"
+    'begin': "((model)(\\.)(SoftwareInstance|SoftwareCluster))"
     'beginCaptures':
       1: 'name': 'entity.name.function.tplpre'
       2: 'name': 'support.function.tplpre'
@@ -561,6 +616,7 @@
         { 'include': '#lines' }
         { 'include': '#all_controls' }
         { 'include': '#regex' }
+        { 'include': '#keywords_attributes' }
       ]
 # Log functions: log.debug("Blah")
   'log_functions':
@@ -657,11 +713,14 @@
 # Discovery functions (SupportingFiles - > pattern):
   'DiscoveryFunctions':
     # name: DiscoveryFunctions.function.tplpre
+    # Maybe add begin\end capture to check and highlight args?
     'match': "(DiscoveryFunctions)(\\.)(escapeArg|expandWindowsPath|normalizePath|escapePath|pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|runFutureActiveCommand|locateCommands|checkCommandList|getErrorRegexes)"
+    # 'match': "(DiscoveryFunctions)(\\.)(escapeArg|expandWindowsPath|normalizePath|escapePath|pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|runFutureActiveCommand|locateCommands|checkCommandList|getErrorRegexes)(\\(.*\\);)"
     'captures':
       1: 'name': 'entity.name.function.tplpre'
       2: 'name': 'punctuation.accessor.tplpre'
       3: 'name': 'entity.name.function.tplpre'
+      4: 'name': 'entity.name.function.tplpre'
 # RDBMSFunctions functions (SupportingFiles - > pattern):
   'RDBMSFunctions':
     # name: RDBMSFunctions.function.tplpre
@@ -745,7 +804,6 @@
   # if, else, end if, for, end for
   # ERRORS: #all_functions (disabling)
   # if model.kind(si) <> 'SoftwareInstance' then
-
   'if_statement':
     'comment': 'Match if ..values.. then and include usual lines. #lines can override some marks'
     # 'begin': '(?!end if;|then)(\bif)(?:.+?)(?:then)'
@@ -770,6 +828,8 @@
         { 'include': '#regexes' }
         { 'include': '#all_keys' }
         { 'include': '#lines' }
+        { 'include': '#keywords_attributes' }
+        { 'include': '#all_functions' }
     ]
   'elif_statement':
     'comment': 'Match elif ..values.. then and include usual lines. #lines can override some marks'
@@ -794,6 +854,8 @@
         { 'include': '#regexes' }
         { 'include': '#all_keys' }
         { 'include': '#lines' }
+        { 'include': '#keywords_attributes' }
+        { 'include': '#all_functions' }
     ]
   # 'elif_statement':
   # 'comment': 'Old simple match'
@@ -822,6 +884,7 @@
         { 'include': '#regex' }
         { 'include': '#lines' }
         { 'include': '#all_controls' }
+        { 'include': '#all_functions' }
     ]
   # 'for_statement':
   #   'comment': 'Old simple match'
@@ -1058,7 +1121,7 @@
         { 'include': '#keywords_attrs' }
     ]
   'keywords_attrs':
-    'comment': 'Changed disabled to 1 to turn off DEV highlighting.'
+    'comment': 'Change disabled to "1" to turn off.'
     'disabled': 0
     'match': "\\b(key_group|key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b"
     'captures':
