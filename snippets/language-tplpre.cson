@@ -1,9 +1,10 @@
 # Alexander Danylchenko
 # BMC tpl\tplre language completions snippet.
-# 2019-02-14 - Latest version.
+# 2017-08-14 - Latest version.
 ".source.tplpre":
 
 	# PATTERN BLOCK COMPLETIONS::
+
 	"_Copyright BMC Copyright":
 		prefix: "_Copyright_BMC_Copyright_"
 		body: "// INFO: Add current year!\n// (c) Copyright 2019 BMC Software, Inc. All rights reserved.$0"
@@ -75,6 +76,9 @@
 	"from ConversionFunctions":
 		prefix: "from_ConversionFunctions_"
 		body: "// INFO: Check the latest version!\nfrom ConversionFunctions import ConversionFunctions ${1:1}.${2:0};$0"
+	"import Future":
+		prefix: "from_System_Future"
+		body: "// INFO: Check the latest version!\nfrom System import Future ${1:1}.${2:0};$0"
 
 	# METADATA:
 	"metadata pattern":
