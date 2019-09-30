@@ -1783,17 +1783,18 @@
 		body: "log.critical(\"${1:message}\");$0"
 
 	# LOG CUSTOM:
-	"_debug line":
-		prefix: "_debug_line_"
-		description: ''
-		descriptionMoreURL: 'https://docs.bmc.com/docs/display/DISCO111/'
-		body: "(?1:line)/}:$0"
 	"_debug simple":
 		prefix: "_debug_simple_"
 		body: "log.debug(\"DEBUG_RUN: -----------> ${1:message} on line:\");$0"
+	"_warn simple":
+		prefix: "_warn_simple_"
+		body: "log.warn(\"DEBUG_RUN: -----------> ${1:message} on line:\");$0"
 	"_debug %variable%":
 		prefix: "_debug_%variable%_"
 		body: "log.debug(\"DEBUG_RUN: -----------> ${1:message} %${2:variable}% - ${4:message} on line:\");$0"
+	"_warn %variable%":
+		prefix: "_warn_%variable%_"
+		body: "log.warn (\"DEBUG_RUN: -----------> ${1:message} %${2:variable}% - ${4:message} on line:\");$0"
 	"_debug %node.attrs%":
 		prefix: "_debug_%node.attrs%_"
 		body: "log.debug(\"DEBUG_RUN: -----------> ${1:message} %${2:host}.${3:name}% - ${4:message} on line:\");$0"

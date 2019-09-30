@@ -33,7 +33,7 @@
   }
 # pattern import section
   {
-    'match': '(from)\\s(\\w+)(?:\.(\\w+))?(?:\.(\\w+))?\\s(import)\\s(\\S+)\\s(\\d+(?:\.\\d+)+);'
+    'match': '(from)\\s(\\w+)(?:\.(\\w+))?(?:\.(\\w+))?\\s+(import)\\s(\\S+)\\s(\\d+(?:\.\\d+)+);'
     'captures':
         1: 'name': 'support.class.tplpre'
         2: 'name': 'entity.name.function.tplpre'
@@ -176,6 +176,41 @@
         { 'include': '#doc_strings_block_doulbe_q' }
     ]
   }
+  # Highlight syncmapping sections:
+  {
+    'begin': '^\\b(syncmapping)\\s+(\\w+)\\s(\\d+(?:\\.\\d+)+)\\s+$'
+    'beginCaptures':
+        1: 'name': 'keyword.control.tplpre'
+        2: 'name': 'constant.numeric.tplpre'
+        3: 'name': 'constant.numeric.tplpre'
+    # 'contentName': 'comment.block.documentation.tplpre'
+    'end': '\\b(end\\s+syncmapping;)'
+    'endCaptures':
+        1: 'name': 'keyword.control.tplpre'
+    # 'name': 'meta.class.old-style.python'
+    'patterns': [
+        { 'include': '#comment_TODO_line' }
+        { 'include': '#comment_WARNING_line' }
+        { 'include': '#comment_ERROR_line' }
+        { 'include': '#comment_INFO_line' }
+        { 'include': '#comment_DEBUG_line' }
+        { 'include': "#comment_line" }
+        { 'include': "#doc_strings" }
+        { 'include': "#metadata" }
+        { 'include': "#overwiev" }
+        { 'include': "#constants" }
+        # { 'include': "#triggers" }
+        # { 'include': "#removal" }
+        { 'include': "#if_addm" }
+        { 'include': '#docstrings' }
+        { 'include': '#doc_strings_block_doulbe_q' }
+        # Additional match patterns only for syncmapping
+        { 'include': '#syncmapping_mapping' }
+        { 'include': '#syncmapping_sync_functions' }
+        { 'include': "#syncmapping_body" }
+    ]
+  }
+
 ]
 # Repository
 'repository':
@@ -1144,6 +1179,63 @@
         { 'include': "#keywords_cmd_indentify_trigger" }
         { 'include': "#if_addm" }
       ]
+
+# SYNCMAPPING \ CDM Patterns:
+  'syncmapping_mapping':
+    'begin': '\\b(mapping)\\s+(\\w+)\\s+(\\w+\\.\\w+)\\s+(\\w+)\\s+(\\w+)'
+    'beginCaptures':
+      1: 'name': "keyword.control.tplpre"
+      2: 'name': 'entity.name.function.model'
+      3: 'name': "constant.numeric.tplpre"
+      4: 'name': 'entity.name.function.model'
+      5: 'name': "constant.numeric.tplpre"
+    'end': '(end\\smapping;)'
+    'endCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'patterns': [
+        { 'include': "#lines" }
+        { 'include': "#keywords_cmd" }
+        { 'include': "#keywords_all" }
+        # { 'include': "#regexes" }
+        # { 'include': "#keywords_cmd_indentify_trigger" }
+        { 'include': "#if_addm" }
+        { 'include': "#traverse" }
+      ]
+# Highlight body sections
+  'syncmapping_body':
+    'begin': '^\\s{4}(body)$'
+    'beginCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'end': '^\\s{4}(end\\sbody;)$'
+    'endCaptures':
+      1: 'name': 'keyword.control.tplpre'
+    'patterns': [
+        { 'include': "#dev_keys" }
+        { 'include': "#doc_strings" }
+        { 'include': "#lines" }
+        { 'include': "#all_functions" }
+        { 'include': "#all_controls" }
+        { 'include': "#if_addm" }
+        { 'include': "#syncmapping_sync_functions" }
+    ]
+  'syncmapping_sync_functions':
+    # name: sync.shared.BMC_ConcreteCollection
+    'comment': 'sync.shared.BMC_ConcreteCollection'
+    'begin': "(sync)(?:\\.)(rel|shared|external|)(?:\\.|)(BMC_\\w+|)"
+    'beginCaptures':
+      1: 'name': 'entity.name.function.tplpre'
+      2: 'name': 'support.function.tplpre'
+      3: 'name': "constant.numeric.tplpre"
+    'end': "\\;"
+    # 'contentName': "comment.block.documentation.tplpre"
+    'endCaptures':
+      1: 'name': "disabled.tplpre"
+     'patterns': [
+        { 'include': '#lines' }
+        { 'include': '#all_controls' }
+        { 'include': '#regex' }
+      ]
+
 # DEVELOPMENT
 # Some functions can be usefull or not. Add them here to be able to disable without errors.
 # Attributes
