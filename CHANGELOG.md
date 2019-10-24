@@ -1,3 +1,8 @@
+## 3.4.1 2019-09-30
+- Sync_mapping patterns support highlight
+- Small regex changes
+- debug log - warn too
+
 ## 0.3.1 2019-02-12
 - Accidentally update the major version =(
 - Added new syntax highlight for old and new functions
