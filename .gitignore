@@ -5,3 +5,4 @@ grammars/SOURCE_tplpre.cson
 DEV/tplpre_READY.sublime-syntax
 .idea/*
 node_modules/
+language-tplpre-*.vsix
