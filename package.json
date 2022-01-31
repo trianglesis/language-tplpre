@@ -1,7 +1,7 @@
 {
   "name": "language-tplpre",
   "description": "BMC tpl and tplpre language support in Atom and VS Code",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "publisher": "trianglesis",
   "categories": ["Programming Languages", "Snippets"],
   "author": {
