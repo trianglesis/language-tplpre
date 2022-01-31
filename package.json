@@ -1,11 +1,13 @@
 {
   "name": "language-tplpre",
   "version": "3.4.0",
+  "publisher": "BMC Discovery TPL",
   "engines": {
     "atom": "*",
-    "node": "*"
+    "node": "*",
+    "vscode": "*"
   },
-  "description": "BMC tpl and tplpre language support in Atom",
+  "description": "BMC tpl and tplpre language support in Atom and VS Code",
   "homepage": "https://github.com/trianglesis/language-tplpre",
   "repository": {
     "type": "git",
