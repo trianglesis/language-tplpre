@@ -1,0 +1,13 @@
+{
+	".source.tplpre": {
+		"editor": {
+			"autoIndentOnPaste": true,
+			"softTabs": true,
+			"tabLength": 4,
+			"commentStart": "// ",
+			"increaseIndentPattern": "(for).*(\\S+\\s+do)\\b.*$",
+			"decreaseIndentPattern": "(end\\sif;|end\\sfor;)$",
+			"decreaseNextIndentPattern": "^\\s*(pass;|break;)\\b.*$"
+		}
+	}
+}

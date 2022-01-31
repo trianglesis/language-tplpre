@@ -1,0 +1,586 @@
+{
+	"scopeName": "source.grammar_check",
+	"name": "GrammarCheck",
+	"fileTypes": [
+		"grammar_check"
+	],
+	"firstLineMatch": ".*",
+	"patterns": [
+		{
+			"include": "#test_colors"
+		},
+		{
+			"include": "#check"
+		}
+	],
+	"repository": {
+		"test_colors": {
+			"patterns": [
+				{
+					"include": "#line_set"
+				},
+				{
+					"include": "#constant_set"
+				},
+				{
+					"include": "#entity_set"
+				},
+				{
+					"include": "#invalid_set"
+				},
+				{
+					"include": "#keyword_set"
+				},
+				{
+					"include": "#markup_set"
+				},
+				{
+					"include": "#meta_set"
+				},
+				{
+					"include": "#storage_set"
+				},
+				{
+					"include": "#string_set"
+				},
+				{
+					"include": "#support_set"
+				},
+				{
+					"include": "#variable_set"
+				}
+			]
+		},
+		"check": {
+			"name": "keyword.control",
+			"match": "\\b(check\\.this)\\b"
+		},
+		"line": {
+			"name": "comment.line",
+			"match": "\\(comment\\.line\\)"
+		},
+		"double_slash": {
+			"name": "comment.line.double-slash",
+			"match": "\\(comment\\.line\\.double-slash\\)"
+		},
+		"double_dash": {
+			"name": "comment.line.double-dash",
+			"match": "\\(comment\\.line\\.double-dash\\)"
+		},
+		"number_sign": {
+			"name": "comment.line.number-sign",
+			"match": "\\(comment\\.line\\.number-sign\\)"
+		},
+		"percentage": {
+			"name": "comment.line.percentage",
+			"match": "\\(comment\\.line\\.percentage\\)"
+		},
+		"character": {
+			"name": "comment.line.character",
+			"match": "\\(comment\\.line\\.character\\)"
+		},
+		"block_multi-line": {
+			"name": "comment.block.multiline",
+			"match": "\\(comment\\.block\\.multiline\\)"
+		},
+		"block_multi-line_doc": {
+			"name": "comment.block.multiline.documentation",
+			"match": "\\(comment\\.block\\.multiline\\.documentation\\)"
+		},
+		"line_set": {
+			"patterns": [
+				{
+					"include": "#line"
+				},
+				{
+					"include": "#double_slash"
+				},
+				{
+					"include": "#double_dash"
+				},
+				{
+					"include": "#number_sign"
+				},
+				{
+					"include": "#percentage"
+				},
+				{
+					"include": "#character"
+				},
+				{
+					"include": "#block_multi-line"
+				},
+				{
+					"include": "#block_multi-line_doc"
+				}
+			]
+		},
+		"constant": {
+			"name": "constant",
+			"match": "\\(constant\\)"
+		},
+		"constant_numeric": {
+			"name": "constant.numeric",
+			"match": "\\(constant\\.numeric\\)"
+		},
+		"constant_character": {
+			"name": "constant.character",
+			"match": "\\(constant\\.character\\)"
+		},
+		"constant_character_escape": {
+			"name": "constant.character.escape",
+			"match": "\\(constant\\.character\\.escape\\)"
+		},
+		"constant_language": {
+			"name": "constant.language",
+			"match": "\\(constant\\.language\\)"
+		},
+		"constant_other": {
+			"name": "constant.other",
+			"match": "\\(constant\\.other\\)"
+		},
+		"constant_set": {
+			"patterns": [
+				{
+					"include": "#constant"
+				},
+				{
+					"include": "#constant_numeric"
+				},
+				{
+					"include": "#constant_character"
+				},
+				{
+					"include": "#constant_character_escape"
+				},
+				{
+					"include": "#constant_language"
+				},
+				{
+					"include": "#constant_other"
+				}
+			]
+		},
+		"entity": {
+			"name": "entity",
+			"match": "\\(entity\\)"
+		},
+		"entity_name": {
+			"name": "entity.name",
+			"match": "\\(entity\\.name\\)"
+		},
+		"entity_function": {
+			"name": "entity.name.function",
+			"match": "\\(entity\\.name\\.function\\)"
+		},
+		"entity_type": {
+			"name": "entity.name.type",
+			"match": "\\(entity\\.name\\.type\\)"
+		},
+		"entity_tag": {
+			"name": "entity.name.tag",
+			"match": "\\(entity\\.name\\.tag\\)"
+		},
+		"entity_section": {
+			"name": "entity.name.section",
+			"match": "\\(entity\\.name\\.section\\)"
+		},
+		"entity_other": {
+			"name": "entity.other",
+			"match": "\\(entity\\.other\\)"
+		},
+		"entity_inherited-class": {
+			"name": "entity.other.inherited-class",
+			"match": "\\(entity\\.other\\.inherited-class\\)"
+		},
+		"entity_attribute-name": {
+			"name": "entity.other.attribute-name",
+			"match": "\\(entity\\.other\\.attribute-name\\)"
+		},
+		"entity_set": {
+			"patterns": [
+				{
+					"include": "#entity"
+				},
+				{
+					"include": "#entity_name"
+				},
+				{
+					"include": "#entity_function"
+				},
+				{
+					"include": "#entity_type"
+				},
+				{
+					"include": "#entity_tag"
+				},
+				{
+					"include": "#entity_section"
+				},
+				{
+					"include": "#entity_other"
+				},
+				{
+					"include": "#entity_inherited-class"
+				},
+				{
+					"include": "#entity_attribute-name"
+				}
+			]
+		},
+		"invalid": {
+			"name": "invalid",
+			"match": "\\(invalid\\)"
+		},
+		"invalid_illegal": {
+			"name": "invalid.illegal",
+			"match": "\\(invalid\\.illegal\\)"
+		},
+		"invalid_deprecated": {
+			"name": "invalid.deprecated",
+			"match": "\\(invalid\\.deprecated\\)"
+		},
+		"invalid_set": {
+			"patterns": [
+				{
+					"include": "#invalid"
+				},
+				{
+					"include": "#invalid_illegal"
+				},
+				{
+					"include": "#invalid_deprecated"
+				}
+			]
+		},
+		"keyword": {
+			"name": "keyword",
+			"match": "\\(keyword\\)"
+		},
+		"keyword_control": {
+			"name": "keyword.control",
+			"match": "\\(keyword\\.control\\)"
+		},
+		"keyword_operator": {
+			"name": "keyword.operator",
+			"match": "\\(keyword\\.operator\\)"
+		},
+		"keyword_other": {
+			"name": "keyword.other",
+			"match": "\\(keyword\\.other\\)"
+		},
+		"keyword_set": {
+			"patterns": [
+				{
+					"include": "#keyword"
+				},
+				{
+					"include": "#keyword_control"
+				},
+				{
+					"include": "#keyword_operator"
+				},
+				{
+					"include": "#keyword_other"
+				}
+			]
+		},
+		"markup": {
+			"name": "markup",
+			"match": "\\(markup\\)"
+		},
+		"markup_underline": {
+			"name": "markup.underline",
+			"match": "\\(markup\\.underline\\)"
+		},
+		"markup_underline_link": {
+			"name": "markup.underline.link",
+			"match": "\\(markup\\.underline\\.link\\)"
+		},
+		"markup_bold": {
+			"name": "markup.bold",
+			"match": "\\(markup\\.bold\\)"
+		},
+		"markup_heading": {
+			"name": "markup.heading",
+			"match": "\\(markup\\.heading\\)"
+		},
+		"markup_italic": {
+			"name": "markup.italic",
+			"match": "\\(markup\\.italic\\)"
+		},
+		"markup_list": {
+			"name": "markup.list",
+			"match": "\\(markup\\.list\\)"
+		},
+		"markup_list_numbered": {
+			"name": "markup.list.numbered",
+			"match": "\\(markup\\.list\\.numbered\\)"
+		},
+		"markup_list_unnumbered": {
+			"name": "markup.list.unnumbered",
+			"match": "\\(markup\\.list\\.unnumbered\\)"
+		},
+		"markup_quote": {
+			"name": "markup.quote",
+			"match": "\\(markup\\.quote\\)"
+		},
+		"markup_raw": {
+			"name": "markup.raw",
+			"match": "\\(markup\\.raw\\)"
+		},
+		"markup_other": {
+			"name": "markup.other",
+			"match": "\\(markup\\.other\\)"
+		},
+		"markup_set": {
+			"patterns": [
+				{
+					"include": "#markup"
+				},
+				{
+					"include": "#markup_underline"
+				},
+				{
+					"include": "#markup_underline_link"
+				},
+				{
+					"include": "#markup_bold"
+				},
+				{
+					"include": "#markup_heading"
+				},
+				{
+					"include": "#markup_italic"
+				},
+				{
+					"include": "#markup_list"
+				},
+				{
+					"include": "#markup_list_numbered"
+				},
+				{
+					"include": "#markup_list_unnumbered"
+				},
+				{
+					"include": "#markup_quote"
+				},
+				{
+					"include": "#markup_raw"
+				},
+				{
+					"include": "#markup_other"
+				}
+			]
+		},
+		"meta": {
+			"name": "meta",
+			"match": "\\(meta\\)"
+		},
+		"meta_function": {
+			"name": "meta.function",
+			"match": "\\(meta.function\\)"
+		},
+		"meta_empty-string_single": {
+			"name": "meta.empty-string.single",
+			"match": "\\(meta.empty-string\\.single\\)"
+		},
+		"meta_set": {
+			"patterns": [
+				{
+					"include": "#meta"
+				},
+				{
+					"include": "#meta_function"
+				},
+				{
+					"include": "#string_single"
+				}
+			]
+		},
+		"storage": {
+			"name": "storage",
+			"match": "\\(storage\\)"
+		},
+		"storage_type": {
+			"name": "storage.type",
+			"match": "\\(storage\\.type\\)"
+		},
+		"storage_modifier": {
+			"name": "storage.modifier",
+			"match": "\\(storage\\.modifier\\)"
+		},
+		"storage_set": {
+			"patterns": [
+				{
+					"include": "#storage"
+				},
+				{
+					"include": "#storage_type"
+				},
+				{
+					"include": "#storage_modifier"
+				}
+			]
+		},
+		"string": {
+			"name": "string",
+			"match": "\\(string\\)"
+		},
+		"string_quoted": {
+			"name": "string.quoted",
+			"match": "\\(string\\.quoted\\)"
+		},
+		"string_quoted_single": {
+			"name": "string.quoted.single",
+			"match": "\\(string.\\quoted\\.single\\)"
+		},
+		"string_quoted_double": {
+			"name": "string.quoted.double",
+			"match": "\\(string.\\quoted\\.double\\)"
+		},
+		"string_quoted_triple": {
+			"name": "string.quoted.triple",
+			"match": "\\(string.\\quoted\\.triple\\)"
+		},
+		"string_quoted_other": {
+			"name": "string.quoted.other",
+			"match": "\\(string\\.quoted\\.other\\)"
+		},
+		"string_unquoted": {
+			"name": "string.unquoted",
+			"match": "\\(string\\.unquoted\\)"
+		},
+		"string_interpolated": {
+			"name": "string.interpolated",
+			"match": "\\(string\\.interpolated\\)"
+		},
+		"string_regexp": {
+			"name": "string.regexp",
+			"match": "\\(string\\.regexp\\)"
+		},
+		"string_other": {
+			"name": "string.other",
+			"match": "\\(string\\.other\\)"
+		},
+		"string_set": {
+			"patterns": [
+				{
+					"include": "#string"
+				},
+				{
+					"include": "#string_quoted"
+				},
+				{
+					"include": "#string_quoted_single"
+				},
+				{
+					"include": "#string_quoted_double"
+				},
+				{
+					"include": "#string_quoted_triple"
+				},
+				{
+					"include": "#string_quoted_other"
+				},
+				{
+					"include": "#string_unquoted"
+				},
+				{
+					"include": "#string_interpolated"
+				},
+				{
+					"include": "#string_regexp"
+				},
+				{
+					"include": "#string_other"
+				}
+			]
+		},
+		"support": {
+			"name": "support",
+			"match": "\\(support\\)"
+		},
+		"support_function": {
+			"name": "support.function",
+			"match": "\\(support\\.function\\)"
+		},
+		"support_class": {
+			"name": "support.class",
+			"match": "\\(support\\.class\\)"
+		},
+		"support_type": {
+			"name": "support.type",
+			"match": "\\(support\\.type\\)"
+		},
+		"support_constant": {
+			"name": "support.constant",
+			"match": "\\(support\\.constant\\)"
+		},
+		"support_variable": {
+			"name": "support.variable",
+			"match": "\\(support\\.variable\\)"
+		},
+		"support_other": {
+			"name": "support.other",
+			"match": "\\(support\\.other\\)"
+		},
+		"support_set": {
+			"patterns": [
+				{
+					"include": "#support"
+				},
+				{
+					"include": "#support_function"
+				},
+				{
+					"include": "#support_class"
+				},
+				{
+					"include": "#support_type"
+				},
+				{
+					"include": "#support_constant"
+				},
+				{
+					"include": "#support_variable"
+				},
+				{
+					"include": "#support_other"
+				}
+			]
+		},
+		"variable": {
+			"name": "variable",
+			"match": "\\(variable\\)"
+		},
+		"variable_parameter": {
+			"name": "variable.parameter",
+			"match": "\\(variable\\.parameter\\)"
+		},
+		"variable_language": {
+			"name": "variable.language",
+			"match": "\\(variable\\.language\\)"
+		},
+		"variable_other": {
+			"name": "variable.other",
+			"match": "\\(variable\\.other\\)"
+		},
+		"variable_set": {
+			"patterns": [
+				{
+					"include": "#variable"
+				},
+				{
+					"include": "#variable_parameter"
+				},
+				{
+					"include": "#variable_language"
+				},
+				{
+					"include": "#variable_other"
+				}
+			]
+		}
+	}
+}

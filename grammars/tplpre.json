@@ -1,0 +1,2224 @@
+{
+	"scopeName": "source.tplpre",
+	"name": "Tplpre",
+	"fileTypes": [
+		"tplpre",
+		"tpl"
+	],
+	"firstLineMatch": ".*",
+	"patterns": [
+		{
+			"include": "#doc_strings"
+		},
+		{
+			"include": "#comment_TODO_line"
+		},
+		{
+			"include": "#comment_WARNING_line"
+		},
+		{
+			"include": "#comment_ERROR_line"
+		},
+		{
+			"include": "#comment_INFO_line"
+		},
+		{
+			"include": "#comment_DEBUG_line"
+		},
+		{
+			"include": "#comment_line"
+		},
+		{
+			"include": "#metadata_2"
+		},
+		{
+			"include": "#overwiev"
+		},
+		{
+			"include": "#simple_identifiers"
+		},
+		{
+			"include": "#if_addm"
+		},
+		{
+			"match": "(tpl)\\s+(\\$\\$TPLVERSION\\$\\$|\\d+\\.\\d+)\\s+(module)\\s(.*);",
+			"captures": {
+				"1": {
+					"name": "support.class.tplpre"
+				},
+				"2": {
+					"name": "variable.parameter.tplpre"
+				},
+				"3": {
+					"name": "support.class.tplpre"
+				},
+				"4": {
+					"name": "constant.character.tplpre"
+				}
+			}
+		},
+		{
+			"match": "(from)\\s(\\w+)(?:.(\\w+))?(?:.(\\w+))?\\s+(import)\\s(\\S+)\\s(\\d+(?:.\\d+)+);",
+			"captures": {
+				"1": {
+					"name": "support.class.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function.tplpre"
+				},
+				"3": {
+					"name": "storage.type.tplpre"
+				},
+				"4": {
+					"name": "variable.parameter.tplpre"
+				},
+				"5": {
+					"name": "support.class.tplpre"
+				},
+				"6": {
+					"name": "entity.name.function.tplpre"
+				},
+				"7": {
+					"name": "constant.numeric.tplpre"
+				}
+			}
+		},
+		{
+			"begin": "^(configuration)\\s(\\S+)\\s(\\d+\\.\\d+)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function.tplpre"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "^(end\\sconfiguration;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		{
+			"begin": "^(table)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				},
+				"4": {
+					"name": "comment.block.documentation.tplpre"
+				}
+			},
+			"end": "^(end\\stable;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#main"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#keywords_cmd"
+				},
+				{
+					"include": "#keywords_all"
+				},
+				{
+					"include": "#regexes"
+				},
+				{
+					"include": "#keywords_cmd_indentify_trigger"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		{
+			"begin": "^(enumeration)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				},
+				"4": {
+					"name": "comment.block.documentation.tplpre"
+				}
+			},
+			"end": "^(end\\senumeration;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#main"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#keywords_cmd"
+				},
+				{
+					"include": "#keywords_all"
+				},
+				{
+					"include": "#regexes"
+				},
+				{
+					"include": "#keywords_cmd_indentify_trigger"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		{
+			"comment": "Adding SQL support via #lines",
+			"begin": "^(definitions)\\s(\\S+)\\s(\\d+(?:\\.\\d+)+)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "^(end\\sdefinitions;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#define"
+				},
+				{
+					"include": "#alt_define"
+				},
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		{
+			"begin": "^\\b(pattern)\\s+(\\w+)\\s(\\d+(?:\\.\\d+)+)\\s+$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "constant.numeric.tplpre"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "\\b(end\\spattern;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment_TODO_line"
+				},
+				{
+					"include": "#comment_WARNING_line"
+				},
+				{
+					"include": "#comment_ERROR_line"
+				},
+				{
+					"include": "#comment_INFO_line"
+				},
+				{
+					"include": "#comment_DEBUG_line"
+				},
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#metadata"
+				},
+				{
+					"include": "#overwiev"
+				},
+				{
+					"include": "#constants"
+				},
+				{
+					"include": "#triggers"
+				},
+				{
+					"include": "#removal"
+				},
+				{
+					"include": "#body"
+				},
+				{
+					"include": "#if_addm"
+				},
+				{
+					"include": "#docstrings"
+				},
+				{
+					"include": "#doc_strings_block_doulbe_q"
+				}
+			]
+		},
+		{
+			"begin": "^\\b(syncmapping)\\s+(\\w+)\\s(\\d+(?:\\.\\d+)+)\\s+$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "constant.numeric.tplpre"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "\\b(end\\s+syncmapping;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment_TODO_line"
+				},
+				{
+					"include": "#comment_WARNING_line"
+				},
+				{
+					"include": "#comment_ERROR_line"
+				},
+				{
+					"include": "#comment_INFO_line"
+				},
+				{
+					"include": "#comment_DEBUG_line"
+				},
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#metadata"
+				},
+				{
+					"include": "#overwiev"
+				},
+				{
+					"include": "#constants"
+				},
+				{
+					"include": "#if_addm"
+				},
+				{
+					"include": "#docstrings"
+				},
+				{
+					"include": "#doc_strings_block_doulbe_q"
+				},
+				{
+					"include": "#syncmapping_mapping"
+				},
+				{
+					"include": "#syncmapping_sync_functions"
+				},
+				{
+					"include": "#syncmapping_body"
+				}
+			]
+		}
+	],
+	"repository": {
+		"tags": {
+			"comment": "Tags",
+			"match": "tags",
+			"name": "keyword.control.import.tplpre"
+		},
+		"tags_TKU": {
+			"comment": "Tags TKU",
+			"match": "(TKU_\\d+_\\d+_\\d+)",
+			"name": "constant.other.tplpre"
+		},
+		"metadata": {
+			"begin": "^\\s{4}(metadata)\\s+?$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "^\\s{4}(end\\smetadata;)\\s+?$",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"metadata_2": {
+			"begin": "^(metadata)\\s+?$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "^(end\\smetadata;)\\s+?$",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"overwiev": {
+			"begin": "^\\s{4}(overview)\\s+?$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "^\\s{4}(end\\soverview;)\\s+?$",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#tags_TKU"
+				},
+				{
+					"include": "#keywords_all"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"constants": {
+			"begin": "\\b(constants)\\s+?$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "\\b(end\\sconstants;)\\s+?$",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_functions"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"triggers": {
+			"begin": "^\\s{4}(triggers)\\s+?$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "^\\s{4}(end\\striggers;)\\s+?$",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_functions"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#keywords_cmd_indentify_trigger"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"body": {
+			"begin": "^\\s{4}(body)$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "^\\s{4}(end\\sbody;)$",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#dev_keys"
+				},
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_functions"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"removal": {
+			"begin": "^\\s{4}(removal)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "^\\s{4}(end\\sremoval;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_functions"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"comment_line": {
+			"name": "comment.line.tplpre",
+			"match": "(?<!\\'|\"|\\(|\\w)(//).*\\n"
+		},
+		"comment_TODO_line": {
+			"begin": "(//)\\s?(TO(\\s+|)DO\\:)",
+			"beginCaptures": {
+				"1": {
+					"name": "comment.line.tplpre"
+				},
+				"2": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "(.*)",
+			"endCaptures": {
+				"1": {
+					"name": "variable.parameter.function.tplpre"
+				}
+			}
+		},
+		"comment_ERROR_line": {
+			"begin": "(//)\\s?(ERROR\\:)",
+			"beginCaptures": {
+				"1": {
+					"name": "comment.line.tplpre"
+				},
+				"2": {
+					"name": "invalid.illegal.tplpre"
+				}
+			},
+			"end": "(.*)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.other.tplpre"
+				}
+			}
+		},
+		"comment_WARNING_line": {
+			"begin": "(//)\\s?(WARNING\\:)",
+			"beginCaptures": {
+				"1": {
+					"name": "comment.line.tplpre"
+				},
+				"2": {
+					"name": "invalid.deprecated.tplpre"
+				}
+			},
+			"end": "(.*)",
+			"endCaptures": {
+				"1": {
+					"name": "constant.other.tplpre"
+				}
+			}
+		},
+		"comment_INFO_line": {
+			"begin": "(//)\\s?(INFO\\:)",
+			"beginCaptures": {
+				"1": {
+					"name": "comment.line.tplpre"
+				},
+				"2": {
+					"name": "support.constant.tplpre"
+				}
+			},
+			"end": "(.*)",
+			"endCaptures": {
+				"1": {
+					"name": "support.constant.tplpre"
+				}
+			}
+		},
+		"comment_DEBUG_line": {
+			"begin": "(//)\\s?(DEBUG\\:)",
+			"beginCaptures": {
+				"1": {
+					"name": "comment.line.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function"
+				}
+			},
+			"end": "(.*)",
+			"endCaptures": {
+				"1": {
+					"name": "entity.name.function"
+				}
+			}
+		},
+		"percent_line": {
+			"comment": "I got a problem here. two %% in one string - break coloring. This should use some more logic.",
+			"match": "(\\%((?:[^\\%]|\\\\\\\\|\\\\%)*)\\%)",
+			"name": "keyword.control.tplpre",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "string.quoted.single.tplpre"
+				}
+			}
+		},
+		"qouted_line": {
+			"match": "(?<!')(')([^']*)(('))(?!')",
+			"comment": "Still cannot match string like with empty or double quotes",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "string.quoted.single.tplpre"
+				},
+				"4": {
+					"name": "keyword.control.tplpre"
+				}
+			}
+		},
+		"qouted_line_empty": {
+			"match": "(?<!')(')(('))(?!')",
+			"comment": "Still cannot match string like with empty or double quotes",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.string.begin.tplpre"
+				},
+				"2": {
+					"name": "punctuation.definition.string.end.tplpre"
+				},
+				"3": {
+					"name": "meta.empty-string.single.tplpre"
+				}
+			}
+		},
+		"double_qouted_line": {
+			"match": "(\\\"((?:[^\\\"]|\\\\\\\\|\\\\\")*)\\\")",
+			"comment": "Still cannot match string like with empty or single quotes",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "string.quoted.single.tplpre"
+				}
+			}
+		},
+		"square_brackets_line_empty": {
+			"match": "(?<!\\[)(\\[)((\\]))(?!\\])",
+			"comment": "Still cannot match string like with empty or double quotes",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.string.begin.tplpre"
+				},
+				"2": {
+					"name": "punctuation.definition.string.end.tplpre"
+				},
+				"3": {
+					"name": "meta.empty-string.single.tplpre"
+				}
+			}
+		},
+		"square_brackets_line_word": {
+			"match": "\\[(\\w*?[^\\d+?])\\]",
+			"captures": {
+				"1": {
+					"name": "variable.parameter.tplpre"
+				}
+			}
+		},
+		"square_brackets_line_int": {
+			"match": "\\[(-?\\d+)\\]",
+			"captures": {
+				"1": {
+					"name": "constant.numeric.tplpre"
+				}
+			}
+		},
+		"drdc_jira": {
+			"match": "\\((DRDC1-\\S+)\\)",
+			"captures": {
+				"1": {
+					"name": "variable.other.tplpre"
+				}
+			}
+		},
+		"sql_query": {
+			"begin": "(?=\"\"\"(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER|WITH))",
+			"end": "(?=\"\"\";)",
+			"patterns": [
+				{
+					"include": "source.sql"
+				}
+			]
+		},
+		"lines": {
+			"patterns": [
+				{
+					"include": "#qouted_line"
+				},
+				{
+					"include": "#qouted_line_empty"
+				},
+				{
+					"include": "#double_qouted_line"
+				},
+				{
+					"include": "#sql_query"
+				},
+				{
+					"include": "#percent_line"
+				},
+				{
+					"include": "#comment_TODO_line"
+				},
+				{
+					"include": "#comment_WARNING_line"
+				},
+				{
+					"include": "#comment_ERROR_line"
+				},
+				{
+					"include": "#comment_INFO_line"
+				},
+				{
+					"include": "#comment_DEBUG_line"
+				},
+				{
+					"include": "#comment_line"
+				},
+				{
+					"include": "#regexes"
+				},
+				{
+					"include": "#square_brackets_line_empty"
+				},
+				{
+					"include": "#square_brackets_line_word"
+				},
+				{
+					"include": "#square_brackets_line_int"
+				},
+				{
+					"include": "#all_keys"
+				},
+				{
+					"include": "#drdc_jira"
+				}
+			]
+		},
+		"plus": {
+			"match": "\\+",
+			"name": "keyword.operator.assignment.tplpre"
+		},
+		"var_assign": {
+			"match": "\\:\\=",
+			"name": "keyword.operator.assignment.tplpre"
+		},
+		"double_q": {
+			"match": "(\\\"\\\"){1}",
+			"name": "comment.tplpre"
+		},
+		"single_q": {
+			"match": "(\\'\\'){1}",
+			"name": "comment.tplpre"
+		},
+		"equal": {
+			"match": "\\=",
+			"name": "keyword.operator.assignment.tplpre"
+		},
+		"less": {
+			"match": "\\<",
+			"name": "keyword.operator.tplpre"
+		},
+		"more": {
+			"match": "\\>",
+			"name": "keyword.operator.tplpre"
+		},
+		"more_equal": {
+			"match": "\\>\\=",
+			"name": "keyword.operator.tplpre"
+		},
+		"less_equal": {
+			"match": "\\<\\=",
+			"name": "keyword.operator.tplpre"
+		},
+		"decimal": {
+			"match": "\\s\\-\\d+\\s",
+			"name": "constant.numeric.integer.tplpre"
+		},
+		"minus_decimal": {
+			"match": "\\s\\-\\d+\\s",
+			"name": "constant.numeric.integer.tplpre"
+		},
+		"just_do": {
+			"match": "(\\.)",
+			"name": "punctuation.accessor.tplpre",
+			"captures": {
+				"1": {
+					"name": "keyword.operator.tplpre"
+				}
+			}
+		},
+		"all_keys": {
+			"patterns": [
+				{
+					"include": "#var_assign"
+				},
+				{
+					"include": "#equal"
+				},
+				{
+					"include": "#less"
+				},
+				{
+					"include": "#more"
+				},
+				{
+					"include": "#more_equal"
+				},
+				{
+					"include": "#less_equal"
+				},
+				{
+					"include": "#plus"
+				},
+				{
+					"include": "#decimal"
+				},
+				{
+					"include": "#minus_decimal"
+				},
+				{
+					"include": "#just_do"
+				}
+			]
+		},
+		"regex_token_s_quote": {
+			"comment": "Catch regex in single quotes",
+			"begin": "(regex)\\s+?(?=')(.+?)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"end": "(')",
+			"endCaptures": {
+				"1": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#regular_expressions"
+				}
+			]
+		},
+		"regex_token_d_quote": {
+			"comment": "Catch regex in double qoutes",
+			"begin": "(regex)\\s+?(?=\")(.+?)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"end": "(\")",
+			"endCaptures": {
+				"1": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#regular_expressions"
+				}
+			]
+		},
+		"regex_token_triple_s_quote": {
+			"comment": "Catch regex in double qoutes",
+			"begin": "(regex)\\s+?('{3})(.+?)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"end": "('{3})",
+			"endCaptures": {
+				"1": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#regular_expressions"
+				}
+			]
+		},
+		"regex_token_triple_d_quote": {
+			"comment": "Catch regex in double qoutes",
+			"begin": "(regex)\\s+?(\"{3})(.+?)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"end": "(\"{3})",
+			"endCaptures": {
+				"1": {
+					"name": "support.function.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#regular_expressions"
+				}
+			]
+		},
+		"regexes": {
+			"patterns": [
+				{
+					"include": "#regex_token_triple_s_quote"
+				},
+				{
+					"include": "#regex_token_triple_d_quote"
+				},
+				{
+					"include": "#regex_token_s_quote"
+				},
+				{
+					"include": "#regex_token_d_quote"
+				}
+			]
+		},
+		"discovery_functions": {
+			"comment": "Discovery functions DEV looks working",
+			"begin": "(discovery)(\\.)(fileGet|fileInfo|getNames|listDirectory|listRegistry|registryKey|wmiQuery|wbemQuery|wbemEnumInstances|runCommand|snmpGet|snmpGetTable|restfulGet|restfulPost|vSphereFindObjects|vSphereTraverseToObjects|vSphereGetProperties|vSphereGetPropertyTable)",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "support.constant.tplpre"
+				}
+			},
+			"end": "\\;",
+			"endCaptures": {
+				"1": {
+					"name": "disabled.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regex"
+				}
+			]
+		},
+		"discovery_functions_Future": {
+			"comment": "Discovery functions Future looks working",
+			"begin": "(Future)(\\.)(runCommand)",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "support.constant.tplpre"
+				}
+			},
+			"end": "\\;",
+			"endCaptures": {
+				"1": {
+					"name": "disabled.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regex"
+				}
+			]
+		},
+		"model_functions": {
+			"comment": "Model functions DEV looks working",
+			"begin": "((model)(\\.)(addDisplayAttribute|removeDisplayAttribute|addContainment|setContainment|destroy|withdraw|setRemovalGroup|anchorRemovalGroup|suppressRemovalGroup|host|hosts|findPackages|addDisplayAttribute|removeDisplayAttribute|kind))",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				},
+				"3": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"4": {
+					"name": "support.constant.tplpre"
+				}
+			},
+			"end": "\\;",
+			"endCaptures": {
+				"1": {
+					"name": "disabled.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regex"
+				}
+			]
+		},
+		"model_rel_functions": {
+			"comment": "Model rel functions DEV looks working",
+			"begin": "((model)(\\.)(rel|uniquerel)(\\.)(Communication|Containment|Dependency|Detail|HostContainment|HostedFile|HostedSoftware|Management|RelatedFile|SoftwareService|SoftwareContainment|StorageUse))",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				},
+				"3": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"4": {
+					"name": "support.constant.tplpre"
+				}
+			},
+			"end": "\\;",
+			"endCaptures": {
+				"1": {
+					"name": "disabled.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regex"
+				}
+			]
+		},
+		"model_SI_functions": {
+			"comment": "Model SI functions DEV looks working. TODO: upgrage to highlight inr content 2017-08-15",
+			"begin": "((model)(\\.)(SoftwareInstance|SoftwareCluster))",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				},
+				"3": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"4": {
+					"name": "support.constant.tplpre"
+				}
+			},
+			"end": "\\;",
+			"endCaptures": {
+				"1": {
+					"name": "disabled.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regex"
+				},
+				{
+					"include": "#keywords_attributes"
+				}
+			]
+		},
+		"log_functions": {
+			"match": "(log\\.(?:debug|info|warn|error|critical))",
+			"captures": {
+				"1": {
+					"name": "storage.type.tplpre"
+				}
+			}
+		},
+		"number_functions": {
+			"match": "(text)(\\.)(lower|upper|toNumber|replace|join|split|strip|leftStrip|rightStrip|hash|ordinal)",
+			"captures": {
+				"1": {
+					"name": "support.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "support.constant.tplpre"
+				}
+			}
+		},
+		"regex_functions": {
+			"match": "(regex)(\\.)(extract|extractAll)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "variable.parameter.tplpre"
+				}
+			}
+		},
+		"xpath_functions": {
+			"match": "(xpath)(\\.)(evaluate|openDocument|closeDocument)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "variable.parameter.tplpre"
+				}
+			}
+		},
+		"discovery_manipulation_functions": {
+			"match": "(discovery)(\\.)(process|children|descendents|parent|allProcesses|access)",
+			"captures": {
+				"1": {
+					"name": "support.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "support.constant.tplpre"
+				}
+			}
+		},
+		"binary_functions": {
+			"match": "(binary)(\\.)(toHexString|toIPv4|toIPv4z|toIPv6|toIPv6z|toMACAddress|toValue|toWWN)",
+			"captures": {
+				"1": {
+					"name": "support.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "support.constant.tplpre"
+				}
+			}
+		},
+		"json_functions": {
+			"match": "(json)(\\.)(encode|decode)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "variable.parameter.tplpre"
+				}
+			}
+		},
+		"related_functions": {
+			"match": "(related)(\\.)(detailContainer|host\\b|hostingNode)",
+			"captures": {
+				"1": {
+					"name": "support.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "support.constant.tplpre"
+				}
+			}
+		},
+		"mail_functions": {
+			"match": "(mail)(\\.)(send)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "variable.parameter.tplpre"
+				}
+			}
+		},
+		"time_functions": {
+			"match": "(time)(\\.)(current|delta|parseLocal|parseUTC|formatLocal|formatUTC|toTicks|fromTicks)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "variable.parameter.tplpre"
+				}
+			}
+		},
+		"inference_functions": {
+			"match": "(inference)(\\.)(associate|contributor|primary|relation|withdrawal|destruction)",
+			"captures": {
+				"1": {
+					"name": "support.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "support.constant.tplpre"
+				}
+			}
+		},
+		"ConversionFunctions": {
+			"match": "(ConversionFunctions)(\\.)(isValidSerialNumber|convertToCharString|convertToBytes)",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "entity.name.function.tplpre"
+				}
+			}
+		},
+		"DiscoveryFunctions": {
+			"match": "(DiscoveryFunctions)(\\.)(escapeArg|expandWindowsPath|normalizePath|escapePath|pathNormalization|getCleanedupPath|getMaxVersion|getExeCwdPath|sortList|runActiveCommand|runFutureActiveCommand|locateCommands|checkCommandList|getErrorRegexes)",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "entity.name.function.tplpre"
+				},
+				"4": {
+					"name": "entity.name.function.tplpre"
+				}
+			}
+		},
+		"RDBMSFunctions": {
+			"match": "(RDBMSFunctions)(\\.)(oracleOraFileParser|performRdbmsSisSearch|oracleNetServiceNameSearch|dsnRdbmsServers|parseJDBC)",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "entity.name.function.tplpre"
+				}
+			}
+		},
+		"rdbms_functions": {
+			"match": "(rdbms_functions)(\\.)(oracle_ora_file_parser|perform_rdbms_sis_search|related_rdbms_sis_search|related_rdbms_sis_search_extended|oracle_net_service_name_search|dsn_rdbms_servers|parseJDBC|jdbc_search|find_db_server)",
+			"captures": {
+				"1": {
+					"name": "invalid.deprecated.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "invalid.deprecated.tplpre"
+				}
+			}
+		},
+		"SearchFunctions": {
+			"match": "(SearchFunctions)(\\.)(getNodeIp|getHostingNodes|getSoftwareNodes|getSI|identifyHostWithUuid|relatedSisSearchOnMultipleHosts)",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "entity.name.function.tplpre"
+				}
+			}
+		},
+		"common_functions": {
+			"match": "(functions)(\\.)(validate_host_address_format|domain_lookup|identify_host_perform_search|identify_host_perform_search_in_scope|identify_host|identify_host_extended|related_sis_search\\b|related_sis_search_on_multiple_hosts|related_sis_search_on_multiple_hosts_extended|related_sis_search_extended|related_si_types_search|path_normalization|links_management|get_cleanedup_path|get_max_version|get_exe_cwd_path|sort_list|run_priv_cmd|has_process|isValidSerialNumber|convertToCharString|wmiFollowAssociations|checkForDecimal|convertToBytes|identify_host_with_uuid|locateCommands|find_server|checkCommandList)",
+			"captures": {
+				"1": {
+					"name": "invalid.deprecated.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "invalid.deprecated.tplpre"
+				}
+			}
+		},
+		"local_functions": {
+			"match": "(local_functions|localFunctions)(\\.)(\\w+)",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "entity.name.function.tplpre"
+				}
+			}
+		},
+		"list_append": {
+			"match": "(list)(\\.)(append)",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "punctuation.accessor.tplpre"
+				},
+				"3": {
+					"name": "entity.name.function.tplpre"
+				}
+			}
+		},
+		"all_functions": {
+			"patterns": [
+				{
+					"include": "#discovery_functions"
+				},
+				{
+					"include": "#discovery_functions_Future"
+				},
+				{
+					"include": "#model_functions"
+				},
+				{
+					"include": "#model_SI_functions"
+				},
+				{
+					"include": "#model_rel_functions"
+				},
+				{
+					"include": "#log_functions"
+				},
+				{
+					"include": "#log_functions"
+				},
+				{
+					"include": "#text_functions"
+				},
+				{
+					"include": "#number_functions"
+				},
+				{
+					"include": "#regex_functions"
+				},
+				{
+					"include": "#xpath_functions"
+				},
+				{
+					"include": "#discovery_manipulation_functions"
+				},
+				{
+					"include": "#binary_functions"
+				},
+				{
+					"include": "#json_functions"
+				},
+				{
+					"include": "#related_functions"
+				},
+				{
+					"include": "#mail_functions"
+				},
+				{
+					"include": "#time_functions"
+				},
+				{
+					"include": "#inference_functions"
+				},
+				{
+					"include": "#ConversionFunctions"
+				},
+				{
+					"include": "#SearchFunctions"
+				},
+				{
+					"include": "#rdbms_functions"
+				},
+				{
+					"include": "#RDBMSFunctions"
+				},
+				{
+					"include": "#DiscoveryFunctions"
+				},
+				{
+					"include": "#common_functions"
+				},
+				{
+					"include": "#local_functions"
+				},
+				{
+					"include": "#list_append"
+				}
+			]
+		},
+		"if_statement": {
+			"comment": "Match if ..values.. then and include usual lines. #lines can override some marks",
+			"begin": "(?!end if;|then)(\\bif)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.conditional.tplpre"
+				}
+			},
+			"end": "(\\bthen)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.conditional.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regexes"
+				},
+				{
+					"include": "#all_keys"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#keywords_attributes"
+				},
+				{
+					"include": "#all_functions"
+				}
+			]
+		},
+		"elif_statement": {
+			"comment": "Match elif ..values.. then and include usual lines. #lines can override some marks",
+			"begin": "(?!end if;|then)(\\belif)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.conditional.tplpre"
+				}
+			},
+			"end": "(\\bthen)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.conditional.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regexes"
+				},
+				{
+					"include": "#all_keys"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#keywords_attributes"
+				},
+				{
+					"include": "#all_functions"
+				}
+			]
+		},
+		"else_statement": {
+			"match": "\\belse\\b",
+			"name": "keyword.control.conditional.tplpre"
+		},
+		"end_if_statement": {
+			"match": "(?!;|if|else\\w)\\bend\\b\\s\\bif\\b;",
+			"name": "keyword.control.conditional.tplpre"
+		},
+		"for_statement": {
+			"comment": "Improve this with some logic. Now only works when 4 spaces before it.",
+			"begin": "\\s{4}(for\\b)(?!;)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "(\\bdo\\b)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#regex"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#all_functions"
+				}
+			]
+		},
+		"end_for_statement": {
+			"match": "\\bend\\sfor;\\s+?",
+			"name": "keyword.control.tplpre"
+		},
+		"keywords_all": {
+			"match": "\\b(size|in|aged|and|as|at|break|by|configuration|continue|created|default|desc|deleted|do|enumeration|exists|expand|explode|false|flags|from|has|in|is|locale|matches|modified|nodes|nodecount|none|not|on|or|order|out|overrides|processwith|relationship|removal|requires|search|show|step|stop|substring|subword|summary|tags|taxonomy|traverse|true|unconfirmed|where|with|void|has|substring)\\b",
+			"name": "storage.type.class.tplpre"
+		},
+		"keywords_cmd": {
+			"match": "\\b(unix_cmd|windows_cmd)",
+			"captures": {
+				"1": {
+					"name": "keyword.operator.tplpre"
+				}
+			}
+		},
+		"keywords_cmd_indentify_trigger": {
+			"match": "\\b(unix_cmd|windows_cmd|cmd|args)",
+			"captures": {
+				"1": {
+					"name": "keyword.operator.tplpre"
+				}
+			}
+		},
+		"if_ADDM_statement": {
+			"match": "(#IFADDM)\\s+(\\d+.\\d+)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.conditional.tplpre"
+				},
+				"2": {
+					"name": "constant.numeric.tplpre"
+				}
+			}
+		},
+		"elif_ADDM_statement": {
+			"match": "(#ELIFADDM)\\s+(\\d+.\\d+)",
+			"captures": {
+				"1": {
+					"name": "keyword.control.conditional.tplpre"
+				},
+				"2": {
+					"name": "constant.numeric.tplpre"
+				}
+			}
+		},
+		"else_ADDM_statement": {
+			"match": "#ELSE\\s+?",
+			"name": "keyword.control.conditional.tplpre"
+		},
+		"end_if_ADDM_statement": {
+			"match": "#ENDIFADDM\\s+?",
+			"name": "keyword.control.conditional.tplpre"
+		},
+		"if_addm": {
+			"patterns": [
+				{
+					"include": "#if_ADDM_statement"
+				},
+				{
+					"include": "#elif_ADDM_statement"
+				},
+				{
+					"include": "#else_ADDM_statement"
+				},
+				{
+					"include": "#end_if_ADDM_statement"
+				}
+			]
+		},
+		"all_controls": {
+			"patterns": [
+				{
+					"include": "#if_statement"
+				},
+				{
+					"include": "#elif_statement"
+				},
+				{
+					"include": "#else_statement"
+				},
+				{
+					"include": "#end_if_statement"
+				},
+				{
+					"include": "#for_statement"
+				},
+				{
+					"include": "#end_for_statement"
+				},
+				{
+					"include": "#if_addm"
+				},
+				{
+					"include": "#keywords_all"
+				},
+				{
+					"include": "#keywords_cmd"
+				},
+				{
+					"include": "#all_keys"
+				}
+			]
+		},
+		"doc_strings_block_doulbe_q": {
+			"comment": "TRIGGER TYPE Working fine and DATE & TASK highlighted Adding SQL support via #lines",
+			"begin": "(\\\"{3})",
+			"beginCaptures": {
+				"1": {
+					"name": "comment.block.documentation.tplpre"
+				}
+			},
+			"end": "(\\\"{3})",
+			"contentName": "comment.block.documentation.tplpre",
+			"endCaptures": {
+				"1": {
+					"name": "comment.block.documentation.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((QM\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((DRDC1-\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((TKU-\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((esc\\s+?\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"doc_strings_block_single_q": {
+			"comment": "TRIGGER TYPE Working fine and DATETASK highlighted",
+			"begin": "('{3})",
+			"beginCaptures": {
+				"1": {
+					"name": "comment.block.documentation.tplpre"
+				}
+			},
+			"end": "('{3})",
+			"contentName": "comment.block.documentation.tplpre",
+			"endCaptures": {
+				"1": {
+					"name": "comment.block.documentation.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4}).*?(\\d{2,4}\\-\\d{2,4}\\-\\d{2,4})?",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((QM\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((DRDC1-\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((TKU-\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"name": "variable.parameter.tplpre",
+					"match": "\\((esc\\s+?\\d+)\\)",
+					"captures": {
+						"1": {
+							"name": "variable.other.tplpre"
+						}
+					}
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"doc_strings_single_simple": {
+			"comment": "Adding SQL support via #lines",
+			"name": "comment.block.documentation.tplpre",
+			"match": "('{3}([^']+?)'{3})",
+			"captures": {
+				"1": {
+					"name": "string.quoted.triple.tplpre"
+				},
+				"2": {
+					"name": "string.quoted.triple.tplpre"
+				},
+				"3": {
+					"name": "string.quoted.triple.tplpre"
+				}
+			}
+		},
+		"doc_strings": {
+			"patterns": [
+				{
+					"include": "#doc_strings_block_doulbe_q"
+				},
+				{
+					"include": "#doc_strings_block_single_q"
+				},
+				{
+					"include": "#doc_strings_single_simple"
+				}
+			]
+		},
+		"define": {
+			"comment": "Adding SQL support via #lines",
+			"begin": "\\s+(define)\\s+(\\S+)\\((.*?)\\)(\\s\\S+\\s(.*))?",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function.tplpre"
+				},
+				"3": {
+					"name": "variable.parameter.tplpre"
+				},
+				"4": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "\\s+(end\\sdefine;\\s+?$)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#all_functions"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#if_addm"
+				},
+				{
+					"include": "#dev_keys"
+				},
+				{
+					"include": "#lines"
+				}
+			]
+		},
+		"alt_define": {
+			"comment": "Adding SQL support via #lines",
+			"begin": "\\s+(define)\\s+(\\S+)(\\s\\S+\\s(.*))?",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function.tplpre"
+				},
+				"3": {
+					"name": "variable.parameter.tplpre"
+				}
+			},
+			"end": "\\s+(end\\sdefine;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#all_functions"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#if_addm"
+				},
+				{
+					"include": "#dev_keys"
+				},
+				{
+					"include": "#lines"
+				}
+			]
+		},
+		"simple_identifiers": {
+			"begin": "\\b(identify)\\s+(\\w+)\\s(\\d+(?:\\.\\d+)+)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "(end\\sidentify;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#keywords_cmd"
+				},
+				{
+					"include": "#keywords_all"
+				},
+				{
+					"include": "#regexes"
+				},
+				{
+					"include": "#keywords_cmd_indentify_trigger"
+				},
+				{
+					"include": "#if_addm"
+				}
+			]
+		},
+		"syncmapping_mapping": {
+			"begin": "\\b(mapping)\\s+(\\w+)\\s+(\\w+\\.\\w+)\\s+(\\w+)\\s+(\\w+)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				},
+				"2": {
+					"name": "entity.name.function.model"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				},
+				"4": {
+					"name": "entity.name.function.model"
+				},
+				"5": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "(end\\smapping;)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#keywords_cmd"
+				},
+				{
+					"include": "#keywords_all"
+				},
+				{
+					"include": "#if_addm"
+				},
+				{
+					"include": "#traverse"
+				}
+			]
+		},
+		"syncmapping_body": {
+			"begin": "^\\s{4}(body)$",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"end": "^\\s{4}(end\\sbody;)$",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#dev_keys"
+				},
+				{
+					"include": "#doc_strings"
+				},
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_functions"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#if_addm"
+				},
+				{
+					"include": "#syncmapping_sync_functions"
+				}
+			]
+		},
+		"syncmapping_sync_functions": {
+			"comment": "sync.shared.BMC_ConcreteCollection",
+			"begin": "(sync)(?:\\.)(rel|shared|external|)(?:\\.|)(BMC_\\w+|)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.tplpre"
+				},
+				"2": {
+					"name": "support.function.tplpre"
+				},
+				"3": {
+					"name": "constant.numeric.tplpre"
+				}
+			},
+			"end": "\\;",
+			"endCaptures": {
+				"1": {
+					"name": "disabled.tplpre"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#lines"
+				},
+				{
+					"include": "#all_controls"
+				},
+				{
+					"include": "#regex"
+				}
+			]
+		},
+		"keywords_attributes": {
+			"patterns": [
+				{
+					"include": "#keywords_attrs"
+				}
+			]
+		},
+		"keywords_attrs": {
+			"comment": "Change disabled to \"1\" to turn off.",
+			"disabled": 0,
+			"match": "\\b(key_group|key|name|type|version|short_name|install_root|listening_ports|product_version|full_version)\\b",
+			"captures": {
+				"1": {
+					"name": "storage.type.tplpre"
+				}
+			}
+		},
+		"traverse": {
+			"name": "entity.name.function.model",
+			"match": "\\#(?:(\\w+)(:|\\.))+(\\w+)",
+			"captures": {
+				"3": {
+					"name": "keyword.control.model"
+				}
+			}
+		},
+		"regular_expressions": {
+			"comment": "Changed disabled to 1 to turn off syntax highlighting in “r” strings.",
+			"disabled": 0,
+			"patterns": [
+				{
+					"include": "source.regexp.tplpre"
+				}
+			]
+		},
+		"dev_keys": {
+			"patterns": [
+				{
+					"include": "#keywords_attributes"
+				},
+				{
+					"include": "#traverse"
+				}
+			]
+		}
+	}
+}

@@ -28,15 +28,25 @@
     "grammars": [
       {
         "language": "tplpre",
-        "scopeName": ".source.tplpre",
-        "path": "./grammars/tplpre.cson"
+        "scopeName": "source.tplpre",
+        "path": "./grammars/tplpre.json"
+      },
+      {
+        "language": "tplpre",
+        "scopeName": "source.grammar_check",
+        "path": "./grammars/test_grammar.json"
+      },
+      {
+        "language": "model",
+        "scopeName": "source.model.tplpre",
+        "path": "./grammars/tplpre.json"
       }
     ],
     "snippets": [
       {
         "language": "tplpre",
         "scopeName": ".source.tplpre",
-        "path": "./snippets/language-tplpre.cson"
+        "path": "./snippets/language-tplpre.json"
       }
     ]
   },
