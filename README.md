@@ -1,5 +1,10 @@
 # BMC tpl or tplpre language support in Atom
 
+## UPDATE 2023
+I've moved all work to a separate repo.
+There are all updates and initial YAML files in dev folder to be used whenever you need (any tmLang supported IDE)
+https://github.com/trianglesis/bmc-tpl
+
 Adds syntax highlighting and snippets for [tpl](https://docs.bmc.com/docs/display/DISCO111/The+Pattern+Language+TPL) in Atom.
 
 Originally re-made from the [Sublmime text 3 bundle](https://github.com/trianglesis/bmc_tpl).
