@@ -41,6 +41,10 @@
 			"include": "#if_addm"
 		},
 		{
+			"match": "MongoDB",
+      		"name": "keyword.letter"
+		},
+		{
 			"match": "(tpl)\\s+(\\$\\$TPLVERSION\\$\\$|\\d+\\.\\d+)\\s+(module)\\s(.*);",
 			"captures": {
 				"1": {

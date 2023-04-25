@@ -3,7 +3,10 @@
   "description": "BMC tpl and tplpre language support in Atom and VS Code",
   "version": "3.4.2",
   "publisher": "trianglesis",
-  "categories": ["Programming Languages", "Snippets"],
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
   "author": {
     "name": "trianglesis"
   },
@@ -16,13 +19,24 @@
     "languages": [
       {
         "id": "tplpre",
-        "aliases": ["TPL", "tplpre", "tpl"],
-        "extensions": [".tpl", ".tplpre"]
+        "aliases": [
+          "TPL",
+          "tplpre",
+          "tpl"
+        ],
+        "extensions": [
+          ".tpl",
+          ".tplpre"
+        ]
       },
       {
         "id": "model",
-        "aliases": ["model"],
-        "extensions": [".model"]
+        "aliases": [
+          "model"
+        ],
+        "extensions": [
+          ".model"
+        ]
       }
     ],
     "grammars": [
@@ -60,7 +74,8 @@
     "url": "https://github.com/trianglesis/language-tplpre/issues"
   },
   "devDependencies": {
-    "coffeelint": "^1.10.1"
+    "coffeelint": "^1.10.1",
+    "js-yaml": "^4.1.0"
   },
   "keywords": [
     "language-tplpre",
